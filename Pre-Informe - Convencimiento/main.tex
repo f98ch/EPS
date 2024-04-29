@@ -1,0 +1,443 @@
+\documentclass[11pt, spanish, letterpage]{report} % {{{
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+%\pagestyle{plain}
+\setlength{\parskip}{\baselineskip}
+\setlength{\parindent}{4mm}
+\usepackage{graphicx}
+%\usepackage{setspace}
+\usepackage{tabulary}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{wrapfig}
+\usepackage{bbold}
+\usepackage{tikz}
+\usetikzlibrary{quantikz}
+
+\usepackage{fancybox}
+\usepackage{colortbl}
+\usepackage{amsbsy}
+\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+
+%-----------------------------------------
+\usepackage[numbers]{natbib} %agregué [numbers] para que no haya problema al usar \bibliographystyle{naturemag} (este estilo incluye los url al citar páginas web)
+%\setcitestyle{authoryear,open={(},close={)}} % para citar las páginas
+\usepackage{bbold}
+
+\definecolor{mycolor}{RGB}{24,128,48}
+
+\usepackage{physics}
+\usepackage{fancybox}
+\usepackage{colortbl}
+\usepackage{amsbsy}
+\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+\FXRegisterAuthor{cp}{acp}{\color{blue}CP}
+\FXRegisterAuthor{fel}{afel}{\color{mycolor}F}
+
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+
+\usepackage[]{lineno} 
+% \setlength\linenumbersep{3pt}
+
+\newcommand{\fref}[1]{fig.\ref{#1}}   \newcommand{\tref}[1]{table\ref{#1}}
+\newcommand{\Fref}[1]{Fig.\ref{#1}}  \newcommand{\Tref}[1]{Table\ref{#1}}
+\newcommand{\Cref}[1]{Cuadro~\ref{#1}}
+
+\newcommand{\psii}{\psi_i}
+\newcommand{\Pk}[1]{\ket{\psi_{#1} }}
+\newcommand{\Pb}[1]{\bra{\psi_{#1} }}
+\newcommand{\pk}{\ket{\psi}}
+\newcommand{\M}{\mathcal{M}^{(N)}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\Erho}{\mathcal{E}(\rho)}
+\newcommand{\1}{\mathbb{1}}
+\newcommand{\ten}{\otimes}
+\newcommand{\h}[1]{\colorbox{yellow}{#1}}
+\newcommand{\hi}{\mathcal{H}}
+\newcommand{\txt}[1]{\text{#1}}
+\newcommand{\here}{\h{\hspace{15cm}} }
+\newcommand{\rhoi}{\dyad{\psii}{\psii}}
+\newcommand{\ind}[2]{{{}^{#1}_{#2}}}
+\newcommand{\rc}[1]{r_{#1}}
+\newcommand{\pauli}[2]{\sigma_{#1}\otimes\sigma_{#2}}
+\newcommand{\esqueleto}[1]{\textcolor{mycolor}{#1}}
+\newcommand{\ot}{\otimes}
+\newcommand{\m}{\textcolor{mycolor}{|}}
+
+% Para que funcione mejor la numeración {{{
+% https://tex.stackexchange.com/questions/43648/why-doesnt-lineno-number-a-paragraph-when-it-is-followed-by-an-align-equation
+\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+  \expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+  \expandafter\let\csname oldend#1\expandafter\endcsname\csname end#1\endcsname
+  \renewenvironment{#1}%
+     {\linenomath\csname old#1\endcsname}%
+     {\csname oldend#1\endcsname\endlinenomath}}% 
+\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+  \patchAmsMathEnvironmentForLineno{#1}%
+  \patchAmsMathEnvironmentForLineno{#1*}}%
+\AtBeginDocument{%
+\patchBothAmsMathEnvironmentsForLineno{equation}%
+\patchBothAmsMathEnvironmentsForLineno{align}%
+\patchBothAmsMathEnvironmentsForLineno{flalign}%
+\patchBothAmsMathEnvironmentsForLineno{alignat}%
+\patchBothAmsMathEnvironmentsForLineno{gather}%
+\patchBothAmsMathEnvironmentsForLineno{multline}%
+
+
+}
+% }}}
+
+
+\usepackage{lipsum}
+\usepackage{babel}
+\usepackage{multirow}
+\usepackage{array}
+\newtheorem{ex}{Ejemplo}[section]
+
+
+%Para dibujar circuitos cuánticos. 
+\usepackage{tikz}
+\usetikzlibrary{quantikz}
+
+
+% \usepackage[]{lineno}  \linenumbers
+%\setlength\linenumbersep{3pt}
+
+\renewcommand{\baselinestretch}{1} % interlinado
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+\date{}
+\spanishdecimal{.}
+\usepackage{multicol}%para escribir en muchas columnas
+%para que no corte palabras
+\usepackage[none]{hyphenat}
+\usepackage{times}
+%\onehalfspacing
+
+\usepackage{hyperref}
+%\usepackage{biblatex}
+%\addbibresource{references.bib}
+
+%---ejercicios, problemas -teoremas
+%---Problemas encerrados-Bonitos
+\usepackage[framemethod=tikz]{mdframed}
+\mdfsetup{skipabove=\topskip,skipbelow=\topskip}
+\newcounter{problem}[section]
+\newenvironment{problem}[1][]{%
+%\stepcounter{problem}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+	\tikz[baseline=(current bounding box.east),outer sep=0pt]
+	\node[anchor=east,rectangle,fill=brown!50]
+{\strut Problema~\theproblem};}}
+
+}%
+{\mdfsetup{%
+frametitle={%
+	\tikz[baseline=(current bounding box.east),outer sep=0pt]
+	\node[anchor=east,rectangle,fill=brown!50]
+{\strut Problema ~\theproblem:~#1};}}%
+
+}%
+\mdfsetup{innertopmargin=5pt,linecolor=black!50,%
+	linewidth=2pt,topline=true,
+	frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+	
+\begin{mdframed}[]\relax%
+}{\end{mdframed}}
+
+\newenvironment{solution}% environment name
+{\colorbox{gray}{~~\textbf{\textcolor{white}{Solución:}}~~}~~}%
+{}
+%-----end------------
+
+%\newtheorem{example}{Ejemplo}[chapter]
+%\newtheorem{ejercicio}{Ejercicio}[chapter]
+%%---
+\newcommand{\Ev}{\mathbf{E}}
+\newcommand{\rv}{\mathbf{r}}
+\newcommand{\ru}{\hat{\rv}}
+\usepackage{tabulary}
+%---paquetes para fisicaz
+\usepackage{physics}%facilita la escritura de operadores usados en fisica
+%-paquete para unidades en el sistema internacional
+% \usepackage[load=prefix, load=abbr, load=physical]{siunitx}
+% \newunit{\gram}{g }%gramos
+% \newunit{\velocity}{ \metre / \Sec }%unidades de velocidad sistema internacional
+% \newunit{\acceleration}{ \metre / \Sec^2 }%unidades de aceleracion sistema internacional
+% \newunit{\entropy}{ \joule / \kelvin }%unidades de entropia sisteme internacional
+%--definiendo constantes fisicas en el SI
+\newcommand{\accgravity}{9.8 \metre / \Sec^2}
+%---diferencial inexacta
+\newcommand{\dbar}{\mathchar'26\mkern-12mu d}
+
+\oddsidemargin 0in
+\textwidth 6.5in
+\topmargin -0.5in
+\textheight 8.5in
+% }}}
+\begin{document}
+\begin{titlepage} % {{{ Suppresses displaying the page number on the title page and the subsequent page counts as page 1                                  
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here                             
+
+\center % Centre everything on the page                                                                                                       
+
+%------------------------------------------------                                                                                             
+%       Title                                                                                                                                 
+%------------------------------------------------                                                                                             
+	
+\HRule\\[0.6cm]
+
+{\huge\bfseries Implementación de Canales Cuánticos con VQA}\\[0.5cm] % Title of your document
+
+\HRule\\[2cm]
+
+%------------------------------------------------                                                                                             
+%       Author(s)                                                                                                                             
+%------------------------------------------------                                                                                             
+
+
+\Large{\textbf{Felipe Antonio Ixcamparic Choy}}\\ [2cm] % Your name                                                                                          
+
+%------------------------------------------------                                                                                             
+%       Headings                                                                                                                              
+%------------------------------------------------                                                                                             
+
+\textsc{\LARGE Universidad de San Carlos de Guatemala\\ Escuela de Ciencias Físicas y Matemáticas\\ Licenciatura en Física}\\[2cm]
+
+
+\textsc{\Large Resumen de trabajo de EPS - Implementación de Canales Cuánticos mediante Algoritmos Variacionales Cuánticos}\\[2cm]
+
+\textsc{\Large Supervisado por: \textbf{Dr. Carlos Pineda (IF-UNAM)}}
+                                                                                                      
+
+%------------------------------------------------                                                                                             
+%       Date                                                                                                                                  
+%------------------------------------------------                                                                                             
+\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+\vfill\vfill\vfill
+
+% {\large 19 de noviembre de 2021} % Date, change the \today to a set date if you want to be precise                                                              
+
+%------------------------------------------------                                                                                             
+%       Logo                                                                                                                                  
+%------------------------------------------------                                                                                             
+
+%----------------------------------------------------------------------------------------                                                     
+
+\vfill % Push the date up 1/4 of the remaining page                                                                                           
+
+\end{titlepage} % }}}
+% Inicio % {{{
+\section{Objetivo General} % {{{
+Estudiar  y desarrollar algoritmos variacionales cuánticos para la implementación de canales cuánticos de un \textit{qubit} en computadoras cuánticas.
+% }}}
+\section{Objetivos Específicos} % {{{
+
+\begin{itemize}
+\item Estudiar la teoría y uso de computadoras cuánticas.
+
+
+    \item Comprender las definiciones fundamentales de la teoría de sistemas cuánticos abiertos y canales cuánticos.
+    
+    \item Investigar el uso de los Algoritmos Variacionales Cuánticos en la resolución de problemas de información cuántica.
+
+    \item Impelemntar Canales cuánticos en computadoras cuánticas y analizar su comportamiento.
+\end{itemize}
+
+
+% }}}
+\section{Introducción}
+
+El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para el avance de la computación e información cuántica. Los canales cuánticos describen la evolución de estados cuánticos en  interacción con su entorno, y son clave para el entendimiento de este tipo de sistemas.
+
+En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
+
+
+\chapter{Sistemas Cuánticos Abiertos} \label{ch:1} 
+
+En la teoría cuántica, un sistema cuántico abierto es aquel que no está aislado, sino que interactúa con su entorno. Esto suele ser representado como un sistema cuántico cerrado $\rho$ como \cite{nielsen_chuang_2011}:
+
+\begin{equation}
+    \rho = \rho_{sist} \otimes \rho_{ent},
+\end{equation}
+donde $\rho_{sist}$ es la matriz densidad del sistema y $\rho_{ent}$ es la del entorno. Luego de una transformación $U$ el sistema deja de interactuar con el entorno, y luego trazamos parcialmente el entorno para obtener el sistema reducido  : 
+
+\begin{equation}
+    \mathcal{E}(\rho_{sist}) = \text{Tr}_{ent}[ U( \rho_{sist} \otimes \rho_{ent} ) U^\dagger ].
+\end{equation}
+
+Esta interacción a menudo resulta en la pérdida de información hacia el entorno y la generación de estados mixtos a partir de estados puros dada la pérdida de su pureza. 
+
+La interacción de un sistema cuántico con su entorno se modela mediante canales cuánticos, que son transformaciones lineales y completamente positivos que preservan la traza de la matriz de densidad del sistema. Los canales cuánticos, $\mathcal{E}$, representan cualquier proceso físico permitido que puede ocurrir en un sistema cuántico, incluyendo operaciones como las compuertas cuánticas, pero también fenómenos no ideales como la decoherencia y el ruido. La acción general de un canal cuántico sobre un estado cuántico $\rho$ puede ser descrita por la ecuación de operadores de Kraus:
+
+\begin{equation}
+\mathcal{E}(\rho) = \sum_k E_k \rho E_k^\dagger,
+\end{equation}
+
+donde $E_k$ son los operadores de Kraus que cumplen con la condición de completitud $\sum_k E_k^\dagger E_k = I$, asegurando la conservación de la traza de $\rho$.
+
+\subsection{Representación de Canales Cuánticos mediante la Matriz de Choi}
+
+Mientras que los operadores de Kraus ofrecen una manera de describir los canales cuánticos, la matriz de Choi proporciona una representación alternativa útil para la caracterización completa de un canal cuántico. A diferencia de los operadores de Kraus que requieren una selección de un conjunto no único para caracterizar el canal, la matriz de Choi captura la totalidad del canal en una única matriz. 
+
+La matriz de Choi, $(\Lambda(\mathcal{E}))$, se construye de la siguiente manera \cite{QProcess}:
+
+\begin{equation} 
+\Lambda(\mathcal{E}) = (I \otimes \mathcal{E})(|\Omega\rangle\langle\Omega|),
+\end{equation} 
+
+donde $|\Omega\rangle$ es un estado máximamente entrelazado del sistema con un sistema \textit{ancilla} de la misma dimensión e $I$ representa la identidad en el espacio del sistema \textit{ancilla}.
+
+Para comprender por qué esta representación es más completa, notemos que, cuando el canal $\mathcal{E}$ se aplica a la mitad del estado entrelazado, obtenemos un nuevo estado mixto que contiene toda la información del canal:
+
+\begin{equation}
+(I \otimes \mathcal{E})(|\Omega\rangle\langle\Omega|).
+\end{equation}
+
+Desarrollando esta operación, el término $|\Omega\rangle\langle\Omega|$ se expande como:
+
+\begin{equation}
+|\Omega\rangle\langle\Omega| = \frac{1}{d} \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \ketbra{i}{j}.
+\end{equation}
+
+Aplicando el canal $\mathcal{E}$ sobre cada $\ketbra{i}{j}$ en el segundo subsistema y dejando intacto el primero , obtenemos la matriz de Choi:
+
+\begin{equation}\label{ec:1.7}
+\Lambda(\mathcal{E}) = \frac{1}{d} \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}).
+\end{equation}
+
+Esta expresión representa una superposición ponderada de todas las posibles acciones del canal $\mathcal{E}$ sobre la base computacional. La presencia de cada término $\ketbra{i}{j}$ garantiza que cualquier efecto que $\mathcal{E}$ tenga sobre los elementos de la base está representado. Por lo tanto, conociendo $\Lambda(\mathcal{E})$, uno puede predecir cómo el canal actuará sobre cualquier estado dado del sistema.
+
+\subsection{Ejemplo: Depolarizing Channel}
+
+El \textit{Depolarizing Channel} es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
+
+\begin{equation}
+\mathcal{E}(\rho) = p \frac{I}{2} + (1 - p)\rho ,
+\end{equation}
+
+donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial.
+
+Dado que el canal  convierte cualquier estado $\rho$ en una mezcla de $\rho$ e $I/d$, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
+
+\begin{equation}
+\mathcal{E}(\ketbra{i}{j}) = p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
+\end{equation}
+
+Por lo tanto la matriz de  Choi de este canal , recordando la ecuación (\ref{ec:1.7}), nos permite reescribirla  como:
+
+
+\begin{equation}
+\Lambda(\mathcal{E}) = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left( (1-p) \ketbra{i}{j} + p \frac{I}{2} \right).
+\end{equation}
+
+La matriz de Choi resultante encapsula todos los posibles efectos del \textit{Depolarizing Channel} sobre cualquier estado de entrada. 
+Notemos que cualquier matriz de densidad $\rho$ de un qubit se puede escribir en la base computacional $(\{\ket{0}, \ket{1} \}$ como:
+
+\begin{equation}
+\rho = \sum_{i,j=0}^{1} \rho_{ij}\ketbra{i}{j}.
+\end{equation}
+
+Cuando el canal actúa sobre $\rho$, es equivalente a sumar todas las transformaciones posibles de los elementos $\ketbra{i}{j}$, ponderadas por los elementos de matriz $\rho_{ij}$. Por lo tanto, la matriz de Choi contiene en su estructura todos los posibles resultados de la acción del canal sobre cualquier estado de qubit:
+
+\begin{equation}
+\mathcal{E}(\rho) = \sum_{i,j=0}^{1} \rho_{ij} \left( (1-p) \ketbra{i}{j} + p \frac{I}{2} \right).
+\end{equation}
+
+
+
+
+
+
+% \subsubsection{Fidelidad de Proceso en Canales Cuánticos}
+
+% La fidelidad de proceso es una medida de similitud entre dos canales cuánticos. Es particularmente relevante cuando uno de los canales representa un proceso cuántico ideal y el otro es un proceso real que se desea comparar. La fidelidad de proceso entre dos canales, $\mathcal{E}$ y $\mathcal{F}$, dadas sus matrices de Choi, $\Lambda(\mathcal{E})$ y $\Lambda(\mathcal{F})$, se define como:
+
+% \begin{equation}
+% F_p(\mathcal{E}, \mathcal{F}) = \left(\text{Tr}\sqrt{\sqrt{\Lambda(\mathcal{E})} \Lambda(\mathcal{F}) \sqrt{\Lambda(\mathcal{E})}}\right)^2.
+% \end{equation}
+
+
+% %%============
+% \begin{equation}
+% \Lambda(\mathcal{E}) = \left( I \otimes \mathcal{E} \right) \left( |\Omega\rangle \langle\Omega| \right).
+% \end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Para entender esta definición, podemos considerar el caso especial en que $\mathcal{E}$ y $\mathcal{F}$ son canales que actúan como operaciones unitarias $U$ y $V$ respectivamente. Las matrices de Choi respectivas son $J(U) = (I \otimes U)|\Omega\rangle\langle\Omega|(I \otimes U^\dagger)$ y de manera similar para $V$. La fidelidad de proceso es entonces el cuadrado del valor absoluto de la traza de $U^\dagger V$, normalizada por la dimensión del sistema:
+
+% \begin{equation}
+% F_p(U, V) = \left|\frac{1}{d}\text{Tr}(U^\dagger V)\right|^2.
+% \end{equation}
+
+% Esta expresión coincide con la definición estándar de fidelidad para operaciones unitarias y se generaliza adecuadamente para canales cuánticos arbitrarios a través de sus matrices de Choi.
+
+
+
+
+
+% \chapter{Algoritmos Variacionales Cuánticos}
+% Los Algoritmos Variacionales Cuánticos (VQA) representan una estrategia innovadora en el campo de la computación cuántica para resolver problemas complejos. A través de un esquema híbrido que aprovecha tanto recursos cuánticos como clásicos, los VQA buscan optimizar un conjunto de parámetros en un circuito cuántico parametrizado. Estos algoritmos son fundamentales en tareas donde la solución se codifica dentro de una función de costo o pérdida, la cual es minimizada a través del ajuste variacional de parámetros dentro del circuito.
+
+% El circuito cuántico parametrizado, o \textit{ansatz}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los ansatz más efectivos, como el Hardware Efficient Ansatz (HEA), son aquellos que equilibran la expresividad del circuito — su capacidad para representar estados cuánticos complejos — y la eficiencia en términos de recursos y operaciones cuánticas requeridas.
+
+% El proceso de optimización en VQAs se articula en tres fases principales:
+% \begin{enumerate}
+%     \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{ansatz}.
+%     \item \textbf{Aplicación del Ansatz:} Se utiliza el \textit{ansatz} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
+%     \item \textbf{Evaluación y Optimización:} Se evalúa la función de costo mediante mediciones cuánticas y se emplea un optimizador clásico para ajustar los parámetros en busca de un mínimo, completando así el bucle cuántico-clásico.
+% \end{enumerate}
+
+% La selección del \textit{ansatz} es decisiva y se basa en un compromiso entre la facilidad de implementación en el hardware cuántico y la capacidad de mitigar los efectos del ruido inherente a este. En este contexto, los HEA se presentan como una opción robusta, particularmente en aplicaciones donde la tolerancia al ruido y la eficiencia operativa son consideraciones primordiales. Investigaciones recientes han destacado la importancia del rol de los estados de entrada en la entrenabilidad de los VQA, sugiriendo que para ciertos escenarios, como aquellos que siguen una ley de área de entrelazamiento, los HEA pueden ser particularmente beneficiosos y entrenables.
+
+% En consecuencia, la arquitectura del \textit{ansatz}, la elección de los parámetros iniciales y la estrategia de optimización forman un trípode sobre el cual se asienta el éxito de los VQA en la resolución de problemas cuánticos, desde la simulación de sistemas físicos hasta aplicaciones en aprendizaje automático cuántico.
+
+
+
+
+% \section{Aplicación de VQA en la Tomografía de Procesos Cuánticos}
+
+% Con el marco teórico establecido, nos adentramos en cómo los Algoritmos Variacionales Cuánticos (VQA) pueden ser implementados para optimizar un \textit{ansatz} que simule un canal cuántico dentro de una computadora cuántica. A través de la optimización iterativa de los parámetros del \textit{ansatz}, basada en la retroalimentación obtenida de la fidelidad de proceso, los VQA permiten una caracterización precisa y eficiente de canales cuánticos desconocidos.
+
+% La tomografía de proceso se convierte entonces en una aplicación práctica para la tecnología emergente de los VQA, permitiendo no solo una comprensión detallada de la naturaleza y comportamiento de los canales cuánticos sino también una implementación más efectiva de las operaciones cuánticas en plataformas de hardware real, un paso crucial para el desarrollo de la computación cuántica confiable y la simulación cuántica precisa.
+
+
+
+
+
+
+
+
+% \subsection{Aplicaciones en Tomografía de Procesos Cuánticos}
+
+% En la tomografía de procesos cuánticos, los VQA ofrecen un enfoque prometedor para reconstruir canales cuánticos desconocidos. La capacidad de los VQA para ajustar el \textit{ansatz} en respuesta a la información obtenida de mediciones sucesivas permite una caracterización precisa de la dinámica cuántica, facilitando una comprensión más profunda y aplicaciones prácticas en la computación cuántica.
+
+
+
+
+
+% }}}
+\bibliographystyle{abbrvnat}
+\bibliography{references}
+\end{document}
