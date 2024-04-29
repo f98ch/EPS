@@ -288,7 +288,7 @@ donde $E_k$ son los operadores de Kraus que cumplen con la condición de complet
 
 Mientras que los operadores de Kraus ofrecen una manera de describir los canales cuánticos, la matriz de Choi proporciona una representación alternativa útil para la caracterización completa de un canal cuántico. A diferencia de los operadores de Kraus que requieren una selección de un conjunto no único para caracterizar el canal, la matriz de Choi captura la totalidad del canal en una única matriz. 
 
-La matriz de Choi, $(\Lambda(\mathcal{E}))$, se construye de la siguiente manera \cite{QProcess}:
+La matriz de Choi se construye de la siguiente manera \cite{QProcess}:
 
 \begin{equation} 
 \Lambda(\mathcal{E}) = (I \otimes \mathcal{E})(|\Omega\rangle\langle\Omega|),
@@ -316,32 +316,26 @@ Aplicando el canal $\mathcal{E}$ sobre cada $\ketbra{i}{j}$ en el segundo subsis
 
 Esta expresión representa una superposición ponderada de todas las posibles acciones del canal $\mathcal{E}$ sobre la base computacional. La presencia de cada término $\ketbra{i}{j}$ garantiza que cualquier efecto que $\mathcal{E}$ tenga sobre los elementos de la base está representado. Por lo tanto, conociendo $\Lambda(\mathcal{E})$, uno puede predecir cómo el canal actuará sobre cualquier estado dado del sistema.
 
-\subsection{Ejemplo: Depolarizing Channel}
+\subsubsection{Ejemplo: Depolarizing Channel}
 
 El \textit{Depolarizing Channel} es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
-
 \begin{equation}
 \mathcal{E}(\rho) = p \frac{I}{2} + (1 - p)\rho ,
 \end{equation}
+donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial.
 
-donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial.
-
-Dado que el canal  convierte cualquier estado $\rho$ en una mezcla de $\rho$ e $I/d$, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
-
+Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
 \begin{equation}
 \mathcal{E}(\ketbra{i}{j}) = p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
 \end{equation}
 
 Por lo tanto la matriz de  Choi de este canal , recordando la ecuación (\ref{ec:1.7}), nos permite reescribirla  como:
-
-
 \begin{equation}
-\Lambda(\mathcal{E}) = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left( (1-p) \ketbra{i}{j} + p \frac{I}{2} \right).
+\Lambda(\mathcal{E}) = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left( p \frac{I}{2} +  (1-p) \ketbra{i}{j}  \right).
 \end{equation}
 
 La matriz de Choi resultante encapsula todos los posibles efectos del \textit{Depolarizing Channel} sobre cualquier estado de entrada. 
 Notemos que cualquier matriz de densidad $\rho$ de un qubit se puede escribir en la base computacional $(\{\ket{0}, \ket{1} \}$ como:
-
 \begin{equation}
 \rho = \sum_{i,j=0}^{1} \rho_{ij}\ketbra{i}{j}.
 \end{equation}
@@ -352,86 +346,31 @@ Cuando el canal actúa sobre $\rho$, es equivalente a sumar todas las transforma
 \mathcal{E}(\rho) = \sum_{i,j=0}^{1} \rho_{ij} \left( (1-p) \ketbra{i}{j} + p \frac{I}{2} \right).
 \end{equation}
 
+\subsection{Tomografía de Procesos Cuánticos y la Matriz de Choi}
+Faltante de redactar
+\subsubsection{Fidelidad de Proceso en Canales Cuánticos}
+Faltante de Redactar
+
+
+
+\chapter{Algoritmos Variacionales Cuánticos}
+Los Algoritmos Variacionales Cuánticos (VQA) representan una estrategia innovadora en el campo de la computación cuántica para resolver problemas complejos. A través de un esquema híbrido que aprovecha tanto recursos cuánticos como clásicos, los VQA buscan optimizar un conjunto de parámetros en un circuito cuántico parametrizado. Estos algoritmos son fundamentales en tareas donde la solución se codifica dentro de una función de costo o pérdida, la cual es minimizada a través del ajuste variacional de parámetros dentro del circuito.
+
+El circuito cuántico parametrizado, o \textit{ansatz}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los ansatz más efectivos, como el Hardware Efficient Ansatz (HEA), son aquellos que equilibran la expresividad del circuito y la eficiencia en términos de recursos y operaciones cuánticas requeridas. \cite{VQA}
+
+El proceso de optimización en VQAs se articula en tres fases principales:
+\begin{enumerate}
+    \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{ansatz}.
+    \item \textbf{Aplicación del Ansatz:} Se utiliza el \textit{ansatz} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
+    \item \textbf{Evaluación y Optimización:} Se evalúa la función de costo mediante mediciones cuánticas y se emplea un optimizador clásico para ajustar los parámetros en busca de un mínimo, completando así el bucle cuántico-clásico.
+\end{enumerate}
 
 
 
 
 
-% \subsubsection{Fidelidad de Proceso en Canales Cuánticos}
-
-% La fidelidad de proceso es una medida de similitud entre dos canales cuánticos. Es particularmente relevante cuando uno de los canales representa un proceso cuántico ideal y el otro es un proceso real que se desea comparar. La fidelidad de proceso entre dos canales, $\mathcal{E}$ y $\mathcal{F}$, dadas sus matrices de Choi, $\Lambda(\mathcal{E})$ y $\Lambda(\mathcal{F})$, se define como:
-
-% \begin{equation}
-% F_p(\mathcal{E}, \mathcal{F}) = \left(\text{Tr}\sqrt{\sqrt{\Lambda(\mathcal{E})} \Lambda(\mathcal{F}) \sqrt{\Lambda(\mathcal{E})}}\right)^2.
-% \end{equation}
-
-
-% %%============
-% \begin{equation}
-% \Lambda(\mathcal{E}) = \left( I \otimes \mathcal{E} \right) \left( |\Omega\rangle \langle\Omega| \right).
-% \end{equation}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% Para entender esta definición, podemos considerar el caso especial en que $\mathcal{E}$ y $\mathcal{F}$ son canales que actúan como operaciones unitarias $U$ y $V$ respectivamente. Las matrices de Choi respectivas son $J(U) = (I \otimes U)|\Omega\rangle\langle\Omega|(I \otimes U^\dagger)$ y de manera similar para $V$. La fidelidad de proceso es entonces el cuadrado del valor absoluto de la traza de $U^\dagger V$, normalizada por la dimensión del sistema:
-
-% \begin{equation}
-% F_p(U, V) = \left|\frac{1}{d}\text{Tr}(U^\dagger V)\right|^2.
-% \end{equation}
-
-% Esta expresión coincide con la definición estándar de fidelidad para operaciones unitarias y se generaliza adecuadamente para canales cuánticos arbitrarios a través de sus matrices de Choi.
-
-
-
-
-
-% \chapter{Algoritmos Variacionales Cuánticos}
-% Los Algoritmos Variacionales Cuánticos (VQA) representan una estrategia innovadora en el campo de la computación cuántica para resolver problemas complejos. A través de un esquema híbrido que aprovecha tanto recursos cuánticos como clásicos, los VQA buscan optimizar un conjunto de parámetros en un circuito cuántico parametrizado. Estos algoritmos son fundamentales en tareas donde la solución se codifica dentro de una función de costo o pérdida, la cual es minimizada a través del ajuste variacional de parámetros dentro del circuito.
-
-% El circuito cuántico parametrizado, o \textit{ansatz}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los ansatz más efectivos, como el Hardware Efficient Ansatz (HEA), son aquellos que equilibran la expresividad del circuito — su capacidad para representar estados cuánticos complejos — y la eficiencia en términos de recursos y operaciones cuánticas requeridas.
-
-% El proceso de optimización en VQAs se articula en tres fases principales:
-% \begin{enumerate}
-%     \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{ansatz}.
-%     \item \textbf{Aplicación del Ansatz:} Se utiliza el \textit{ansatz} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
-%     \item \textbf{Evaluación y Optimización:} Se evalúa la función de costo mediante mediciones cuánticas y se emplea un optimizador clásico para ajustar los parámetros en busca de un mínimo, completando así el bucle cuántico-clásico.
-% \end{enumerate}
-
-% La selección del \textit{ansatz} es decisiva y se basa en un compromiso entre la facilidad de implementación en el hardware cuántico y la capacidad de mitigar los efectos del ruido inherente a este. En este contexto, los HEA se presentan como una opción robusta, particularmente en aplicaciones donde la tolerancia al ruido y la eficiencia operativa son consideraciones primordiales. Investigaciones recientes han destacado la importancia del rol de los estados de entrada en la entrenabilidad de los VQA, sugiriendo que para ciertos escenarios, como aquellos que siguen una ley de área de entrelazamiento, los HEA pueden ser particularmente beneficiosos y entrenables.
-
-% En consecuencia, la arquitectura del \textit{ansatz}, la elección de los parámetros iniciales y la estrategia de optimización forman un trípode sobre el cual se asienta el éxito de los VQA en la resolución de problemas cuánticos, desde la simulación de sistemas físicos hasta aplicaciones en aprendizaje automático cuántico.
-
-
-
-
-% \section{Aplicación de VQA en la Tomografía de Procesos Cuánticos}
-
-% Con el marco teórico establecido, nos adentramos en cómo los Algoritmos Variacionales Cuánticos (VQA) pueden ser implementados para optimizar un \textit{ansatz} que simule un canal cuántico dentro de una computadora cuántica. A través de la optimización iterativa de los parámetros del \textit{ansatz}, basada en la retroalimentación obtenida de la fidelidad de proceso, los VQA permiten una caracterización precisa y eficiente de canales cuánticos desconocidos.
-
-% La tomografía de proceso se convierte entonces en una aplicación práctica para la tecnología emergente de los VQA, permitiendo no solo una comprensión detallada de la naturaleza y comportamiento de los canales cuánticos sino también una implementación más efectiva de las operaciones cuánticas en plataformas de hardware real, un paso crucial para el desarrollo de la computación cuántica confiable y la simulación cuántica precisa.
-
-
-
-
-
-
-
-
-% \subsection{Aplicaciones en Tomografía de Procesos Cuánticos}
-
-% En la tomografía de procesos cuánticos, los VQA ofrecen un enfoque prometedor para reconstruir canales cuánticos desconocidos. La capacidad de los VQA para ajustar el \textit{ansatz} en respuesta a la información obtenida de mediciones sucesivas permite una caracterización precisa de la dinámica cuántica, facilitando una comprensión más profunda y aplicaciones prácticas en la computación cuántica.
+\section{Aplicación de VQA para la simulación de Canales Cuánticos}
+Faltante de Redactar
 
 
 
