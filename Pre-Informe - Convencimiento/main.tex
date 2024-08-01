@@ -298,19 +298,17 @@ El \textit{Depolarizing Channel} es un ejemplo de canal cuántico que introduce 
 
 En los siguientes capítulos se detallará el proceso para implementar la matriz de Choi y reconstruirla en sistemas cuánticos.
 \section{Circuitos Cuánticos}
-*Sección heredada de informe de prácticas
-\section{Tomografía y Fidelidad de Proceso}
-La tomografía de proceso cuántico (QPT) es una técnica para reconstruir experimentalmente un canal cuántico mediante mediciones. Primero, entendemos la tomografía de estado cuántico, que permite reconstruir un estado desconocido a partir de mediciones repetidas.
+*Heredado de informe de prácticas 
 
-Para implementar la tomografía de estado en una computadora cuántica, realizamos mediciones en las bases de los operadores de Pauli $(X,Y,Z)$. Usamos compuertas cuánticas como Hadamard $H$ y $S^{\dagger}$ para cambiar las bases de medición.
+Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al qubit. Esta esfera nos permite visualizar los cambios del estado de un qubit bajo transformaciones unitarias $U$. 
 
-Con esta información, pasamos a la tomografía de proceso, que implica preparar un conjunto de estados puros de entrada, pasarlos por el canal $\mathcal{E}$ y realizar tomografía de estado en las salidas. Esto nos permite reconstruir la matriz de Choi $\Lambda_{\mathcal{E}}$ del canal cuántico.
+Las computadoras cuánticas tienen compuertas cuánticas, operadores unitarios reversibles $U$ que actúan linealmente sobre qubits en superposición. Las compuertas $X$, $Y$ y $Z$ representan las matrices de Pauli $\sigma_x$, $\sigma_y$ y $\sigma_z$ respectivamente.
 
-La fidelidad de estado cuántico mide la similitud entre dos estados $\rho$ y $\sigma$. Utilizamos esta métrica para definir la fidelidad de proceso cuántico $F_{\text{pro}}(\mathcal{E}, \mathcal{F})$, que compara dos canales cuánticos. Esta métrica es útil para medir la diferencia entre un canal cuántico teórico y uno experimental.
+Un circuito cuántico es una rutina computacional con operadores que actúan sobre qubits. Los circuitos se conforman por cables, compuertas y mediciones.
 
+Para este trabajo, utilizamos la plataforma \textit{IBM Quantum Experience}, que nos da acceso a computadoras cuánticas para ejecutar circuitos cuánticos válidos. 
 
 \chapter{Algoritmos Variacionales Cuánticos}
-*Resumen pendiente
 \section{Introducción}
 \section{Descripción de los VQA}
 Los Algoritmos Variacionales Cuánticos son una clase de algoritmos que combinan computación cuántica y clásica para resolver problemas de optimización. 
