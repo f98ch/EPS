@@ -38,6 +38,7 @@
 \usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
 \FXRegisterAuthor{cp}{acp}{\color{blue}CP}
 \FXRegisterAuthor{fel}{afel}{\color{mycolor}F}
+\FXRegisterAuthor{sub}{asub}{\color{red}Sub}
 
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
@@ -107,8 +108,8 @@
 \usetikzlibrary{quantikz}
 
 
-% \usepackage[]{lineno}  \linenumbers
-%\setlength\linenumbersep{3pt}
+\usepackage[]{lineno}  \linenumbers
+\setlength\linenumbersep{3pt}
 
 \renewcommand{\baselinestretch}{1} % interlinado
 \addto\shorthandsspanish{\spanishdeactivate{~<>}}
@@ -194,7 +195,7 @@ frametitle={%
 %       Title
 %------------------------------------------------
 \HRule \\[0.4cm] % Adjusted space before and after the rule
-{\huge\bfseries Implementación de Canales Cuánticos con VQA\\[0.3cm]} % Adjusted space before and after the title
+{\huge\bfseries Implementación de Canales Cuánticos de 1 qubit con VQA\\[0.3cm]} % Adjusted space before and after the title
 \HRule \\[2cm] % Adjusted space before and after the rule
 % \end{titlepage}
 
@@ -212,7 +213,7 @@ frametitle={%
 \textsc{\LARGE Universidad de San Carlos de Guatemala\\ Escuela de Ciencias Físicas y Matemáticas\\ Licenciatura en Física}\\[2cm]
 
 \textsc{\Large Resumen de trabajo de EPS - Implementación de Canales Cuánticos mediante Algoritmos Variacionales Cuánticos}\\[2cm]
-\textsc{\Large Supervisado por: \textbf{Dr. Carlos Pineda (IF-UNAM)}}
+\textsc{\Large Supervisado por: \textbf{Dr. Carlos Pineda (IF-UNAM) y\\M.Sc. Juan Diego Chang (ECFM-USAC)}}
                                                                                                       
 
 %------------------------------------------------                                                                                             
@@ -256,425 +257,93 @@ Estudiar  y desarrollar algoritmos variacionales cuánticos para la implementaci
 El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para el avance de la computación e información cuántica. Los canales cuánticos describen la evolución de estados cuánticos en  interacción con su entorno, y son clave para el entendimiento de este tipo de sistemas.
 
 En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
-\chapter{Matriz Densidad}
+\chapter{Fundamentos Teóricos}
 *Capítulo a heredar de informe de prácticas. 
-\section{Estados puros y mixtos}
-\section{Pureza y Traza Parcial}
-\section{Purificación de estados mixtos}
+\section{Introducción}
+\section{Matriz Densidad}
+*Sección heredada de informe de prácticas
 
-\chapter{Circuitos Cuánticos}
-*Capitulo a heredar de informa de prácticas
-\section{Compuertas y mediciones cuánticas}
-\section{Composición de circuitos cuánticos}
-\section{Plataforma \textit{IBM Quantum Experience}}
+Un sistema cuántico se describe mediante un vector complejo $\ket{\psi}$, conocido como estado cuántico. Un estado cuántico puro se representa como:
+$
+\ket{\psi} = \sum_{i=1}^{d} c_i \ket{i},
+$
+donde $c_i$ son coeficientes complejos y $\{\ket{i}\}$ es una base ortonormal. Los coeficientes deben cumplir con la condición de normalización:
+$
+\braket{\psi}{\psi}=1.
+$
 
-\chapter{Sistemas Cuánticos Abiertos} \label{ch:1} 
+ Los estados puros pueden representarse mediante la matriz densidad:$\rho = \ketbra{\psi}.$.  
+ 
+ Un estado mixto es un ensamble estadístico de estados puros $\{\ket{\psi_i}\}$ con probabilidades $\{p_i\}$. La matriz densidad para estados mixtos es:$\rho = \sum_{i=1}^{n} p_i \ketbra{\psi_i}.$
+
+La matriz densidad $\rho$ tiene tres propiedades principales: Hermiticidad , traza unitaria y no negatividad.
+
+La pureza de un estado cuántico mide qué tan mixto es el estado. Se define como $\text{Pureza} = tr(\rho^2).$
+
+La traza parcial se usa para obtener la matriz densidad reducida de un subsistema en estados compuestos. Por ejemplo, si tenemos un sistema compuesto por dos subsistemas $A$ y $B$, la matriz densidad reducida del subsistema $A$ se obtiene trazando sobre el subsistema $B$:
+$\rho_A = tr_B(\rho_{AB}).$
+
+La purificación es un proceso para representar un estado mixto como un estado puro en un espacio de Hilbert ampliado. Esto es útil en computadoras cuánticas para iniciar estados mixtos.
+
+
+
+\section{Canales Cuánticos y su representación}
+La dinámica de un sistema cuántico abierto se describe mediante la interacción de un sistema principal y un entorno, formando un sistema cuántico cerrado \cite{nielsen_chuang_2011}. Esta interacción se da por una transformación unitaria $U$, resultando en el estado final del sistema principal $\mathcal{E}$.
+
+Los operadores cuánticos pueden representarse mediante la \textit{representación de Kraus}, donde los operadores ${E_k}$ satisfacen la \textit{relación de completitud}. La \textit{matriz de Choi} es otra representación útil para caracterizar los canales cuánticos, definida como $\Lambda_{\mathcal{E}} = (I \otimes \mathcal{E})(|\Omega\rangle\langle\Omega|)$.
+
+La matriz de Choi tiene varias propiedades: es Hermítica, puede expresarse en términos de los operadores de Kraus, es positivo semidefinido y su traza parcial es la identidad si preserva la traza. Además, la matriz de Choi de un operador CPTP es única, mientras que la representación de Kraus no lo es.
+
+El \textit{Depolarizing Channel} es un ejemplo de canal cuántico que introduce ruido aleatorio en un sistema. Su matriz de Choi refleja cómo el canal mezcla el estado original con la matriz identidad, reduciendo la pureza del estado.
+
+En los siguientes capítulos se detallará el proceso para implementar la matriz de Choi y reconstruirla en sistemas cuánticos.
+\section{Circuitos Cuánticos}
+*Sección heredada de informe de prácticas
+\section{Tomografía y Fidelidad de Proceso}
+La tomografía de proceso cuántico (QPT) es una técnica para reconstruir experimentalmente un canal cuántico mediante mediciones. Primero, entendemos la tomografía de estado cuántico, que permite reconstruir un estado desconocido a partir de mediciones repetidas.
+
+Para implementar la tomografía de estado en una computadora cuántica, realizamos mediciones en las bases de los operadores de Pauli $(X,Y,Z)$. Usamos compuertas cuánticas como Hadamard $H$ y $S^{\dagger}$ para cambiar las bases de medición.
+
+Con esta información, pasamos a la tomografía de proceso, que implica preparar un conjunto de estados puros de entrada, pasarlos por el canal $\mathcal{E}$ y realizar tomografía de estado en las salidas. Esto nos permite reconstruir la matriz de Choi $\Lambda_{\mathcal{E}}$ del canal cuántico.
+
+La fidelidad de estado cuántico mide la similitud entre dos estados $\rho$ y $\sigma$. Utilizamos esta métrica para definir la fidelidad de proceso cuántico $F_{\text{pro}}(\mathcal{E}, \mathcal{F})$, que compara dos canales cuánticos. Esta métrica es útil para medir la diferencia entre un canal cuántico teórico y uno experimental.
+
+
+\chapter{Algoritmos Variacionales Cuánticos}
 *Resumen pendiente
-% En la teoría cuántica, un sistema cuántico abierto es aquel que no está aislado, sino que interactúa continuamente con su entorno. Este tipo de sistemas son fundamentales para entender muchos fenómenos cuánticos en la práctica, ya que cualquier sistema cuántico real interactúa con su entorno. A diferencia de los sistemas cuánticos cerrados, que se consideran completamente aislados y evolucionan de manera unitaria según la ecuación de Schrödinger, los sistemas cuánticos abiertos pueden sufrir pérdidas de coherencia cuántica debido a estas interacciones. En la sección 3.1 exploraremos este tipo de sistemas por medio de canales cuánticos, con énfasis en su representación con la matriz de Choi. En la sección 3.2 mencionaremos la tomografía y fidelidad de proceso cuántico, ya que son importantes para la reconstrucción de canales cuánticos en computadoras cuánticas
-
-
-
-\section{Representación de Canales Cuánticos} 
-Una forma natural de describir la dinámica de un sistema cuántico abierto es considerar que este surge de la interacción de un sistema de interés , al que llamaremos \textit{sitema principal} , y un \textit{entorno}, que juntos forman un sistema cuántico cerrado \cite{nielsen_chuang_2011}:
-\begin{equation}
-    \rho = \rho_{\text{sp}} \otimes \rho_{\text{ent}}.
-\end{equation}
-Supondremos que la interacción entre ambos sistemas se da por una transformación unitaria $U$, luego de esto, el sistema ya no interactúa con el entorno resultando en el estado final del sistema pincipal $\mathcal{E}$:
-\begin{equation}
-    \mathcal{E}(\rho_{\text{sp}}) = \text{Tr}_{\text{ent}}[ U( \rho_{\text{sp}} \otimes \rho_{\text{ent}} ) U^\dagger ].
-\end{equation}
-Notemos que si $U$ no involucra ninguna interacción entre el sistema y el entorno entonces  $\mathcal{E}(\rho_{sp}) =  \widetilde{U} \rho \widetilde{U}^\dagger \footnotemark$\footnotetext{A partir de los siguientes enunciados se utilizará $\rho = \rho_{\text{sp}}$ ya que se entiende de forma implícita que nos referimos a $\rho$ como el sistema principal.} , donde $\widetilde{U}$ es la parte de $U$ que interactúa solo con el sistema principal. Este proceso describe cómo los operadores de evolución de sistemas cuánticos cerrados pueden ser generalizados a operadores cuánticos $\mathcal{E}$ (también conocidos como superoperadores), que mapean matrices de densidad del sistema a nuevos estados cuánticos, teniendo en cuenta las influencias del entorno.
-
-
-Los operadores cuánticos pueden ser representados de forma explícita en términos del espacio de Hilbert de los operadores del sistema principal. Donde $\ket{e_k}$ es una base ortonormal del espacio del entorno, y $\rho_{ent} = \ketbra{e_0}$ su estado inicial, asumimos que:
-\begin{align}
-\mathcal{E}(\rho) &= \text{Tr}_{\text{ent}}[ U( \rho \otimes \ketbra{e_0} ) U^\dagger ] \\
-&= \sum_k E_k \rho E_k^\dagger.  \label{ec:Canal_Kraus}
-\end{align}
-En esta expresión, cada operador $E_k \equiv \bra{e_k} U \ket{e_0}$ actúa sobre el espacio del sistema principal. Esta formulación es conocida como la \textit{representación de Kraus} de $\mathcal{E}$. Los operadores $\{E_k\}$ son denominados \textit{operadores de Kraus}. Además, esta representación caracteriza a $\mathcal{E}$ como un operador \textit{completamente positivo} (CP).
-
-Los operadores $\{E_k\}$  satisfacen la \textit{relación de completitud}, que requiere que la traza de $\mathcal{E}(\rho) = 1$:
-\begin{align}
-    \text{Tr}(\mathcal{E}(\rho)) &= \text{Tr}\left(\sum_k E_k \rho E_k^\dagger\right) \\
-    &= \text{Tr}\left(\rho \sum_k E_k^\dagger E_k \right).
-\end{align}
-Notemos que para que esto se cumpla entonces:
-\begin{equation}
-    \sum_k E_k^\dagger E_k = I. \label{ec:trace_preserving}
-\end{equation}
-Esta propiedad caracteriza a los operadores $\mathcal{E}$ que \textit{preservan la traza} (TP). Por lo tanto, decimos que un \textit{canal cuántico} $\mathcal{E}$ es un operador completamente positivo y  que preserva la traza (CPTP), cumpliendo con las ecuaciones \ref{ec:Canal_Kraus}  y\ref{ec:trace_preserving}. 
-
-Mientras que la representación de Kraus ofrece una forma de describir los canales cuánticos, la matriz de Choi proporciona una representación alternativa útil para su caracterización. 
-La matriz de Choi de un canal cuántico $\mathcal{E}$ se define como \cite{QProcess}:
-\begin{equation} 
-\Lambda_{\mathcal{E}} = (I \otimes \mathcal{E})(|\Omega\rangle\langle\Omega|),
-\end{equation} 
-donde $\ket{\Omega}$ es un estado máximamente entrelazado no normalizado $\ket{\Omega} = \sum_i \ket{ii}$ .
-Desarrollando el el término $|\Omega\rangle\langle\Omega|$ obtenemos:
-\begin{equation}
-|\Omega\rangle\langle\Omega| = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \ketbra{i}{j},
-\end{equation} 
-que nos deja la segunda representación de la matriz de Choi \cite{qiskit_documentation} \cite{QProcess}:
-\begin{equation}\label{ec:Choi_ketbra}
-\Lambda_{\mathcal{E}} = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}).
-\end{equation}
-Esta expresión representa la superposición de todas las posibles transformaciones que $\mathcal{E}$ puede aplicar sobre la base computacional del sistema principal luego de su interacción con el entorno. Esto permite ver el efecto del canal sobre cualquier estado del sistema principal.
-
-
-La matriz de Choi tiene  varias propiedades descritas en el paper de  G. Homa  y otros \cite{Choi2024},  que permiten describir completamente un canal cuántico y hacer una correlación con la representación de Kraus:
-\begin{enumerate}
-     \item Para un operador $\mathcal{E}$ completamente positivo, dado en una representación de Kraus, su matriz de Choi es \textit{Hermítica}, es decir $\Lambda_{\mathcal{E}} = \Lambda_{\mathcal{E}}^{\dagger}$.\\ 
-        La transpuesta conjuntada de la matriz de Choi es: 
-        \begin{equation*}
-            \Lambda_{\mathcal{E}}^\dagger = \left( \sum_{i,j} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) \right)^\dagger.
-        \end{equation*}
-        Utilizando la propiedad de la transpuesta conjuntada $(A \otimes B)^\dagger = A^\dagger \otimes B^\dagger$, obtenemos:
-        \begin{equation}
-          \Lambda_{\mathcal{E}}^\dagger = \sum_{i,j} (\ketbra{i}{j})^\dagger \otimes \mathcal{E}(\ketbra{i}{j})^\dagger.  
-        \end{equation}
-        Sabemos que $(\ketbra{i}{j})^\dagger = \ketbra{j}{i}$ y que $\mathcal{E}(\ketbra{i}{j})^\dagger = \mathcal{E}(\ketbra{j}{i})$ porque $\mathcal{E}$ es un operador CP. Así, tenemos:
-        \begin{equation}
-         \Lambda_{\mathcal{E}}^\dagger = \sum_{i,j} \ketbra{j}{i} \otimes \mathcal{E}(\ketbra{j}{i}).   
-        \end{equation}
-        Cambiando los índices de suma, podemos renombrar $i$ como $j$ y $j$ como $i$:
-        \begin{equation}
-           \Lambda_{\mathcal{E}}^\dagger = \sum_{j,i} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) = \Lambda_{\mathcal{E}}. \blacksquare
-        \end{equation}
-    \item Para un operador $\mathcal{E}$ completamente positivo, podemos escribirlo en términos de la matriz de Choi como:
-            \begin{equation}\label{ec:canal_choi_form}
-            \mathcal{E} (\rho) = \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)] .
-            \end{equation}
-            Para demostrar esta expresión partimos de escribir a  $\rho$ en la base computacional:
-        \begin{equation} \label{ec:densidad_computacional}
-            \rho = \sum_{k,l} \rho_{k,l} \ketbra{k}{l},
-        \end{equation}
-        entonces:
-        \begin{equation}
-            \rho^{T} \otimes I = \sum_{k,l} \rho_{k,l} \ketbra{l}{k} \otimes I.
-        \end{equation}
-        Multiplicamos $\Lambda$ con $\rho^{T} \otimes I$:
-        \begin{align}
-            \Lambda(\rho^{T} \otimes I) & = \left( \sum_{i,j} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) \right) \left( \sum_{k,l} \rho_{k,l} \ketbra{l}{k} \otimes I \right) \\
-            & = \sum_{i,j,k,l} \rho_{k,l} (  \ketbra{i}{j} ) (\ketbra{l}{k}) \otimes \mathcal{E} (\ketbra{i}{j})\\
-            & =  \sum_{i,j,k,l} \rho_{k,l} \delta_{j,l} \ketbra{i}{k} \otimes \mathcal{E}( \ketbra{i}{j})\\
-            & = \sum_{i,k,l} \rho_{k,l} \ketbra{i}{k} \otimes \mathcal{E}( \ketbra{i}{l}).
-        \end{align}
-        Si trazamos parcialmente el primer subsistema tenemos la expresión: 
-        \begin{equation}
-            \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)]  = \text{Tr}_1 \left[  \sum_{i,k,l} \rho_{k,l}\ketbra{i}{k} \otimes \mathcal{E}(\ketbra{i}{l})\right],
-        \end{equation}
-        consideramos solo los términos donde $i=k$:
-        \begin{equation}
-            \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)]  = \sum_{i,l}\rho_{i,l} \mathcal{E}(\ketbra{i}{l}) = \mathcal{E}(\rho) .\blacksquare
-        \end{equation}
-        Notemos también  que podemos reescribir esta expresión en términos de los operadores de Kraus:
-        \begin{equation}
-            \mathcal{E}(\rho) = \sum_{i,l} \rho_{i,l} \sum_k E_k \ketbra{i}{l}E_k^{\dagger},
-        \end{equation}
-        ya que $\rho_{i,l}$ es un escalar, y recordando la ecuación \ref{ec:densidad_computacional}, reordenamos la expresión: 
-        \begin{align}
-            \mathcal{E}(\rho)& = \sum_k E_k \left( \sum_{i,l}\rho_{i,l}\ketbra{i}{l}\right) E_k^{\dagger}\\
-            & = \sum_k E_k \rho E_k^{\dagger}.
-        \end{align}
-
-
-        
-    \item La matriz de Choi $\Lambda_{\mathcal{E}}$ de un mapeo completamente positivo (CP), es positivo semidefinido (no negativo).\\ 
-     Tomemos cualquier estado $\ket{\psi}$:
-    \begin{equation}
-    \bra{\psi} \Lambda_{\mathcal{E}} \ket{\psi} = \bra{\psi} (\mathcal{I} \otimes \mathcal{E})(\ketbra{\Omega}) \ket{\psi}.
-    \end{equation}
-    
-    Si escribimos a $\ket{\psi} = \sum_i c_i \ket{i} \otimes \ket{\psi_i}$, tenemos:
-    \begin{equation}
-    \bra{\psi} \Lambda_{\mathcal{E}} \ket{\psi} = \sum_{i,j} \overline{c_i} c_j \bra{\psi_i} \mathcal{E}\ketbra{i}{j}) \ket{\psi_j}.
-    \end{equation}
-    Debido a que $\mathcal{E}$ es completamente positivo, entonces $\mathcal{E}(\ketbra{i}{j})$ es un operador positivo semidefinido. Por lo tanto: 
-    \begin{equation}
-    \bra{\psi_i} \mathcal{E}(\ketbra{i}{j}) \ket{\psi_j} \geq 0,
-    \end{equation}
-    que sumando sobre todos los índices $i$ y $j$, obtenemos que
-    \begin{equation}
-    \bra{\psi} \Lambda_{\mathcal{E}} \ket{\psi} \geq 0. \blacksquare
-    \end{equation}
-    \item Sea $\Lambda \geq0$ una matriz hermitica de dimensión $d \times d$. Es la representación de Choi de un de un mapeo que preserva la traza (TP) sí y solo sí 
-    \begin{equation}
-        \text{Tr}_2 (\Lambda) = I.
-    \end{equation}
-    \textbf{Ida:} suponemos que $\mathcal{F}$ es un mapeo que preserva la traza. Por lo que si trazamos parcialmente el segundo subsistema tenemos:
-    \begin{equation}
-        \text{Tr}_2(\Lambda) = \sum_{i,j}\ketbra{i}{j}\text{Tr}( \mathcal{F}(\ketbra{i}{j})),
-    \end{equation}
-    ya que $\mathcal{F}$ preserva la traza, entonces $\text{Tr}( \mathcal{F}(\ketbra{i}{j})) = Tr(\ketbra{i}{j})$, por lo tanto:
-    \begin{equation}
-         \text{Tr}_2(\Lambda) = \sum_{i,j}\ketbra{i}{j} \delta_{ij}= \sum_i \ketbra{i}= I. 
-    \end{equation}
-    
-    \textbf{Vuelta:} suponemos que $\text{Tr}_2(\Lambda) = I$ para $\Lambda$. Por lo que si usamos la representación del mapeo $\mathcal{F}$ según la ecuación \ref{ec:canal_choi_form} tenemos:
-    \begin{align}
-        \text{Tr} (\mathcal{F}(\rho)) &= \text{Tr}( \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)]).
-    \end{align}
-    Usando la propiedad cíclica de la traza $\text{Tr}(AB) = \text{Tr}(BA)$:
-    \begin{align}
-        &= \text{Tr}[(\rho^T \otimes I) \Lambda], \\
-        &= \text{Tr}[\rho^T \cdot \text{Tr}_2(\Lambda)]\\
-        &= \text{Tr}(\rho^T)\\
-        &=\text{Tr}(\rho).
-    \end{align}
-    Por lo tanto, vemos que $\text{Tr}(\mathcal{F}(\rho))= \text{Tr}(\rho)$, esto muestra que $\mathcal{F}$ preserva la traza $\blacksquare$.
-
-    \item La matriz de Choi $\Lambda_{\mathcal{E}}$ de un operador cuántico completamente positivo y que preserva la traza (CPTP)  es única. \\
-    Supongamos dos operadores distintos $\mathcal{F}$ y $\mathcal{G}$ con la misma matriz de Choi:
-    \begin{equation}
-       \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{F}(\ketbra{i}{j}) =  \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{G}(\ketbra{i}{j}).
-    \end{equation}
-    Esto implica que para cada par $i, j$, se debe cumplir que $\mathcal{F}(\ketbra{i}{j}) = \mathcal{G}(\ketbra{i}{j})$. Dado que los elementos $\ketbra{i}{j}$ abarcan toda la base del espacio de operadores, implica que $\mathcal{F} = \mathcal{G}$ para todos los posibles estados en el espacio $\blacksquare$.
-\end{enumerate}
-
-Tras demostrar estas propiedades, notemos  que podemos analizar si un operador $\mathcal{E}$ es CPTP al igual que con los operadores de Kraus. Sin embargo hay una diferencia fundamental entre ambas representaciones: la representación de Kraus \textit{no es única} para un canal cuántico $\mathcal{E}$.
-Esta demostración se da por el Teorema 8.1 en Nielsen y Chuang \cite{nielsen_chuang_2011}:
-
-\textbf{(Teorema de libertad unitaria en la representación de Kraus):} Supongamos dos conjuntos de operadores de Kraus $\{E_i, \ldots, E_m\}$ y $\{F_1, \ldots, F_r\}$ que representan el mismo canal cuántico. Podemos asegurar que $m = n$ añadiendo ceros a la lista más corta de operadores. Entonces, $\{E_i\}$ y $\{F_j\}$ describen el mismo canal cuántico si y solo si existe una matriz unitaria $U$ tal que $E_i = \sum_j u_{ij} F_j$, donde $u_{ij}$ es un elemento de la matriz unitaria $U$.
-
-Para probar este teorema partimos sabiendo que  $\{E_i\}$ y $\{F_j\}$ son conjuntos de operadores de Kraus para el mismo canal cuántico, tenemos que:
-\begin{equation}
-   \sum_i E_i^\dagger E_i = \sum_j F_j^\dagger F_j. 
-\end{equation}
-Definimos los estados $\ket{e_i} = E_i \ket{k}$ , $\ket{f_j} = F_j \ket{k}$. Por la definición de un operador de Kraus, podemos escribir:
-\begin{equation}
-  \ket{e_i} = \sum_j u_{ij} \ket{f_j},  
-\end{equation} 
-donde $u_{ij}$ son los elementos de una matriz unitaria $U$.
-
-Por otro lado, cualquier estado $\ket{\psi}$ puede expresarse en términos de $\ket{e_i}$ y $\ket{f_j}$ de la siguiente forma:
-\begin{equation}
-E_i \ket{\psi} = \sum_j u_{ij} F_j \ket{\psi}.
-\end{equation}
-Esto demuestra que $E_i$ puede ser expresado como una combinación lineal de $\{F_j\}$ con coeficientes unitarios, mostrando que la representación de Kraus no es única y depende de la elección de la matriz unitaria $U$.
-
-Por lo tanto, en adelante utilizaremos la notación de la matriz de Choi, ya que nos será de utilidad para la reconstrucción de canales cuánticos en la tomografía de proceso y la fidelidad de proceso al ejecutarlo en computadoras cuánticas.
-
-\begin{ex} \label{Ejemplo 1.0.1} 
-\end{ex}
-El \textit{Depolarizing Channel} es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
-\begin{equation}
-\mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho ,
-\end{equation}
-donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}
-
-
-Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
-\begin{equation}
-\mathcal{E}(\ketbra{i}{j}) = \text{Tr}(\ketbra{i}{j})  p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
-\end{equation}
-Por lo que podemos ver su acción en los estados de la base:
-\begin{alignat*}{2}
-     \mathcal{E}( \ketbra{0}) = & (1 - \frac{p}{2} ) \ketbra{0} + \frac{p}{2} \ketbra{1}, \\
-     \mathcal{E}( \ketbra{0}{1}) = & (1 - p ) \ketbra{0}{1},\\
-      \mathcal{E}( \ketbra{1}{0}) = & (1 - p ) \ketbra{1}{0},\\
-           \mathcal{E}( \ketbra{1}) = & (1 - \frac{p}{2} ) \ketbra{1} + \frac{p}{2} \ketbra{0}.
-\end{alignat*}
-
-Recordando la ecuación \ref{ec:Choi_ketbra}, escribimos su matriz de Choi:
-% \begin{equation}
-% \Lambda_{\mathcal{E}} = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left(  \text{Tr}(\ketbra{i}{j} ) p  \frac{I}{2} +  (1-p) \ketbra{i}{j}  \right).
-% \end{equation}
-% que consiguientemente nos da la matriz 
-\begin{equation}
-    \Lambda_\mathcal{E} = 
-\begin{pmatrix}
-1 - \frac{p}{2} & 0 & 0 & 1 - p \\
-0 & \frac{p}{2} & 0 & 0 \\
-0 & 0 & \frac{p}{2} & 0 \\
-1 - p & 0 & 0 & 1 - \frac{p}{2}
-\end{pmatrix}.
-\end{equation}
-Notemos cómo $\Lambda_{\mathcal{E}}$ refleja el funcionamiento del Depolarizing Channel: las entradas diagonales muestran cómo el canal mezcla el estado original con la matriz identidad, dependiendo de $p$, reduciendo la pureza del estado. Las entradas no diagonales indican las coherencias introducidas por el canal. Así, $\Lambda_{\mathcal{E}}$  nos proporciona una representación completa del efecto del depolarizing channel sobre la base computacional.  
-
-Los canales cuánticos representarán un papel al implementarse en computadoras cuánticas. En los siguientes capítulos se detallará el proceso para implementar su matriz de Choi y reconstruirla en sistemas cuánticos.
-
-\section{Tomografía y Fidelidad de Proceso Cuántico}
-La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes de hablar de la tomografía es necesario conocer la tomografía de estado cuántico. \par 
-
-La tomografía de estado cuántico es un proceso para reconstruir
-experimentalmente un estado desconocido a partir de un conjunto de mediciones
-\cite{nielsen_chuang_2011}. El problema básico es que no existe medición
-cuántica que pueda distinguir entre estados como $\ket{0}$ y
-$(\ket{0}+\ket{1})/\sqrt{2}$ con certeza. No obstante, es posible estimar
-$\rho$ si tenemos un gran número de copias de $\rho$. Mencionaremos el proceso
-indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011}. \par
-
-
-Consideremos un estado $\rho$ y los operadores $\{\frac{\mathcal{I}}{\sqrt{2}}
-\frac{X}{\sqrt{2}},  \frac{Y}{\sqrt{2}},  \frac{Z}{\sqrt{2}} \} $ que forman un
-conjunto ortonormal de matrices con su respectivo producto interno. Entonces,
-$\rho$ se expande como:
-\begin{equation}
-\label{ec:8.148}
-    \rho = \frac{tr(\rho)\mathcal{I} + tr(X\rho)X  + tr(Y\rho)Y + tr(Z\rho)Z}  {2}.
-\end{equation}
-La expresión $tr(A\rho)$ se interpreta como el valor medio de los observables. Para esta estimación, si medimos un observable $A$ una gran cantidad de veces, $m$, obteniendo resultados $z_i$ iguales a $\pm 1$, nuestro promedio empírico de resultados sería:
-\begin{equation}
-    tr(A \rho) \approx \sum_i \frac{z_i}{m}.
-\end{equation}
-De esta forma podemos reconstruir la matriz $\rho$ como en la ecuación \ref{ec:8.148}. \par 
-
-Generalizando este procedimiento, para el caso de una matriz densidad arbitraria de $n$ qubits, puede ser expandida cómo:
-\begin{equation}
-\rho = \sum_{\vec{v}} \frac{ tr(\sigma_{v_1} \otimes \sigma_{v_2} \otimes ... \otimes \sigma_{v_n} \rho  ) \sigma_{v_1} \otimes \sigma_{v_2 } \otimes ... \otimes \sigma_{v_n}     }{2}.
-\end{equation}
-La suma de la ecuación es sobre vectores $\vec{v} = (v_1,...,v_n)$ con entradas $v_i$ escogidas del conjunto 0,1,2,3. Al realizar mediciones de observables que son productos de las matrices de Pauli, podemos estimar cada término en esta suma, y entonces estimar $\rho$.\par 
-
-
-Para implementar la tomografía de estado en una computadora cuántica es
-necesario realizar mediciones en las bases de los operadores de Pauli
-$(X,Y,Z)$. Por lo que  podemos hacer un cambio de base para nuestras mediciones. Por lo tanto, para $X$ transformamos a los estados de la base $\{ 
- {\ket{0},\ket{1}} \}$, a la base de Pauli $X$:
-\begin{equation}
-    \ket{\pm} = \frac{1}{\sqrt{2}} (\ket{0} \pm \ket{1}),
-\end{equation}
-por medio de la compuerta de Hadamard $H$. 
-Por el lado de $Y$, se transforma el estado por medio de la compuertas $H$, seguido de la compuerta $S^{\dagger}$, que es una rotación $R_z(-\pi/2)$ alrededor de la esfera de Bloch, dando como resultado el cambio a la base:
-\begin{equation}
- \ket{\pm i} = \frac{1}{\sqrt{2}}(\ket{0} \pm i\ket{1}).
-\end{equation}
-Por ende, el circuito cuántico debe ser medido en cada una de las bases (ver figura \ref{fig:circuito9})  un número $m$ de veces para reconstruir el estado $\rho$.
-
-  \begin{figure}[h]
-        \centering
-        \begin{quantikz}
-        \lstick{$\ket{\psi}$} &  \gate{X} & \meter{} & \cw{M}
-        \end{quantikz},
-        \begin{quantikz}
-        \lstick{$\ket{\psi}$} &  \gate{H} & \gate{S^{\dagger}} & \meter{} & \cw{M}
-        \end{quantikz} , 
-        \begin{quantikz}
-        \lstick{$\ket{\psi}$}  & \meter{} & \cw{M}
-        \end{quantikz}  
-        \caption{Mediciones cuánticas necesarias para realizar la tomografía de estado.}
-        \label{fig:circuito9}
-    \end{figure}
-
-Ya que conocemos como realizar la tomografía de estado, podemos usarla para realizar tomografía de proceso. La tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011}. 
-
-Sea $\rho_j$ , $1\leq j \leq d^2$ una base linealmente independiente del espacio de matrices $d\times d$, es decir, que cualquier matriz $d \times d$ puede ser escrita como una combinación linear única de $\rho_j$.  Una elección conveniente de operadores es $\ketbra{n}{m}$. Por lo tanto, los estados de salida $\mathcal{E}(\ketbra{n}{m})$ pueden ser considerados preparando los estados de entrada:
-\begin{itemize}
-    \item$\ket{n}$,
-    \item$\ket{m}$,
-    \item$\ket{+} = \frac{\ket{n} + \ket{m}}{\sqrt{2}}$,
-    \item$\ket{-} = \frac{\ket{n} + i\ket{m}}{\sqrt{2}}$.
-\end{itemize}
-luego, se forman combinaciones lineales de $\mathcal{E} (\ketbra{n}), \ketbra{m},\mathcal{E}(\ketbra{+})$ y $\mathcal{E}(\ketbra{-})$ de la forma:
-\begin{equation}
-    \mathcal{E}(\ket{n}\bra{m}) = \mathcal{E}(\ket{+}\bra{+}) + i \mathcal{E}(\ket{-}\bra{-}) - \frac{1 + i}{2} \mathcal{E}(\ket{n}\bra{n}) - \frac{1 + i}{2} \mathcal{E}(\ket{m}\bra{m}).
-\end{equation}
-Entonces, es posible determinar $\mathcal{E}(\rho_j)$ por medio de tomografía de estado para cada $\rho_j$.
-
-Qiskit , para un qubit , utiliza los estados de entrada para la QPT:
-\begin{alignat}{2}
-    \ket{\psi_1} &= \ket{0}, \\
-    \ket{\psi_2} &= \ket{1}, \\
-    \ket{\psi_3} &= \ket{+} &&= \frac{1}{\sqrt{2}}(\ket{0} + \ket{1}), \\
-    \ket{\psi_4} &= \ket{i} &&= \frac{1}{\sqrt{2}}(\ket{0} + i\ket{1}).
-\end{alignat}
-Notemos que para la matriz de Choi necesitamos los estados $\ketbra{0}{1}$ y $\ketbra{1}{0}$, que obtenemos respectivamente:
-\begin{alignat}{1}
-    \ketbra{0}{1} &= \frac{1}{2} \left( \ketbra{+}{+} - \ketbra{-}{-} + i \big( \ketbra{i}{i} - \ketbra{-i}{-i} \big) \right), \\
-    \ketbra{1}{0} &= \frac{1}{2} \left( \ketbra{+}{+} - \ketbra{-}{-} - i \big( \ketbra{i}{i} - \ketbra{-i}{-i} \big) \right).
-\end{alignat}
-Con cada estado reconstruido $\mathcal{E}(\ketbra{\psi_i})$,  obtenemos la matriz de Choi $\Lambda_{\mathcal{E}}$ \ref{ec:Choi_ketbra}. De esta forma, la tomografía de proceso cuántico proporciona una descripción completa y detallada del canal cuántico por medio de mediciones. 
-
-\subsection{Fidelidad de Proceso Cuántico}
-Previo a hablar de la fidelidad de proceso cuántico es necesario conocer la fidelidad de estado cuántico, que es una una forma de conocer la similitud entre dos estados cuánticos. Si poseemos dos estados $\rho,\sigma$, conoceremos su fidelidad por la ecuación \cite{nielsen_chuang_2011} \cite{bengtsson_zyczkowski_2017}
-\begin{equation}
-       \label{ec::1.65}
-       F(\rho,\sigma) \equiv tr \sqrt{\rho^{1/2} \sigma \rho^{1/2} } = tr |\sqrt{\rho}\sqrt{\sigma}|.     \footnote{La ecuación usada aquí para describir la fidelidad es la descrita en Nielsen y Chuang. En otros textos,  como del autor original Richard Jozsa\cite{Jozsa} y Bengston \cite{bengtsson_zyczkowski_2017},  suelen llamarla  'raíz fidelidad'.}
-\end{equation} \par 
-
-    
-Es importante mencionar las propiedades que conforman a la fidelidad de
-estados. Previo a ello mencionaremos un teorema importante mencionado
-originalmente en el artículo de Jozsa \cite{Jozsa} y luego reescrito en Nielsen
-y Chuang  \cite{nielsen_chuang_2011}, que da sentido a la ecuación
-(\ref{ec::1.65}):
-    
-    \textbf{(Teorema de Uhlmann):} \quad $F(\rho,\sigma) = max |\braket{\psi_\rho}{\psi_\sigma}|$ . El máximo se toma sobre las purificaciones de $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ de $\rho,\sigma$ respectivamente. \par 
-     Para probar este teorema supondremos dos estados $\ket{\psi_\rho},\ket{\psi_\sigma}$ que son las purificaciones de las matrices $\rho,\sigma$ respectivamente. Si los escribimos de forma general tendremos
-    \begin{align}
-        \ket{\psi_\rho} & = \sum_k \sqrt{\lambda_k} \ket{\lambda_k u_k},\\
-        \ket{\psi_\sigma} & = \sum_k \sqrt{\mu_k} \ket{\mu_k v_k},       
-    \end{align}
-    siendo $\ket{\lambda_k},\ket{\mu_k}$ autovectores de $\rho,\sigma$, y $\{\ket{u_k} \}_k, \{\ket{v_k} \}_k$ bases ortonormales arbitarias. Al superponer las purificaciones obtenemos
-    \begin{align}
-        \braket{\psi_\rho}{\psi_\sigma} & = \sum_{jk} \sqrt{\lambda_j\mu_k} \braket{\lambda_j}{\mu_k} \braket{u_j}{v_k},
-    \end{align}
-    con $tr(A) = \sum_{i=1}^{d} \lambda_i$, siendo $\lambda_i$ sus autovalores llegamos a la expresión
-    \begin{equation}
-    \label{ec:1.60}
-        \braket{\psi_\rho}{\psi_\sigma} = tr( \sqrt{\rho}\sqrt{\sigma} U ),
-    \end{equation}
-    con la matriz unitaria $U$ definida como 
-    \begin{equation}
-        U = \left(\sum_k \ketbra{\mu_k}{u_k}    \right)  \left(\sum_j \ketbra{v_j} {\lambda_j}   \right) .
-    \end{equation}\par 
-    En este momento es bueno introducir el \textit{Lema 9.5} de Nielsen y Chuang \cite{nielsen_chuang_2011} que dice lo siguiente:\par 
-    \textit{(Lema 9.5 (Nielsen-Chuang):)} Sea A cualquier operador, y $U$ unitario. Entonces
-    \begin{equation}
-        | tr(AU)| \leq tr|A|,
-    \end{equation}
-    con la igualdad obtenida escogiendo $U= V^\dagger$. Aquí $A= |A|V$ es la descomposición polar de $A$.\par  Para probar este lema podemos ver que
-    \begin{equation}
-        |tr(AU)| = |tr(|A|VU)| = \left| tr(|A|VU  ) \right| = \left|tr(|A|^{1/2}|A|^{1/2} VU )   \right|.
-    \end{equation}
-    Usando la desigualdad de Cauchy-Schwarz \cite{nielsen_chuang_2011} para el espacio de Hilbert-Schmidt obtenemos que
-    \begin{equation}
-        |tr(AU)| \leq \sqrt{ tr|A| tr(U^\dagger V^ \dagger  |A|VU) } = tr|A|,
-    \end{equation}
-    completando la prueba. $\blacksquare$ \par 
-    Retomando la prueba de Uhlman, al usar el (Lema 9.5 ) comparado con la ecuación ( \ref{ec:1.60})  llegamos a la conclusión
-    \begin{equation}
-        |\braket{\psi_\rho}{\psi_\sigma}| = |tr(\sqrt{\rho} \sqrt{\sigma} U )| \leq tr|\sqrt{\rho} \sqrt{\sigma} |.
-    \end{equation}
-    Esto nos quiere decir que $|\braket{\psi_\rho}{\psi_\sigma}| = tr| \sqrt{\rho}\sqrt{\sigma}|$ cuando las purificaciones $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ son tales que $\sqrt{\rho}\sqrt{\sigma} U = |\sqrt{\rho}\sqrt{\sigma}|$. Como esta selección no depende de los estados que escojamos podemos concluir que
-    \begin{equation}
-        tr|\sqrt{\rho}\sqrt{\sigma}| = max | \braket{\psi_\rho}{\psi_\sigma}|. \blacksquare
-    \end{equation}
-    Consecuencia del teorema anterior se tienen las siguientes propiedades de la fidelidad mostradas en el paper de Josza \cite{Jozsa}:
-    \begin{enumerate}
-        \item La fidelidad posee valores acotados. $0 \leq F(\rho,\sigma) \leq 1$ y también $F(\rho,\sigma)=1 $ sí y solo sí $\rho=\sigma$.
-	\item La fidelidad es simétrica, es decir  $F(\rho,\sigma) = F(\sigma,\rho).$
-        \item Si $\rho= \ketbra{\Omega}{\Omega}$ es puro, entonces $F(\rho,\sigma)= \sqrt{\bra{\Omega}\sigma \ket{\Omega}} = tr(\sqrt{\rho} \sqrt{\sigma}).$
-    \end{enumerate}
-
-    
-Ya que conocemos la fidelidad de estado cuántico, podemos la similitud entre dos canales cuánticos por medio de la  fidelidad de proceso, $F_{\text{pro}}$, entre dos canales cuánticos $\mathcal{E}$ y $\mathcal{F}$, definida como:
-\begin{equation}
-F_{\text{pro}}(\mathcal{E}, \mathcal{F}) = F(\rho_{\mathcal{E}}, \rho_{\mathcal{F}}), 
-\end{equation}
-donde $F$ es la fidelidad de estado,  $\rho_{\mathcal{E}} =  \Lambda_{\mathcal{E}}/d $ es la matriz de Choi normalizada del canal cuántico $\mathcal{E}$, y $d$ es la dimensión de entrada del canal $\mathcal{E}$. 
-
-Esta métrica proporciona una medida cuantitativa de cuán similar es un canal cuántico experimental al canal cuántico teórico. Ya que utiliza la fidelidad de estado, mantiene las mismas propiedades para describir a los canales cuánticos. Además, no será de utilidad en el próximo capítulo para medir la diferencia de un canal cuántico teórico con uno reconstruido en una computadora cuántica.
-
-\chapter{Inicialización de Canales Cuánticos con Algoritmos Variacionales Cuánticos}
-\section{Algoritmos Variacionales Cuánticos}
-
+\section{Introducción}
+\section{Descripción de los VQA}
 Los Algoritmos Variacionales Cuánticos son una clase de algoritmos que combinan computación cuántica y clásica para resolver problemas de optimización. 
 
 El ansatz es una suposición inicial o una forma parametrizada del estado cuántico que se va a optimizar. La calidad del ansatz afecta directamente la eficiencia del VQA.
 
-La función de costo mide la calidad de la solución propuesta por el algoritmo cuántico. Esta función es evaluada en un circuito cuántico y luego optimizada clásicamente.
+La función de costo $C(\theta)$ mide la calidad de la solución propuesta por el algoritmo cuántico. Esta función es evaluada en un circuito cuántico y luego optimizada clásicamente.
 
 La optimización de la función de costo se realiza mediante métodos clásicos, como el descenso de gradientes, que ajustan los parámetros del ansatz para minimizar la función de costo.
 
 El método de gradientes calcula la derivada de la función de costo respecto a los parámetros del ansatz y ajusta estos parámetros para encontrar el mínimo de la función de costo.
 
-\section{Inicialización de Canales en computadoras cuánticas usando VQA}
+\section{Implementación de canales de un qubit usando VQA}
 Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$.
 
-Hemos propuesto utilizar los VQA para inicializar un canal cuántico mediante su matriz de Choi $\Lambda_{\mathcal{E}}$, de tal forma que su fidelidad de proceso se asemeje a la del canal deseado. Para nuestro estudio, hemos seleccionado el \textit{Depolarizing Channel}, simulándolo para diferentes valores de $p$. 
+Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit, para esto , nuestra función de costo a optimizar será la Fidelidad entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica.
 
-Para nuestros resultados con este canal, hemos decidido analizar la fidelidad de proceso, pureza y comparación de autovalores y autovectores entre las matrices de Choi.
+Esta implementación se realizó en el lenguaje de \textit{Python} por medio de la plataforma de \textit{IBM Quantum Experience}, donde explicaremos el ansatz, así como la metodología para la optimización de la función de costo $C(\theta)$.
 
+
+\chapter{Resultados para canales de un qubit}
+\section{Introducción}
+\section{Resultados}
+Para nuestro estudio, hemos implementado el \textit{Depolarizing Channel} de un qubit, haciendo una optimización para sus distintos valores de $p$. Esto lo ejecutamos tanto en un simulador como en una computadora cuántica.
+
+Para el análisis de nuestros resultados estudiamos la fidelidad de proceso, pureza y comparación de autovalores y autovectores entre las matrices de Choi. 
+\section{Discusión de Resultados}
+Como parte de la discusión de resultados analizamos las causas de fidelidades inferiores en la computadora cuántica a diferencia del simulador cuántico. 
+\chapter{Conclusiones}
+
+\chapter{Trabajo a Futuro}
+\section{Implementación de VQA para 2 qubits}
+% En la teoría cuántica, un sistema cuántico abierto es aquel que no está aislado, sino que interactúa continuamente con su entorno. Este tipo de sistemas son fundamentales para entender muchos fenómenos cuánticos en la práctica, ya que cualquier sistema cuántico real interactúa con su entorno. A diferencia de los sistemas cuánticos cerrados, que se consideran completamente aislados y evolucionan de manera unitaria según la ecuación de Schrödinger, los sistemas cuánticos abiertos pueden sufrir pérdidas de coherencia cuántica debido a estas interacciones. En la sección 3.1 exploraremos este tipo de sistemas por medio de canales cuánticos, con énfasis en su representación con la matriz de Choi. En la sección 3.2 mencionaremos la tomografía y fidelidad de proceso cuántico, ya que son importantes para la reconstrucción de canales cuánticos en computadoras cuánticas
 
 
 % % Pendiente de redactar
