@@ -16,6 +16,23 @@ from qiskit_experiments.library.tomography.qpt_experiment import ProcessTomograp
 
 
 
+def partial_trace(choi_matrix, dim=2):
+    """
+    Calcula la traza parcial sobre el sistema de salida de una matriz de Choi.
+    :param choi_matrix: Matriz de Choi.
+    :param dim: Dimensión del sistema cuántico (por defecto 2 para qubits).
+    :return: Matriz resultante de la traza parcial.
+    """
+    d = dim
+    partial_trace = np.zeros((d, d), dtype=np.complex128)
+
+    for i in range(d):
+        partial_trace += choi_matrix[i*d:(i+1)*d, i*d:(i+1)*d]
+
+    return partial_trace
+
+
+
 def tomografia(qc,qubits,qcomp=None,simulador = None):
     """
     Función encargada de realizar tomografía de estado cuántico para un circuito cuántico. 
@@ -200,11 +217,11 @@ def choi_matrix_depolarizing(p):
 
 def choi_matrix_depolarizing_channel(p, d):
     """
-    Generate the Choi matrix for a depolarizing channel.
+    Genera la matriz de Choi para el depolarizing Channel
 
-    Parameters:
-        p (float): Probability of depolarization.
-        d (int): Dimension of the quantum system (number of levels).
+    Parámetros:
+        p (float): Probabilidad de despolarización
+        d (int): Dimensión del sistema cuántico (número de niveles)
 
     Returns:
         np.ndarray: The Choi matrix of the depolarizing channel.
