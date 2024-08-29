@@ -193,7 +193,7 @@ El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para e
 En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
 
 % }}}
-\chapter{FUNDAMENTOS TEÓRICOS} \label{cap:1}% {{{
+\chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}% {{{
 \section{Introducción}
 
 \section{Matriz Densidad}
@@ -264,19 +264,17 @@ Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1\textit
 
 % }}}
 \chapter{RESULTADOS PARA EL DEPOLARIZING CHANNEL DE UN QUBIT } % {{{
-\cpnote{Cambair el nombre a español en todas partes}
 \section{Introducción} % {{{
 \cpnote{Falta introduccion. Escribirla al final quizá de la tesis}\felnote{Ok. La redactaré al final}
 % }}}
-\cpnote{Esto no me parecen resultados sino como algoritpos o algo asi. Divide esta seccion
-y dale un nuevo nombre a aesta parte} \felnote{Agregada}
-\section{Algoritmos de implementación}
-Se han programado las funciones necesarias para implementar un \textit{depolarizing channel} \cpnote{utiliza español. Si insistes en ingles, usa italicas y no 
-le pongas maypusculas.} \felnote{corregido, usaré itálica. No he visto aún una traducción literal del depolarizing} mediante VQA en una computadora cuántica. Estas funciones siguen el algoritmo presentado en el capítulo anterior, desarrollado en el lenguaje Python con el apoyo esencial de la librería Qiskit \cpnote{Este es un nombre propio
-y por consiguiente va con mayuscula. Cambia todos.} \felnote{Listo. Corregí todos los Python y Qiskit. } . A continuación, se enumeran
-las funciones utilizadas: \cpnote{Las mayusculas en las frases que vienen hacen 
-falta. Quizá los dos puntos acá no se usan. Busca un ejemplo o en la red y resuelves eso.}
-
+\section{Algoritmos de implementación} % {{{
+Se han programado las funciones necesarias para implementar un
+\textit{depolarizing channel} \cpnote{para evitar el uso del ingle, de propongo
+que pongas algo como depolarizing channel (DP) y que luego te refieras a el
+como DP.} mediante VQA en una computadora cuántica. Estas funciones siguen el
+algoritmo presentado en el capítulo anterior, desarrollado en el lenguaje
+Python con el apoyo esencial de la librería Qiskit. A continuación, se enumeran
+las funciones utilizadas: 
 \begin{enumerate}
     \item \texttt{Choi\_matrix\_depolarizing(p)}: genera la matriz de Choi que
 corresponde al \textit{depolarizing channel} con probabilidad de depolarización $p$.
@@ -291,14 +289,14 @@ un circuito cuántico de Qiskit. Toma como entradas el número de
 preparation\_indices)}: función de Qiskit que genera los circuitos
 correspondientes a la tomografía de proceso para reconstruir la matriz de Choi
 en un circuito cuántico. Esta función genera $4^N3^N$ circuitos de medición
-acorde a la teoría explicada en el \autoref{cap:1}\cpnote{Usa el comando ref
-porque puedes meter uno que sea solo de intro sin teoria o quitar y te desparatoa
-los numeors.} \felnote{Corregido.}. Toma como entrada el circuito
+acorde a la teoría explicada en el \autoref{cap:fundamentos:teoricos}\cpnote{Le cambié el nombre
+a la referencia. Si decides por ejemplo que la intro lleva numero, luego ese sería el 
+dos y seria confuso que el dos se referencie como uno. Checalo en el codigo y borra 
+esta nota}. Toma como entrada el circuito
 cuántico (en  \texttt{circuit})  y el indicador correspondiente al(los)
 qubit(s) donde se realizará la tomografía de proceso ( indicado en
 \texttt{measurement\_indices} y \texttt{preparation\_indices}) . Tiene el
-método: \cpnote{Revisa por favor el uso de los dos puntos y luego si se hace
-mayuscula o no. Quedo pendiente de lo que encuentres antes de proseguir} \felnote{Si se pueden usar dos puntos antes de una enumeración o ecuaciones.   Aquí hay un ejemplo en arxiv: https://arxiv.org/pdf/2401.00019. Por las mayúsculas luego de ":", según APA , se inicia con minúscula para este caso luego de los dos puntos, ya que  la descripción no es una oración nueva, sino una explicación del elemento.}
+método: 
     \begin{enumerate}
 	\item \texttt{Run(backend)}: método encargado de ejecutar el(los)
 circuito(s) cuántico(s) en un servidor de IBM Quantum Experience. El
@@ -311,12 +309,14 @@ ver los backends en la documentación de Qiskit \cite{Qiskit_documentation}.
 mide la fidelidad de proceso entre dos matrices de Choi , (\texttt{channel}
 para la matriz de choi del canal, \texttt{target} para una matriz de Choi
 objetivo) \cite{Qiskit_documentation}, acorde a la teoría explicada en el
-capítulo 1.
+capítulo 1\cpnote{De nuevo referencia abstracta aca. Aparte, convendría 
+aca referenciar la ecuacion exacta que necesites}.
 
     \item \texttt{Partial\_trace(choi\_matrix,dim)}: calcula la traza parcial
 sobre el sistema de una matriz de choi definida en \texttt{choi\_matrix()}.
 Este cálculo se realiza dependiendo de la dimensión del sistema cuántico (por
-defecto es para dos\textit{qubit}s).
+defecto es para dos\textit{qubit}s) \cpnote{no estas usando italicas antes para
+qubits. Creo qeu es mejor no usarlas}.
     
     \item \texttt{Cost\_func(params)}: genera el circuito \textit{ansatz} usando
 \texttt{Cirq\_ansq()}. Posteriormente utiliza \texttt{ProcessTomography()} para
@@ -337,6 +337,8 @@ documentación \cite{scipy}. Finalmente, se puede escoger un valor de tolerancia
 utilizado (en \texttt{method}) y que éste se detenga.
     
 \end{enumerate}
+\cpnote{Va bien hasta acá. Esto te está dando la pauta de que es lo que debes expilcar en las
+secciones anteriores. Toma nota!!!!}
 
 Agrupamos estas funciones en una función general encargada de repetir el
 proceso de optimización para una lista de valores de $p$. Esta función, llamada
@@ -367,7 +369,8 @@ aleatorio de parámetros $\{\theta_i\}$.
 \texttt{Cost\_func()}, ajustando los parámetros $\{\theta_i\}$ hasta alcanzar
 una convergencia definida por \texttt{tol}.
    \item Guardar los parámetros $\{ \theta_i\}$ que hacen que la función de
-costo converja. 
+costo converja \cpnote{mas bien que minimicen la funcion de costo, no? Casi todos
+los parametros iniciales van a converger}. 
    \item Ejecutar \texttt{ProcessTomography()} con el circuito optimizado 4
 veces en el simulador \texttt{AerSimualtor()} y una vez en una computadora
 cuántica. 
@@ -377,30 +380,36 @@ sistemas, y sus fidelidades de proceso.
 \end{enumerate}
 \vspace{-.5cm}
 \noindent\rule{\textwidth}{1mm}
-
-
-\section{Resultados}
+\cpnote{No veo el uso de las lineas gruesas. Las quitaria}
+% }}}
+\section{Resultados} % {{{
 Para la función general, se fijaron dos hiper parámetros de 
 \texttt{Cirq\_ansq()}: \texttt{layers} y \texttt{qubits}. El número de capas se
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
 de optimización, ni en la convergencia de la función de costo al aumentar este
-parámetro. Se utilizaron 4 \textit{qubits} en el \textit{ansatz}, donde dos se usaron como
+parámetro\cpnote{Tocaría mostrar una gráfica donde se demuestre esa
+afirmación.}. Se utilizaron 4 \textit{qubits} en el \textit{ansatz}, donde dos se usaron como
 \textit{ancillas} y otros dos para el sistema, siguiendo el diseño presentado en el
-capítulo anterior. Esto se decidió porque al utilizar únicamente dos\textit{qubit}s no
-se alcanzó la convergencia en la función de costo, y al utilizar 6 o más\textit{qubit}s
-tampoco se notó una mejora notoria.
+capítulo anterior. Esto se decidió porque al utilizar únicamente dos \textit{qubit}s no
+se alcanzó la convergencia en la función de costo, y al utilizar 6 o más \textit{qubit}s
+tampoco se notó una mejora notoria. \cpnote{no porqué pero cuando tienes qubit a
+veces no separas el espacio entre la palabra anteiror y qubit. Creo que es
+porque cambiaste automaticamente. }
 
 Como hiper parámetros para \texttt{Minimize}(), se utilizó el método de
 \texttt{COBYLLA}, que es un método de minimización por aproximación lineal.
 Además, se tomó como tolerancia de $1\times 10^{-15}$. Nuevamente, se
 escogieron estos parámetros ya que fue no observamos una mejora notoria en los
-tiempos de ejecución ni en la optimización de la función de costo.
+tiempos de ejecución ni en la optimización de la función de costo\cpnote{frase
+con una redaccion muy rara. No se entiende, quizá incluir otro gráfico? quizá 
+ya es demasiado... }.
 
 
 Es importante mencionar las limitaciones al usar las computadoras cuánticas de
 IBM, donde el tiempo de uso está limitado a 10 minutos mensuales\footnote{Este
 es el tiempo de uso disponible en el plan gratuito de IBM.}. Vimos que el
-tiempo de ejecución de una tomografía de proceso para un canal de un\textit{qubit}
+tiempo de ejecución de una tomografía de proceso para un canal de un \textit{qubit}
+\cpnote{revisa todas las instancias de qubit y dejalo sin italicas por favor}
 requiere 12 circuitos, que lleva un tiempo de ejecución promedio de $16s$. Por
 esta razón decidimos optimizar el \textit{ansatz} en el simulador cuántico y
 posteriormente, ejecutar el circuito optimizado en una computadora cuántica.
@@ -411,14 +420,16 @@ Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
 La función general se ejecutó para un listado de 38 valores distintos de $p$ en
 \texttt{p\_values}, ajustándose al tiempo mensual disponible en IBM, con un
 margen de error de una tomografía mensual. Cada circuito se ejecutó para un
-número de 4000 \textit{shots} o mediciones, para la computadora cuántica como
+número de 4000 \textit{shots}\cpnote{demasiados anglisismos. Solo usalos si la 
+traduccion es rara. aca puedes aclarar la situacion en español} o mediciones,
+para la computadora cuántica como
 en el simulador. No incluimos todos los resultados detallados en esta sección
-para evitar sobrecargar la discusión \footnote{Se puede acceder al dataframe
+para evitar sobrecargar la discusión\footnote{Se puede acceder al dataframe
 final, así como al código de este proyecto el github:
 \href{https://github.com/felipechoy1/EPS/tree/main/Código\%20y\%20Resultados}{https://github.com/felipechoy1/EPS/tree/main/Código\%20y\%20Resultados}}.
 
 Los resultados correspondientes a las fidelidades alcanzadas en la computadora
-cuántica como en el simulador son visibles en la figura
+cuántica como en el simulador son presentadas en la figura
 \ref{fig:comparacion_fidelidad}. Aquí obtenemos fidelidades en la computadora
 cuántica en el rango de $0.553\leq F_{proc} \leq 0.974$. Por otro lado, para el
 simulador, el promedio de las fidelidades en las 4 ejecuciones está en el rango
@@ -464,14 +475,12 @@ correspondiente al \textit{depolarizing channel}. Sabemos que su matriz de Choi 
 dada por la ecuación \ref{ec:Choi_depolarizing} \felnote{Aquí todavía no
 aparece porque la declararemos en el capítulo 1}. Por lo tanto, sus autovalores
 se calculan resolviendo:
-
 \begin{equation}
 \det(\Lambda_\mathcal{E} - \lambda I) = 0,
 \end{equation}
 donde $\Lambda_\mathcal{E}$ es la matriz de Choi e $I$ es la matriz identidad
 de dimensiones $4 \times 4$. Para resolver esta ecuación, restamos $\lambda$ de
 los elementos diagonales de $\Lambda_\mathcal{E}$:
-
 \begin{equation}
 \Lambda_\mathcal{E} - \lambda I = \begin{pmatrix}
 1 - \frac{p}{2} - \lambda & 0 & 0 & 1 - p \\
@@ -496,12 +505,12 @@ Por lo tanto, los autovalores de $\Lambda_{\mathcal{E}}$ son:
 Comparamos los autovalores de nuestros resultados en la figura
 \ref{fig:comparacion_autovalores} para cada valor de $p$. Notamos que todos los
 autovalores para todos los valores de $p$ cumplen con ser mayores o iguales a
-0. Por lo que las matrices de Choi reconstruidas cumplen con ser CP.  Por otro
+0. Por lo tanto, los canales reconstruidos cumplen con ser CP.  Por otro
 lado, al analizar la condición de preservación de la traza (TP) notamos que
 ninguna de las matrices de Choi reconstruidas en ninguno de los sistemas cumple
 con preservar la traza. Esto lo verificamos trazando parcialmente las matrices
 de Choi con \texttt{partial\_trace()}, cuyo resultado no coincide con la matriz
-identidad $I$. 
+identidad $I$. \cpnote{Aca si puede haber un problema más serio. Lo platicamos.}
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.90 \linewidth]{imagenes/eigenvalores_comparacion.png}
@@ -515,6 +524,7 @@ fidelidades y autovalores calculados en el simulador y la computadora cuántica.
 Vemos que estas diferencias se deben en gran parte a los errores inherentes al
 hardware cuántico real, como la decoherencia, errores en las compuertas
 cuánticas y limitaciones en la precisión de las mediciones. 
+\cpnote{A ver si lo justificas mas adelante. Se me hace una frase osada}
 
 La figura \ref{fig:comparacion_fidelidad} así como la tabla
 \ref{tab:comparacion_fidelidades} muestran que el simulador cuántico produce
@@ -533,20 +543,42 @@ cuántica como para el simulador, como se muestra en la figura
 \end{figure}
 
 En el caso de la computadora cuántica, la ecuación de la regresión lineal es:
-
 \begin{equation}
     F_{proc\_qc}(p) = 0.2707 \cdot p + 0.7376,
 \end{equation}
-
-con un coeficiente de determinación $R^2 = 0.7055$ y un valor de Chi-cuadrado de $\chi^2 = 0.1085$. Esta ecuación indica que la fidelidad en la computadora cuántica aumenta proporcionalmente a $p$. Este comportamiento podría deberse a que, al aumentar la probabilidad de depolarización, también se incrementa la decoherencia en el sistema. En consecuencia, la computadora cuántica \texttt{ibm\_kyoto} parece ofrecer mejores resultados de fidelidad cuando hay una mayor interacción con el entorno.
+con un coeficiente de determinación $R^2 = 0.7055$ y un valor de Chi-cuadrado
+de $\chi^2 = 0.1085$. Esta ecuación indica que la fidelidad en la computadora
+cuántica aumenta proporcionalmente a $p$\cpnote{no, tu propusiste un crecimiento lineal. 
+y la verdad no da tan bien. mejorra la interpretacion. quizá es mejor si discutimos acerca 
+de estas graficas}. Este comportamiento podría deberse a
+que, al aumentar la probabilidad de depolarización, también se incrementa la
+decoherencia en el sistema\cpnote{Interpretacion chafa}. En consecuencia, la computadora cuántica
+\texttt{ibm\_kyoto} parece ofrecer mejores resultados de fidelidad cuando hay
+una mayor interacción con el entorno.
 
 Por otro lado, observamos que el simulador \texttt{AerSimulator()} tiene una ecuación de la recta:
 \begin{equation}
     F_{proc\_sim}(p) = 0.0371 \cdot p + 0.9346,
 \end{equation}
-con un coeficiente de determinación $R^2 = 0.0612$ y un valor de Chi-cuadrado de $\chi^2 = 0.0633$. El bajo valor de $R^2$ en el simulador sugiere que, a diferencia de la computadora cuántica, la fidelidad en el simulador no parece depender significativamente de $p$. Además, la pendiente de la recta es pequeña, lo que indica que la fidelidad en el simulador es prácticamente constante a lo largo del rango de $p$.
+con un coeficiente de determinación $R^2 = 0.0612$ y un valor de Chi-cuadrado
+de $\chi^2 = 0.0633$. El bajo valor de $R^2$ en el simulador sugiere que, a
+diferencia de la computadora cuántica, la fidelidad en el simulador no parece
+depender significativamente de $p$\cpnote{esto me gusta mas}. Además, la pendiente de la recta es
+pequeña, lo que indica que la fidelidad en el simulador es prácticamente
+constante a lo largo del rango de $p$. \cpnote{estaría bueno comentar el
+outlier que esta bien raro}
 
-Analizamos la variabilidad de fidelidad en ambos casos, como se muestra en la figura \ref{fig:comparacion_desviaciones}. En el simulador cuántico, no se observa una tendencia clara en la desviación estándar de la fidelidad a lo largo de $p$, excepto en el intervalo $0.6 \le p \leq 0.75$, que parece ser una anomalía en los datos. Por otro lado, la computadora cuántica muestra una reducción en la desviación estándar de la fidelidad a medida que aumenta $p$, lo que confirma nuestra suposición basada en la regresión lineal. Finalmente, en ambos casos, observamos que para valores de $p>0.75$, la desviación estándar disminuye significativamente.
+Analizamos la variabilidad de fidelidad en ambos casos, como se muestra en la
+figura \ref{fig:comparacion_desviaciones}. En el simulador cuántico, no se
+observa una tendencia clara en la desviación estándar de la fidelidad a lo
+largo de $p$, excepto en el intervalo $0.6 \le p \leq 0.75$, que parece ser una
+anomalía en los datos. Por otro lado, la computadora cuántica muestra una
+reducción en la desviación estándar de la fidelidad a medida que aumenta $p$,
+lo que confirma nuestra suposición basada en la regresión lineal. Finalmente,
+en ambos casos, observamos que para valores de $p>0.75$, la desviación estándar
+disminuye significativamente.\cpnote{Creo que hay varios estudios que sugieren que 
+el comportamiento de la computadora cuántica de la IBM no es estacionario. 
+Sería bueno citarlos. Hablemos también}
 
 
 \begin{figure}[h!]
@@ -576,6 +608,7 @@ fidelidad en la computadora cuántica ($0.7376$) es menor que en el simulador,
 que muestra fidelidades iniciales más altas y con menor variabilidad
 ($0.9346$).
 
+\cpnote{Me falta corregir este parrafo pues no entiendo la figura}
 En la figura \ref{fig:comparacion_choi}, observamos que las matrices de Choi
 generadas por la computadora cuántica presentan mayor coherencia en las
 entradas no diagonales. Esto también nos muestra que la computadora cuántica
@@ -589,7 +622,9 @@ a lo largo de $p$.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.95\linewidth]{imagenes/comparacion_choi.png}
-    \caption{Comparación de matrices de Choi objetivo, y matrices de Choi reconstruidas en el simulador cuántico \texttt{AerSimulator()} como en la computadora cuántica \texttt{ibm\_kyoto} respectivamente. \textbf{Fuente:} elaboración propia.}
+    \caption{\cpnote{figura chafa. No se puede leer los numeros y ademas no entiendo que son las 
+filas, las columnas, En fin. hablemos de esta figura}
+Comparación de matrices de Choi objetivo, y matrices de Choi reconstruidas en el simulador cuántico \texttt{AerSimulator()} como en la computadora cuántica \texttt{ibm\_kyoto} respectivamente. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_choi}
 \end{figure}
 
