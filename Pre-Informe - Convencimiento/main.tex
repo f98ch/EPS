@@ -28,7 +28,7 @@
 \newtheorem{axm}{Axioma}[chapter]
 \usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
 \FXRegisterAuthor{cp}{acp}{\color{blue}CP}
-\FXRegisterAuthor{fel}{afel}{\color{red}F}
+\FXRegisterAuthor{fel}{afel}{\color{purple}F}
 
 \theoremstyle{remark}
 \newtheorem{rem}{Nota}[chapter]
@@ -163,7 +163,7 @@
 % Datos generales del trabajo de graduación, tabla de contenidos etc {{{
 \datosThesis%
 {1}%						% física 1; matemática 2
-{Implementación de canales cuánticos \\ de un qubit usando VQA}%		% Título del trabajo de graduación
+{Implementación de canales cuánticos \\ de un\textit{qubit} usando VQA}%		% Título del trabajo de graduación
 {Felipe Antonio Ixcamparic Choy}%			% autor
 {M.Sc. Juan Diego Chang\\y Dr. Carlos Francisco Pineda Zorrilla}%			% asesor
 {agosto de 2024}		% mes y año de la orden de impresión
@@ -184,7 +184,7 @@ Estudiar  y desarrollar algoritmos variacionales cuánticos para la implementaci
     \item Estudiar la teoría y uso de computadoras cuánticas.
     \item Comprender las definiciones fundamentales de la teoría de sistemas cuánticos abiertos y canales cuánticos.
     \item Investigar el uso de los Algoritmos Variacionales Cuánticos en la resolución de problemas de información cuántica.
-    \item Implementar canales cuánticos de un qubit en computadoras cuánticas y analizar su comportamiento.
+    \item Implementar canales cuánticos de un\textit{qubit} en computadoras cuánticas y analizar su comportamiento.
 \end{itemize}
 % }}}
 \chapter*{INTRODUCCIÓN} % {{{
@@ -193,7 +193,7 @@ El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para e
 En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
 
 % }}}
-\chapter{FUNDAMENTOS TEÓRICOS} % {{{
+\chapter{FUNDAMENTOS TEÓRICOS} \label{cap:1}% {{{
 \section{Introducción}
 
 \section{Matriz Densidad}
@@ -229,17 +229,17 @@ Los operadores cuánticos pueden representarse mediante la \textit{representaci�
 
 La matriz de Choi tiene varias propiedades: es Hermítica, puede expresarse en términos de los operadores de Kraus, es positivo semidefinido y su traza parcial es la identidad si preserva la traza. Además, la matriz de Choi de un operador CPTP es única, mientras que la representación de Kraus no lo es. \par 
 
-El \textit{Depolarizing Channel} es un ejemplo de canal cuántico que introduce ruido aleatorio en un sistema. Su matriz de Choi refleja cómo el canal mezcla el estado original con la matriz identidad, reduciendo la pureza del estado. \par 
+El \textit{\textit{depolarizing channel}} es un ejemplo de canal cuántico que introduce ruido aleatorio en un sistema. Su matriz de Choi refleja cómo el canal mezcla el estado original con la matriz identidad, reduciendo la pureza del estado. \par 
 
 En los siguientes capítulos se detallará el proceso para implementar la matriz de Choi y reconstruirla en sistemas cuánticos. \par 
 \section{Circuitos Cuánticos}
 *Heredado de informe de prácticas 
 
-Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al qubit. Esta esfera nos permite visualizar los cambios del estado de un qubit bajo transformaciones unitarias $U$. \par 
+Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al\textit{qubit}. Esta esfera nos permite visualizar los cambios del estado de un\textit{qubit} bajo transformaciones unitarias $U$. \par 
 
-Las computadoras cuánticas tienen compuertas cuánticas, operadores unitarios reversibles $U$ que actúan linealmente sobre qubits en superposición. Las compuertas $X$, $Y$ y $Z$ representan las matrices de Pauli $\sigma_x$, $\sigma_y$ y $\sigma_z$ respectivamente. \par 
+Las computadoras cuánticas tienen compuertas cuánticas, operadores unitarios reversibles $U$ que actúan linealmente sobre\textit{qubit}s en superposición. Las compuertas $X$, $Y$ y $Z$ representan las matrices de Pauli $\sigma_x$, $\sigma_y$ y $\sigma_z$ respectivamente. \par 
 
-Un circuito cuántico es una rutina computacional con operadores que actúan sobre qubits. Los circuitos se conforman por cables, compuertas y mediciones. \par 
+Un circuito cuántico es una rutina computacional con operadores que actúan sobre\textit{qubit}s. Los circuitos se conforman por cables, compuertas y mediciones. \par 
 
 Para este trabajo, utilizamos la plataforma \textit{IBM Quantum Experience}, que nos da acceso a computadoras cuánticas para ejecutar circuitos cuánticos válidos. \par  
 % }}}
@@ -248,89 +248,86 @@ Para este trabajo, utilizamos la plataforma \textit{IBM Quantum Experience}, que
 \section{Descripción de los VQA}
 Los Algoritmos Variacionales Cuánticos son una clase de algoritmos que combinan computación cuántica y clásica para resolver problemas de optimización. \par 
 
-El ansatz es una suposición inicial o una forma parametrizada del estado cuántico que se va a optimizar. La calidad del ansatz afecta directamente la eficiencia del VQA . \par 
+El \textit{ansatz} es una suposición inicial o una forma parametrizada del estado cuántico que se va a optimizar. La calidad del \textit{ansatz} afecta directamente la eficiencia del VQA . \par 
 
 La función de costo $C(\theta)$ mide la calidad de la solución propuesta por el algoritmo cuántico. Esta función es evaluada en un circuito cuántico y luego optimizada clásicamente. \par 
 
-La optimización de la función de costo se realiza mediante métodos clásicos, como el descenso de gradientes, que ajustan los parámetros del ansatz para minimizar la función de costo. \par 
+La optimización de la función de costo se realiza mediante métodos clásicos, como el descenso de gradientes, que ajustan los parámetros del \textit{ansatz} para minimizar la función de costo. \par 
  
-El método de gradientes calcula la derivada de la función de costo respecto a los parámetros del ansatz y ajusta estos parámetros para encontrar el mínimo de la función de costo. \par 
+El método de gradientes calcula la derivada de la función de costo respecto a los parámetros del \textit{ansatz} y ajusta estos parámetros para encontrar el mínimo de la función de costo. \par 
 
-\section{Implementación de canales de un qubit usando VQA}
+\section{Implementación de canales de un\textit{qubit} usando VQA}
 Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$. \par 
 
-Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit, para esto , nuestra función de costo a optimizar será la fidelidad de proceso entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica. \par 
+Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1\textit{qubit}, para esto , nuestra función de costo a optimizar será la fidelidad de proceso entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica. \par 
  
 
 % }}}
 \chapter{RESULTADOS PARA EL DEPOLARIZING CHANNEL DE UN QUBIT } % {{{
 \cpnote{Cambair el nombre a español en todas partes}
 \section{Introducción} % {{{
-\cpnote{Falta introduccion. Escribirla al final quizá de la tesis}
+\cpnote{Falta introduccion. Escribirla al final quizá de la tesis}\felnote{Ok. La redactaré al final}
 % }}}
-\section{Resultados} % {{{
 \cpnote{Esto no me parecen resultados sino como algoritpos o algo asi. Divide esta seccion
-y dale un nuevo nombre a aesta parte}
-Se han programado las funciones necesarias para implementar un Depolarizing
-Channel \cpnote{utiliza español. Si insistes en ingles, usa italicas y no 
-le pongas maypusculas.} mediante VQA en una computadora cuántica. Estas funciones siguen el
-algoritmo presentado en el capítulo anterior, desarrollado en el lenguaje
-Python con el apoyo esencial de la librería qiskit \cpnote{Este es un nombre propio
-y por consiguiente va con mayuscula. Cambia todos.}. A continuación, se enumeran
+y dale un nuevo nombre a aesta parte} \felnote{Agregada}
+\section{Algoritmos de implementación}
+Se han programado las funciones necesarias para implementar un \textit{depolarizing channel} \cpnote{utiliza español. Si insistes en ingles, usa italicas y no 
+le pongas maypusculas.} \felnote{corregido, usaré itálica. No he visto aún una traducción literal del depolarizing} mediante VQA en una computadora cuántica. Estas funciones siguen el algoritmo presentado en el capítulo anterior, desarrollado en el lenguaje Python con el apoyo esencial de la librería Qiskit \cpnote{Este es un nombre propio
+y por consiguiente va con mayuscula. Cambia todos.} \felnote{Listo. Corregí todos los Python y Qiskit. } . A continuación, se enumeran
 las funciones utilizadas: \cpnote{Las mayusculas en las frases que vienen hacen 
 falta. Quizá los dos puntos acá no se usan. Busca un ejemplo o en la red y resuelves eso.}
 
 \begin{enumerate}
-    \item \texttt{choi\_matrix\_depolarizing(p)}: genera la matriz de Choi que
-corresponde al Depolarizing Channel con probabilidad de depolarización $p$.
+    \item \texttt{Choi\_matrix\_depolarizing(p)}: genera la matriz de Choi que
+corresponde al \textit{depolarizing channel} con probabilidad de depolarización $p$.
 
-    \item \texttt{cirq\_ansq(qubits, parameters, layers)}: genera un ansatz en
-un circuito cuántico de qiskit. Toma como entradas el número de
+    \item \texttt{Cirq\_ansq(qubits, parameters, layers)}: genera un \textit{ansatz} en
+un circuito cuántico de Qiskit. Toma como entradas el número de
 \texttt{qubits}, el listado de ángulos de rotación $\{\theta_i\}$ (indicados en
-\texttt{parameters}) y el número de capas del ansatz (indicado en
+\texttt{parameters}) y el número de capas del \textit{ansatz} (indicado en
 \texttt{layers}).
 
     \item \texttt{ProcessTomography(circuit, measurement\_indices,
-preparation\_indices)}: función de qiskit que genera los circuitos
+preparation\_indices)}: función de Qiskit que genera los circuitos
 correspondientes a la tomografía de proceso para reconstruir la matriz de Choi
 en un circuito cuántico. Esta función genera $4^N3^N$ circuitos de medición
-acorde a la teoría explicada en el capítulo 1\cpnote{Usa el comando ref
+acorde a la teoría explicada en el \autoref{cap:1}\cpnote{Usa el comando ref
 porque puedes meter uno que sea solo de intro sin teoria o quitar y te desparatoa
-los numeors}. Toma como entrada el circuito
+los numeors.} \felnote{Corregido.}. Toma como entrada el circuito
 cuántico (en  \texttt{circuit})  y el indicador correspondiente al(los)
 qubit(s) donde se realizará la tomografía de proceso ( indicado en
 \texttt{measurement\_indices} y \texttt{preparation\_indices}) . Tiene el
 método: \cpnote{Revisa por favor el uso de los dos puntos y luego si se hace
-mayuscula o no. Quedo pendiente de lo que encuentres antes de proseguir}
+mayuscula o no. Quedo pendiente de lo que encuentres antes de proseguir} \felnote{Si se pueden usar dos puntos antes de una enumeración o ecuaciones.   Aquí hay un ejemplo en arxiv: https://arxiv.org/pdf/2401.00019. Por las mayúsculas luego de ":", según APA , se inicia con minúscula para este caso luego de los dos puntos, ya que  la descripción no es una oración nueva, sino una explicación del elemento.}
     \begin{enumerate}
-	\item \texttt{run(backend)}: método encargado de ejecutar el(los)
+	\item \texttt{Run(backend)}: método encargado de ejecutar el(los)
 circuito(s) cuántico(s) en un servidor de IBM Quantum Experience. El
-\texttt{backend} puede ser el simulador de qiskit  \texttt{AerSimulator()} o
+\texttt{backend} puede ser el simulador de Qiskit  \texttt{AerSimulator()} o
 bien, una computadora cuántica en servicio. Invitamos nuevamente al lector a
-ver los backends en la documentación de qiskit \cite{qiskit_documentation}. 
+ver los backends en la documentación de Qiskit \cite{Qiskit_documentation}. 
     \end{enumerate}
 
-    \item \texttt{process\_fidelity(channel, target)}: función de qiskit que
+    \item \texttt{Process\_fidelity(channel, target)}: función de Qiskit que
 mide la fidelidad de proceso entre dos matrices de Choi , (\texttt{channel}
 para la matriz de choi del canal, \texttt{target} para una matriz de Choi
-objetivo) \cite{qiskit_documentation}, acorde a la teoría explicada en el
+objetivo) \cite{Qiskit_documentation}, acorde a la teoría explicada en el
 capítulo 1.
 
-    \item \texttt{partial\_trace(choi\_matrix,dim)}: calcula la traza parcial
+    \item \texttt{Partial\_trace(choi\_matrix,dim)}: calcula la traza parcial
 sobre el sistema de una matriz de choi definida en \texttt{choi\_matrix()}.
 Este cálculo se realiza dependiendo de la dimensión del sistema cuántico (por
-defecto es para dos qubits).
+defecto es para dos\textit{qubit}s).
     
-    \item \texttt{cost\_func(params)}: genera el circuito ansatz usando
-\texttt{cirq\_ansq()}. Posteriormente utiliza \texttt{ProcessTomography()} para
-ejecutar la tomografía de proceso sobre el primer qubit del circuito generado.
-Finalmente calcula la función de costo usando \texttt{process\_fidelity()}
-entre la matriz de Choi reconstruida del circuito ansatz y una matriz de Choi
+    \item \texttt{Cost\_func(params)}: genera el circuito \textit{ansatz} usando
+\texttt{Cirq\_ansq()}. Posteriormente utiliza \texttt{ProcessTomography()} para
+ejecutar la tomografía de proceso sobre el primer\textit{qubit} del circuito generado.
+Finalmente calcula la función de costo usando \texttt{Process\_fidelity()}
+entre la matriz de Choi reconstruida del circuito \textit{ansatz} y una matriz de Choi
 objetivo. Esta función usa como entrada global la matriz de Choi objetivo
-(\texttt{target} de la función \texttt{process\_fidelity()}) y como entrada
+(\texttt{target} de la función \texttt{Process\_fidelity()}) y como entrada
 local la lista de rotaciones $\{\theta_i\}$ (definidas en  \texttt{params}).
 
-    \item \texttt{minimize(fun, x0, method=None, tol)}: función de la librería
+    \item \texttt{Minimize(fun, x0, method=None, tol)}: función de la librería
 \texttt{scipy} encargada de minimización una función escalar \texttt{fun}, de
 una o más variables. Esta función requiere un conjunto de parámetros iniciales
 de la función \texttt{x0}. Como parte opcional se puede escoger el método de
@@ -348,26 +345,26 @@ DataFrame de \texttt{pandas} con todos los resultados relevantes de cada
 iteración. A continuación la describimos en detalle:
 
 \noindent\rule{\textwidth}{1mm}
-\texttt{optimizar\_depolarizacion(p\_values)}: función para optimizar la
+\texttt{Optimizar\_depolarizacion(p\_values)}: función para optimizar la
 fidelidad del proceso cuántico para una lista de valores de $p$. \newline
 
-\noindent\textbf{Entrada:} lista de valores $p$ para optimizar el ansatz.
+\noindent\textbf{Entrada:} lista de valores $p$ para optimizar el \textit{ansatz}.
 
 \noindent\textbf{Salida:} DataFrame con los valores de $p$, la fidelidad
 optimizada, matriz de Choi objetivo, matriz de Choi reconstruida y los
 parámetros $\{\theta_i\}$ optimizados.
 
 \noindent\textbf{Utiliza:} \texttt{choi\_matrix\_depolarizing},
-\texttt{cirq\_ansatz}, \texttt{ProcessTomography}, \texttt{process\_fidelity},
+\texttt{cirq\_\textit{ansatz}}, \texttt{ProcessTomography}, \texttt{process\_fidelity},
 \texttt{cost\_func}, \texttt{minimize}. \newline
 
 Para cada valor de $p$ en \texttt{p\_values}: 
 \begin{enumerate}
-    \item Generar una matriz de Choi dependiente de $p$ con \texttt{choi\_matrix\_depolarizing()}.
-    \item Iniciar a  \texttt{cost\_func()} valuado en un conjunto inicial
+    \item Generar una matriz de Choi dependiente de $p$ con \texttt{Choi\_matrix\_depolarizing()}.
+    \item Iniciar a  \texttt{Cost\_func()} valuado en un conjunto inicial
 aleatorio de parámetros $\{\theta_i\}$. 
-   \item Utilizar \texttt{minimize()} para iterar recursivamente sobre
-\texttt{cost\_func()}, ajustando los parámetros $\{\theta_i\}$ hasta alcanzar
+   \item Utilizar \texttt{Minimize()} para iterar recursivamente sobre
+\texttt{Cost\_func()}, ajustando los parámetros $\{\theta_i\}$ hasta alcanzar
 una convergencia definida por \texttt{tol}.
    \item Guardar los parámetros $\{ \theta_i\}$ que hacen que la función de
 costo converja. 
@@ -375,36 +372,40 @@ costo converja.
 veces en el simulador \texttt{AerSimualtor()} y una vez en una computadora
 cuántica. 
     \item Almacenar los parámetros optimizados $\{ \theta_i\}$, el circuito
-ansatz generado, las matrices de Choi objetvo y reconstruidas en ambos
+\textit{ansatz} generado, las matrices de Choi objetvo y reconstruidas en ambos
 sistemas, y sus fidelidades de proceso. 
 \end{enumerate}
 \vspace{-.5cm}
 \noindent\rule{\textwidth}{1mm}
-Para esta función general, se fijaron dos hiper parámetros para
-\texttt{cirq\_ansq()}: \texttt{layers} y \texttt{qubits}. El número de capas se
+
+
+\section{Resultados}
+Para la función general, se fijaron dos hiper parámetros de 
+\texttt{Cirq\_ansq()}: \texttt{layers} y \texttt{qubits}. El número de capas se
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
 de optimización, ni en la convergencia de la función de costo al aumentar este
-parámetro. Se utilizaron 4 qubits en el ansatz, donde dos se usaron como
-ancillas y otros dos para el sistema, siguiendo el diseño presentado en el
-capítulo anterior. Esto se decidió porque al utilizar únicamente dos qubits no
-se alcanzó la convergencia en la función de costo, y al utilizar 6 o más qubits
+parámetro. Se utilizaron 4 \textit{qubits} en el \textit{ansatz}, donde dos se usaron como
+\textit{ancillas} y otros dos para el sistema, siguiendo el diseño presentado en el
+capítulo anterior. Esto se decidió porque al utilizar únicamente dos\textit{qubit}s no
+se alcanzó la convergencia en la función de costo, y al utilizar 6 o más\textit{qubit}s
 tampoco se notó una mejora notoria.
 
-Como hiper parámetros para \texttt{minimize}(), se utilizó el método de
+Como hiper parámetros para \texttt{Minimize}(), se utilizó el método de
 \texttt{COBYLLA}, que es un método de minimización por aproximación lineal.
 Además, se tomó como tolerancia de $1\times 10^{-15}$. Nuevamente, se
 escogieron estos parámetros ya que fue no observamos una mejora notoria en los
 tiempos de ejecución ni en la optimización de la función de costo.
 
+
 Es importante mencionar las limitaciones al usar las computadoras cuánticas de
 IBM, donde el tiempo de uso está limitado a 10 minutos mensuales\footnote{Este
 es el tiempo de uso disponible en el plan gratuito de IBM.}. Vimos que el
-tiempo de ejecución de una tomografía de proceso para un canal de un qubit
+tiempo de ejecución de una tomografía de proceso para un canal de un\textit{qubit}
 requiere 12 circuitos, que lleva un tiempo de ejecución promedio de $16s$. Por
-esta razón decidimos optimizar el ansatz en el simulador cuántico y
+esta razón decidimos optimizar el \textit{ansatz} en el simulador cuántico y
 posteriormente, ejecutar el circuito optimizado en una computadora cuántica.
 Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
-ansatz optimizado 4 veces para cada valor de $p$ en el simulador de
+\textit{ansatz} optimizado 4 veces para cada valor de $p$ en el simulador de
 \texttt{AerSimualtor()}.
 
 La función general se ejecutó para un listado de 38 valores distintos de $p$ en
@@ -431,7 +432,7 @@ tabla \ref{tab:comparacion_fidelidades}.
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.7\linewidth]{imagenes/comparacion fidelidad.png}
-    \caption{Comparación de fidelidades de proceso luego de ejecutar el ansatz
+    \caption{Comparación de fidelidades de proceso luego de ejecutar el \textit{ansatz}
 optimizado. En azul se encuentra la fidelidad de la matriz de Choi reconstruida
 en el simulador cuántico \texttt{AerSimualtor()}. Por otro lado en azul,
 corresponde a la ejecución en la computadora cuántica \texttt{ibm-kyoto}.
@@ -451,15 +452,15 @@ ibm-kyoto     & 0.8916 & 0.5533 & 0.9738 & 0.825 & 0.125 & 0.0899  \\ \hline
 \end{tabular}
 }
 \caption{Comparación de fidelidad de proceso entre las matrices de Choi
-reconstruidas del ansatz optimizado. Los resultados de la computadora cuántica
+reconstruidas del \textit{ansatz} optimizado. Los resultados de la computadora cuántica
 fueron tomados en \texttt{ibm-kyoto}, mientras que en el simulador fueron en
-\texttt{AerSimualtor()} de qiskit. \textbf{Fuente:} elaboración propia.}
+\texttt{AerSimualtor()} de Qiskit. \textbf{Fuente:} elaboración propia.}
 \label{tab:comparacion_fidelidades}
 \end{table}
 
 Como parte de la evaluación de completa positividad (CP)  de las matrices
 reconstruidas, es importante analizar los autovalores de la matriz de Choi
-correspondiente al depolarizing channel. Sabemos que su matriz de Choi esta
+correspondiente al \textit{depolarizing channel}. Sabemos que su matriz de Choi esta
 dada por la ecuación \ref{ec:Choi_depolarizing} \felnote{Aquí todavía no
 aparece porque la declararemos en el capítulo 1}. Por lo tanto, sus autovalores
 se calculan resolviendo:
@@ -597,7 +598,7 @@ a lo largo de $p$.
 \chapter{CONCLUSIONES} % {{{
 \section{Conclusiones}
 \section{Trabajo a Futuro}
-\subsection{Implementación de VQA para 2 qubits}
+\subsection{Implementación de VQA para 2\textit{qubit}s}
 % }}}
 \appendix
 % Notas sueltas {{{
@@ -608,12 +609,12 @@ a lo largo de $p$.
 % % Pendiente de redactar
 % Los Algoritmos Variacionales Cuánticos (VQA) representan una estrategia innovadora en el campo de la computación cuántica para resolver problemas complejos. A través de un esquema híbrido que aprovecha tanto recursos cuánticos como clásicos, los VQA buscan optimizar un conjunto de parámetros en un circuito cuántico parametrizado. Estos algoritmos son fundamentales en tareas donde la solución se codifica dentro de una función de costo o pérdida, la cual es minimizada a través del ajuste variacional de parámetros dentro del circuito. \cite{VQA}
 
-% El circuito cuántico parametrizado, o \textit{ansatz}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los ansatz más efectivos, como el Hardware Efficient Ansatz (HEA), son aquellos que equilibran la expresividad del circuito y la eficiencia en términos de recursos y operaciones cuánticas requeridas. \cite{VQA}
+% El circuito cuántico parametrizado, o \textit{\textit}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los \textit{ansatz} más efectivos, como el Hardware Efficient \textit{ansatz} (HEA), son aquellos que equilibran la expresividad del circuito y la eficiencia en términos de recursos y operaciones cuánticas requeridas. \cite{VQA}
 
 % El proceso de optimización en VQAs se articula en tres fases principales:
 % \begin{enumerate}
-%     \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{ansatz}.
-%     \item \textbf{Aplicación del Ansatz:} Se utiliza el \textit{ansatz} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
+%     \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{\textit{ansatz}}.
+%     \item \textbf{Aplicación del \textit{ansatz}:} Se utiliza el \textit{\textit{ansatz}} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
 %     \item \textbf{Evaluación y Optimización:} Se evalúa la función de costo mediante mediciones cuánticas y se emplea un optimizador clásico para ajustar los parámetros en busca de un mínimo, completando así el bucle cuántico-clásico.
 % \end{enumerate}
 % \subsubsection{Ejemplo: Inicialización de estados mixtos en computadoras cuánticas}
