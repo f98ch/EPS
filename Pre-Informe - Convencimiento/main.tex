@@ -163,7 +163,7 @@
 % Datos generales del trabajo de graduación, tabla de contenidos etc {{{
 \datosThesis%
 {1}%						% física 1; matemática 2
-{Implementación de canales cuánticos \\ de un\textit{qubit} usando VQA}%		% Título del trabajo de graduación
+{Implementación de canales cuánticos \\ de un qubit usando VQA}%		% Título del trabajo de graduación
 {Felipe Antonio Ixcamparic Choy}%			% autor
 {M.Sc. Juan Diego Chang\\y Dr. Carlos Francisco Pineda Zorrilla}%			% asesor
 {agosto de 2024}		% mes y año de la orden de impresión
@@ -176,15 +176,15 @@
 % }}}
 \chapter*{OBJETIVOS} % {{{
 \section*{General} 
-\cpnote{Por favor consistencia con la capitalizacion de ``Algoritmos Variacionales''.}
-Estudiar  y desarrollar algoritmos variacionales cuánticos para la implementación de canales cuánticos de un \textit{qubit} en computadoras cuánticas.
+\cpnote{Por favor consistencia con la capitalizacion de ``Algoritmos Variacionales''.} \felnote{Corregido}
+Estudiar y desarrollar Algoritmos Variacionales Cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
 
 \section*{Específicos}
 \begin{itemize}
     \item Estudiar la teoría y uso de computadoras cuánticas.
     \item Comprender las definiciones fundamentales de la teoría de sistemas cuánticos abiertos y canales cuánticos.
     \item Investigar el uso de los Algoritmos Variacionales Cuánticos en la resolución de problemas de información cuántica.
-    \item Implementar canales cuánticos de un\textit{qubit} en computadoras cuánticas y analizar su comportamiento.
+    \item Implementar canales cuánticos de un qubit en computadoras cuánticas y analizar su comportamiento.
 \end{itemize}
 % }}}
 \chapter*{INTRODUCCIÓN} % {{{
@@ -229,17 +229,17 @@ Los operadores cuánticos pueden representarse mediante la \textit{representaci�
 
 La matriz de Choi tiene varias propiedades: es Hermítica, puede expresarse en términos de los operadores de Kraus, es positivo semidefinido y su traza parcial es la identidad si preserva la traza. Además, la matriz de Choi de un operador CPTP es única, mientras que la representación de Kraus no lo es. \par 
 
-El \textit{\textit{depolarizing channel}} es un ejemplo de canal cuántico que introduce ruido aleatorio en un sistema. Su matriz de Choi refleja cómo el canal mezcla el estado original con la matriz identidad, reduciendo la pureza del estado. \par 
+El Canal Despolarizante (DP) es un ejemplo de canal cuántico que introduce ruido aleatorio en un sistema. Su matriz de Choi refleja cómo el canal mezcla el estado original con la matriz identidad, reduciendo la pureza del estado. \par 
 
 En los siguientes capítulos se detallará el proceso para implementar la matriz de Choi y reconstruirla en sistemas cuánticos. \par 
 \section{Circuitos Cuánticos}
 *Heredado de informe de prácticas 
 
-Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al\textit{qubit}. Esta esfera nos permite visualizar los cambios del estado de un\textit{qubit} bajo transformaciones unitarias $U$. \par 
+Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al qubit. Esta esfera nos permite visualizar los cambios del estado de un qubit bajo transformaciones unitarias $U$. \par 
 
-Las computadoras cuánticas tienen compuertas cuánticas, operadores unitarios reversibles $U$ que actúan linealmente sobre\textit{qubit}s en superposición. Las compuertas $X$, $Y$ y $Z$ representan las matrices de Pauli $\sigma_x$, $\sigma_y$ y $\sigma_z$ respectivamente. \par 
+Las computadoras cuánticas tienen compuertas cuánticas, operadores unitarios reversibles $U$ que actúan linealmente sobre qubits en superposición. Las compuertas $X$, $Y$ y $Z$ representan las matrices de Pauli $\sigma_x$, $\sigma_y$ y $\sigma_z$ respectivamente. \par 
 
-Un circuito cuántico es una rutina computacional con operadores que actúan sobre\textit{qubit}s. Los circuitos se conforman por cables, compuertas y mediciones. \par 
+Un circuito cuántico es una rutina computacional con operadores que actúan sobre qubits. Los circuitos se conforman por cables, compuertas y mediciones. \par 
 
 Para este trabajo, utilizamos la plataforma \textit{IBM Quantum Experience}, que nos da acceso a computadoras cuánticas para ejecutar circuitos cuánticos válidos. \par  
 % }}}
@@ -256,10 +256,10 @@ La optimización de la función de costo se realiza mediante métodos clásicos,
  
 El método de gradientes calcula la derivada de la función de costo respecto a los parámetros del \textit{ansatz} y ajusta estos parámetros para encontrar el mínimo de la función de costo. \par 
 
-\section{Implementación de canales de un\textit{qubit} usando VQA}
+\section{Implementación de canales de un qubit usando VQA}
 Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$. \par 
 
-Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1\textit{qubit}, para esto , nuestra función de costo a optimizar será la fidelidad de proceso entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica. \par 
+Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit, para esto , nuestra función de costo a optimizar será la fidelidad de proceso entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica. \par 
  
 
 % }}}
@@ -269,19 +269,19 @@ Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1\textit
 % }}}
 \section{Algoritmos de implementación} % {{{
 Se han programado las funciones necesarias para implementar un
-\textit{depolarizing channel} \cpnote{para evitar el uso del ingle, de propongo
+DP \cpnote{para evitar el uso del ingle, de propongo
 que pongas algo como depolarizing channel (DP) y que luego te refieras a el
-como DP.} mediante VQA en una computadora cuántica. Estas funciones siguen el
+como DP.} \felnote{Lo definí como DP en el capítulo 2. En este capítulo se verá como DP a menos que referencíe algún código de programación.} mediante VQA en una computadora cuántica. Estas funciones siguen el
 algoritmo presentado en el capítulo anterior, desarrollado en el lenguaje
 Python con el apoyo esencial de la librería Qiskit. A continuación, se enumeran
 las funciones utilizadas: 
 \begin{enumerate}
     \item \texttt{Choi\_matrix\_depolarizing(p)}: genera la matriz de Choi que
-corresponde al \textit{depolarizing channel} con probabilidad de depolarización $p$.
+corresponde al DP con probabilidad de depolarización $p$.
 
     \item \texttt{Cirq\_ansq(qubits, parameters, layers)}: genera un \textit{ansatz} en
 un circuito cuántico de Qiskit. Toma como entradas el número de
-\texttt{qubits}, el listado de ángulos de rotación $\{\theta_i\}$ (indicados en
+ qubit, el listado de ángulos de rotación $\{\theta_i\}$ (indicados en
 \texttt{parameters}) y el número de capas del \textit{ansatz} (indicado en
 \texttt{layers}).
 
@@ -289,10 +289,7 @@ un circuito cuántico de Qiskit. Toma como entradas el número de
 preparation\_indices)}: función de Qiskit que genera los circuitos
 correspondientes a la tomografía de proceso para reconstruir la matriz de Choi
 en un circuito cuántico. Esta función genera $4^N3^N$ circuitos de medición
-acorde a la teoría explicada en el \autoref{cap:fundamentos:teoricos}\cpnote{Le cambié el nombre
-a la referencia. Si decides por ejemplo que la intro lleva numero, luego ese sería el 
-dos y seria confuso que el dos se referencie como uno. Checalo en el codigo y borra 
-esta nota}. Toma como entrada el circuito
+acorde a la teoría explicada en el \autoref{cap:fundamentos:teoricos}. Toma como entrada el circuito
 cuántico (en  \texttt{circuit})  y el indicador correspondiente al(los)
 qubit(s) donde se realizará la tomografía de proceso ( indicado en
 \texttt{measurement\_indices} y \texttt{preparation\_indices}) . Tiene el
@@ -308,19 +305,18 @@ ver los backends en la documentación de Qiskit \cite{Qiskit_documentation}.
     \item \texttt{Process\_fidelity(channel, target)}: función de Qiskit que
 mide la fidelidad de proceso entre dos matrices de Choi , (\texttt{channel}
 para la matriz de choi del canal, \texttt{target} para una matriz de Choi
-objetivo) \cite{Qiskit_documentation}, acorde a la teoría explicada en el
-capítulo 1\cpnote{De nuevo referencia abstracta aca. Aparte, convendría 
-aca referenciar la ecuacion exacta que necesites}.
+objetivo) \cite{Qiskit_documentation}, acorde a la ecuación \ref{ec:Choi_depolarizing}\cpnote{De nuevo referencia abstracta aca. Aparte, convendría 
+aca referenciar la ecuacion exacta que necesites} \felnote{Lo cambié a referencia de ecuación (aparecerá cuando agregue el cap 1)}
 
     \item \texttt{Partial\_trace(choi\_matrix,dim)}: calcula la traza parcial
 sobre el sistema de una matriz de choi definida en \texttt{choi\_matrix()}.
 Este cálculo se realiza dependiendo de la dimensión del sistema cuántico (por
-defecto es para dos\textit{qubit}s) \cpnote{no estas usando italicas antes para
-qubits. Creo qeu es mejor no usarlas}.
+defecto es para dos qubits) \cpnote{no estas usando italicas antes para
+qubits. Creo qeu es mejor no usarlas}\felnote{Corregido}.
     
     \item \texttt{Cost\_func(params)}: genera el circuito \textit{ansatz} usando
 \texttt{Cirq\_ansq()}. Posteriormente utiliza \texttt{ProcessTomography()} para
-ejecutar la tomografía de proceso sobre el primer\textit{qubit} del circuito generado.
+ejecutar la tomografía de proceso sobre el primer qubit del circuito generado.
 Finalmente calcula la función de costo usando \texttt{Process\_fidelity()}
 entre la matriz de Choi reconstruida del circuito \textit{ansatz} y una matriz de Choi
 objetivo. Esta función usa como entrada global la matriz de Choi objetivo
@@ -368,9 +364,8 @@ aleatorio de parámetros $\{\theta_i\}$.
    \item Utilizar \texttt{Minimize()} para iterar recursivamente sobre
 \texttt{Cost\_func()}, ajustando los parámetros $\{\theta_i\}$ hasta alcanzar
 una convergencia definida por \texttt{tol}.
-   \item Guardar los parámetros $\{ \theta_i\}$ que hacen que la función de
-costo converja \cpnote{mas bien que minimicen la funcion de costo, no? Casi todos
-los parametros iniciales van a converger}. 
+   \item Guardar los parámetros $\{ \theta_i\}$ que minimizan la función de costo. \cpnote{mas bien que minimicen la funcion de costo, no? Casi todos
+los parametros iniciales van a converger} \felnote{Tienes razón. Corregido}. 
    \item Ejecutar \texttt{ProcessTomography()} con el circuito optimizado 4
 veces en el simulador \texttt{AerSimualtor()} y una vez en una computadora
 cuántica. 
@@ -380,36 +375,35 @@ sistemas, y sus fidelidades de proceso.
 \end{enumerate}
 \vspace{-.5cm}
 \noindent\rule{\textwidth}{1mm}
-\cpnote{No veo el uso de las lineas gruesas. Las quitaria}
+\cpnote{No veo el uso de las lineas gruesas. Las quitaria} \felnote{Prefiero usarlas. JA las usó también para su tésis, me ayuda a diferenciarla de las demás funciones.}
 % }}}
 \section{Resultados} % {{{
 Para la función general, se fijaron dos hiper parámetros de 
-\texttt{Cirq\_ansq()}: \texttt{layers} y \texttt{qubits}. El número de capas se
+\texttt{Cirq\_ansq()}: \texttt{layers} y  qubit. El número de capas se
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
-de optimización, ni en la convergencia de la función de costo al aumentar este
-parámetro\cpnote{Tocaría mostrar una gráfica donde se demuestre esa
-afirmación.}. Se utilizaron 4 \textit{qubits} en el \textit{ansatz}, donde dos se usaron como
-\textit{ancillas} y otros dos para el sistema, siguiendo el diseño presentado en el
-capítulo anterior. Esto se decidió porque al utilizar únicamente dos \textit{qubit}s no
-se alcanzó la convergencia en la función de costo, y al utilizar 6 o más \textit{qubit}s
-tampoco se notó una mejora notoria. \cpnote{no porqué pero cuando tienes qubit a
+de optimización, ni en la minimización de la función de costo al aumentar este
+parámetro, esto lo podemos ver en la figura \ref{fig:comparacion_capas} \cpnote{Tocaría mostrar una gráfica donde se demuestre esa afirmación.}\felnote{La agregué, no se si es mejor mandarla a un apéndice o la dejo aquí?}. Por otro lado, se utilizaron 4 qubits en el \textit{ansatz}, donde una mitad funcionó como \textit{ancilla} y la otra para el sistema, siguiendo el diseño presentado en el \textit{ansatz} \ref{fig:ansatz_dp}. Esto se decidió porque al utilizar únicamente dos  qubits no se alcanzó la convergencia en la función de costo. \cpnote{no porqué pero cuando tienes qubit a
 veces no separas el espacio entre la palabra anteiror y qubit. Creo que es
-porque cambiaste automaticamente. }
+porque cambiaste automaticamente. } \felnote{Gracias por notarlo, lo corregi en todas las instancias.}
 
-Como hiper parámetros para \texttt{Minimize}(), se utilizó el método de
-\texttt{COBYLLA}, que es un método de minimización por aproximación lineal.
-Además, se tomó como tolerancia de $1\times 10^{-15}$. Nuevamente, se
-escogieron estos parámetros ya que fue no observamos una mejora notoria en los
-tiempos de ejecución ni en la optimización de la función de costo\cpnote{frase
+\begin{figure}[h!] 
+    \centering 
+    \includegraphics[width=0.70 \linewidth]{imagenes/comparacion_capas.png}
+    \caption{Comparación de el proceso de optimización del ansatz utilizado para el DP a diferentes capas. En azul vemos el resultado para una capa, amarillo para dos y verde para tres. Estos resultados fueron ejecutados para un valor de $p=0.125$. \textbf{Fuente}: elaboración propia. \felnote{Está bien en escala logarítmica? Ahí se ve mejor la diferencia, pero puedo hacerlo también en escala normal}}
+    \label{fig:comparacion_capas}
+\end{figure}
+
+
+Para la función \texttt{Minimize}() se fijaron dos hiper parámetros : \texttt{method} y \texttt{tol}. Se utilizó el método \texttt{COBYLLA}, que realiza la minimización mediante aproximaciones lineales, mientras que la tolerancia se ajustó a $1\times 10^{-15}$. Se tomaron estos hiperparámetros porque con ellos alcanzamos consistentemente la minimización de la función de costo sin estresar de forma inecesaria el equipo de trabajo. \cpnote{frase
 con una redaccion muy rara. No se entiende, quizá incluir otro gráfico? quizá 
-ya es demasiado... }.
+ya es demasiado... } \felnote{Modifiqué este párrafo, ahora creo que es mucho más entendible. Por el lado del gráfico también pienso que sería mucho considerando que ya esta el de comparación de capas.}.
 
 
 Es importante mencionar las limitaciones al usar las computadoras cuánticas de
 IBM, donde el tiempo de uso está limitado a 10 minutos mensuales\footnote{Este
 es el tiempo de uso disponible en el plan gratuito de IBM.}. Vimos que el
-tiempo de ejecución de una tomografía de proceso para un canal de un \textit{qubit}
-\cpnote{revisa todas las instancias de qubit y dejalo sin italicas por favor}
+tiempo de ejecución de una tomografía de proceso para un canal de un  qubit
+\cpnote{revisa todas las instancias de qubit y dejalo sin italicas por favor} \felnote{Corregido.}
 requiere 12 circuitos, que lleva un tiempo de ejecución promedio de $16s$. Por
 esta razón decidimos optimizar el \textit{ansatz} en el simulador cuántico y
 posteriormente, ejecutar el circuito optimizado en una computadora cuántica.
@@ -420,8 +414,8 @@ Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
 La función general se ejecutó para un listado de 38 valores distintos de $p$ en
 \texttt{p\_values}, ajustándose al tiempo mensual disponible en IBM, con un
 margen de error de una tomografía mensual. Cada circuito se ejecutó para un
-número de 4000 \textit{shots}\cpnote{demasiados anglisismos. Solo usalos si la 
-traduccion es rara. aca puedes aclarar la situacion en español} o mediciones,
+número de 4000 mediciones por circuito. \cpnote{demasiados anglisismos. Solo usalos si la 
+traduccion es rara. aca puedes aclarar la situacion en español} \felnote{Listo, corregí el shots},
 para la computadora cuántica como
 en el simulador. No incluimos todos los resultados detallados en esta sección
 para evitar sobrecargar la discusión\footnote{Se puede acceder al dataframe
@@ -471,7 +465,7 @@ fueron tomados en \texttt{ibm-kyoto}, mientras que en el simulador fueron en
 
 Como parte de la evaluación de completa positividad (CP)  de las matrices
 reconstruidas, es importante analizar los autovalores de la matriz de Choi
-correspondiente al \textit{depolarizing channel}. Sabemos que su matriz de Choi esta
+correspondiente al DP. Sabemos que su matriz de Choi esta
 dada por la ecuación \ref{ec:Choi_depolarizing} \felnote{Aquí todavía no
 aparece porque la declararemos en el capítulo 1}. Por lo tanto, sus autovalores
 se calculan resolviendo:
@@ -510,7 +504,7 @@ lado, al analizar la condición de preservación de la traza (TP) notamos que
 ninguna de las matrices de Choi reconstruidas en ninguno de los sistemas cumple
 con preservar la traza. Esto lo verificamos trazando parcialmente las matrices
 de Choi con \texttt{partial\_trace()}, cuyo resultado no coincide con la matriz
-identidad $I$. \cpnote{Aca si puede haber un problema más serio. Lo platicamos.}
+identidad $I$. \cpnote{Aca si puede haber un problema más serio. Lo platicamos.} \felnote{Sí claro, lo que pasa aquí es que se quedan bastante cerca pero no le llegan exacto a la identidad. (ver imagen comparaciones\_identidad\_reconstruida.png en la carptea de imagenes del proyecto) }
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.90 \linewidth]{imagenes/eigenvalores_comparacion.png}
@@ -521,10 +515,11 @@ identidad $I$. \cpnote{Aca si puede haber un problema más serio. Lo platicamos.
 \section{Discusión de Resultados} % {{{
 En esta sección discutiremos sobre las diferencias encontradas entre las
 fidelidades y autovalores calculados en el simulador y la computadora cuántica.
-Vemos que estas diferencias se deben en gran parte a los errores inherentes al
-hardware cuántico real, como la decoherencia, errores en las compuertas
-cuánticas y limitaciones en la precisión de las mediciones. 
-\cpnote{A ver si lo justificas mas adelante. Se me hace una frase osada}
+Vemos que estas diferencias se deben en gran parte a que la optimización fue realizada en el simulador cuántico, el cual esta configurado en un entorno ideal. \cpnote{A ver si lo justificas mas adelante. Se me hace una frase osada} \felnote{Lo volví a leer y si suena mal atribuirlo directo a la computadora, lo modifiqué ahora porque realmente optimicé con el simulador. De igual forma, aquí abajo deje comentada la frase anterior}
+% Vemos que estas diferencias se deben en gran parte a los errores inherentes al
+% hardware cuántico real, como la decoherencia, errores en las compuertas
+% cuánticas y limitaciones en la precisión de las mediciones. 
+
 
 La figura \ref{fig:comparacion_fidelidad} así como la tabla
 \ref{tab:comparacion_fidelidades} muestran que el simulador cuántico produce
@@ -547,14 +542,12 @@ En el caso de la computadora cuántica, la ecuación de la regresión lineal es:
     F_{proc\_qc}(p) = 0.2707 \cdot p + 0.7376,
 \end{equation}
 con un coeficiente de determinación $R^2 = 0.7055$ y un valor de Chi-cuadrado
-de $\chi^2 = 0.1085$. Esta ecuación indica que la fidelidad en la computadora
-cuántica aumenta proporcionalmente a $p$\cpnote{no, tu propusiste un crecimiento lineal. 
+de $\chi^2 = 0.1085$.  Esto indica que la fidelidad tiende a aumentar con la probabilidad de despolarización $p$, pero el ajuste no es perfecto. Los valores de $R^2$ y $\chi^2$ sugieren que la relación no es estrictamente lineal y que podría haber otros factores influyendo en los resultados en la computadora cuántica. \cpnote{no, tu propusiste un crecimiento lineal. 
 y la verdad no da tan bien. mejorra la interpretacion. quizá es mejor si discutimos acerca 
-de estas graficas}. Este comportamiento podría deberse a
-que, al aumentar la probabilidad de depolarización, también se incrementa la
-decoherencia en el sistema\cpnote{Interpretacion chafa}. En consecuencia, la computadora cuántica
-\texttt{ibm\_kyoto} parece ofrecer mejores resultados de fidelidad cuando hay
-una mayor interacción con el entorno.
+de estas graficas} \felnote{Lo corregí, es cierto, no necesariamente es lineal. Y sí, también quisiera que hablaramos sobre las gráficas}. 
+
+Este comportamiento puede explicarse porque, al aumentar $p$ en el DP, los estados se vuelven más mixtos y menos afectados por errores específicos del hardware cuántico. En sistemas como \texttt{ibm\_kyoto}, una alta despolarización puede reducir el impacto de errores de las compuertas cuánticas y la decoherencia, ya que el estado menos puro es menos sensible a estos fallos. Entonces, la fidelidad mejora con  $p$ porque el DP atenúa algunos errores del sistema, no porque el hardware mejore su rendimiento. \cpnote{Interpretación chafa}\felnote{Lo modifiqué}
+
 
 Por otro lado, observamos que el simulador \texttt{AerSimulator()} tiene una ecuación de la recta:
 \begin{equation}
@@ -566,7 +559,7 @@ diferencia de la computadora cuántica, la fidelidad en el simulador no parece
 depender significativamente de $p$\cpnote{esto me gusta mas}. Además, la pendiente de la recta es
 pequeña, lo que indica que la fidelidad en el simulador es prácticamente
 constante a lo largo del rango de $p$. \cpnote{estaría bueno comentar el
-outlier que esta bien raro}
+outlier que esta bien raro} \felnote{De hecho lo comento adelante en el rango de 0.6 a 0.75}
 
 Analizamos la variabilidad de fidelidad en ambos casos, como se muestra en la
 figura \ref{fig:comparacion_desviaciones}. En el simulador cuántico, no se
@@ -578,7 +571,7 @@ lo que confirma nuestra suposición basada en la regresión lineal. Finalmente,
 en ambos casos, observamos que para valores de $p>0.75$, la desviación estándar
 disminuye significativamente.\cpnote{Creo que hay varios estudios que sugieren que 
 el comportamiento de la computadora cuántica de la IBM no es estacionario. 
-Sería bueno citarlos. Hablemos también}
+Sería bueno citarlos. Hablemos también} \felnote{Claro, estuve investigando y me encontré con este paper: https://arxiv.org/pdf/2302.10881 . Aquí mencionan como los errores fuera de  resonancia pueden causar comporatmientos no estacionarios. Pero si quisiera que lo vieramos también.}
 
 
 \begin{figure}[h!]
@@ -608,7 +601,7 @@ fidelidad en la computadora cuántica ($0.7376$) es menor que en el simulador,
 que muestra fidelidades iniciales más altas y con menor variabilidad
 ($0.9346$).
 
-\cpnote{Me falta corregir este parrafo pues no entiendo la figura}
+\cpnote{Me falta corregir este parrafo pues no entiendo la figura} \felnote{La corregí}
 En la figura \ref{fig:comparacion_choi}, observamos que las matrices de Choi
 generadas por la computadora cuántica presentan mayor coherencia en las
 entradas no diagonales. Esto también nos muestra que la computadora cuántica
@@ -621,10 +614,35 @@ a lo largo de $p$.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.95\linewidth]{imagenes/comparacion_choi.png}
-    \caption{\cpnote{figura chafa. No se puede leer los numeros y ademas no entiendo que son las 
-filas, las columnas, En fin. hablemos de esta figura}
-Comparación de matrices de Choi objetivo, y matrices de Choi reconstruidas en el simulador cuántico \texttt{AerSimulator()} como en la computadora cuántica \texttt{ibm\_kyoto} respectivamente. \textbf{Fuente:} elaboración propia.}
+    % Subfigura para p = 0.1
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{imagenes/comp_choi_p0.1.png}
+        \caption{Comparación de matrices de Choi para p = 0.1}
+        \label{fig:choi_p0.1}
+    \end{subfigure}
+    \vspace{1em} % Espacio vertical entre subfiguras
+    
+   
+    % Subfigura para p = 0.5
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{imagenes/comp_choi_p0.5.png}
+        \caption{Comparación de matrices de Choi para p = 0.5}
+        \label{fig:choi_p0.5}
+    \end{subfigure}
+    \vspace{1em}
+    
+    % Subfigura para p = 0.9
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{imagenes/comp_choi_p0.9.png}
+        \caption{Comparación de matrices de Choi para p = 0.9}
+        \label{fig:choi_p0.9}
+    \end{subfigure}
+    
+    \caption[Comparación de matrices de Choi objetivo y reconstruidas]{\cpnote{figura chafa. No se puede leer los números y además no entiendo qué son las filas, las columnas, en fin. Hablemos de esta figura} \felnote{Está bien. La segmenté en partes para que se vean mejor y cambie el caption.}
+    Comparación de matrices de Choi objetivo y matrices de Choi reconstruidas en el simulador cuántico \texttt{AerSimulator()}, como en la computadora cuántica \texttt{ibm\_kyoto}. Los valores se presentan para disntintas probabilidades de despolarización $p$ del DP. Cada valor representa una componente real de la matriz de Choi. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_choi}
 \end{figure}
 
@@ -633,7 +651,7 @@ Comparación de matrices de Choi objetivo, y matrices de Choi reconstruidas en e
 \chapter{CONCLUSIONES} % {{{
 \section{Conclusiones}
 \section{Trabajo a Futuro}
-\subsection{Implementación de VQA para 2\textit{qubit}s}
+\subsection{Implementación de VQA para 2 qubits}
 % }}}
 \appendix
 % Notas sueltas {{{
