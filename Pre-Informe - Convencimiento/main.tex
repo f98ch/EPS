@@ -269,13 +269,10 @@ Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit,
 \cpnote{Falta introduccion. Escribirla al final quizá de la tesis}\felnote{Pendiente: la redactaré al finalizar el cap}
 % }}}
 \section{Algoritmos de implementación} % {{{
-Se han programado las funciones necesarias para implementar un
-DP \cpnote{para evitar el uso del ingle, de propongo
-que pongas algo como depolarizing channel (DP) y que luego te refieras a el
-como DP.} \felnote{Corregido: lo definí como DP en el capítulo 2. En este capítulo se verá como DP a menos que referencíe algún código de programación.} mediante VQA en una computadora cuántica. Estas funciones siguen el
-algoritmo presentado en el capítulo anterior, desarrollado en el lenguaje
-Python con el apoyo esencial de la librería Qiskit. A continuación, se enumeran
-las funciones utilizadas: 
+Se han programado las funciones necesarias para implementar un DP mediante VQA
+en una computadora cuántica. Estas funciones siguen el algoritmo presentado en
+el capítulo anterior, desarrollado en el lenguaje Python con el apoyo esencial
+de la librería Qiskit. A continuación, se enumeran las funciones utilizadas: 
 \begin{enumerate}
     \item \texttt{Choi\_matrix\_depolarizing(p)}: genera la matriz de Choi que
 corresponde al DP con probabilidad de depolarización $p$.
