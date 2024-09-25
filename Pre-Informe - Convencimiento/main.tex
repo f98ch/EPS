@@ -303,14 +303,14 @@ ver los backends en la documentación de Qiskit \cite{Qiskit_documentation}.
     \item \texttt{Process\_fidelity(channel, target)}: función de Qiskit que
 mide la fidelidad de proceso entre dos matrices de Choi , (\texttt{channel}
 para la matriz de choi del canal, \texttt{target} para una matriz de Choi
-objetivo) \cite{Qiskit_documentation}, acorde a la ecuación \ref{ec:Choi_depolarizing}\cpnote{De nuevo referencia abstracta aca. Aparte, convendría 
-aca referenciar la ecuacion exacta que necesites} \felnote{ Corregido: lo cambié a referencia de ecuación (aparecerá cuando redacte el cap 1)}
+objetivo) \cite{Qiskit_documentation}, acorde a la ecuación
+\ref{ec:Choi_depolarizing}.\cpnote{La referencia parece incompleta. Revisa con cuidado 
+como referenciar un libro (es un libro?)}
 
     \item \texttt{Partial\_trace(choi\_matrix,dim)}: calcula la traza parcial
 sobre el sistema de una matriz de choi definida en \texttt{choi\_matrix()}.
 Este cálculo se realiza dependiendo de la dimensión del sistema cuántico (por
-defecto es para dos qubits) \cpnote{no estas usando italicas antes para
-qubits. Creo qeu es mejor no usarlas}\felnote{Corregido: todas las instancias de qubit vienen sin itálica ahora.}.
+defecto es para dos qubits).
     
     \item \texttt{Cost\_func(params)}: genera el circuito \textit{ansatz} usando
 \texttt{Cirq\_ansq()}. Posteriormente utiliza \texttt{ProcessTomography()} para
@@ -331,8 +331,6 @@ documentación \cite{scipy}. Finalmente, se puede escoger un valor de tolerancia
 utilizado (en \texttt{method}) y que éste se detenga.
     
 \end{enumerate}
-\cpnote{Va bien hasta acá. Esto te está dando la pauta de que es lo que debes expilcar en las
-secciones anteriores. Toma nota!!!!}
 
 Agrupamos estas funciones en una función general encargada de repetir el
 proceso de optimización para una lista de valores de $p$. Esta función, llamada
@@ -362,8 +360,8 @@ aleatorio de parámetros $\{\theta_i\}$.
    \item Utilizar \texttt{Minimize()} para iterar recursivamente sobre
 \texttt{Cost\_func()}, ajustando los parámetros $\{\theta_i\}$ hasta alcanzar
 una convergencia definida por \texttt{tol}.
-   \item Guardar los parámetros $\{ \theta_i\}$ que minimizan la función de costo. \cpnote{mas bien que minimicen la funcion de costo, no? Casi todos
-los parametros iniciales van a converger} \felnote{Corregido: modifiqué la frase a .. "que minimizan la función de costo".}. 
+   \item Guardar los parámetros $\{ \theta_i\}$ que minimizan la función de
+costo. 
    \item Ejecutar \texttt{ProcessTomography()} con el circuito optimizado 4
 veces en el simulador \texttt{AerSimualtor()} y una vez en una computadora
 cuántica. 
@@ -373,9 +371,9 @@ sistemas, y sus fidelidades de proceso.
 \end{enumerate}
 \vspace{-.5cm}
 \noindent\rule{\textwidth}{1mm}
-\cpnote{No veo el uso de las lineas gruesas. Las quitaria} \felnote{Pendiente: prefiero usar las líneas gruesas. J.A. las usó también para su tesis, me ayuda a diferenciar esta función de las demás.}
 % }}}
 \section{Resultados} % {{{
+\cpnote{Aca voy}
 Para la función general, se fijaron dos hiper parámetros de 
 \texttt{Cirq\_ansq()}: \texttt{layers} y  qubit. El número de capas se
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
