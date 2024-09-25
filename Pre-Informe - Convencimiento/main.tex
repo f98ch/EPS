@@ -374,33 +374,40 @@ sistemas, y sus fidelidades de proceso.
 % }}}
 \section{Resultados} % {{{
 \cpnote{Aca voy}
-Para la función general, se fijaron dos hiper parámetros de 
+Para la función general, se fijaron dos hiper parámetros de
 \texttt{Cirq\_ansq()}: \texttt{layers} y  qubit. El número de capas se
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
 de optimización, ni en la minimización de la función de costo al aumentar este
-parámetro, esto lo podemos ver en la figura \ref{fig:comparacion_capas} \cpnote{Tocaría mostrar una gráfica donde se demuestre esa afirmación.}\felnote{Corregido: la agregué en la fig. \ref{fig:comparacion_capas}.}. Por otro lado, se utilizaron 4 qubits en el \textit{ansatz}, donde una mitad funcionó como \textit{ancilla} y la otra para el sistema, siguiendo el diseño presentado en el \textit{ansatz} \ref{fig:ansatz_dp}. Esto se decidió porque al utilizar únicamente dos  qubits no se alcanzó la convergencia en la función de costo. \cpnote{no porqué pero cuando tienes qubit a
-veces no separas el espacio entre la palabra anteiror y qubit. Creo que es
-porque cambiaste automaticamente. } \felnote{Corregido: aparece qubit sin notaciones raras en todas las instancias.}
+parámetro, esto lo podemos ver en la figura \ref{fig:comparacion_capas}. Por
+otro lado, se utilizaron 4 qubits en el \textit{ansatz}, donde una mitad
+funcionó como \textit{ancilla} y la otra para el sistema, siguiendo el diseño
+presentado en el \textit{ansatz} \ref{fig:ansatz_dp}. Esto se decidió porque al
+utilizar únicamente dos  qubits no se alcanzó la convergencia en la función de
+costo. 
 
-\begin{figure}[h!] 
+\begin{figure}[h!]  % {{{
     \centering 
     \includegraphics[width=0.70 \linewidth]{imagenes/comparacion_capas.png}
-    \caption{Comparación de el proceso de optimización del ansatz utilizado para el DP a diferentes capas. En azul vemos el resultado para una capa, amarillo para dos y verde para tres. Estos resultados fueron ejecutados para un valor de $p=0.125$. \textbf{Fuente}: elaboración propia. \felnote{Duda: está bien en escala logarítmica? Ahí se ve mejor la diferencia, pero puedo hacerlo también en escala normal}}
+    \caption{Comparación de el proceso de optimización del ansatz utilizado
+para el DP a diferentes capas. En azul vemos el resultado para una capa,
+amarillo para dos y verde para tres. Estos resultados fueron ejecutados para un
+valor de $p=0.125$. \textbf{Fuente}: elaboración propia.}
     \label{fig:comparacion_capas}
-\end{figure}
+\end{figure} % }}}
 
 
-Para la función \texttt{Minimize}() se fijaron dos hiper parámetros : \texttt{method} y \texttt{tol}. Se utilizó el método \texttt{COBYLLA}, que realiza la minimización mediante aproximaciones lineales, mientras que la tolerancia se ajustó a $1\times 10^{-15}$. Se tomaron estos hiperparámetros porque con ellos alcanzamos consistentemente la minimización de la función de costo sin estresar de forma inecesaria el equipo de trabajo. \cpnote{frase
-con una redaccion muy rara. No se entiende, quizá incluir otro gráfico? quizá 
-ya es demasiado... } \felnote{Corregido: modifiqué la redacción del parrafo (linea 254 a 258) .  Pendiente: por el lado del gráfico también pienso que sería mucho considerando que ya esta el de comparación de capas.}.
-
+Para la función \texttt{Minimize}() se fijaron dos hiper parámetros :
+\texttt{method} y \texttt{tol}. Se utilizó el método \texttt{COBYLLA}, que
+realiza la minimización mediante aproximaciones lineales, mientras que la
+tolerancia se ajustó a $1\times 10^{-15}$. Se tomaron estos hiperparámetros
+porque con ellos alcanzamos consistentemente la minimización de la función de
+costo sin estresar de forma inecesaria el equipo de trabajo. 
 
 Es importante mencionar las limitaciones al usar las computadoras cuánticas de
 IBM, donde el tiempo de uso está limitado a 10 minutos mensuales\footnote{Este
 es el tiempo de uso disponible en el plan gratuito de IBM.}. Vimos que el
 tiempo de ejecución de una tomografía de proceso para un canal de un  qubit
-\cpnote{revisa todas las instancias de qubit y dejalo sin italicas por favor} \felnote{Corregido: qubit aparece ahora sin itálica en todas las instancias.}
-requiere 12 circuitos, que lleva un tiempo de ejecución promedio de $16s$. Por
+requiere 12 circuitos, que lleva un tiempo de ejecución promedio de $16$s. Por
 esta razón decidimos optimizar el \textit{ansatz} en el simulador cuántico y
 posteriormente, ejecutar el circuito optimizado en una computadora cuántica.
 Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
@@ -410,8 +417,8 @@ Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
 La función general se ejecutó para un listado de 38 valores distintos de $p$ en
 \texttt{p\_values}, ajustándose al tiempo mensual disponible en IBM, con un
 margen de error de una tomografía mensual. Cada circuito se ejecutó para un
-número de 4000 mediciones por circuito. \cpnote{demasiados anglisismos. Solo usalos si la 
-traduccion es rara. aca puedes aclarar la situacion en español} \felnote{Corregido: solo uso anglisismo si me refiero a alguna función del código. Modifiqué también la palabra 'shots' a 'mediciones por circuito' (línea 276) .},
+número de 4000 mediciones por circuito. \cpnote{frase rara y quedo como mal conectado
+con lo que sigue}
 para la computadora cuántica como
 en el simulador. No incluimos todos los resultados detallados en esta sección
 para evitar sobrecargar la discusión\footnote{Se puede acceder al dataframe
@@ -492,6 +499,8 @@ Por lo tanto, los autovalores de $\Lambda_{\mathcal{E}}$ son:
 \lambda_1 &=\lambda_2=\lambda_3 = \frac{p}{2} \quad \\
 \lambda_4 &= 2 - \frac{3p}{2} .
 \end{align}
+\cpnote{La redaccion de este parrafo que contiene a las ecuaciones anteriores
+está muy rara. Corrigela}
 Comparamos los autovalores de nuestros resultados en la figura
 \ref{fig:comparacion_autovalores} para cada valor de $p$. Notamos que todos los
 autovalores para todos los valores de $p$ cumplen con ser mayores o iguales a
@@ -500,7 +509,12 @@ lado, al analizar la condición de preservación de la traza (TP) notamos que
 ninguna de las matrices de Choi reconstruidas en ninguno de los sistemas cumple
 con preservar la traza. Esto lo verificamos trazando parcialmente las matrices
 de Choi con \texttt{partial\_trace()}, cuyo resultado no coincide con la matriz
-identidad $I$. \cpnote{Aca si puede haber un problema más serio. Lo platicamos.} \felnote{Pendiente: Noté que se quedan bastante cerca a los valores de la identidad, pero siguen difiriendo. (ver imagen comparaciones\_identidad\_reconstruida.png en la carpeta de imagenes del proyecto) }
+identidad $I$. \cpnote{Aca si puede haber un problema más serio. Lo
+platicamos.} \felnote{Pendiente: Noté que se quedan bastante cerca a los
+valores de la identidad, pero siguen difiriendo. (ver imagen
+comparaciones\_identidad\_reconstruida.png en la carpeta de imagenes del
+proyecto) } \cpnote{Comenta que es muy cercana a la matriz identidad igual y el error
+que se presenta}
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.90 \linewidth]{imagenes/eigenvalores_comparacion.png}
@@ -511,7 +525,9 @@ identidad $I$. \cpnote{Aca si puede haber un problema más serio. Lo platicamos.
 \section{Discusión de Resultados} % {{{
 En esta sección discutiremos sobre las diferencias encontradas entre las
 fidelidades y autovalores calculados en el simulador y la computadora cuántica.
-Vemos que estas diferencias se deben en gran parte a que la optimización fue realizada en el simulador cuántico, el cual esta configurado en un entorno ideal. \cpnote{A ver si lo justificas mas adelante. Se me hace una frase osada} \felnote{Corregido: lo modifiqué porque realmente optimicé con el simulador (línea 312 a 314) . De igual forma, aquí abajo deje comentada la frase anterior}
+Vemos que estas diferencias se deben en gran parte a que la optimización fue
+realizada en el simulador cuántico, el cual esta configurado en un entorno
+ideal. 
 % Vemos que estas diferencias se deben en gran parte a los errores inherentes al
 % hardware cuántico real, como la decoherencia, errores en las compuertas
 % cuánticas y limitaciones en la precisión de las mediciones. 
@@ -538,24 +554,38 @@ En el caso de la computadora cuántica, la ecuación de la regresión lineal es:
     F_{proc\_qc}(p) = 0.2707 \cdot p + 0.7376,
 \end{equation}
 con un coeficiente de determinación $R^2 = 0.7055$ y un valor de Chi-cuadrado
-de $\chi^2 = 0.1085$.  Esto indica que la fidelidad tiende a aumentar con la probabilidad de despolarización $p$, pero el ajuste no es perfecto. Los valores de $R^2$ y $\chi^2$ sugieren que la relación no es estrictamente lineal y que podría haber otros factores influyendo en los resultados en la computadora cuántica. \cpnote{no, tu propusiste un crecimiento lineal. 
-y la verdad no da tan bien. mejorra la interpretacion. quizá es mejor si discutimos acerca 
-de estas graficas} \felnote{Corregido:  es cierto, no necesariamente es lineal y no es una correlación muy fuerte (línea 326 a 328). También quisiera que hablaramos sobre las gráficas}. 
+de $\chi^2 = 0.1085$.  Esto indica que la fidelidad tiende a aumentar con la
+probabilidad de despolarización $p$, pero el ajuste no es perfecto. Los valores
+de $R^2$ y $\chi^2$ sugieren que la relación no es estrictamente lineal y que
+podría haber otros factores influyendo en los resultados en la computadora
+cuántica. \felnote{También quisiera que hablaramos sobre las gráficas}. \cpnote{Va}
 
-Este comportamiento puede explicarse porque, al aumentar $p$ en el DP, los estados se vuelven más mixtos y menos afectados por errores específicos del hardware cuántico. En sistemas como \texttt{ibm\_kyoto}, una alta despolarización puede reducir el impacto de errores de las compuertas cuánticas y la decoherencia, ya que el estado menos puro es menos sensible a estos fallos. Entonces, la fidelidad mejora con  $p$ porque el DP atenúa algunos errores del sistema, no porque el hardware mejore su rendimiento. \cpnote{Interpretación chafa}\felnote{Pendiente: reescribí este parrafo, quisiera saber tu opinión. ( 334 a 341). }
+Este comportamiento \cpnote{Cual, todo? que sea lineal? que la xi sea baja?}
+puede explicarse porque, al aumentar $p$ en el DP, los estados se vuelven más
+mixtos y menos afectados por errores específicos del hardware cuántico. En
+sistemas como \texttt{ibm\_kyoto}, una alta despolarización puede reducir el
+impacto de errores de las compuertas cuánticas y la decoherencia, ya que el
+estado menos puro es menos sensible a estos fallos. Entonces, la fidelidad
+mejora con  $p$ porque el DP atenúa algunos errores del sistema, no porque el
+hardware mejore su rendimiento.  \cpnote{Interpretación
+chafa}\felnote{Pendiente: reescribí este parrafo, quisiera saber tu opinión. (
+334 a 341). } \cpnote{Esta mejor, pero aun admite una iterada. Otra cosa, al mover y editar
+las lineas se mueven. Yo no se si se puede usar un comando de latex para 
+marcar una linea. Quizá puedas probar. }
 
 
-Por otro lado, observamos que el simulador \texttt{AerSimulator()} tiene una ecuación de la recta:
+Por otro lado, observamos que el simulador \texttt{AerSimulator()} tiene una
+ecuación de la recta:
 \begin{equation}
     F_{proc\_sim}(p) = 0.0371 \cdot p + 0.9346,
 \end{equation}
 con un coeficiente de determinación $R^2 = 0.0612$ y un valor de Chi-cuadrado
 de $\chi^2 = 0.0633$. El bajo valor de $R^2$ en el simulador sugiere que, a
 diferencia de la computadora cuántica, la fidelidad en el simulador no parece
-depender significativamente de $p$\cpnote{esto me gusta mas}. Además, la pendiente de la recta es
+depender significativamente de $p$. Además, la
+pendiente de la recta es
 pequeña, lo que indica que la fidelidad en el simulador es prácticamente
-constante a lo largo del rango de $p$. \cpnote{estaría bueno comentar el
-outlier que esta bien raro} \felnote{Pendiente: lo comento adelante en el rango de 0.6 a 0.75. En la línea 353.}
+constante a lo largo del rango de $p$. \cpnote{Estoy en desacuerdo. Si se observa que sistematicamente hay un aumento lineal. Quizá sea solo cosa de redaccion, pero lo platicamos.}
 
 Analizamos la variabilidad de fidelidad en ambos casos, como se muestra en la
 figura \ref{fig:comparacion_desviaciones}. En el simulador cuántico, no se
@@ -570,12 +600,12 @@ el comportamiento de la computadora cuántica de la IBM no es estacionario.
 Sería bueno citarlos. Hablemos también} \felnote{Pendiente: estuve investigando y me encontré con este paper: https://arxiv.org/pdf/2302.10881 . Aquí mencionan como los errores fuera de  resonancia pueden causar comporatmientos no estacionarios. Pero si quisiera que lo vieramos también.}
 
 
-\begin{figure}[h!]
+\begin{figure}[h!] % {{{
     \centering
     \includegraphics[width=0.95\linewidth]{imagenes/Comparacion_desviaciones.png}
     \caption{Comparación de desviación estándar entre los resultados de la fidelidad de proceso entre la matriz de Choi esperada , la computadora cuántica \texttt{ibm\_kyoto} (color naranja) y el simualdor cuántico (color azul) \texttt{AerSimualtor()}. La desviación estándar se calcula sobre los valores de fidelidad en el intervalo de $p$. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_desviaciones}
-\end{figure}
+\end{figure} % }}}
 
 
 Al analizar los cuatro autovalores presentados en la figura
@@ -601,14 +631,15 @@ que muestra fidelidades iniciales más altas y con menor variabilidad
 En la figura \ref{fig:comparacion_choi}, observamos que las matrices de Choi
 generadas por la computadora cuántica presentan mayor coherencia en las
 entradas no diagonales. Esto también nos muestra que la computadora cuántica
-introduce ruido desde un inicio. Notemos que al incrementar $p$, introducimos
-más ruido a la interacción, que hace que nuestra fidelidad mejore con la
-computadora cuántica. Por otro lado , las matrices obtenidas del simulador son
-más consistentes con los vlores teóricos, con valores casi nulos en las
+introduce ruido desde un inicio\cpnote{por?}. Notemos que al incrementar $p$, introducimos
+más ruido a la interacción\cpnote{Cual interaccion?}, que hace que nuestra
+fidelidad mejore con la
+computadora cuántica\cpnote{por?}. Por otro lado, las matrices obtenidas del simulador son
+más consistentes con los valores teóricos, con valores casi nulos en las
 posiciones no diagonales, reflejando mayor fidelidad en la simulación del canal
 a lo largo de $p$.
 
-\begin{figure}[h!]
+\begin{figure}[h!] % {{{
     \centering
     % Subfigura para p = 0.1
     \begin{subfigure}{\textwidth}
@@ -637,10 +668,12 @@ a lo largo de $p$.
         \label{fig:choi_p0.9}
     \end{subfigure}
     
-    \caption[Comparación de matrices de Choi objetivo y reconstruidas]{\cpnote{figura chafa. No se puede leer los números y además no entiendo qué son las filas, las columnas, en fin. Hablemos de esta figura} \felnote{Corregido: la segmenté en partes para que se vean mejor y cambie el caption.}
+    \caption[Comparación de matrices de Choi objetivo y
+reconstruidas]{\cpnote{Mejoro mucho. Deja dos figuras significativas y quita la barra que no se ve. Con los valores ya se entiende. Aumenta lo que aparece encima de cada matriz. Casi no se puede leer. Quizá para ganar espacio, puedes poner f= en vez de Fidelidad. Está bonita
+y me gusta la idea.}
     Comparación de matrices de Choi objetivo y matrices de Choi reconstruidas en el simulador cuántico \texttt{AerSimulator()}, como en la computadora cuántica \texttt{ibm\_kyoto}. Los valores se presentan para disntintas probabilidades de despolarización $p$ del DP. Cada valor representa una componente real de la matriz de Choi. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_choi}
-\end{figure}
+\end{figure} % }}
 
 % }}}
 % }}}
