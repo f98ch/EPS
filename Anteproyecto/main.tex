@@ -1,0 +1,197 @@
+\documentclass[11pt, spanish, letterpage]{article} % {{{
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{quantikz}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm}
+%\pagestyle{plain}
+\setlength{\parskip}{\baselineskip}%espacio entre parrafos
+\setlength{\parindent}{0mm}
+\usepackage{graphicx}
+%\usepackage{setspace}
+\usepackage{tabulary}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{wrapfig}% para colocar figuras en diferentes posiciones
+\usepackage{bbold}
+
+\usepackage{fancybox}
+\usepackage{colortbl}
+\usepackage{amsbsy}
+\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+\FXRegisterAuthor{cp}{acp}{\color{blue}CP}
+\FXRegisterAuthor{ja}{aja}{\color{orange}JA}
+
+\usepackage{lipsum}
+\usepackage{babel}
+\usepackage{multirow}
+\usepackage{array}
+
+\usepackage[]{lineno}  %\linenumbers
+%\setlength\linenumbersep{3pt}
+
+\renewcommand{\baselinestretch}{1} % interlinado
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+\date{}
+\spanishdecimal{.}
+\usepackage{multicol}%para escribir en muchas columnas
+%para que no corte palabras
+\usepackage[none]{hyphenat}
+\usepackage{times}
+%\onehalfspacing
+
+\usepackage{hyperref}
+%\usepackage{biblatex}
+
+%---ejercicios, problemas -teoremas
+%---Problemas encerrados-Bonitos
+\usepackage[framemethod=tikz]{mdframed}
+\mdfsetup{skipabove=\topskip,skipbelow=\topskip}
+\newcounter{problem}[section]
+\newenvironment{problem}[1][]{%
+%\stepcounter{problem}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+	\tikz[baseline=(current bounding box.east),outer sep=0pt]
+	\node[anchor=east,rectangle,fill=brown!50]
+{\strut Problema~\theproblem};}}
+
+}%
+{\mdfsetup{%
+frametitle={%
+	\tikz[baseline=(current bounding box.east),outer sep=0pt]
+	\node[anchor=east,rectangle,fill=brown!50]
+{\strut Problema ~\theproblem:~#1};}}%
+
+}%
+\mdfsetup{innertopmargin=5pt,linecolor=black!50,%
+	linewidth=2pt,topline=true,
+	frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+	
+\begin{mdframed}[]\relax%
+}{\end{mdframed}}
+
+\newenvironment{solution}% environment name
+{\colorbox{gray}{~~\textbf{\textcolor{white}{Solución:}}~~}~~}%
+{}
+%-----end------------
+
+%\newtheorem{example}{Ejemplo}[chapter]
+%\newtheorem{ejercicio}{Ejercicio}[chapter]
+%%---
+\newcommand{\Ev}{\mathbf{E}}
+\newcommand{\rv}{\mathbf{r}}
+\newcommand{\ru}{\hat{\rv}}
+\usepackage{tabulary}
+%---paquetes para fisica
+\usepackage{physics}%facilita la escritura de operadores usados en fisica
+%-paquete para unidades en el sistema internacional
+% \usepackage[load=prefix, load=abbr, load=physical]{siunitx}
+% --definiendo constantes fisicas en el SI
+% \newcommand{\accgravity}{9.8 \metre / \Sec^2}
+% ---diferencial inexacta
+% \newcommand{\dbar}{\mathchar'26\mkern-12mu d}
+
+\oddsidemargin 0in
+\textwidth 6.5in
+\topmargin -0.5in
+\textheight 8.5in
+% }}}
+\begin{document}
+\begin{titlepage} % {{{ Suppresses displaying the page number on the title page and the subsequent page counts as page 1                                  
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here                             
+
+\center % Centre everything on the page                                                                                                       
+
+%------------------------------------------------                                                                                             
+%       Title                                                                                                                                 
+%------------------------------------------------                                                                                             
+	
+\HRule\\[0.6cm]
+
+{\huge\bfseries Implementación de canales cuánticos de un qubit usando VQA}\\[0.5cm] % Title of your document                                                 
+
+\HRule\\[2cm]
+
+%------------------------------------------------                                                                                             
+%       Author(s)                                                                                                                             
+%------------------------------------------------                                                                                             
+
+
+\Large{\textbf{Felipe Antonio Ixcamparic Choy}}\\ [2cm] % Your name                                                                                          
+
+%------------------------------------------------                                                                                             
+%       Headings                                                                                                                              
+%------------------------------------------------                                                                                             
+
+\textsc{\LARGE Universidad de San Carlos de Guatemala\\ Escuela de Ciencias Físicas y Matemáticas\\ Licenciatura en Física}\\[2cm]
+
+\textsc{\huge Anteproyecto}\\
+\textsc{\Large Ejercicio Profesional Supervisado}\\[2cm]
+
+\textsc{\Large Supervisado por: \textbf{Dr. Carlos Francisco Pineda Zorrilla} \\ y  \textbf{Dr. Giovanni Ramirez} }  %	} 
+                                                                                                      
+
+%------------------------------------------------                                                                                             
+%       Date                                                                                                                                  
+%------------------------------------------------                                                                                             
+\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+\vfill\vfill\vfill
+
+{\large \today} % Date, change the \today to a set date if you want to be precise                                                              
+
+%------------------------------------------------                                                                                             
+%       Logo                                                                                                                                  
+%------------------------------------------------                                                                                             
+
+%\vfill\vfill                                                                                                                                 
+\includegraphics[width=0.2\textwidth]{Imagenes/0001.jpg}\\[1cm] % Include a department/university logo - this will require the graphicx packag\                                                                                                                                                  
+
+%----------------------------------------------------------------------------------------                                                     
+
+\vfill % Push the date up 1/4 of the remaining page      
+\end{titlepage} % }}}
+
+%\input{Descripcion}
+
+\tableofcontents
+
+\bigskip
+
+\input{secciones/Intro}
+
+\section{Objetivos}
+\subsection{Objetivo general}
+
+Estudiar y desarrollar Algoritmos Variacionales Cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
+
+
+\subsubsection{Objetivos específicos}
+
+
+\begin{enumerate}
+    \item Estudiar la teoría y uso de computadoras cuánticas.
+    \item Comprender las definiciones fundamentales de la teoría de sistemas cuánticos abiertos y canales cuánticos.
+    \item Investigar el uso de los Algoritmos Variacionales Cuánticos en la resolución de problemas de información cuántica.
+    \item Implementar canales cuánticos de un qubit en computadoras cuánticas y analizar su comportamiento.
+\end{enumerate}
+
+\input{secciones/Justificacion}
+
+\input{secciones/Marco}
+
+\input{secciones/Meto}
+
+\input{secciones/Cronograma}
+
+
+\bibliographystyle{unsrt}
+\bibliography{biblio}
+
+\end{document}
