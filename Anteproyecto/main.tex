@@ -168,7 +168,9 @@ frametitle={%
 \section{Objetivos}
 \subsection{Objetivo general}
 
-Estudiar y desarrollar Algoritmos Variacionales Cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
+Estudiar y desarrollar Algoritmos Variacionales Cuánticos \cpnote{Esto no es 
+un nombre propio. No lo capitalices} para la
+implementación de canales cuánticos de un  qubit en computadoras cuánticas.
 
 
 \subsubsection{Objetivos específicos}
@@ -183,8 +185,94 @@ Estudiar y desarrollar Algoritmos Variacionales Cuánticos para la implementaci�
 
 \input{secciones/Justificacion}
 
-\input{secciones/Marco}
+\section{Marco Teórico} % {{{
 
+\subsection{Matriz Densidad}
+
+Un sistema cuántico se describe mediante un vector complejo $\ket{\psi}$, conocido como estado cuántico. En el caso de un estado puro, este se representa como: 
+$ \ket{\psi} = \sum_{i=1}^{d} c_i \ket{i}, $
+donde $c_i$ son coeficientes complejos y $\{\ket{i}\}$ es una base ortonormal \cite{nielsen_chuang_2011}.
+
+Sin embargo, un sistema cuántico también puede estar en un ensamble estadístico
+de estados $\{\ket{\psi_i}\}$ con probabilidades o ``pesos'' $\{p_i\}$. Este tipo
+de sistema se denomina estado mixto. \cpnote{porque sistema?}
+
+Tanto los estados puros como los mixtos se describen mediante un operador
+conocido como matriz densidad. Para un estado puro, la matriz densidad está
+dada por:
+\begin{equation}
+    \label{ec:1.5}
+    \rho = \ketbra{\psi}.
+\end{equation}
+En el caso de un estado mixto, la matriz densidad se expresa como:
+\begin{equation}
+\label{dens_mixtos}
+    \rho = \sum_{i=1}^{n} p_i \ketbra{\psi_i}.
+\end{equation}
+
+
+
+
+\subsection{Canales Cuánticos y su representación}
+La dinámica de un sistema cuántico abierto se describe mediante la interacción
+de un sistema principal y un entorno, formando un sistema cuántico cerrado
+\cite{nielsen_chuang_2011}\cpnote{Muy confuso. No esta bien esta frase}. Esta
+interacción se da por una transformación
+unitaria $U$ \cpnote{No, porfa revisa y se detallista en las palabras que usas}, resultando en el estado final del sistema principal
+$\mathcal{E}$:
+\begin{equation}
+    \mathcal{E}(\rho_{\text{sp}}) = \text{Tr}_{\text{ent}}[ U( \rho_{\text{sp}} \otimes \rho_{\text{ent}} ) U^\dagger ].
+\end{equation}
+
+Los operadores cuánticos pueden representarse mediante la \textit{representación de Kraus}, donde los operadores ${E_k}$ satisfacen la \textit{relación de completitud}.  Por otro lado, la matriz de Choi es otra representación útil para caracterizar los canales cuánticos, definida como \cite{Choi2024}:
+\begin{equation}
+\Lambda_{\mathcal{E}} = (I \otimes \mathcal{E})(|\Omega\rangle\langle\Omega|).
+\end{equation}
+
+\subsection{Circuitos Cuánticos}
+Un circuito cuántico es una rutina computacional con operadores que actúan sobre qubits. Los circuitos se conforman por cables, compuertas, mediciones y \textit{resets}. Un cable puede representar el paso del tiempo, como una partícula física, en nuestro caso representará a uno o varios qubits en el estado inicial $\ket{0}$ \cite{nielsen_chuang_2011}. 
+
+Las compuertas cuánticas son operadores unitarios reversibles $U$ de dimensión
+$n\times n $. Estas actúan linealmente sobre qubits que pueden estar
+en superposición. Además, se visualizan por cajas que contienen las
+iniciales del operador aplicado (ver figura \ref{fig:compuerta}). \par
+
+  \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+        \qw & \gate{U} & \qw
+        \end{quantikz}
+        \caption{Representación de compuerta cuántica $U$}
+        \label{fig:compuerta}
+    \end{figure}
+
+Los operadores $U$ que actúan sobre un qubit son de dimensión $2 \times 2$, y se representan por la matriz
+\begin{equation}
+    U = \begin{pmatrix}
+    u_{00} & u_{01}  \\
+    u_{10} & u_{11} 
+    \end{pmatrix}.
+\end{equation}
+
+Podemos correr circuitos cuánticos en la plataforma de IBM Quantum Experience por medio de simuladores, que emulan de forma cercana el comportamiento de una computadora cuántica, con capacidad de hasta 5000 qubits. También podemos correr los circuitos en computadoras cuánticas reales,  con capacidad de hasta 7 qubits de forma gratuita. En este trabajo haremos uso de los servicios gratuitos, conociendo sus limitaciones.\par 
+
+
+\subsection{Algoritmos Variacionales Cuánticos (VQA)}
+ 
+Los VQA  \cpnote{Basta introducirlo una vez y ya lo hiciste. Se consistente con eso}
+son algoritmos que combinan la computación cuántica y los métodos
+clásicos de optimización para entrenar un circuito cuántico parametrizado \cite{VQA}. La
+solución del problema se codifica en una función de costo $C$, y se define un
+\textit{ansatz}, que es una suposición inicial sobre la forma del circuito
+cuántico parametrizado por un conjunto de parámetros $\{\theta\}$. Esta
+hipótesis asume que el circuito puede generar un estado cuántico $\ket{\phi}$
+que minimice la función de costo $C$. El ansatz se entrena posteriormente es
+un bucle cuántico-clásico para resolver la tarea de optimización:
+\begin{equation}
+\theta^* = \text{arg }\underset{\theta}{\text{min}} C (\theta).
+\end{equation}
+
+% }}}
 \input{secciones/Meto}
 
 \input{secciones/Cronograma}
