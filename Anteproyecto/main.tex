@@ -32,7 +32,7 @@
 \usepackage{multirow}
 \usepackage{array}
 
-\usepackage[]{lineno}  %\linenumbers
+% \usepackage[]{lineno}  %\linenumbers
 %\setlength\linenumbersep{3pt}
 
 \renewcommand{\baselinestretch}{1} % interlinado
@@ -91,9 +91,9 @@ frametitle={%
 \usepackage{tabulary}
 %---paquetes para fisica
 \usepackage{physics}
-\usepackage[]{lineno} %\linenumbers
-\linenumbers
-\setlength\linenumbersep{3pt}
+% \usepackage[]{lineno} %\linenumbers
+% \linenumbers
+% \setlength\linenumbersep{3pt}
 %facilita la escritura de operadores usados en fisica
 %-paquete para unidades en el sistema internacional
 % \usepackage[load=prefix, load=abbr, load=physical]{siunitx}
@@ -172,8 +172,7 @@ frametitle={%
 \section{Objetivos}
 \subsection{Objetivo general}
 
-Estudiar y desarrollar algoritmos variacionales cuánticos \cpnote{Esto no es 
-un nombre propio. No lo capitalices} \felnote{Corregido: lo actualicé en todas las instancias.} para la
+Estudiar y desarrollar algoritmos variacionales cuánticos para la
 implementación de canales cuánticos de un  qubit en computadoras cuánticas.
 
 
@@ -199,8 +198,7 @@ donde $c_i$ son coeficientes complejos y $\{\ket{i}\}$ es una base ortonormal \c
 
 Sin embargo, un estado cuántico también puede estar en un ensamble estadístico
 de estados puros $\{\ket{\psi_i}\}$ con probabilidades o ``pesos'' $\{p_i\}$. Este tipo
-de estado se denomina estado mixto. \cpnote{porque sistema?} \felnote{Corregido: gracias, era estado, no sistema}
-
+de estado se denomina estado mixto.
 Tanto los estados puros como los mixtos se describen mediante un operador
 conocido como matriz densidad. Para un estado puro, la matriz densidad está
 dada por:
@@ -221,8 +219,8 @@ En el caso de un estado mixto, la matriz densidad se expresa como:
 Un sistema cuántico abierto surge de la interacción de un sistema de interés , al que llamaremos sistema principal, y un entorno, que juntos forman un sistema cuántico cerrado. Asumiremos que su estado de entrada es\cite{nielsen_chuang_2011}:
 \begin{equation}
     \rho = \rho_{\text{sp}} \otimes \rho_{\text{ent}}.
-\end{equation} \cpnote{Muy confuso. No esta bien esta frase} \felnote{Corregido: Ahora la frase es similar a lo que dice el Chuang (de 79 a 82)}. 
-Al ser un sistema cuántico cerrado, su dinámica puede ser descrita por una transformación unitaria $U$. Luego de la transformación, el sistema deja de interactuar con el entorno, resultando en el estado final del sistema principal $\mathcal{E}:$ \cpnote{No, porfa revisa y se detallista en las palabras que usas} \felnote{Corregido: Arreglé esa redacción de 83 a 86. Y desarrollé más a detalle desde 87 a 91.}, :
+\end{equation}
+Al ser un sistema cuántico cerrado, su dinámica puede ser descrita por una transformación unitaria $U$. Luego de la transformación, el sistema deja de interactuar con el entorno, resultando en el estado final del sistema principal $\mathcal{E}:$:
 \begin{equation}
     \mathcal{E}(\rho_{\text{sp}}) = \text{Tr}_{\text{ent}}[ U( \rho_{\text{sp}} \otimes \rho_{\text{ent}} ) U^\dagger ].
 \end{equation}
@@ -266,7 +264,7 @@ Podemos correr circuitos cuánticos en la plataforma de IBM Quantum Experience p
 
 \subsection{Algoritmos variacionales cuánticos (VQA)}
  
-Estos algoritmos   \cpnote{Basta introducirlo una vez y ya lo hiciste. Se consistente con eso} \felnote{Corregido: ya no se introduce denuevo aquí en base a lo que ya dije en 60 a 62.}requieren optimizar una función de costo $C$ \cite{VQA}. Para lograr esto, se define de un 
+Estos algoritmos requieren optimizar una función de costo $C$ \cite{VQA}. Para lograr esto, se define de un 
 \textit{ansatz}, que es una suposición inicial sobre la forma del circuito
 cuántico, parametrizado por un conjunto de parámetros $\{\theta\}$. Esta
 hipótesis asume que el circuito puede generar un estado cuántico $\ket{\phi}$
