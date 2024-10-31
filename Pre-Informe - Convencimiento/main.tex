@@ -221,7 +221,7 @@ normalización \cite{nielsen_chuang_2011}:
            |c_i|^2=\braket{\psi}{\psi}=1, 
     \end{equation} 
 con $|c_i|^2$, como la probabilidad que el estado colapse al $i$-ésimo vector
-$\ket{i}$ de la base al ser medido\cnote{Al ser medido que? Lo discutimos para 
+$\ket{i}$ de la base al ser medido\cpnote{Al ser medido que? Lo discutimos para 
 que no te vayas por un camino largo}.
 
 \begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un  qubit
@@ -261,17 +261,19 @@ Los estados puros como mixtos pueden ser descritos por un operador,
 conocido como matriz densidad $\rho$. Para estados puros tenemos:
     \begin{equation}
         \label{ec:1.5}
-        \rho = \ketbra{\psi}.
+        \rho = \ketbra{\psi},
     \end{equation}
-Mientras que para los estados mixtos es:
+mientras que para los estados mixtos es:
 \begin{equation}
 \label{dens_mixtos}
     \rho = \sum_{i=1}^{n} p_i \ketbra{\psi_i},
 \end{equation}
-con $n$ el número de estados del ensamble y $p_i$ el 'peso' mencionado anteriormente, cumpliendo con la condición $\sum p_i =1$. \
+con $n$ el número de estados del ensamble y $p_i$ el 'peso' mencionado
+anteriormente, cumpliendo con la condición $\sum p_i =1$.
 
 Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,...,d$ ($d$ es la
-dimensión del espacio de Hilbert del sistema), veremos que los elementos de la matriz densidad serán \cite{princip_quantum}:
+dimensión del espacio de Hilbert del sistema \cpnote{ya lo dijiste}), veremos que los elementos de la
+matriz densidad serán \cite{princip_quantum}:
 \begin{equation}
     \label{eq:rho_ij}
     \rho_{ij} = \bra{i} \rho \ket{j}.
@@ -291,7 +293,10 @@ Esta cumple con la siguiente propiedad:
 \begin{align}
     (AB)^{\dagger} = B^{\dagger} A^{\dagger},
 \end{align}
-para cualquier matriz de dimensión $m\times n $ para $A$,  y $n \times p$ para $B$. Al ser $A = \ket{\psi_i}$ de dimensión $1\times n$ y $B = \bra{\psi_i}$ de dimensión $n \times 1$ podemos utilizar esta propiedad. Consecuentemente reescribimos la ecuación $\ref{ec:dagger}$ como
+para cualquier matriz de dimensión $m\times n $ para $A$,  y $n \times p$ para
+$B$. Al ser $A = \ket{\psi_i}$ de dimensión $1\times n$ y $B = \bra{\psi_i}$ de
+dimensión $n \times 1$ podemos utilizar esta propiedad. Consecuentemente
+reescribimos la ecuación $\ref{ec:dagger}$ como
 \begin{align}
     \rho^{\dagger} = \sum p_i  \bra{\psi_i}^{\dagger} \ket{\psi_i}^{\dagger} = \sum p_i \ketbra{\psi_i}.  \blacksquare
 \end{align}
@@ -352,12 +357,15 @@ siendo $\ket{j}$ vectores  qubit zados y ortogonales y $d$ la dimensión del sis
         &= \sum_{j} \lambda^2_j \ket{j}\braket{j}\bra{j} \\
         & = \sum_{j} \lambda_j^2\ketbra{j}.
     \end{align}
-Como$\rho$ es diagonal concluímos: 
+Como $\rho$ es diagonal concluímos: 
     \begin{equation}
     \label{eq:pureza_lambdas}
     \gamma=\sum_j\lambda_j^2.
     \end{equation} 
-Por el procedimiento anterior con $\rho$ sabemos que $\sum_j \lambda_j = 1$ y$\lambda_j \geq 0 $. Por lo tanto, la condición $\gamma =1$ se cumple sí y solo sí $\lambda_j=1$ para un único $j = \overline{j}$, de lo contrario $\lambda_j=0$. Esto corresponderá a un estado puro.  
+Por el procedimiento anterior con $\rho$ sabemos que $\sum_j \lambda_j = 1$
+y $\lambda_j \geq 0 $. Por lo tanto, la condición $\gamma =1$ se cumple sí y
+solo sí $\lambda_j=1$ para un único $j = \overline{j}$ \cpnote{no entiendo esa ecuacion}, de lo contrario
+$\lambda_j=0$. Esto corresponderá a un estado puro.  
  Por otro lado, por definición sabemos que un estado es mixto si la representación diagonal (\ref{ec:dens_espectral}) de $\rho$ posee más de un estado puro, es decir $\lambda_j<1$ para todos los $j$. Por consiguiente:
     \begin{align}
         \sum_j \lambda_j^2 & < \sum_j \lambda_j =1 \\
@@ -384,7 +392,10 @@ Por lo visto en $(\ref{ec:dens_eigvals}),(\ref{eq:pureza_lambdas})$ aplicado a $
 demostrando que las cotas de la pureza son $\frac{1}{d} \leq \gamma \leq
 1$.$\blacksquare$ 
 
-Cuando trabajamos con un sistema conformado por dos o más sistemas físicos distintos se le conoce como un sistema compuesto.  El espacio de Hilbert correspondiente al estado que describe a este sistema , es el producto tensorial de cada uno de los espacios $H_i$ asociadados a los subsistemas: 
+Cuando trabajamos con un sistema conformado por dos o más sistemas físicos
+distintos se le conoce como un sistema compuesto.  El espacio de Hilbert
+correspondiente al estado que describe a este sistema, es el producto
+tensorial de cada uno de los espacios $H_i$ asociados a los subsistemas: 
 \begin{equation}
 H_T=H_1 \otimes H_2\otimes ...\otimes H_n.
 \end{equation}
@@ -392,28 +403,47 @@ H_T=H_1 \otimes H_2\otimes ...\otimes H_n.
 \begin{equation}
     \ket{\psi}_T = \ket{\psi}_1 \otimes ... \otimes \ket{\psi_n},
 \end{equation}
-a los que su matriz densidad correspondiente sería \cite{nielsen_chuang_2011} \footnote{Para este caso se utilizan números para indicar el estado $\rho$ que describe al $i$-ésimo sistema, esto también puede ser representado con letras mayúsculas tales como $\rho_A$ describiendo a un primer sistema $A$. En adelante se utilizarán letras mayúsculas como subíndices para mantener consistencia, y no confundirse con componentes de una matriz densidad como en la ecuación \ref{eq:rho_ij}.}: 
+a los que su matriz densidad correspondiente sería \cite{nielsen_chuang_2011}
+\footnote{Para este caso se utilizan números para indicar el estado $\rho$ que
+describe al $i$-ésimo sistema, esto también puede ser representado con letras
+mayúsculas tales como $\rho_A$ describiendo a un primer sistema $A$. En
+adelante se utilizarán letras mayúsculas como subíndices para mantener
+consistencia, y no confundirse con componentes de una matriz densidad como en
+la ecuación \ref{eq:rho_ij}.}: 
 \begin{align}
     \rho_T  & = \rho_1 \otimes \rho_2 \otimes  ... \otimes \rho_n \\
             & = \ketbra{\psi_1} \otimes \ketbra{\psi_2} ... \otimes \ketbra{\psi_n}. 
 \end{align}
-Este no es el caso general para los sistemas compuestos, sin embargo, será con el que trabajemos en los siguientes capítulos.
+Este no es el caso general para los sistemas compuestos, sin embargo, será con
+el que trabajemos en los siguientes capítulos\cpnote{No creo qe trabajemos con este 
+estado. lo discutimos}.
 
-Al trabajar con sistemas compuestos puede darse el caso donde no conozcamos uno, o varios de los estados que describan a sus subsistemas. Entonces, para dar una descripción a los subsistemas se usa la matriz densidad reducida. Utilizaremos la definición dada por Nielsen y Chuang \cite{nielsen_chuang_2011}:
+Al trabajar con sistemas compuestos puede darse el caso donde no conozcamos
+uno, o varios de los estados que describan a sus subsistemas. Entonces, para
+dar una descripción a los subsistemas se usa la matriz densidad reducida.
+Utilizaremos la definición dada por Nielsen y Chuang
+\cite{nielsen_chuang_2011}.
 
-Si tenemos a los sistemas físicos $A$,$B$ cuyo sistema compuesto se describe por el estado $\rho_{AB}$. Entonces el subsistema $A$ puede ser descrito por medio de la matriz densidad reducida $\rho_A$:
+Si tenemos a los sistemas físicos $A$,$B$ cuyo sistema compuesto se describe
+por el estado $\rho_{AB}$. Entonces el subsistema $A$ puede ser descrito por
+medio de la matriz densidad reducida $\rho_A$:
 \begin{equation}
     \rho_A \equiv \text{Tr}_B(\rho_{AB}),
 \end{equation}
-con $\text{Tr}_B$ un mapeo de operadores, conocido como traza parcial, que actúa sobre el sistema compuesto. Si buscamos trazar parcialmente el subsistema $B$ obtenemos:
+con $\text{Tr}_B$ un mapeo de operadores, conocido como traza parcial, que
+actúa sobre el sistema compuesto. Si buscamos trazar parcialmente el subsistema
+$B$ obtenemos:
 \begin{equation}
     \text{Tr}_B(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B}  ) \equiv \ket{i_A} \bra{j_A} \text{Tr}(\ket{i_B}\bra{j_B}),
 \end{equation}
-siendo $\ket{i_A}$ y $\ket{j_A}$ un par de vectores cualquiera en el espacio de $A$, análogamente $\ket{i_B}$, $\ket{j_B}$ para el espacio de $B$. Por lo que la traza $tr$ en $B$ es:
+siendo $\ket{i_A}$ y $\ket{j_A}$ un par de vectores cualquiera en el espacio de
+$A$, análogamente $\ket{i_B}$, $\ket{j_B}$ para el espacio de $B$. Por lo que
+la traza $\text{Tr}$ en $B$ es:
 \begin{equation*}
     \text{Tr}(\ket{i_B}\bra{j_B}) = \bra{j_B}\ket{i_B}.
 \end{equation*}
-Similarmente podemos calcular la matriz densidad para el sistema reducido $B$ trazando parcialmente $A$ como:
+Similarmente podemos calcular la matriz densidad para el sistema reducido $B$
+trazando parcialmente $A$ como:
 \begin{equation}
     \text{Tr}_A(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B}  ) \equiv  \text{Tr}(\ket{i_A} \bra{j_A}) \ket{i_B}\bra{j_B}.
 \end{equation}
@@ -454,6 +484,9 @@ Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto.
 % }}}
 % }}}
 \section{Circuitos Cuánticos} % {{{
+\cpnote{Escribe solo lo necesario aca por favor}
+
+
 \felnote{Heredado de informe de prácticas} 
 
 Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al qubit. Esta esfera nos permite visualizar los cambios del estado de un qubit bajo transformaciones unitarias $U$. \par 
