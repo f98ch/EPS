@@ -197,13 +197,13 @@ En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cu�
 
 % }}}
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}% {{{
+% Intro {{{
 \felnote{Por el momento está redactada la sección 1.2 y 1.4. Sigo redactando la sección 1.3 . }
 \section{Introducción}
 \felnote{Pendiente: la redactaré al finalizar el capítulo}
-
-\section{Matriz Densidad}
-\felnote{Sección heredada de informe de prácticas}
-\subsection{Estados puros y mixtos}
+% }}}
+\section{Matriz Densidad} % {{{
+\subsection{Estados puros y mixtos} % {{{
 Para describir un sistema cuántico usamos un vector complejo $\ket{\psi}$,
 también llamado \textit{ket} o estado cuántico . El
 estado cuántico puede estar representado por la ecuación: 
@@ -221,7 +221,8 @@ normalización \cite{nielsen_chuang_2011}:
            |c_i|^2=\braket{\psi}{\psi}=1, 
     \end{equation} 
 con $|c_i|^2$, como la probabilidad que el estado colapse al $i$-ésimo vector
-$\ket{i}$ de la base al ser medido.
+$\ket{i}$ de la base al ser medido\cnote{Al ser medido que? Lo discutimos para 
+que no te vayas por un camino largo}.
 
 \begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un  qubit
 \footnote{Qubit es un sistema cuántico de dos estados (o dos niveles). Es la
@@ -324,7 +325,7 @@ Esta condición también es conocida como condición de positividad \cite{nielse
 \end{enumerate}
 
 % }}}
-\subsection{Pureza y traza parcial}
+\subsection{Pureza y traza parcial} % {{{
 Para medir que tanta información o que tan mixto es un estado cuántico se hace uso de la pureza, criterio descrito por la ecuación:
 \begin{equation}
     \label{ec::1.25}
@@ -450,7 +451,9 @@ Si buscamos la matriz reducida del subsistema $B$ tenemos:
 \end{align}
 Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto. También veamos que nuestro sistema compuesto no se puede describir de alguna forma con el producto $\rho_A \otimes \rho_B$ para las matrices densidad reducidas. Esto indica que las correlaciones entre $A,B$ no se incluyen en el producto tensorial de ambos subsistemas. 
 
-\section{Circuitos Cuánticos}
+% }}}
+% }}}
+\section{Circuitos Cuánticos} % {{{
 \felnote{Heredado de informe de prácticas} 
 
 Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al qubit. Esta esfera nos permite visualizar los cambios del estado de un qubit bajo transformaciones unitarias $U$. \par 
@@ -461,7 +464,8 @@ Un circuito cuántico es una rutina computacional con operadores que actúan sob
 
 Para este trabajo, utilizamos la plataforma \textit{IBM Quantum Experience}, que nos da acceso a computadoras cuánticas para ejecutar circuitos cuánticos válidos. \par  
 
-\section{Canales Cuánticos y su representación}
+% }}}
+\section{Canales Cuánticos y su representación} % {{{
 Una forma natural de describir la dinámica de un sistema cuántico abierto es considerar que este surge de la interacción de un sistema de interés , al que llamaremos sitema principal , y un \textit{entorno}, que juntos forman un sistema cuántico cerrado \cite{nielsen_chuang_2011}:
 \begin{equation}
     \rho = \rho_{\text{sp}} \otimes \rho_{\text{ent}}.
@@ -681,7 +685,7 @@ Notemos cómo $\Lambda_{\mathcal{E}}$ refleja el funcionamiento del Depolarizing
 
 Los canales cuánticos representarán un papel al implementarse en computadoras cuánticas. En los siguientes capítulos se detallará el proceso para implementar su matriz de Choi y reconstruirla en sistemas cuánticos.
 
-\subsection{Tomografía y Fidelidad de Proceso Cuántico}
+\subsection{Tomografía y Fidelidad de Proceso Cuántico} % {{{
 La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes de hablar de la tomografía es necesario conocer la tomografía de estado cuántico. \par 
 
 La tomografía de estado cuántico es un proceso para reconstruir
@@ -772,7 +776,8 @@ Notemos que para la matriz de Choi necesitamos los estados $\ketbra{0}{1}$ y $\k
 \end{alignat}
 Con cada estado reconstruido $\mathcal{E}(\ketbra{\psi_i})$,  obtenemos la matriz de Choi $\Lambda_{\mathcal{E}}$ \ref{ec:Choi_ketbra}. De esta forma, la tomografía de proceso cuántico proporciona una descripción completa y detallada del canal cuántico por medio de mediciones. 
 
-\subsection{Fidelidad de Proceso Cuántico}
+% }}}
+\subsection{Fidelidad de Proceso Cuántico} % {{{
 Previo a hablar de la fidelidad de proceso cuántico es necesario conocer la fidelidad de estado cuántico, que es una una forma de conocer la similitud entre dos estados cuánticos. Si poseemos dos estados $\rho,\sigma$, conoceremos su fidelidad por la ecuación \cite{nielsen_chuang_2011} \cite{bengtsson_zyczkowski_2017}:
 \begin{equation}
        \label{eq:fidelidad_estado}
@@ -844,6 +849,8 @@ donde $F$ es la fidelidad de estado,  $\rho_{\mathcal{E}} =  \Lambda_{\mathcal{E
 Esta métrica proporciona una medida cuantitativa de cuán similar es un canal cuántico experimental al canal cuántico teórico. Ya que utiliza la fidelidad de estado, mantiene las mismas propiedades para describir a los canales cuánticos. 
 
 % }}}
+% }}}
+% }}}
 \chapter{ALGORITMOS VARIACIONALES CUÁNTICOS (VQA)} % {{{
 \section{Introducción}
 \section{Descripción de los VQA}
@@ -902,10 +909,9 @@ ver los backends en la documentación de Qiskit \cite{Qiskit_documentation}.
 
     \item \texttt{Process\_fidelity(channel, target)}: función de Qiskit que
 mide la fidelidad de proceso entre dos matrices de Choi , (\texttt{channel}
-para la matriz de choi del canal, \texttt{target} para una matriz de Choi
+para la matriz de Choi del canal, \texttt{target} para una matriz de Choi
 objetivo) \cite{Qiskit_documentation}, acorde a la ecuación
-\ref{ec:choi_depolarizing}.\cpnote{La referencia parece incompleta. Revisa con cuidado 
-como referenciar un libro (es un libro?)}\felnote{Corregido: sigo redactando el cap1. Ya aparece la referencia en esta iteración.}
+\ref{ec:choi_depolarizing}.
     \item \texttt{Partial\_trace(choi\_matrix,dim)}: calcula la traza parcial
 sobre el sistema de una matriz de choi definida en \texttt{choi\_matrix()}.
 Este cálculo se realiza dependiendo de la dimensión del sistema cuántico (por
@@ -969,7 +975,6 @@ sistemas, y sus fidelidades de proceso.
 \noindent\rule{\textwidth}{1mm}
 % }}}
 \section{Resultados} % {{{
-\cpnote{Aca voy}
 Para la función general, se fijaron dos hiper parámetros de
 \texttt{Cirq\_ansq()}: \texttt{layers} y  qubit. El número de capas se
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
@@ -1013,8 +1018,7 @@ Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
 La función general se ejecutó para un listado de 38 valores distintos de $p$ en 
 \texttt{p\_values}, ajustándose al tiempo mensual disponible en IBM, con un 
 margen de error de una tomografía mensual. Cada circuito se ejecutó con 4000 
-mediciones tanto en la computadora cuántica como en el simulador. \cpnote{frase rara y quedo como mal conectado
-con lo que sigue} \felnote{Corregido: se verá reflejado desde 551 a 552} No incluimos 
+mediciones tanto en la computadora cuántica como en el simulador.  No incluimos 
 todos los resultados detallados en esta sección para evitar sobrecargar la 
 discusión\footnote{Se puede acceder al dataframe final, así como al código de 
 este proyecto en el github: 
@@ -1089,20 +1093,13 @@ Por lo tanto, los autovalores de $\Lambda_{\mathcal{E}}$ son:
 \lambda_1 &=\lambda_2=\lambda_3 = \frac{p}{2} \quad \\
 \lambda_4 &= 2 - \frac{3p}{2} .
 \end{align}
-\cpnote{La redaccion de este parrafo que contiene a las ecuaciones anteriores
-está muy rara. Corrigela} \felnote{Corregido: se modificó la redacción del párrafo previo a las ecuaciones.}
 Comparamos los autovalores de nuestros resultados en la figura
 \ref{fig:comparacion_autovalores} para cada valor de $p$. Notamos que todos los
 autovalores para todos los valores de $p$ cumplen con ser mayores o iguales a
 0. Por lo tanto, los canales reconstruidos cumplen con ser CP.  Por otro
 lado, al analizar la condición de preservación de la traza (TP) notamos que
 ninguna de las matrices de Choi reconstruidas en ninguno de los sistemas cumple
-con preservar la traza. Esto lo verificamos realizando la traza parcial de las matrices de Choi con \texttt{partial\_trace()}, obteniendo resultados que son cercanos a la matriz identidad $I$. Sin embargo, se observan valores no nulos en los elementos fuera de la diagonal, lo que impide que sean exactamente iguales a $I$ (ver figura \ref{fig:ident_comp}) .\cpnote{Aca si puede haber un problema más serio. Lo
-platicamos.} \felnote{Pendiente: Noté que se quedan bastante cerca a los
-valores de la identidad, pero siguen difiriendo. (ver imagen
-comparaciones\_identidad\_reconstruida.png en la carpeta de imagenes del
-proyecto) } \cpnote{Comenta que es muy cercana a la matriz identidad igual y el error
-que se presenta} \felnote{Corregido: se verá reflejado en 592 a 595. Para reforzar el punto agregué la figura \ref{fig:ident_comp}}
+con preservar la traza. Esto lo verificamos realizando la traza parcial de las matrices de Choi con \texttt{partial\_trace()}, obteniendo resultados que son cercanos a la matriz identidad $I$. Sin embargo, se observan valores no nulos en los elementos fuera de la diagonal, lo que impide que sean exactamente iguales a $I$ (ver figura \ref{fig:ident_comp}).
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.90 \linewidth]{imagenes/eigenvalores_comparacion.png}
@@ -1135,6 +1132,7 @@ que se presenta} \felnote{Corregido: se verá reflejado en 592 a 595. Para refor
 \end{figure}
 
 
+% }}}
 % }}}
 \section{Discusión de Resultados} % {{{
 En esta sección discutiremos sobre las diferencias encontradas entre las
@@ -1174,14 +1172,12 @@ de $R^2$ y $\chi^2$ sugieren que la relación no es estrictamente lineal y que
 podría haber otros factores influyendo en los resultados en la computadora
 cuántica. \felnote{También quisiera que hablaramos sobre las gráficas}. \cpnote{Va}
 
-El aumento lineal de la fidelidad puede explicarse porque,\cpnote{Cual, todo? que sea lineal? que la xi sea baja?} \felnote{Corregido: El comportamiento lineal de la fidelidad, se verá en 620-621}
+El aumento lineal de la fidelidad puede explicarse porque,
 al aumentar $p$ en el DP, los estados se vuelven más
-mixtos, reduciendo su sensibilidad a errores específicos del hardware cuántico. En sistemas como \texttt{ibm\_kyoto}, una alta despolarización reduce la sensibilidad del estado a errores de compuertas cuánticas y decoherencia, ya que un estado menos puro tiende a ser menos afectado por estas imperfecciones.  \cpnote{Interpretación
-chafa}\felnote{Pendiente: reescribí este parrafo, quisiera saber tu opinión. (
-334 a 341). } \cpnote{Esta mejor, pero aun admite una iterada. Otra cosa, al mover y editar
-las lineas se mueven. Yo no se si se puede usar un comando de latex para 
-marcar una linea. Quizá puedas probar. } \felnote{Corregido: iteré todo el párrafo (620-626). Por el lado de editar por línea, sigo buscando, si gusta puedo poner en la siguiente un label para referenciar en donde incia una correción.}
-
+mixtos, reduciendo su sensibilidad a errores específicos del hardware cuántico.
+En sistemas como \texttt{ibm\_kyoto}, una alta despolarización reduce la
+sensibilidad del estado a errores de compuertas cuánticas y decoherencia, ya
+que un estado menos puro tiende a ser menos afectado por estas imperfecciones.
 
 Por otro lado, observamos que el simulador \texttt{AerSimulator()} tiene una
 ecuación de la recta:
@@ -1190,7 +1186,11 @@ ecuación de la recta:
 \end{equation}
 con un coeficiente de determinación $R^2 = 0.0612$ y un valor de Chi-cuadrado
 de $\chi^2 = 0.0633$. 
-Aunque el bajo valor de $R^2$ indica que la relación entre la fidelidad y $p$ en el simulador es débil, sí se observa un aumento lineal sistemático en la fidelidad con respecto a $p$. La pequeña pendiente de la recta sugiere que el cambio en la fidelidad es leve y se mantiene prácticamente constante a lo largo del rango de $p$, aunque no completamente insensible al aumento de $p$. \cpnote{Estoy en desacuerdo. Si se observa que sistematicamente hay un aumento lineal. Quizá sea solo cosa de redaccion, pero lo platicamos.} \felnote{Corregido: Indiqué que sí, hay un aumento, aunque a comparación de la computadora cuántica es una tendencia menos pronunciada. }
+Aunque el bajo valor de $R^2$ indica que la relación entre la fidelidad y $p$
+en el simulador es débil, sí se observa un aumento lineal sistemático en la
+fidelidad con respecto a $p$. La pequeña pendiente de la recta sugiere que el
+cambio en la fidelidad es leve y se mantiene prácticamente constante a lo largo
+del rango de $p$, aunque no completamente insensible al aumento de $p$.
 
 Analizamos la variabilidad de fidelidad en ambos casos, como se muestra en la
 figura \ref{fig:comparacion_desviaciones}. En el simulador cuántico, no se
@@ -1232,11 +1232,17 @@ fidelidad en la computadora cuántica ($0.7376$) es menor que en el simulador,
 que muestra fidelidades iniciales más altas y con menor variabilidad
 ($0.9346$).
 
-\cpnote{Me falta corregir este parrafo pues no entiendo la figura} \felnote{Corregido: reescalé la figura \ref{fig:comparacion_choi}, y le cambié el caption.}
-En la figura \ref{fig:comparacion_choi}, observamos que las matrices de Choi
-generadas por la computadora cuántica presentan mayor coherencia en las
-entradas no diagonales. Esto también nos muestra que la computadora cuántica
-introduce ruido desde un inicio del proceso de despolarización debido a las imperfecciones inherentes al hardware y las compuertas cuánticas.\cpnote{por?} \felnote{Corregido: el por qué va en la línea 675-676}. Notemos que al incrementar $p$, aumentamos la probabilidad de despolarización, lo cual introduce más ruido a la interacción del sistema con el estado máximamente mixto (ver ecuación \ref{ec:superop_depolarizing})\cpnote{Cual interaccion?} \felnote{Corregido: entre el sistema y el estado maximamente mixto por cómo se comporta el depolarizing.(corregido en 678 -679)}. Este proceso provoca una mejora en la fidelidad porque, al hacer que los estados sean menos puros, se vuelven menos sensibles a errores específicos del hardware cuántico. \cpnote{por?} \felnote{Corregido: el por qué esta de 682-683. }. 
+En la figura \ref{fig:comparacion_choi}, observamos que las
+matrices de Choi generadas por la computadora cuántica presentan mayor
+coherencia en las entradas no diagonales. Esto también nos muestra que la
+computadora cuántica introduce ruido desde un inicio del proceso de
+despolarización debido a las imperfecciones inherentes al hardware y las
+compuertas cuánticas. Notemos que al incrementar $p$, aumentamos la probabilidad de
+despolarización, lo cual introduce más ruido a la interacción del sistema con
+el estado máximamente mixto (ver ecuación
+\ref{ec:superop_depolarizing}). Este proceso provoca una mejora en la
+fidelidad porque, al hacer que los estados sean menos puros, se vuelven menos
+sensibles a errores específicos del hardware cuántico. 
 
 Por otro lado, las matrices obtenidas del simulador son
 más consistentes con los valores teóricos, con valores casi nulos en las
@@ -1263,12 +1269,12 @@ a lo largo de $p$.
     \end{subfigure}
     
     \caption[Comparación de matrices de Choi objetivo y
-reconstruidas]{\cpnote{Mejoro mucho. Deja dos figuras significativas y quita la barra que no se ve. Con los valores ya se entiende. Aumenta lo que aparece encima de cada matriz. Casi no se puede leer. Quizá para ganar espacio, puedes poner f= en vez de Fidelidad. Está bonita
-y me gusta la idea.} \felnote{Corregido: muchas gracias, verás la fuente más grande de los subtítulos de cada matriz, usé $F_{proc}$ por la ecuación \ref{ec:fidel_proc}. Ya no aparece el colorbar.}
+reconstruidas]{
     Comparación de matrices de Choi objetivo y matrices de Choi reconstruidas en el simulador cuántico \texttt{AerSimulator()}, como en la computadora cuántica \texttt{ibm\_kyoto}. Los valores se presentan para disntintas probabilidades de despolarización $p$ del DP. Cada valor representa una componente real de la matriz de Choi. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_choi}
 \end{figure} % }}
 
+% }}}
 % }}}
 % }}}
 \chapter{CONCLUSIONES} % {{{
