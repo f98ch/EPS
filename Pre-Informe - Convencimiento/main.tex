@@ -23,6 +23,9 @@
 \newtheorem{prp}{Proposición}[chapter]
 
 \theoremstyle{definition}
+\newtheorem{prin}{Principio}[chapter]
+
+\theoremstyle{definition}
 \newtheorem{exa}{Ejemplo}[chapter]
 \newtheorem{defn}{Definición}[chapter]
 \newtheorem{axm}{Axioma}[chapter]
@@ -220,9 +223,9 @@ normalización \cite{nielsen_chuang_2011}:
     \label{ec::1.2}
            |c_i|^2=\braket{\psi}{\psi}=1, 
     \end{equation} 
-con $|c_i|^2$, como la probabilidad que el estado colapse al $i$-ésimo vector
-$\ket{i}$ de la base al ser medido\cpnote{Al ser medido que? Lo discutimos para 
-que no te vayas por un camino largo}.
+
+donde $|c_i|^2$ representa la probabilidad de que, al medir el sistema, el estado colapse al $i$-ésimo vector $\ket{i}$ de la base. \cpnote{Al ser medido que? Lo discutimos para 
+que no te vayas por un camino largo} \felnote{Corregido: 1. El sistema, lo agregué (línea . 2. Sí claro, me parece bien. }
 
 \begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un  qubit
 \footnote{Qubit es un sistema cuántico de dos estados (o dos niveles). Es la
@@ -260,7 +263,7 @@ $\{p_i\}$. El ensamble que describe al sistema  es llamado un estado mixto.
 Los estados puros como mixtos pueden ser descritos por un operador,
 conocido como matriz densidad $\rho$. Para estados puros tenemos:
     \begin{equation}
-        \label{ec:1.5}
+        \label{ec:dens_puros}
         \rho = \ketbra{\psi},
     \end{equation}
 mientras que para los estados mixtos es:
@@ -271,8 +274,7 @@ mientras que para los estados mixtos es:
 con $n$ el número de estados del ensamble y $p_i$ el 'peso' mencionado
 anteriormente, cumpliendo con la condición $\sum p_i =1$.
 
-Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,...,d$ ($d$ es la
-dimensión del espacio de Hilbert del sistema \cpnote{ya lo dijiste}), veremos que los elementos de la
+Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,...,d$  \cpnote{ya lo dijiste} \felnote{Corregido: removí la redundancia. (línea 110)}, veremos que los elementos de la
 matriz densidad serán \cite{princip_quantum}:
 \begin{equation}
     \label{eq:rho_ij}
@@ -325,7 +327,7 @@ Si anotamos para un estado $\ket{\phi}$:
 \bra{\phi}\rho\ket{\phi} & = \bra{\phi} \left(\sum p_i \ket{\psi_i} \bra{\psi_i}   \right)     \ket{\phi}\\
 & = \sum p_i \bra{\phi}\ket{\psi_i}\bra{\psi_i}\ket{\phi}  = \sum p_i \bra{\phi}\ket{\psi_i} \bra{\phi}\ket{\psi_i}^{\star}\\
 & = \sum p_i |\bra{\phi}\ket{\psi_i}| ^2 \geq 0. \blacksquare
-\end{align} \par 
+\end{align}  
 Esta condición también es conocida como condición de positividad \cite{nielsen_chuang_2011}.
 \end{enumerate}
 
@@ -338,7 +340,7 @@ Para medir que tanta información o que tan mixto es un estado cuántico se hace
 \end{equation}
 con $\gamma=1$ para un estado puro, mientras que $\gamma < 1$ para un estado
 mixto. Además, la pureza está limitada por las cotas $ \frac{1}{d}\leq\gamma\leq 1$. 
- \par 
+  
 
 Para probar este criterio iniciamos con la descomposición espectral
 \cite{princip_quantum} para la matriz densidad $\rho$ :
@@ -346,33 +348,36 @@ Para probar este criterio iniciamos con la descomposición espectral
         \label{ec:dens_espectral}
         \rho = \sum_{j} \lambda_j \ketbra{j},
     \end{equation}
-siendo $\ket{j}$ vectores  qubit zados y ortogonales y $d$ la dimensión del sistema, con  $\lambda_j \geq0$ ya que $\rho$ es positivo. Ya que la matriz es matriz diagonal, hacemos uso de la propiedad 2, obteniendo:
-    \begin{equation}
-    \label{ec:dens_eigvals}
-    \sum_j \lambda_j = 1.
-    \end{equation} 
+siendo $\ket{j}$ vectores  qubit normalizados y ortogonales y $d$ la dimensión del sistema, con  $\lambda_j \geq0$ ya que $\rho$ es positivo. 
  Usando la descomposición espectral nuevamente para $\rho^2$ tenemos:
     \begin{align}
         \rho^2 & = \left( \sum_{j} \lambda_j \ketbra{j} \right) \left( \sum_{j} \lambda_j \ketbra{j} \right) \\
         &= \sum_{j} \lambda^2_j \ket{j}\braket{j}\bra{j} \\
         & = \sum_{j} \lambda_j^2\ketbra{j}.
     \end{align}
-Como $\rho$ es diagonal concluímos: 
+Si obtenemos la traza de $\rho^2$ concluímos: 
     \begin{equation}
     \label{eq:pureza_lambdas}
     \gamma=\sum_j\lambda_j^2.
     \end{equation} 
-Por el procedimiento anterior con $\rho$ sabemos que $\sum_j \lambda_j = 1$
-y $\lambda_j \geq 0 $. Por lo tanto, la condición $\gamma =1$ se cumple sí y
-solo sí $\lambda_j=1$ para un único $j = \overline{j}$ \cpnote{no entiendo esa ecuacion}, de lo contrario
-$\lambda_j=0$. Esto corresponderá a un estado puro.  
- Por otro lado, por definición sabemos que un estado es mixto si la representación diagonal (\ref{ec:dens_espectral}) de $\rho$ posee más de un estado puro, es decir $\lambda_j<1$ para todos los $j$. Por consiguiente:
+Notemos que los autovalores $\lambda_j$ deben cumplir también con la propiedad 2, es decir:
+    \begin{equation}
+    \label{ec:dens_eigvals}
+    \sum_j \lambda_j = 1.
+    \end{equation} 
+
+Por lo tanto, la condición $\gamma = 1$ se cumple si y solo si existe un único índice $\overline{j}$ tal que $\lambda_{\overline{j}} = 1$, y $\lambda_j = 0$ para todo $j \ne \overline{j}$. \cpnote{no entiendo esa ecuacion} \felnote{Corregido: reordene el flujo de la demostración. Ahora debe tener más sentido que para un estado puro, necesita tener un único autovalor=1 (la parte de los índices j), mientras que los mixtos tinen más de un autovalor<1. (135-150~)} Esto corresponde a un estado puro, ya que la matriz densidad se reduce a un proyector sobre un solo estado:
+
+\begin{equation}
+\rho  = \lambda_{\overline{j}} \ketbra{\overline{j}} = \ketbra{\overline{j}},
+\end{equation}
+que es la misma representación vista en la ecuación (\ref{ec:dens_puros}). Por otro lado, en un estado mixto, la matriz densidad $\rho$ tiene más de un autovalor $\lambda_j$ distinto de cero, todos en el rango $0 < \lambda_j < 1$. Por consiguiente:
     \begin{align}
         \sum_j \lambda_j^2 & < \sum_j \lambda_j =1 \\
         \therefore \gamma & < 1 \square
      \end{align}
  La demostración anterior prueba la cota superior de la pureza, para la cota inferior es necesario agregar un teorema:
- \par %Estos \par solo están para el \felnote
+  %Estos  solo están para el \felnote
  \begin{thm}\textbf{(Desigualdad de Jensen):} \label{thm:jensen}  Sean $w_1,...,w_n$ números positivos que sumen $1$ y $f$ una función real continua convexa, entonces \cite{jensen_wolfram} :
 \begin{equation}
     f \left( \sum_j w_j x_j  \right) \leq \sum_j w_j f(x_j).
@@ -380,12 +385,12 @@ $\lambda_j=0$. Esto corresponderá a un estado puro.
 \end{thm}
 
 Si aplicamos esta desigualdad con la función convexa $x \xrightarrow{}x^2$,  a
-la suma $\sum_j \lambda_j /d$ (siendo $1/d$ el peso de $j$) tendremos
+la suma $\sum_j \lambda_j /d$ (siendo $1/d$ el peso de $j$) tendremos:
     \begin{align}
     \label{eq:desig_jens}
         \left( \frac{\sum_j  \lambda_j}{d}\right)^2  & \leq \frac{1}{d} \sum_j \lambda_j^2.
     \end{align}
-Por lo visto en $(\ref{ec:dens_eigvals}),(\ref{eq:pureza_lambdas})$ aplicado a $(\ref{eq:desig_jens})$ concluimos con
+Por lo visto en $(\ref{ec:dens_eigvals}),(\ref{eq:pureza_lambdas})$ aplicado a $(\ref{eq:desig_jens})$ concluimos con:
 \begin{equation}
     \frac{1}{d} \leq \gamma, 
 \end{equation}
@@ -416,7 +421,7 @@ la ecuación \ref{eq:rho_ij}.}:
 \end{align}
 Este no es el caso general para los sistemas compuestos, sin embargo, será con
 el que trabajemos en los siguientes capítulos\cpnote{No creo qe trabajemos con este 
-estado. lo discutimos}.
+estado. lo discutimos} \felnote{Sí claro, me parece bien. Yo lo uso luego para introducir los canales (linea 330).}.
 
 Al trabajar con sistemas compuestos puede darse el caso donde no conozcamos
 uno, o varios de los estados que describan a sus subsistemas. Entonces, para
@@ -447,7 +452,7 @@ trazando parcialmente $A$ como:
 \begin{equation}
     \text{Tr}_A(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B}  ) \equiv  \text{Tr}(\ket{i_A} \bra{j_A}) \ket{i_B}\bra{j_B}.
 \end{equation}
-\par 
+ 
 
 \begin{ex}\label{ex:traza parcial} \end{ex}  Consideremos un estado compuesto puro, conformado por dos estados puros $\rho_{AB} = \Omega  \otimes \sigma$. Si buscamos describir al subsistema $\rho_{B}$ tenemos:
 \begin{equation}
@@ -458,7 +463,7 @@ análogamente si buscáramos $\rho_A$:
      \rho_{A} = \text{Tr}_{B} (\Omega  \otimes \sigma) = \text{Tr}(\Omega) \sigma = \sigma.
 \end{equation}
 
-El estado que describe a este sistema es llamado un estado separable. Ya que al hallar sus subsistemas, veremos que puede escribirse como un producto tensorial $\rho_A \otimes \rho_B$, indicando que ambos subsistemas no estan correlacionados.  \par 
+El estado que describe a este sistema es llamado un estado separable. Ya que al hallar sus subsistemas, veremos que puede escribirse como un producto tensorial $\rho_A \otimes \rho_B$, indicando que ambos subsistemas no estan correlacionados.   
 
 \begin{ex} \label{ex: traza parcial2} \end{ex} 
 Consideremos un estado puro de dos qubits conocido como el estado de \textit{Bell} 
@@ -485,17 +490,316 @@ Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto.
 % }}}
 \section{Circuitos Cuánticos} % {{{
 \cpnote{Escribe solo lo necesario aca por favor}
-
-
 \felnote{Heredado de informe de prácticas} 
 
-Previo a hablar sobre compuertas y circuitos cuánticos, introducimos la Esfera de Bloch para representar geométricamente al qubit. Esta esfera nos permite visualizar los cambios del estado de un qubit bajo transformaciones unitarias $U$. \par 
+% Intro {{{
+% }}}
+\subsection{Compuertas y mediciones cuánticas} % {{{
 
-Las computadoras cuánticas tienen compuertas cuánticas, operadores unitarios reversibles $U$ que actúan linealmente sobre qubits en superposición. Las compuertas $X$, $Y$ y $Z$ representan las matrices de Pauli $\sigma_x$, $\sigma_y$ y $\sigma_z$ respectivamente. \par 
+Previo a hablar sobre compuertas cuánticas, es necesario introducir una forma de representar geométricamente al qubit, por ello utilizamos la esfera de Bloch. Esta esfera será una herramienta que nos permitirá visualizar los cambios del estado de un qubit bajo diversas transformaciones unitarias $U$.
 
-Un circuito cuántico es una rutina computacional con operadores que actúan sobre qubits. Los circuitos se conforman por cables, compuertas y mediciones. \par 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.70]{imagenes/Bloch.png}
+    \caption{Representación de un estado cuántico en la esfera de Bloch. \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}}.
+    \label{fig:Bloch}
+\end{figure}
+La represntación de un qubit en la esfera de Bloch, se describe por medio de la ecuación: 
+\begin{equation}
+    \label{ec:Bloch_rep}
+    \ket{\psi} = \cos{\frac{\theta}{2}}\ket{0}+ e^{i\phi}\sin{\frac{\theta}{2}}\ket{1},
+\end{equation}
+con $\theta,\phi$,  ángulos que recorren la esfera (ver figura \ref{fig:Bloch}), y toman los valores
+\begin{equation}
+ 0 \leq \theta \leq \pi ;  \quad   0 \leq \phi \leq 2\pi.
+\end{equation} 
+La ecuación \ref{ec:Bloch_rep} nos permite describir estados puros en la esfera de Bloch, sin embargo, para visualizar cualquier estado $\rho$ de un qubit usamos el vector de Bloch. Este es un vector cuyas componentes señalan un punto en la esfera de Bloch \cite{princip_quantum}.
 
-Para este trabajo, utilizamos la plataforma \textit{IBM Quantum Experience}, que nos da acceso a computadoras cuánticas para ejecutar circuitos cuánticos válidos. \par  
+Para definir el vector de Bloch transformamos los parámetros $\theta,\phi$ a coordenadas cartesianas como $\textbf{r} = (x,y,z)$ de la forma:
+\begin{equation}
+\left\{\begin{matrix}
+x = |\textbf{r}| \sin{(\theta)} \cos{(\phi)} \\
+y = |\textbf{r}| \sin{(\theta)} \sin{(\phi)} \\
+z = |\textbf{r}| \cos{(\theta)},
+\end{matrix}\right. 
+\end{equation}
+El valor absoluto $|\textbf{r}|=1$ para estados puros, mientras que $|\textbf{r}|<1$ para estados mixtos. Notemos que los estados puros se encuentran en la superficie de la esfera de Bloch, mientras que los estados mixtos en el interior. 
+
+Por lo tanto, obtenemos otra representación útil de la ecuación \ref{ec:Bloch_rep} mediante el operador $\rho$ para estados puros como :
+\begin{equation}    \label{ec:vec_bloch}
+    \rho  = \frac{1}{2} ( \mathbb{1} + \textbf{r} \cdot \sigma),
+\end{equation}
+donde $\sigma $ es llamado el vector de Pauli, con las matrices:
+\begin{equation}
+\label{ec:pauli_matrix}
+\sigma_x= \begin{pmatrix}
+    0 & 1 \\
+    1 & 0 \\
+\end{pmatrix} ;\quad 
+\sigma_y= \begin{pmatrix}
+    0 & -i \\
+    i & 0 \\
+\end{pmatrix};\quad
+\sigma_z= \begin{pmatrix}
+    1 & 0 \\
+    0 & -1 \\
+\end{pmatrix}.
+\end{equation}
+
+Las compuertas cuánticas son operadores unitarios reversibles $U$ de dimensión
+$n\times n $. Estas actúan linealmente sobre qubits que pueden estar en superposición. Además, se visualizan por cajas que contienen las iniciales del operador aplicado (ver figura \ref{fig:compuerta}). 
+
+  \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+        \qw & \gate{U} & \qw
+        \end{quantikz}
+        \caption{Representación de compuerta cuántica $U$. \textbf{Fuente:} elaboración propia.     }
+        \label{fig:compuerta}
+    \end{figure}
+    
+Los operadores $U$ que actúan sobre un qubit son de dimensión $2 \times 2$, y se representan por la matriz:
+\begin{equation}
+    U = \begin{pmatrix}
+    u_{00} & u_{01}  \\
+    u_{10} & u_{11} 
+    \end{pmatrix}.
+\end{equation}
+
+Nos enfocaremos en un conjunto específico de compuertas de uno y varios qubits necesarias para este trabajo, comenzando con las compuertas de rotación en los ejes de la esfera de Bloch: $R_x$, $R_y$ y $R_z$. Estas compuertas rotan el estado del qubit alrededor de cada eje de la esfera de Bloch y pueden interpretarse como versiones parametrizadas de los operadores de Pauli (ver ecuación \ref{ec:pauli_matrix}). La representación de cada rotación es:
+\begin{align}
+    R_x(\theta) &=  \begin{bmatrix}
+    \cos{(\theta)} & -i\sin{(\theta)}\\
+    -i\sin{(\theta)} & \cos{(\theta)} 
+    \end{bmatrix},  \\
+    R_y(\theta) &=  \begin{bmatrix}
+    \cos{(\theta)} & -\sin{(\theta)}\\
+    \sin{(\theta)} & \cos{(\theta)} 
+    \end{bmatrix}, \\
+    R_z(\theta) &=  \begin{bmatrix}
+    e^{-i\theta} & 0\\
+    0 & e^{i\theta} 
+    \end{bmatrix}.
+\end{align}
+
+Si aplicamos una rotación con un ángulo $\pi/2$ es equivalente a aplicar los operadores de Pauli $X,Y,Z$. Esto cambia la dirección del estado en su respectivo eje (ver figura \ref{fig:rep_pauli}). 
+
+\begin{figure}[h!] % {{{
+    \centering
+    % Subfigura para X y Y en la misma fila
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/Paulix.png}
+        \caption{Representación visual de la acción de $X$ en la esfera de Bloch.}
+        \label{fig:choi_p0.1}
+    \end{subfigure}
+    \hspace{1em} % Espacio horizontal entre las dos primeras subfiguras
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/Pauliy.png}
+        \caption{Representación visual de la acción de $Y$ en la esfera de Bloch.}
+        \label{fig:choi_p0.9}
+    \end{subfigure}
+
+    % Subfigura para Z en una fila inferior
+    \vspace{1em} % Espacio vertical entre las filas
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/Pauliz.png}
+        \caption{Representación visual de la acción de $Z$ en la esfera de Bloch.}
+        \label{fig:choi_p0.9}
+    \end{subfigure}
+    
+    \caption{Representación visual de las compuertas de rotación en la esfera de Bloch. \textbf{Fuente:} elaboración propia}
+    \label{fig:rep_pauli}
+\end{figure} % }}
+
+Además de las compuertas de Pauli, necesitamos de una compuerta que haga otro
+tipo de cambio en la base de un qubit, como lo es la compuerta de
+Hadamard. Esta compuerta tiene la característica de poner en
+superposición de igual amplitud a los estados de la base de un qubit.
+La matriz que la describe es
+\begin{equation}
+    H= \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+     1& 1 \\
+     1& -1 \\
+    \end{pmatrix},
+\end{equation} 
+Su acción se ve como una rotación de $\pi$ radiantes sobre el eje
+$\frac{(x+z)}{\sqrt{2}}$ en la esfera de Bloch.  También puede descomponerse como la sucesión de $\pi$ radianes en el eje $x$, seguido de una rotación de
+$\pi/2$ en $y$. (ver figura \ref{fig:hadamard}).
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.15]{imagenes/Haddamard.png}
+    \caption{Representación visual de la acción de la compuerta de Hadamard sobre un estado inicial $\ket{0}$ en la esfera de Bloch.}
+    \label{fig:hadamard}
+\end{figure}
+
+Las compuertas anteriores son importantes al trabajar con un qubit, sin
+embargo, para trabajar con varios qubits usamos compuertas de control.
+Estas compuertas hacen uso de un qubit con el rol de  control, el cual
+regula la acción de otros qubits que tienen el rol de objetivo.
+
+Las compuertas de control unitario de dos qubits $CU$, son representadas por la matriz:
+\begin{equation}
+    CU = 
+    \begin{pmatrix}
+    \label{ec:2.27}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+     0& 0 & u_{00} & u_{01} \\
+     0&  0&  u_{10}&u_{11} \\
+    \end{pmatrix},
+\end{equation}
+donde $u_{ij}$ son los elementos de la compuerta unitaria $U$ que actúa sobre el qubit objetivo.
+
+En esta matriz, el primer cuadrante es una identidad que garantiza que, si el qubit de control está en el estado $\ket{0}$, el qubit objetivo permanece sin cambios. Si el qubit de control está en $\ket{1}$, el bloque inferior derecho aplica la transformación unitaria $U$ al qubit objetivo. Esto permite implementar distintas compuertas de control, como $CR_x$ \footnote{La compuerta $CX$ es comúnmente conocida como compuerta $CNOT$. En adelante, cuando hablemos de la compuerta $CNOT$, nos referimos a $CR_x(\pi/2)$.}  o $CR_z$, ajustando los parámetros $u_{ij}$.
+
+
+Al realizar una medición cuántica hace que nuestro qubit colapse a uno de los estados de la base $ \sigma_z$. Sin embargo, es posible realizar un cambio de base y poder medir en otro tipo de bases. A continuación daremos la definición de Nielsen y Chuang \cite{nielsen_chuang_2011}:
+
+Dada cualquier base de estados $\ket{a},\ket{b}$ para un qubit, es posible expresar un estado arbitrario como una combinación lineal $\alpha\ket{a}+\beta\ket{b}$ de esos estados. Además, siempre que los estados sean ortonormales,  \textbf{es posible realizar una medición respecto a la base de $\ket{a},\ket{b}$}, dando un resultado $a$, con probabilidad $|\alpha|^2$ y $b$, con probabilidad $|\beta|^2$. 
+
+\begin{ex}\label{Ejemplo 2.1.1} \end{ex}
+ Supongamos un estado arbitrario $\ket{\psi}=\alpha \ket{0} + \beta\ket{1}$, del cual buscamos medir en una nueva base:
+ \begin{align}
+ \label{ec:2.32}
+     \ket{+} & \equiv \frac{1}{\sqrt{2}} (\ket{0} + \ket{1}) \\
+    \ket{-} & \equiv \frac{1}{\sqrt{2}} (\ket{0}-\ket{1}).
+ \end{align}
+Si re expresamos $\ket{\psi}$ en la nueva base veremos que:
+ \begin{align}
+     \ket{\psi}  &= \alpha\ket{0} + \beta\ket{1} \\
+                 &= \frac{\alpha}{\sqrt{2}} ( \ket{+ } + \ket{-}) + \frac{\beta}{\sqrt{2}} (\ket{+} + \ket{-})\\
+                 & = \frac{\alpha+\beta}{\sqrt{2}} \ket{+} + \frac{\alpha-\beta}{\sqrt{2}} \ket{-} . 
+ \end{align}
+Al medirlo en la base $\{\ket{+}, \ket{-}\}$, obtendremos probabilidades $|\alpha+\beta|^2$ y $|\alpha-\beta|^2$ respectivamente.
+
+Las mediciones en otras bases será de utilidad para la tomografía de estado ya que hace uso de distintas mediciones en distintas bases para recuperar la información de un estado cuántico.
+% }}}
+\subsection{Composición de circuitos cuánticos} % {{{
+
+Un circuito cuántico es una rutina computacional con operadores que actúan
+sobre qubits. Los circuitos se conforman por cables, compuertas y mediciones.
+Un cable se usa como representación de un qubit en estado inicial $\ket{0}$.  
+Como vimos en la sección anterior, las compuertas cuánticas se representan con
+cajas que contienen el nombre del operador, además se posicionan en el cable del qubit que actúan. Por otro lado, las compuertas de
+control se identifican con un punto para el qubit de control unido a una caja
+del qubit target (ver figura \ref{fig:circuito0}).
+
+\begin{figure}[h]
+    \centering
+    \begin{quantikz}
+    \lstick{$\ket{0}$} & \gate{X} & \ctrl{1} & \qw  \\
+    \lstick{$\ket{0}$} & \qw & \gate{R_y} & \qw 
+    \end{quantikz}
+    \caption{Circuito de ejemplo para crear interacción entre dos qubits. \textbf{Fuente:} elaboración propia.}
+    \label{fig:circuito0}
+\end{figure}
+
+
+Por el lado de  la medición cuántica, se representa mediante un símbolo de "medidor" que colapsa el estado cuántico del qubit y almacena el resultado en bits clásicos (ver figura \ref{fig:circuito2}). En los diagramas, una línea simple representa a los qubits, mientras que una línea doble indica los bits clásicos resultantes de la medición.
+ 
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+        \lstick{$\ket{\psi}$} &  \meter{} & \cw{M}
+        \end{quantikz}
+        \caption{Circuito cuántico representativo para una medición.}
+        \label{fig:circuito2}
+    \end{figure}
+
+Al conocer la composición de circuitos cuánticos, es importante un principio que nos permitirá implementar circuitos en computadoras cuánticas reales. A continuación, usaremos la definición de Nielsen y Chuang \cite{nielsen_chuang_2011}:
+%
+\begin{prin}\textbf{(Principio de medición diferida)}:  Las mediciones siempre pueden
+ser medidas de un punto intermedio de un circuito cuántico al final
+del circuito. Si resultados de la medición son usados en algún punto del
+circuito, entonces los operadores de control clásicos son reemplazados por
+operadores condicionales cuánticos.   
+\end{prin}
+
+A menudo, las mediciones cuánticas se realizan como un paso intermedio en un circuito cuántico, y sus resultados se utilizan para controlar de manera condicional las compuertas cuánticas que siguen.  Este es el caso, por ejemplo, en un circuito de teleportación cuántica (ver figura \ref{fig:telep_cuant}). Sin embargo, estas mediciones pueden moverse al final del circuito, reemplazando las operaciones clásicas condicionales por operaciones cuánticas equivalentes (ver figura \ref{fig:telep_cuant_dif}).
+
+\begin{figure}[h]
+    \centering
+    \begin{quantikz}
+    \lstick{$\ket{\psi}$} \qw & \ctrl{1} & \gate{H} & \meter{$M_1$} & \cw & \cw & \cwbend{2} & \\
+    \lstick[wires=2]{$\ket{\beta_{00}}$} \qw & \targ{} & \qw & \meter{$M_2$} & \cw & \cwbend{1} \\
+    \qw & \qw & \qw & \qw & \qw & \gate{X^{M_2}} & \gate{Z^{M_1}} & \qw \rstick{$\ket{\psi}$}\\
+    \end{quantikz}
+    \caption{Circuito de teleportación cuántica. Las líneas dobles representan
+el traslado de información en bits clásicos. El estado $\ket{\beta_{00}}$ representa un estado de Bell. \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}.}
+    \label{fig:telep_cuant}
+\end{figure}	
+
+\begin{figure}[h]
+    \centering
+    \begin{quantikz}
+    \lstick{$\ket{\psi}$} \qw & \ctrl{1} & \gate{H} & \qw  & \ctrl{2} & \qw  & \meter{}\\
+    \lstick[wires=2]{$\ket{\beta_{00}}$} \qw & \targ{} & \qw &  \ctrl{1} & \qw & \qw & \meter{} \\
+    \qw & \qw & \qw & \gate{X} & \gate{Z} & \qw & \qw       \rstick{$\ket{\psi}$}\\
+    \end{quantikz}
+    \caption{Circuito equivalente de teleportación, usando el principio de medición diferida. \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}.}
+    \label{fig:telep_cuant_dif}
+\end{figure}
+
+
+% Desarrollaremos un principio importante para las mediciones en circuitos cuánticos: principio de medición diferida. El principio nos indica que las mediciones pueden ser llevadas siempre al final del circuito.  
+
+% }}}
+\subsection{Plataforma \textit{IBM Quantum Experience}} % {{{
+
+Para este trabajo utilizaremos la plataforma de \textit{IBM Quantum Experience}. Esta plataforma nos da acceso a computadoras cuánticas para ejecutar circuitos cuánticos válidos. La conexión a las computadoras se hace por medio de la librería de qiskit en el lenguaje de \textit{Python}.  
+
+ Podemos correr circuitos cuánticos en la plataforma por medio de simuladores, que emulan de forma cercana el comportamiento de una computadora cuántica, con capacidad de hasta 5000 qubits. También podemos correr los circuitos en computadoras cuánticas reales,  con capacidad de hasta 7 qubits de forma gratuita. En este trabajo haremos uso de los servicios gratuitos en la plataforma. 
+ 
+Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico de modo que se ajuste a la topología de la computadora cuántica (ver figura \ref{fig:transpiling}). 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.15]{imagenes/transpiling_core_steps.png}
+    \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM} \textbf{Fuente}: IBM Quantum API \cite{ibm_quantum_api}
+    \label{fig:transpiling}
+\end{figure}
+
+En este trabajo, nos referiremos a las topologías como las distintas formas que pueden estar conectados los qubits en una computadora cuántica. En la plataforma de IBM las topologías que trabajaremos son la T, línea y H (ver figura \ref{fig:topos}). El uso cada topología afectará en la forma de acomodar las distintas transformaciones de un circuito.  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.16]{imagenes/topologias.png}
+    \caption{Visualización de las topologías T,línea y H para la conexión de qubits en la plataforma de IBM}
+    \label{fig:topos}
+\end{figure}
+ \begin{ex} \label{ex:med_dif} \end{ex} El circuito cuántico de la figura \ref{fig:circuito7}, muestra al qubit $q_3$ pasando por una compuerta $Z$  y luego interaccionando con el qubit $q_0$ por medio de una compuerta $CNOT$. Caso similar  entre el qubit $q_2$ y $q_0$ con una $CNOT$; mientras que $q_2$ solo pasa por una compuerta $Y$. 
+    \noindent Supongamos que se busca ejecutar este circuito en una computadora cuántica de topología T como en la figura \ref{fig:circuito7}. Ya que los qubits $q_0,q_3$ y $q_0,q_2$ no interaccionan directamente, debemos reescribir nuestro circuito para esta topología. La solución bastaría con cambiar las operaciones realizadas de $q_0$ a $q_1$, ya que $q_1$ interacciona directamente con $q_3,q_2$ (ver figura \ref{fig:circuito8}).  
+        
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+        \lstick{$q_0$} & \qw  & \targ{} & \targ{}& \qw \\
+        \lstick{$q_1$} & \gate{Y} & \qw & \qw  & \qw \\
+        \lstick{$q_2$} & \qw & \qw & \ctrl{-2} & \qw \\
+        \lstick{$q_3$} & \gate{Z} & \ctrl{-3} & \qw  & \qw\\
+        \end{quantikz}
+        \caption{Circuito inicial correspondiente al ejemplo \ref{ex:med_dif}. \textbf{Fuente:} elaboración propia.}
+        \label{fig:circuito7}
+    \end{figure}
+    
+    \begin{figure}[h]
+        \centering
+        \begin{quantikz}
+        \lstick{$q_0$} & \gate{Y} & \qw & \qw  & \qw \\
+        \lstick{$q_1$} & \qw  & \targ{} & \targ{}& \qw \\
+        \lstick{$q_2$} & \qw & \qw & \ctrl{-1} & \qw \\
+        \lstick{$q_3$} & \gate{Z} & \ctrl{-2} & \qw  & \qw\\
+        \end{quantikz}
+        \caption{Circuito final correspondiente al ejemplo \ref{ex:med_dif}, ajustado a la topología T. \textbf{Fuente:} elaboración propia.}
+        \label{fig:circuito8}
+    \end{figure}
+
+
+
 
 % }}}
 \section{Canales Cuánticos y su representación} % {{{
@@ -681,7 +985,7 @@ Por lo tanto, en adelante utilizaremos la notación de la matriz de Choi, ya que
 
 \begin{ex} \label{Ejemplo 1.0.1} 
 \end{ex}
-El canal despolarizante (\textit{Depolarizing Channel}) es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
+El canal despolarizante  (DP, por sus siglas en inglés de Depolarizing Channel)  es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
 \begin{equation} \label{ec:superop_depolarizing}
 \mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho ,
 \end{equation}
@@ -714,12 +1018,12 @@ Recordando la ecuación \ref{ec:Choi_ketbra}, escribimos su matriz de Choi:
 1 - p & 0 & 0 & 1 - \frac{p}{2}
 \end{pmatrix}.
 \end{equation}
-Notemos cómo $\Lambda_{\mathcal{E}}$ refleja el funcionamiento del Depolarizing Channel: las entradas diagonales muestran cómo el canal mezcla el estado original con la matriz identidad, dependiendo de $p$, reduciendo la pureza del estado. Las entradas no diagonales indican las coherencias introducidas por el canal. Así, $\Lambda_{\mathcal{E}}$  nos proporciona una representación completa del efecto del depolarizing channel sobre la base computacional.  
+Notemos cómo $\Lambda_{\mathcal{E}}$ refleja el funcionamiento del canal despolarizante: las entradas diagonales muestran cómo el canal mezcla el estado original con la matriz identidad, dependiendo de $p$, reduciendo la pureza del estado. Las entradas no diagonales indican las coherencias introducidas por el canal. Así, $\Lambda_{\mathcal{E}}$  nos proporciona una representación completa del efecto del canal despolarizante sobre la base computacional.  
 
 Los canales cuánticos representarán un papel al implementarse en computadoras cuánticas. En los siguientes capítulos se detallará el proceso para implementar su matriz de Choi y reconstruirla en sistemas cuánticos.
 
 \subsection{Tomografía y Fidelidad de Proceso Cuántico} % {{{
-La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes de hablar de la tomografía es necesario conocer la tomografía de estado cuántico. \par 
+La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes de hablar de la tomografía es necesario conocer la tomografía de estado cuántico.  
 
 La tomografía de estado cuántico es un proceso para reconstruir
 experimentalmente un estado desconocido a partir de un conjunto de mediciones
@@ -727,7 +1031,7 @@ experimentalmente un estado desconocido a partir de un conjunto de mediciones
 cuántica que pueda distinguir entre estados como $\ket{0}$ y
 $(\ket{0}+\ket{1})/\sqrt{2}$ con certeza. No obstante, es posible estimar
 $\rho$ si tenemos un gran número de copias de $\rho$. Mencionaremos el proceso
-indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011}. \par
+indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011}. 
 
 
 Consideremos un estado $\rho$ y los operadores $\{\frac{\mathcal{I}}{\sqrt{2}}
@@ -742,13 +1046,13 @@ La expresión $\text{Tr}(A\rho)$ se interpreta como el valor medio de los observ
 \begin{equation}
     \text{Tr}(A \rho) \approx \sum_i \frac{z_i}{m}.
 \end{equation}
-De esta forma podemos reconstruir la matriz $\rho$ como en la ecuación \ref{eq:tomo_estado}. \par 
+De esta forma podemos reconstruir la matriz $\rho$ como en la ecuación \ref{eq:tomo_estado}.  
 
 Generalizando este procedimiento, para el caso de una matriz densidad arbitraria de $n$ qubits, puede ser expandida cómo:
 \begin{equation}
 \rho = \sum_{\vec{v}} \frac{ \text{Tr}(\sigma_{v_1} \otimes \sigma_{v_2} \otimes ... \otimes \sigma_{v_n} \rho  ) \sigma_{v_1} \otimes \sigma_{v_2 } \otimes ... \otimes \sigma_{v_n}     }{2}.
 \end{equation}
-La suma de la ecuación es sobre vectores $\vec{v} = (v_1,...,v_n)$ con entradas $v_i$ escogidas del conjunto 0,1,2,3. Al realizar mediciones de observables que son productos de las matrices de Pauli, podemos estimar cada término en esta suma, y entonces estimar $\rho$.\par 
+La suma de la ecuación es sobre vectores $\vec{v} = (v_1,...,v_n)$ con entradas $v_i$ escogidas del conjunto 0,1,2,3. Al realizar mediciones de observables que son productos de las matrices de Pauli, podemos estimar cada término en esta suma, y entonces estimar $\rho$. 
 
 
 Para implementar la tomografía de estado en una computadora cuántica es
@@ -807,7 +1111,7 @@ Notemos que para la matriz de Choi necesitamos los estados $\ketbra{0}{1}$ y $\k
     \ketbra{0}{1} &= \frac{1}{2} \left( \ketbra{+}{+} - \ketbra{-}{-} + i \big( \ketbra{i}{i} - \ketbra{-i}{-i} \big) \right), \\
     \ketbra{1}{0} &= \frac{1}{2} \left( \ketbra{+}{+} - \ketbra{-}{-} - i \big( \ketbra{i}{i} - \ketbra{-i}{-i} \big) \right).
 \end{alignat}
-Con cada estado reconstruido $\mathcal{E}(\ketbra{\psi_i})$,  obtenemos la matriz de Choi $\Lambda_{\mathcal{E}}$ \ref{ec:Choi_ketbra}. De esta forma, la tomografía de proceso cuántico proporciona una descripción completa y detallada del canal cuántico por medio de mediciones. 
+Con cada estado reconstruido $\mathcal{E}(\ketbra{\psi_i})$,  obtenemos la matriz de Choi $\Lambda_{\mathcal{E}}$ ( \ref{ec:Choi_ketbra} ). De esta forma, la tomografía de proceso cuántico proporciona una descripción completa y detallada del canal cuántico por medio de mediciones. 
 
 % }}}
 \subsection{Fidelidad de Proceso Cuántico} % {{{
@@ -815,7 +1119,7 @@ Previo a hablar de la fidelidad de proceso cuántico es necesario conocer la fid
 \begin{equation}
        \label{eq:fidelidad_estado}
        F(\rho,\sigma) \equiv tr \sqrt{\rho^{1/2} \sigma \rho^{1/2} } = tr |\sqrt{\rho}\sqrt{\sigma}|.     \footnote{La ecuación usada aquí para describir la fidelidad es la descrita en Nielsen y Chuang. En otros textos,  como del autor original Richard Jozsa\cite{Jozsa} y Bengston \cite{bengtsson_zyczkowski_2017},  suelen llamarla  'raíz fidelidad'.}
-\end{equation} \par 
+\end{equation}  
 
     
 Es importante mencionar las propiedades que conforman a la fidelidad de
@@ -824,7 +1128,9 @@ originalmente en el artículo de Jozsa \cite{Jozsa} y luego reescrito en Nielsen
 y Chuang  \cite{nielsen_chuang_2011}, que da sentido a la ecuación
 (\ref{eq:fidelidad_estado}):
     
-    \textbf{(Teorema de Uhlmann):} \quad $F(\rho,\sigma) = max |\braket{\psi_\rho}{\psi_\sigma}|$ . El máximo se toma sobre las purificaciones de $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ de $\rho,\sigma$ respectivamente. \par 
+    \begin{thm}
+    \textbf{(Teorema de Uhlmann)}: $F(\rho,\sigma) = max |\braket{\psi_\rho}{\psi_\sigma}|$ . El máximo se toma sobre las purificaciones de $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ de $\rho,\sigma$ respectivamente. 
+    \end{thm}
      Para probar este teorema supondremos dos estados $\ket{\psi_\rho},\ket{\psi_\sigma}$ que son las purificaciones de las matrices $\rho,\sigma$ respectivamente. Si los escribimos de forma general tendremos
     \begin{align}
         \ket{\psi_\rho} & = \sum_k \sqrt{\lambda_k} \ket{\lambda_k u_k},\\
@@ -842,21 +1148,23 @@ y Chuang  \cite{nielsen_chuang_2011}, que da sentido a la ecuación
     con la matriz unitaria $U$ definida como 
     \begin{equation}
         U = \left(\sum_k \ketbra{\mu_k}{u_k}    \right)  \left(\sum_j \ketbra{v_j} {\lambda_j}   \right) .
-    \end{equation}\par 
-    En este momento es bueno introducir el \textit{Lema 9.5} de Nielsen y Chuang \cite{nielsen_chuang_2011} que dice lo siguiente:\\ 
-    \textit{(Lema 9.5 (Nielsen-Chuang):)} Sea A cualquier operador, y $U$ unitario. Entonces
+    \end{equation} 
+    En este momento es bueno introducir el \textit{Lema 9.5} de Nielsen y Chuang \cite{nielsen_chuang_2011} que dice lo siguiente:
+    \felnote{Aquí use un \text{begin\{lem\}} pero se ve raro que inicie con Lema 1.1 y luego Lema 9.5... Le quito la parte de Lema 9.5 (Nielsen-Chuang) (linea 536) ? }
+    \begin{lem}\textbf{(Lema 9.5 (Nielsen-Chuang)):}  Sea A cualquier operador, y $U$ unitario. Entonces
     \begin{equation}
         | \text{Tr}(AU)| \leq tr|A|,
     \end{equation}
-    con la igualdad obtenida escogiendo $U= V^\dagger$. Aquí $A= |A|V$ es la descomposición polar de $A$.\par  Para probar este lema podemos ver que
+    con la igualdad obtenida escogiendo $U= V^\dagger$. Aquí $A= |A|V$ es la descomposición polar de $A$.
+    \end{lem}
+    Para probar este lema podemos ver que:
     \begin{equation}
         |\text{Tr}(AU)| = |\text{Tr}(|A|VU)| = \left| \text{Tr}(|A|VU  ) \right| = \left|\text{Tr}(|A|^{1/2}|A|^{1/2} VU )   \right|.
     \end{equation}
-    Usando la desigualdad de Cauchy-Schwarz \cite{nielsen_chuang_2011} para el espacio de Hilbert-Schmidt obtenemos que
+    Usando la desigualdad de Cauchy-Schwarz \cite{nielsen_chuang_2011} para el espacio de Hilbert-Schmidt obtenemos:
     \begin{equation}
-        |\text{Tr}(AU)| \leq \sqrt{ tr|A| \text{Tr}(U^\dagger V^ \dagger  |A|VU) } = tr|A|,
-    \end{equation}
-    completando la prueba. $\blacksquare$ \par 
+        |\text{Tr}(AU)| \leq \sqrt{ tr|A| \text{Tr}(U^\dagger V^ \dagger  |A|VU) } = tr|A| \blacksquare  
+    \end{equation} 
     Retomando la prueba de Uhlman, al usar el (Lema 9.5 ) comparado con la ecuación ( \ref{eq:rho_ij0})  llegamos a la conclusión
     \begin{equation}
         |\braket{\psi_\rho}{\psi_\sigma}| = |\text{Tr}(\sqrt{\rho} \sqrt{\sigma} U )| \leq tr|\sqrt{\rho} \sqrt{\sigma} |.
@@ -887,24 +1195,24 @@ Esta métrica proporciona una medida cuantitativa de cuán similar es un canal c
 \chapter{ALGORITMOS VARIACIONALES CUÁNTICOS (VQA)} % {{{
 \section{Introducción}
 \section{Descripción de los VQA}
-Los Algoritmos Variacionales Cuánticos son una clase de algoritmos que combinan computación cuántica y clásica para resolver problemas de optimización. \par 
+Los Algoritmos Variacionales Cuánticos son una clase de algoritmos que combinan computación cuántica y clásica para resolver problemas de optimización.  
 
-El \textit{ansatz} es una suposición inicial o una forma parametrizada del estado cuántico que se va a optimizar. La calidad del \textit{ansatz} afecta directamente la eficiencia del VQA . \par 
+El \textit{ansatz} es una suposición inicial o una forma parametrizada del estado cuántico que se va a optimizar. La calidad del \textit{ansatz} afecta directamente la eficiencia del VQA .  
 
-La función de costo $C(\theta)$ mide la calidad de la solución propuesta por el algoritmo cuántico. Esta función es evaluada en un circuito cuántico y luego optimizada clásicamente. \par 
+La función de costo $C(\theta)$ mide la calidad de la solución propuesta por el algoritmo cuántico. Esta función es evaluada en un circuito cuántico y luego optimizada clásicamente.  
 
-La optimización de la función de costo se realiza mediante métodos clásicos, como el descenso de gradientes, que ajustan los parámetros del \textit{ansatz} para minimizar la función de costo. \par 
+La optimización de la función de costo se realiza mediante métodos clásicos, como el descenso de gradientes, que ajustan los parámetros del \textit{ansatz} para minimizar la función de costo.  
  
-El método de gradientes calcula la derivada de la función de costo respecto a los parámetros del \textit{ansatz} y ajusta estos parámetros para encontrar el mínimo de la función de costo. \par 
+El método de gradientes calcula la derivada de la función de costo respecto a los parámetros del \textit{ansatz} y ajusta estos parámetros para encontrar el mínimo de la función de costo.  
 
 \section{Implementación de canales de un qubit usando VQA}
-Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$. \par 
+Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$.  
 
-Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit, para esto , nuestra función de costo a optimizar será la fidelidad de proceso entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica. \par 
+Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit, para esto , nuestra función de costo a optimizar será la fidelidad de proceso entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica.  
  
 
 % }}}
-\chapter{RESULTADOS PARA EL DEPOLARIZING CHANNEL DE UN QUBIT } % {{{
+\chapter{RESULTADOS PARA EL CANAL DESPOLARIZANTE DE UN QUBIT } % {{{
 \section{Introducción} % {{{
 \cpnote{Falta introduccion. Escribirla al final quizá de la tesis}\felnote{Pendiente: la redactaré al finalizar el cap}
 % }}}
