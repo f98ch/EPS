@@ -200,15 +200,14 @@ En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cu�
 
 % }}}
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}% {{{
-% Intro {{{
 \felnote{Por el momento está redactada la sección 1.2 y 1.4. Sigo redactando la sección 1.3 . }
-\section{Introducción}
+\section{Introducción} % Intro {{{
 \felnote{Pendiente: la redactaré al finalizar el capítulo}
 % }}}
 \section{Matriz Densidad} % {{{
 \subsection{Estados puros y mixtos} % {{{
 Para describir un sistema cuántico usamos un vector complejo $\ket{\psi}$,
-también llamado \textit{ket} o estado cuántico . El
+también llamado \textit{ket} o estado cuántico. El
 estado cuántico puede estar representado por la ecuación: 
 \begin{equation}
      \label{eq:1.1}
@@ -224,11 +223,19 @@ normalización \cite{nielsen_chuang_2011}:
            |c_i|^2=\braket{\psi}{\psi}=1, 
     \end{equation} 
 
-donde $|c_i|^2$ representa la probabilidad de que, al medir el sistema, el estado colapse al $i$-ésimo vector $\ket{i}$ de la base. \cpnote{Al ser medido que? Lo discutimos para 
-que no te vayas por un camino largo} \felnote{Corregido: 1. El sistema, lo agregué (línea . 2. Sí claro, me parece bien. }
+donde \cpnote{Fijate queu si dejas una linea en blanco en el tex entre la
+ecuación y la siguiente linea, lo toma como un nuevo parrafo, y en este caso lo
+identa. No queremos eso, por lo que no debes dejar esa linea en blanco. En
+general lo voy a corregir, pero corrigelo aca y en lo que sigas
+escribiendo.} $|c_i|^2$ representa la probabilidad de que, al medir el sistema, el
+estado colapse al $i$-ésimo vector $\ket{i}$ de la base. \cpnote{Al ser medido
+que? Lo discutimos para que no te vayas por un camino largo}
+\felnote{Corregido: 1. El sistema, lo agregué (línea . 2. Sí claro, me parece
+bien. }\cpnote{Aun no entiendes el punto. Da lo mismo medir cualquier observable?}
 
-\begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un  qubit
-\footnote{Qubit es un sistema cuántico de dos estados (o dos niveles). Es la
+\begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un
+qubit~\footnote{Qubit es un sistema cuántico de dos estados (o dos niveles). Es
+la
 unidad básica de información de una computadora cuántica siendo su base los
 autovectores de el operador de Pauli 
 $\sigma_z$.}, su base estaría conformada
@@ -274,7 +281,7 @@ mientras que para los estados mixtos es:
 con $n$ el número de estados del ensamble y $p_i$ el 'peso' mencionado
 anteriormente, cumpliendo con la condición $\sum p_i =1$.
 
-Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,...,d$  \cpnote{ya lo dijiste} \felnote{Corregido: removí la redundancia. (línea 110)}, veremos que los elementos de la
+Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,...,d$, veremos que los elementos de la
 matriz densidad serán \cite{princip_quantum}:
 \begin{equation}
     \label{eq:rho_ij}
@@ -365,20 +372,28 @@ Notemos que los autovalores $\lambda_j$ deben cumplir también con la propiedad 
     \label{ec:dens_eigvals}
     \sum_j \lambda_j = 1.
     \end{equation} 
-
-Por lo tanto, la condición $\gamma = 1$ se cumple si y solo si existe un único índice $\overline{j}$ tal que $\lambda_{\overline{j}} = 1$, y $\lambda_j = 0$ para todo $j \ne \overline{j}$. \cpnote{no entiendo esa ecuacion} \felnote{Corregido: reordene el flujo de la demostración. Ahora debe tener más sentido que para un estado puro, necesita tener un único autovalor=1 (la parte de los índices j), mientras que los mixtos tinen más de un autovalor<1. (135-150~)} Esto corresponde a un estado puro, ya que la matriz densidad se reduce a un proyector sobre un solo estado:
-
+Por lo tanto, la condición $\gamma = 1$ se cumple si y solo si existe un único
+índice $\overline{j}$ tal que $\lambda_{\overline{j}} = 1$, y $\lambda_j = 0$
+para todo $j \ne \overline{j}$.  Esto corresponde a un estado puro, ya que la matriz densidad se
+reduce a un proyector sobre un solo estado:
 \begin{equation}
 \rho  = \lambda_{\overline{j}} \ketbra{\overline{j}} = \ketbra{\overline{j}},
 \end{equation}
-que es la misma representación vista en la ecuación (\ref{ec:dens_puros}). Por otro lado, en un estado mixto, la matriz densidad $\rho$ tiene más de un autovalor $\lambda_j$ distinto de cero, todos en el rango $0 < \lambda_j < 1$. Por consiguiente:
+que es la misma representación vista en la ecuación (\ref{ec:dens_puros}). Por
+otro lado, en un estado mixto, la matriz densidad $\rho$ tiene más de un
+autovalor $\lambda_j$ distinto de cero, todos en el rango $0 < \lambda_j < 1$.
+Por consiguiente:
     \begin{align}
         \sum_j \lambda_j^2 & < \sum_j \lambda_j =1 \\
         \therefore \gamma & < 1 \square
      \end{align}
- La demostración anterior prueba la cota superior de la pureza, para la cota inferior es necesario agregar un teorema:
+La demostración anterior prueba la cota superior de la pureza, para la cota
+inferior es necesario agregar un teorema:
   %Estos  solo están para el \felnote
- \begin{thm}\textbf{(Desigualdad de Jensen):} \label{thm:jensen}  Sean $w_1,...,w_n$ números positivos que sumen $1$ y $f$ una función real continua convexa, entonces \cite{jensen_wolfram} :
+\begin{thm}
+\textbf{(Desigualdad de Jensen):} \label{thm:jensen}  Sean $w_1,...,w_n$
+números positivos que sumen $1$ y $f$ una función real continua convexa,
+entonces \cite{jensen_wolfram}:
 \begin{equation}
     f \left( \sum_j w_j x_j  \right) \leq \sum_j w_j f(x_j).
 \end{equation}
@@ -420,8 +435,11 @@ la ecuación \ref{eq:rho_ij}.}:
             & = \ketbra{\psi_1} \otimes \ketbra{\psi_2} ... \otimes \ketbra{\psi_n}. 
 \end{align}
 Este no es el caso general para los sistemas compuestos, sin embargo, será con
-el que trabajemos en los siguientes capítulos\cpnote{No creo qe trabajemos con este 
-estado. lo discutimos} \felnote{Sí claro, me parece bien. Yo lo uso luego para introducir los canales (linea 330).}.
+el que trabajemos en los siguientes capítulos\cpnote{No creo qe trabajemos con
+este estado. lo discutimos} \felnote{Sí claro, me parece bien. Yo lo uso luego
+para introducir los canales (linea 330).}\cpnote{Ahora que estoy quitando comentarios se mueve
+todo. Busque odnde haces referencia a esta ecuacion pero no encuentro. Quizá si en vez de 
+referir una linea, refieres una ecuacion es mas facil de encontrar}.
 
 Al trabajar con sistemas compuestos puede darse el caso donde no conozcamos
 uno, o varios de los estados que describan a sus subsistemas. Entonces, para
@@ -481,7 +499,8 @@ Este estado se dice que está \textit{entrelazado}, dado que no es separable, es
 Si buscamos la matriz reducida del subsistema $B$ tenemos:
 \begin{align}
     \rho_B  & = \text{Tr}_A(\rho_{AB})\\
-        & =  \frac{1}{2} \left[ \text{Tr}_A(\ketbra{0_A0_B}) + \text{Tr}_A(\ketbra{1_A1_B}{0_A0_B}) + \text{Tr}_A(\ketbra{0_A0_B}{1_A1_B}) + \text{Tr}_A(\ketbra{1_A1_B}{1_A1_B})  \right] \\
+        & =  \frac{1}{2} \large[ \text{Tr}_A(\ketbra{0_A0_B}) + \text{Tr}_A(\ketbra{1_A1_B}{0_A0_B})\\
+        & \qquad +\text{Tr}_A(\ketbra{0_A0_B}{1_A1_B}) + \text{Tr}_A(\ketbra{1_A1_B}{1_A1_B})  \large] \\
       & = \frac{1}{2} \left[ \ketbra{0_B} + \ketbra{1_B}  \right]  = \frac{1}{2} \mathbb{1}.
 \end{align}
 Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto. También veamos que nuestro sistema compuesto no se puede describir de alguna forma con el producto $\rho_A \otimes \rho_B$ para las matrices densidad reducidas. Esto indica que las correlaciones entre $A,B$ no se incluyen en el producto tensorial de ambos subsistemas. 
@@ -612,7 +631,7 @@ Si aplicamos una rotación con un ángulo $\pi/2$ es equivalente a aplicar los o
     
     \caption{Representación visual de las compuertas de rotación en la esfera de Bloch. \textbf{Fuente:} elaboración propia}
     \label{fig:rep_pauli}
-\end{figure} % }}
+\end{figure} % }}}
 
 Además de las compuertas de Pauli, necesitamos de una compuerta que haga otro
 tipo de cambio en la base de un qubit, como lo es la compuerta de
@@ -801,6 +820,7 @@ En este trabajo, nos referiremos a las topologías como las distintas formas que
 
 
 
+% }}}
 % }}}
 \section{Canales Cuánticos y su representación} % {{{
 Una forma natural de describir la dinámica de un sistema cuántico abierto es considerar que este surge de la interacción de un sistema de interés , al que llamaremos sitema principal , y un \textit{entorno}, que juntos forman un sistema cuántico cerrado \cite{nielsen_chuang_2011}:
