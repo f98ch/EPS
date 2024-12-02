@@ -200,7 +200,6 @@ En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cu�
 
 % }}}
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}% {{{
-\felnote{Por el momento está redactada la sección 1.2 y 1.4. Sigo redactando la sección 1.3 . }
 \section{Introducción} % Intro {{{
 \felnote{Pendiente: la redactaré al finalizar el capítulo}
 % }}}
@@ -220,18 +219,17 @@ sistema cuántico.  Los coeficientes deben cumplir con la condición de
 normalización \cite{nielsen_chuang_2011}:
     \begin{equation}
     \label{ec::1.2}
-           |c_i|^2=\braket{\psi}{\psi}=1, 
+           \sum_i |c_i|^2=\braket{\psi}{\psi}=1, 
     \end{equation} 
-
 donde \cpnote{Fijate queu si dejas una linea en blanco en el tex entre la
 ecuación y la siguiente linea, lo toma como un nuevo parrafo, y en este caso lo
 identa. No queremos eso, por lo que no debes dejar esa linea en blanco. En
 general lo voy a corregir, pero corrigelo aca y en lo que sigas
-escribiendo.} $|c_i|^2$ representa la probabilidad de que, al medir el sistema, el
-estado colapse al $i$-ésimo vector $\ket{i}$ de la base. \cpnote{Al ser medido
+escribiendo.} \felnote{Está bien, lo ajusté para todas las ecuaciones.} $|c_i|^2$ es la probabilidad de encontrar al sistema en el estado $\ket{i}$ al medir el observable asociado con la base $\ket{i}$.
+\cpnote{Al ser medido
 que? Lo discutimos para que no te vayas por un camino largo}
 \felnote{Corregido: 1. El sistema, lo agregué (línea . 2. Sí claro, me parece
-bien. }\cpnote{Aun no entiendes el punto. Da lo mismo medir cualquier observable?}
+bien. }\cpnote{Aun no entiendes el punto. Da lo mismo medir cualquier observable?} \felnote{Corregido: tienes razón, es medir el observable de la base del sistema. Lo modifiqué}
 
 \begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un
 qubit~\footnote{Qubit es un sistema cuántico de dos estados (o dos niveles). Es
@@ -437,9 +435,9 @@ la ecuación \ref{eq:rho_ij}.}:
 Este no es el caso general para los sistemas compuestos, sin embargo, será con
 el que trabajemos en los siguientes capítulos\cpnote{No creo qe trabajemos con
 este estado. lo discutimos} \felnote{Sí claro, me parece bien. Yo lo uso luego
-para introducir los canales (linea 330).}\cpnote{Ahora que estoy quitando comentarios se mueve
+para introducir los canales (ec: \ref{ec:rep_sist_abierto} ).}\cpnote{Ahora que estoy quitando comentarios se mueve
 todo. Busque odnde haces referencia a esta ecuacion pero no encuentro. Quizá si en vez de 
-referir una linea, refieres una ecuacion es mas facil de encontrar}.
+referir una linea, refieres una ecuacion es mas facil de encontrar} \felnote{Corregido: sí claro, ahora referenciaré a una ecuación o pondré un label para ubicar cambios.}.
 
 Al trabajar con sistemas compuestos puede darse el caso donde no conozcamos
 uno, o varios de los estados que describan a sus subsistemas. Entonces, para
@@ -509,13 +507,14 @@ Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto.
 % }}}
 \section{Circuitos Cuánticos} % {{{
 % Intro {{{
-\cpnote{Falta una miniintro que puede ser de un par de frases posiblemente diciendo lo que vas a 
-hablar y porque. } 
+Este capítulo estudiará las propiedades y definiciones esenciales de la computación cuántica para entender los circuitos cuánticos. Comenzaremos describiendo las compuertas cuánticas y su acción sobre estados de qubits, incluyendo cómo se transforman en la esfera de Bloch. También exploraremos las mediciones cuánticas y las transformaciones necesarias para medir en distintas bases. Finalmente, describiremos la plataforma de \textit{IBM Quantum Experience} donde se implementarán nuestros circuitos cuánticos, mencionando sus capacidades y limitaciones para entender cómo inicializar estados en circuitos cuánticos. Los conocimientos y técnicas
+adquiridas a lo largo de esta sección nos darán las bases necesarias para
+trabajar con estados y canales cuánticos en las próximas secciones. \label{introduccion} \cpnote{Falta una miniintro que puede ser de un par de frases posiblemente diciendo lo que vas a hablar y porque.} \felnote{Corregido: le agregué una introducción \ref{introduccion}}
 
 % }}}
 \subsection{Compuertas y mediciones cuánticas} % {{{
 
-\cpnote{Revisa redaccion}
+\cpnote{Revisa redaccion}\felnote{Corregido: revisé la redacción nuevamente. También le pedí ayuda a subadra para verificarla.}
 
 Previo a hablar sobre compuertas cuánticas, es necesario introducir una forma
 de representar geométricamente al qubit. Para ello utilizamos la esfera de
@@ -529,29 +528,26 @@ cambios del estado de un qubit bajo diversas transformaciones unitarias $U$.
 \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}.}
     \label{fig:Bloch}
 \end{figure}
-La representación de un qubit en la esfera de Bloch, se describe por medio de
-la ecuación\cpnote{esta frase no tiene sentido. porque dices quue vamos a describir una representacion???}: 
+La representación de un qubit en la esfera de Bloch esta dada por la ecuación :\cpnote{esta frase no tiene sentido. porque dices quue vamos a describir una representacion???} \felnote{Corregido: esto si fue error de redacción mío, en lugar de poner 'esta dada' había puesto 'se describe' (ahora debe decir : esta dada)}: 
 \begin{equation}
     \label{ec:Bloch_rep}
     \ket{\psi} = \cos{\frac{\theta}{2}}\ket{0}+ e^{i\phi}\sin{\frac{\theta}{2}}\ket{1},
 \end{equation}
-con $\theta,\phi$,  ángulos que recorren la esfera (ver figura \ref{fig:Bloch}), y toman los valores
+con $\theta,\phi$,  ángulos que recorren la esfera (ver figura \ref{fig:Bloch}), y toman los valores:
 \begin{equation}
  0 \leq \theta \leq \pi ;  \quad   0 \leq \phi \leq 2\pi.
 \end{equation} 
-La ecuación \ref{ec:Bloch_rep} nos permite describir estados puros en la esfera de Bloch, sin embargo, para visualizar cualquier estado $\rho$ de un qubit usamos el vector de Bloch. Este es un vector cuyas componentes señalan un punto en la esfera de Bloch \cite{princip_quantum}.
+La ecuación \ref{ec:Bloch_rep} nos permite representar estados puros en la esfera de Bloch. Sin embargo, para cualquier estado $\rho$ de un qubit, usamos el vector de Bloch, cuyas componentes señalan un punto en la esfera \cite{princip_quantum}.
 
 Para definir el vector de Bloch transformamos los parámetros $\theta,\phi$ a coordenadas cartesianas como $\textbf{r} = (x,y,z)$ de la forma:
 \begin{equation}
 \left\{\begin{matrix}
 x = |\textbf{r}| \sin{(\theta)} \cos{(\phi)} \\
 y = |\textbf{r}| \sin{(\theta)} \sin{(\phi)} \\
-z = |\textbf{r}| \cos{(\theta)},
+z = |\textbf{r}| \cos{(\theta)}.
 \end{matrix}\right. 
 \end{equation}
-El valor absoluto $|\textbf{r}|=1$ para estados puros, mientras que $|\textbf{r}|<1$ para estados mixtos. Notemos que los estados puros se encuentran en la superficie de la esfera de Bloch, mientras que los estados mixtos en el interior. 
-
-Por lo tanto, obtenemos otra representación útil de la ecuación \ref{ec:Bloch_rep} mediante el operador $\rho$ para estados puros como :
+El valor absoluto $|\textbf{r}|=1$ para estados puros, mientras que $|\textbf{r}|<1$ para estados mixtos. Notemos que los estados puros se encuentran en la superficie de la esfera de Bloch, mientras que los estados mixtos en el interior. Por lo tanto, obtenemos otra representación útil de la ecuación \ref{ec:Bloch_rep} mediante el operador $\rho$ para estados puros como :
 \begin{equation}    \label{ec:vec_bloch}
     \rho  = \frac{1}{2} ( \mathbb{1} + \textbf{r} \cdot \sigma),
 \end{equation}
@@ -591,7 +587,6 @@ Los operadores $U$ que actúan sobre un qubit son de dimensión $2 \times 2$, y 
     u_{10} & u_{11} 
     \end{pmatrix}.
 \end{equation}
-
 Nos enfocaremos en un conjunto específico de compuertas de uno y varios qubits necesarias para este trabajo, comenzando con las compuertas de rotación en los ejes de la esfera de Bloch: $R_x$, $R_y$ y $R_z$. Estas compuertas rotan el estado del qubit alrededor de cada eje de la esfera de Bloch y pueden interpretarse como versiones parametrizadas de los operadores de Pauli (ver ecuación \ref{ec:pauli_matrix}). La representación de cada rotación es:
 \begin{align}
     R_x(\theta) &=  \begin{bmatrix}
@@ -607,7 +602,6 @@ Nos enfocaremos en un conjunto específico de compuertas de uno y varios qubits 
     0 & e^{i\theta} 
     \end{bmatrix}.
 \end{align}
-
 Si aplicamos una rotación con un ángulo $\pi/2$ es equivalente a aplicar los operadores de Pauli $X,Y,Z$. Esto cambia la dirección del estado en su respectivo eje (ver figura \ref{fig:rep_pauli}). 
 
 \begin{figure}[h!] % {{{
@@ -683,7 +677,6 @@ donde $u_{ij}$ son los elementos de la compuerta unitaria $U$ que actúa sobre e
 
 En esta matriz, el primer cuadrante es una identidad que garantiza que, si el qubit de control está en el estado $\ket{0}$, el qubit objetivo permanece sin cambios. Si el qubit de control está en $\ket{1}$, el bloque inferior derecho aplica la transformación unitaria $U$ al qubit objetivo. Esto permite implementar distintas compuertas de control, como $CR_x$ \footnote{La compuerta $CX$ es comúnmente conocida como compuerta $CNOT$. En adelante, cuando hablemos de la compuerta $CNOT$, nos referimos a $CR_x(\pi/2)$.}  o $CR_z$, ajustando los parámetros $u_{ij}$.
 
-
 Al realizar una medición cuántica hace que nuestro qubit colapse a uno de los estados de la base $ \sigma_z$. Sin embargo, es posible realizar un cambio de base y poder medir en otro tipo de bases. A continuación daremos la definición de Nielsen y Chuang \cite{nielsen_chuang_2011}:
 
 Dada cualquier base de estados $\ket{a},\ket{b}$ para un qubit, es posible expresar un estado arbitrario como una combinación lineal $\alpha\ket{a}+\beta\ket{b}$ de esos estados. Además, siempre que los estados sean ortonormales,  \textbf{es posible realizar una medición respecto a la base de $\ket{a},\ket{b}$}, dando un resultado $a$, con probabilidad $|\alpha|^2$ y $b$, con probabilidad $|\beta|^2$. 
@@ -703,7 +696,7 @@ Si re expresamos $\ket{\psi}$ en la nueva base veremos que:
  \end{align}
 Al medirlo en la base $\{\ket{+}, \ket{-}\}$, obtendremos probabilidades $|\alpha+\beta|^2$ y $|\alpha-\beta|^2$ respectivamente.
 
-Las mediciones en otras bases será de utilidad para la tomografía de estado ya que hace uso de distintas mediciones en distintas bases para recuperar la información de un estado cuántico.
+Las mediciones en otras bases serán de utilidad para la tomografía de estado ya que hace uso de distintas mediciones en distintas bases para recuperar la información de un estado cuántico.
 % }}}
 \subsection{Composición de circuitos cuánticos} % {{{
 
@@ -831,7 +824,7 @@ En este trabajo, nos referiremos a las topologías como las distintas formas que
 % }}}
 \section{Canales Cuánticos y su representación} % {{{
 Una forma natural de describir la dinámica de un sistema cuántico abierto es considerar que este surge de la interacción de un sistema de interés , al que llamaremos sitema principal , y un \textit{entorno}, que juntos forman un sistema cuántico cerrado \cite{nielsen_chuang_2011}:
-\begin{equation}
+\begin{equation}\label{ec:rep_sist_abierto}
     \rho = \rho_{\text{sp}} \otimes \rho_{\text{ent}}.
 \end{equation}
 Supondremos que la interacción entre ambos sistemas se da por una transformación unitaria $U$, luego de esto, el sistema ya no interactúa con el entorno resultando en el estado final del sistema pincipal $\mathcal{E}$:
@@ -1000,14 +993,12 @@ Definimos los estados $\ket{e_i} = E_i \ket{k}$ , $\ket{f_j} = F_j \ket{k}$. Por
 \begin{equation}
   \ket{e_i} = \sum_j u_{ij} \ket{f_j},  
 \end{equation} 
-donde $u_{ij}$ son los elementos de una matriz unitaria $U$.
-
+donde $u_{ij}$ son los elementos de una matriz unitaria $U$.\\
 Por otro lado, cualquier estado $\ket{\psi}$ puede expresarse en términos de $\ket{e_i}$ y $\ket{f_j}$ de la siguiente forma:
 \begin{equation}
 E_i \ket{\psi} = \sum_j u_{ij} F_j \ket{\psi}.
 \end{equation}
-Esto demuestra que $E_i$ puede ser expresado como una combinación lineal de $\{F_j\}$ con coeficientes unitarios, mostrando que la representación de Kraus no es única y depende de la elección de la matriz unitaria $U$.
-
+Esto demuestra que $E_i$ puede ser expresado como una combinación lineal de $\{F_j\}$ con coeficientes unitarios, mostrando que la representación de Kraus no es única y depende de la elección de la matriz unitaria $U$.\\
 Por lo tanto, en adelante utilizaremos la notación de la matriz de Choi, ya que nos será de utilidad para la reconstrucción de canales cuánticos en la tomografía de proceso y la fidelidad de proceso al ejecutarlo en computadoras cuánticas.
 
 \begin{ex} \label{Ejemplo 1.0.1} 
@@ -1016,9 +1007,7 @@ El canal despolarizante  (DP, por sus siglas en inglés de Depolarizing Channel)
 \begin{equation} \label{ec:superop_depolarizing}
 \mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho ,
 \end{equation}
-donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}
-
-
+donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}\\
 Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
 \begin{equation}
 \mathcal{E}(\ketbra{i}{j}) = \text{Tr}(\ketbra{i}{j})  p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
@@ -1030,7 +1019,6 @@ Por lo que podemos ver su acción en los estados de la base:
       \mathcal{E}( \ketbra{1}{0}) = & (1 - p ) \ketbra{1}{0},\\
            \mathcal{E}( \ketbra{1}) = & (1 - \frac{p}{2} ) \ketbra{1} + \frac{p}{2} \ketbra{0}.
 \end{alignat*}
-
 Recordando la ecuación \ref{ec:Choi_ketbra}, escribimos su matriz de Choi:
 % \begin{equation}
 % \Lambda_{\mathcal{E}} = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left(  \text{Tr}(\ketbra{i}{j} ) p  \frac{I}{2} +  (1-p) \ketbra{i}{j}  \right).
@@ -1158,21 +1146,21 @@ y Chuang  \cite{nielsen_chuang_2011}, que da sentido a la ecuación
     \begin{thm}
     \textbf{(Teorema de Uhlmann)}: $F(\rho,\sigma) = max |\braket{\psi_\rho}{\psi_\sigma}|$ . El máximo se toma sobre las purificaciones de $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ de $\rho,\sigma$ respectivamente. 
     \end{thm}
-     Para probar este teorema supondremos dos estados $\ket{\psi_\rho},\ket{\psi_\sigma}$ que son las purificaciones de las matrices $\rho,\sigma$ respectivamente. Si los escribimos de forma general tendremos
+     Para probar este teorema supondremos dos estados $\ket{\psi_\rho},\ket{\psi_\sigma}$ que son las purificaciones de las matrices $\rho,\sigma$ respectivamente. Si los escribimos de forma general tendremos:
     \begin{align}
         \ket{\psi_\rho} & = \sum_k \sqrt{\lambda_k} \ket{\lambda_k u_k},\\
         \ket{\psi_\sigma} & = \sum_k \sqrt{\mu_k} \ket{\mu_k v_k},       
     \end{align}
-    siendo $\ket{\lambda_k},\ket{\mu_k}$ autovectores de $\rho,\sigma$, y $\{\ket{u_k} \}_k, \{\ket{v_k} \}_k$ bases ortonormales arbitarias. Al superponer las purificaciones obtenemos
+    siendo $\ket{\lambda_k},\ket{\mu_k}$ autovectores de $\rho,\sigma$, y $\{\ket{u_k} \}_k, \{\ket{v_k} \}_k$ bases ortonormales arbitarias. Al superponer las purificaciones obtenemos:
     \begin{align}
         \braket{\psi_\rho}{\psi_\sigma} & = \sum_{jk} \sqrt{\lambda_j\mu_k} \braket{\lambda_j}{\mu_k} \braket{u_j}{v_k},
     \end{align}
-    con $\text{Tr}(A) = \sum_{i=1}^{d} \lambda_i$, siendo $\lambda_i$ sus autovalores llegamos a la expresión
+    con $\text{Tr}(A) = \sum_{i=1}^{d} \lambda_i$, siendo $\lambda_i$ sus autovalores llegamos a la expresión:
     \begin{equation}
     \label{eq:rho_ij0}
         \braket{\psi_\rho}{\psi_\sigma} = \text{Tr}( \sqrt{\rho}\sqrt{\sigma} U ),
     \end{equation}
-    con la matriz unitaria $U$ definida como 
+    con la matriz unitaria $U$ definida como:
     \begin{equation}
         U = \left(\sum_k \ketbra{\mu_k}{u_k}    \right)  \left(\sum_j \ketbra{v_j} {\lambda_j}   \right) .
     \end{equation} 
