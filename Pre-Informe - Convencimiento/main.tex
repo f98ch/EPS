@@ -732,7 +732,14 @@ del qubit target (ver figura \ref{fig:circuito0}).
 \end{figure}
 
 
-Por el lado de  la medición cuántica, se representa mediante un símbolo de "medidor" que colapsa el estado cuántico del qubit y almacena el resultado en bits clásicos (ver figura \ref{fig:circuito2}). En los diagramas, una línea simple representa a los qubits, mientras que una línea doble indica los bits clásicos resultantes de la medición.
+Por el lado de  la medición cuántica, se representa mediante un símbolo de
+``medidor'' \cpnote{las comillas dobles son problematicas en Latex. Checa por ahi en 
+internet como se hace. Ahora ya corregi estas y no encontre mas, pero cuidado
+si las quieres usar de nuevo.}
+que colapsa el estado cuántico del qubit y almacena el resultado en
+bits clásicos (ver figura \ref{fig:circuito2}). En los diagramas, una línea
+simple representa a los qubits, mientras que una línea doble indica los bits
+clásicos resultantes de la medición.
  
     \begin{figure}[h]
         \centering
@@ -743,7 +750,12 @@ Por el lado de  la medición cuántica, se representa mediante un símbolo de "m
         \label{fig:circuito2}
     \end{figure}
 
-Al conocer la composición de circuitos cuánticos, es importante un principio que nos permitirá implementar circuitos en computadoras cuánticas reales. A continuación, usaremos la definición de Nielsen y Chuang \cite{nielsen_chuang_2011}:
+Al conocer la composición de circuitos cuánticos, es importante un principio
+que nos permitirá implementar circuitos en computadoras cuánticas
+reales\cpnote{porque necesitamos este principio para implemtnar circuitos?}.
+A continuación, usaremos la definición \cpnote{Es una definicion, o un principio?}
+ de Nielsen y Chuang
+\cite{nielsen_chuang_2011}:
 %
 \begin{prin}\textbf{(Principio de medición diferida)}:  Las mediciones siempre pueden
 ser medidas de un punto intermedio de un circuito cuántico al final
@@ -751,8 +763,15 @@ del circuito. Si resultados de la medición son usados en algún punto del
 circuito, entonces los operadores de control clásicos son reemplazados por
 operadores condicionales cuánticos.   
 \end{prin}
+\cpnote{No recuerod donde usas eso en tu trabajo. Me lo puedes señalar?}
 
-A menudo, las mediciones cuánticas se realizan como un paso intermedio en un circuito cuántico, y sus resultados se utilizan para controlar de manera condicional las compuertas cuánticas que siguen.  Este es el caso, por ejemplo, en un circuito de teleportación cuántica (ver figura \ref{fig:telep_cuant}). Sin embargo, estas mediciones pueden moverse al final del circuito, reemplazando las operaciones clásicas condicionales por operaciones cuánticas equivalentes (ver figura \ref{fig:telep_cuant_dif}).
+A menudo, las mediciones cuánticas se realizan como un paso intermedio en un
+circuito cuántico, y sus resultados se utilizan para controlar de manera
+condicional las compuertas cuánticas que siguen.  Este es el caso, por ejemplo,
+en un circuito de teleportación cuántica (ver figura \ref{fig:telep_cuant}).
+Sin embargo, estas mediciones pueden moverse al final del circuito,
+reemplazando las operaciones clásicas condicionales por operaciones cuánticas
+equivalentes (ver figura \ref{fig:telep_cuant_dif}).
 
 \begin{figure}[h]
     \centering
@@ -783,9 +802,17 @@ el traslado de información en bits clásicos. El estado $\ket{\beta_{00}}$ repr
 % }}}
 \subsection{Plataforma \textit{IBM Quantum Experience}} % {{{
 
-Para este trabajo utilizaremos la plataforma de \textit{IBM Quantum Experience}. Esta plataforma nos da acceso a computadoras cuánticas para ejecutar circuitos cuánticos válidos. La conexión a las computadoras se hace por medio de la librería de qiskit en el lenguaje de \textit{Python}.  
+Para este trabajo utilizaremos la plataforma de \textit{IBM Quantum
+Experience}. Esta plataforma nos da acceso a computadoras cuánticas para
+ejecutar circuitos cuánticos válidos. La conexión a las computadoras se hace
+por medio de la librería de qiskit de \textit{Python}.  
 
- Podemos correr circuitos cuánticos en la plataforma por medio de simuladores, que emulan de forma cercana el comportamiento de una computadora cuántica, con capacidad de hasta 5000 qubits. También podemos correr los circuitos en computadoras cuánticas reales,  con capacidad de hasta 7 qubits de forma gratuita. En este trabajo haremos uso de los servicios gratuitos en la plataforma. 
+Podemos correr circuitos cuánticos en la plataforma por medio de simuladores,
+que emulan de forma cercana el comportamiento de una computadora cuántica, con
+capacidad de hasta 5000 qubits \cpnote{dudo este numero. tienes alguna referencia?}. También podemos correr los circuitos en
+computadoras cuánticas reales,  con capacidad de hasta 7 qubits de forma
+gratuita. En este trabajo haremos uso de los servicios gratuitos en la
+plataforma. 
  
 Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico de modo que se ajuste a la topología de la computadora cuántica (ver figura \ref{fig:transpiling}). 
 \begin{figure}[h]
