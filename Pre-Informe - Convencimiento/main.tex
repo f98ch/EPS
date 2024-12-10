@@ -182,7 +182,6 @@
 % }}}
 \chapter*{OBJETIVOS} % {{{
 \section*{General} 
-\cpnote{Por favor consistencia con la capitalizacion de ``Algoritmos Variacionales''.} \felnote{Corregido. Todas las instancias vienen con inicio mayúscula.}
 Estudiar y desarrollar Algoritmos Variacionales Cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
 
 \section*{Específicos}
@@ -198,6 +197,8 @@ El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para e
 
 En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
 
+\cpnote{Esta es la intro total? Me parece que el primer parrafo y el segundo no están 
+bien conectados}
 % }}}
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}% {{{
 \section{Introducción} % Intro {{{
@@ -221,15 +222,8 @@ normalización \cite{nielsen_chuang_2011}:
     \label{ec::1.2}
            \sum_i |c_i|^2=\braket{\psi}{\psi}=1, 
     \end{equation} 
-donde \cpnote{Fijate queu si dejas una linea en blanco en el tex entre la
-ecuación y la siguiente linea, lo toma como un nuevo parrafo, y en este caso lo
-identa. No queremos eso, por lo que no debes dejar esa linea en blanco. En
-general lo voy a corregir, pero corrigelo aca y en lo que sigas
-escribiendo.} \felnote{Está bien, lo ajusté para todas las ecuaciones.} $|c_i|^2$ es la probabilidad de encontrar al sistema en el estado $\ket{i}$ al medir el observable asociado con la base $\ket{i}$.
-\cpnote{Al ser medido
-que? Lo discutimos para que no te vayas por un camino largo}
-\felnote{Corregido: 1. El sistema, lo agregué (línea . 2. Sí claro, me parece
-bien. }\cpnote{Aun no entiendes el punto. Da lo mismo medir cualquier observable?} \felnote{Corregido: tienes razón, es medir el observable de la base del sistema. Lo modifiqué}
+donde $|c_i|^2$ es la probabilidad de encontrar al sistema en el estado
+$\ket{i}$ al medir el observable asociado con la base $\{\ket{i} \}$.
 
 \begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un
 qubit~\footnote{Qubit es un sistema cuántico de dos estados (o dos niveles). Es
@@ -433,11 +427,9 @@ la ecuación \ref{eq:rho_ij}.}:
             & = \ketbra{\psi_1} \otimes \ketbra{\psi_2} ... \otimes \ketbra{\psi_n}. 
 \end{align}
 Este no es el caso general para los sistemas compuestos, sin embargo, será con
-el que trabajemos en los siguientes capítulos\cpnote{No creo qe trabajemos con
+el que trabajemos en los siguientes capítulos \cpnote{No creo qe trabajemos con
 este estado. lo discutimos} \felnote{Sí claro, me parece bien. Yo lo uso luego
-para introducir los canales (ec: \ref{ec:rep_sist_abierto} ).}\cpnote{Ahora que estoy quitando comentarios se mueve
-todo. Busque odnde haces referencia a esta ecuacion pero no encuentro. Quizá si en vez de 
-referir una linea, refieres una ecuacion es mas facil de encontrar} \felnote{Corregido: sí claro, ahora referenciaré a una ecuación o pondré un label para ubicar cambios.}.
+para introducir los canales (ec: \ref{ec:rep_sist_abierto} ).}.
 
 Al trabajar con sistemas compuestos puede darse el caso donde no conozcamos
 uno, o varios de los estados que describan a sus subsistemas. Entonces, para
@@ -506,15 +498,21 @@ Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto.
 % }}}
 % }}}
 \section{Circuitos Cuánticos} % {{{
+\label{introduccion} 
 % Intro {{{
-Este capítulo estudiará las propiedades y definiciones esenciales de la computación cuántica para entender los circuitos cuánticos. Comenzaremos describiendo las compuertas cuánticas y su acción sobre estados de qubits, incluyendo cómo se transforman en la esfera de Bloch. También exploraremos las mediciones cuánticas y las transformaciones necesarias para medir en distintas bases. Finalmente, describiremos la plataforma de \textit{IBM Quantum Experience} donde se implementarán nuestros circuitos cuánticos, mencionando sus capacidades y limitaciones para entender cómo inicializar estados en circuitos cuánticos. Los conocimientos y técnicas
-adquiridas a lo largo de esta sección nos darán las bases necesarias para
-trabajar con estados y canales cuánticos en las próximas secciones. \label{introduccion} \cpnote{Falta una miniintro que puede ser de un par de frases posiblemente diciendo lo que vas a hablar y porque.} \felnote{Corregido: le agregué una introducción \ref{introduccion}}
-
+Este capítulo estudiará las propiedades y definiciones esenciales de la
+computación cuántica para entender los circuitos cuánticos. Comenzaremos
+describiendo las compuertas cuánticas y su acción sobre estados de qubits,
+incluyendo cómo se transforman en la esfera de Bloch. También exploraremos las
+mediciones cuánticas y las transformaciones necesarias para medir en distintas
+bases. Finalmente, describiremos la plataforma de \textit{IBM Quantum
+Experience} donde se implementarán nuestros circuitos cuánticos, mencionando
+sus capacidades y limitaciones para entender cómo inicializar estados en
+circuitos cuánticos. Los conocimientos y técnicas adquiridas a lo largo de esta
+sección nos darán las bases necesarias para
+trabajar con estados y canales cuánticos en las próximas secciones.
 % }}}
 \subsection{Compuertas y mediciones cuánticas} % {{{
-
-\cpnote{Revisa redaccion}\felnote{Corregido: revisé la redacción nuevamente. También le pedí ayuda a subadra para verificarla.}
 
 Previo a hablar sobre compuertas cuánticas, es necesario introducir una forma
 de representar geométricamente al qubit. Para ello utilizamos la esfera de
@@ -528,7 +526,7 @@ cambios del estado de un qubit bajo diversas transformaciones unitarias $U$.
 \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}.}
     \label{fig:Bloch}
 \end{figure}
-La representación de un qubit en la esfera de Bloch esta dada por la ecuación :\cpnote{esta frase no tiene sentido. porque dices quue vamos a describir una representacion???} \felnote{Corregido: esto si fue error de redacción mío, en lugar de poner 'esta dada' había puesto 'se describe' (ahora debe decir : esta dada)}: 
+La representación de un qubit en la esfera de Bloch esta dada por la ecuación: 
 \begin{equation}
     \label{ec:Bloch_rep}
     \ket{\psi} = \cos{\frac{\theta}{2}}\ket{0}+ e^{i\phi}\sin{\frac{\theta}{2}}\ket{1},
@@ -547,7 +545,12 @@ y = |\textbf{r}| \sin{(\theta)} \sin{(\phi)} \\
 z = |\textbf{r}| \cos{(\theta)}.
 \end{matrix}\right. 
 \end{equation}
-El valor absoluto $|\textbf{r}|=1$ para estados puros, mientras que $|\textbf{r}|<1$ para estados mixtos. Notemos que los estados puros se encuentran en la superficie de la esfera de Bloch, mientras que los estados mixtos en el interior. Por lo tanto, obtenemos otra representación útil de la ecuación \ref{ec:Bloch_rep} mediante el operador $\rho$ para estados puros como :
+El valor absoluto $|\textbf{r}|=1$ para estados puros, mientras que
+$|\textbf{r}|<1$ para estados mixtos. Notemos que los estados puros se
+encuentran en la superficie de la esfera de Bloch, mientras que los estados
+mixtos en el interior. Por lo tanto, obtenemos otra representación útil de la
+ecuación \ref{ec:Bloch_rep} mediante el operador $\rho$ para estados puros como
+:
 \begin{equation}    \label{ec:vec_bloch}
     \rho  = \frac{1}{2} ( \mathbb{1} + \textbf{r} \cdot \sigma),
 \end{equation}
@@ -569,7 +572,9 @@ donde $\sigma $ es llamado el vector de Pauli, con las matrices:
 \end{equation}
 
 Las compuertas cuánticas son operadores unitarios reversibles $U$ de dimensión
-$n\times n $. Estas actúan linealmente sobre qubits que pueden estar en superposición. Además, se visualizan por cajas que contienen las iniciales del operador aplicado (ver figura \ref{fig:compuerta}). 
+$n\times n $. Estas actúan linealmente sobre qubits que pueden estar en
+superposición. Además, se visualizan por cajas que contienen las iniciales del
+operador aplicado (ver figura \ref{fig:compuerta}). 
 
   \begin{figure}[h]
         \centering
@@ -587,7 +592,12 @@ Los operadores $U$ que actúan sobre un qubit son de dimensión $2 \times 2$, y 
     u_{10} & u_{11} 
     \end{pmatrix}.
 \end{equation}
-Nos enfocaremos en un conjunto específico de compuertas de uno y varios qubits necesarias para este trabajo, comenzando con las compuertas de rotación en los ejes de la esfera de Bloch: $R_x$, $R_y$ y $R_z$. Estas compuertas rotan el estado del qubit alrededor de cada eje de la esfera de Bloch y pueden interpretarse como versiones parametrizadas de los operadores de Pauli (ver ecuación \ref{ec:pauli_matrix}). La representación de cada rotación es:
+Nos enfocaremos en un conjunto específico de compuertas de uno y varios qubits
+necesarias para este trabajo, comenzando con las compuertas de rotación en los
+ejes de la esfera de Bloch: $R_x$, $R_y$ y $R_z$. Estas compuertas rotan el
+estado del qubit alrededor de cada eje de la esfera de Bloch y pueden
+interpretarse como versiones parametrizadas de los operadores de Pauli (ver
+ecuación \ref{ec:pauli_matrix}). La representación de cada rotación es:
 \begin{align}
     R_x(\theta) &=  \begin{bmatrix}
     \cos{(\theta)} & -i\sin{(\theta)}\\
@@ -602,7 +612,9 @@ Nos enfocaremos en un conjunto específico de compuertas de uno y varios qubits 
     0 & e^{i\theta} 
     \end{bmatrix}.
 \end{align}
-Si aplicamos una rotación con un ángulo $\pi/2$ es equivalente a aplicar los operadores de Pauli $X,Y,Z$. Esto cambia la dirección del estado en su respectivo eje (ver figura \ref{fig:rep_pauli}). 
+Si aplicamos una rotación con un ángulo $\pi/2$ es equivalente a aplicar los
+operadores de Pauli $X,Y,Z$. Esto cambia la dirección del estado en su
+respectivo eje (ver figura \ref{fig:rep_pauli}). 
 
 \begin{figure}[h!] % {{{
     \centering
@@ -647,8 +659,9 @@ La matriz que la describe es
     \end{pmatrix},
 \end{equation} 
 Su acción se ve como una rotación de $\pi$ radiantes sobre el eje
-$\frac{(x+z)}{\sqrt{2}}$ en la esfera de Bloch.  También puede descomponerse como la sucesión de $\pi$ radianes en el eje $x$, seguido de una rotación de
-$\pi/2$ en $y$. (ver figura \ref{fig:hadamard}).
+$(x+z)/\sqrt{2}$ en la esfera de Bloch.  También puede descomponerse como la
+sucesión de $\pi$ radianes en el eje $x$, seguido de una rotación de $\pi/2$ en
+$y$ (ver figura \ref{fig:hadamard}).
 
 \begin{figure}
     \centering
