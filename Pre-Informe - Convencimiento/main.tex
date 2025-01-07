@@ -813,15 +813,15 @@ capacidad de hasta 5000 qubits \cpnote{dudo este numero. tienes alguna referenci
 computadoras cuánticas reales,  con capacidad de hasta 127 qubits de forma
 gratuita \cite{ibm_quantum_resources}\cpnote{Checa, no se si siga siendo gratuito y no se si ese numero de 7 está 
 actualizado} \felnote{Corregido: lo actualicé a 127 (https://quantum.ibm.com/services/resources) , pero también quisiera que lo hablaramos.}. En este trabajo haremos uso de los servicios gratuitos en la
-plataforma.  Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico para que se adapte a la topología de un dispositivo cuántico específico. También optimiza sus instrucciones para su ejecución en computadoras cuánticas con presencia de ruido.(ver figura \ref{fig:transpiling}). 
+plataforma.  
+
+Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico para que se adapte a la topología de un dispositivo cuántico específico. También optimiza sus instrucciones para su ejecución en computadoras cuánticas con presencia de ruido.(ver figura \ref{fig:transpiling}). 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.15]{imagenes/transpiling_core_steps.png}
     \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM} \textbf{Fuente}: IBM Quantum API \cite{ibm_quantum_api}
     \label{fig:transpiling}
 \end{figure}
-
-%=======================
 La topología del sistema influye directamente en como se implementan las interacciones entre qubits dentro del circuito cuántico, especialmente cuando se hacen operaciones entre qubits que no estan conectados de forma uniforme (ver figura \ref{fig:topos}). 
 \begin{figure}[h]
     \centering
@@ -830,7 +830,7 @@ La topología del sistema influye directamente en como se implementan las intera
     \label{fig:topos}
 \end{figure}
 \begin{ex} \label{ex:transpilation} \end{ex}
-El circuito cuántico mostrado en la figura \ref{fig:circuito7} aplica una compuerta $Z$ al qubit $q_3$ y luego una compuerta $CNOT$ entre los qubits $q_3$ y $q_0$. De manera similar, los qubits $q_2$ y $q_0$ interactúan a través de otra compuerta $CNOT$. Supongamos que buscamos ejecutar este circuito en la computadora cuántica con la topología de la figura \ref{fig:circuito7}. Ya que los qubits $q_0,q_3$ y $q_0,q_2$ no interaccionan directamente, debemos reescribir nuestro circuito para esta topología. La transpilación resultante se puede ver en la figura \ref{fig:circuito8}).  
+El circuito cuántico mostrado en la figura \ref{fig:circuito7}  se aplica una compuerta $Z$ al qubit $q_3$ , segudo una compuerta $CNOT$ entre los qubits $q_3$ y $q_0$. De forma similar, los qubits $q_2$ y $q_0$ interactúan a través de otra compuerta $CNOT$. Supongamos que buscamos ejecutar este circuito en la computadora cuántica con la topología de la figura \ref{fig:topos}. Ya que los qubits $q_0,q_3$ y $q_0,q_2$ no interaccionan directamente, debemos reescribir nuestro circuito para esta topología. La transpilación resultante se puede ver en la figura \ref{fig:circuito8}).  
 
 \begin{figure}[h]
 \centering
