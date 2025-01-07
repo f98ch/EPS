@@ -198,7 +198,7 @@ El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para e
 En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
 
 \cpnote{Esta es la intro total? Me parece que el primer parrafo y el segundo no están 
-bien conectados}
+bien conectados} \felnote{No lo es. Pensaba dejarla al final de la redacción para cuadrar con los puntos finales.}
 % }}}
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}% {{{
 \section{Introducción} % Intro {{{
@@ -735,7 +735,7 @@ del qubit target (ver figura \ref{fig:circuito0}).
 Por el lado de  la medición cuántica, se representa mediante un símbolo de
 ``medidor'' \cpnote{las comillas dobles son problematicas en Latex. Checa por ahi en 
 internet como se hace. Ahora ya corregi estas y no encontre mas, pero cuidado
-si las quieres usar de nuevo.}
+si las quieres usar de nuevo.} \felnote{Muchas gracias. Si gustas puedo cambiarlo mejor a comilla simple?}
 que colapsa el estado cuántico del qubit y almacena el resultado en
 bits clásicos (ver figura \ref{fig:circuito2}). En los diagramas, una línea
 simple representa a los qubits, mientras que una línea doble indica los bits
@@ -752,8 +752,8 @@ clásicos resultantes de la medición.
 
 Al conocer la composición de circuitos cuánticos, es importante un principio
 que nos permitirá implementar circuitos en computadoras cuánticas
-reales\cpnote{porque necesitamos este principio para implemtnar circuitos?}.
-A continuación, usaremos la definición \cpnote{Es una definicion, o un principio?}
+reales\cpnote{porque necesitamos este principio para implemtnar circuitos?} \felnote{Lo uso de forma implícita cuando trazamos parcialmente el entorno. Lo quito?   }.
+A continuación, usaremos el principio \cpnote{Es una definicion, o un principio?} \felnote{Corregido: es un principio}
  de Nielsen y Chuang
 \cite{nielsen_chuang_2011}:
 %
@@ -763,7 +763,7 @@ del circuito. Si resultados de la medición son usados en algún punto del
 circuito, entonces los operadores de control clásicos son reemplazados por
 operadores condicionales cuánticos.   
 \end{prin}
-\cpnote{No recuerod donde usas eso en tu trabajo. Me lo puedes señalar?}
+\cpnote{No recuerod donde usas eso en tu trabajo. Me lo puedes señalar?}\felnote{idem con lo anterior. Lo uso de forma implícita cuando trazamos parcialmente un circuito , consideras mejor quitarlo?    }
 
 A menudo, las mediciones cuánticas se realizan como un paso intermedio en un
 circuito cuántico, y sus resultados se utilizan para controlar de manera
@@ -809,13 +809,11 @@ por medio de la librería de qiskit de \textit{Python}.
 
 Podemos correr circuitos cuánticos en la plataforma por medio de simuladores,
 que emulan de forma cercana el comportamiento de una computadora cuántica, con
-capacidad de hasta 5000 qubits \cpnote{dudo este numero. tienes alguna referencia?}. También podemos correr los circuitos en
-computadoras cuánticas reales,  con capacidad de hasta 7 qubits de forma
-gratuita\cpnote{Checa, no se si siga siendo gratuito y no se si ese numero de 7 está 
-actualizado}. En este trabajo haremos uso de los servicios gratuitos en la
-plataforma. 
- 
-Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico de modo que se ajuste a la topología de la computadora cuántica (ver figura \ref{fig:transpiling}). 
+capacidad de hasta 5000 qubits \cpnote{dudo este numero. tienes alguna referencia?} \felnote{Quisiera que hablemos sobre esto, desde la versión 1.0 ya no aparecen los simuladores en el dashboard (https://quantum.ibm.com/services/resources), hice pruebas con las funciones actuales y no pasa de 16 qubits. Encontré cuando sí decía 5000 en el internet archive (ver quantum\_resources\_archive.png) .}. También podemos correr los circuitos en
+computadoras cuánticas reales,  con capacidad de hasta 127 qubits de forma
+gratuita \cite{ibm_quantum_resources}\cpnote{Checa, no se si siga siendo gratuito y no se si ese numero de 7 está 
+actualizado} \felnote{Corregido: lo actualicé a 127 (https://quantum.ibm.com/services/resources) , pero también quisiera que lo hablaramos.}. En este trabajo haremos uso de los servicios gratuitos en la
+plataforma.  Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico para que se adapte a la topología de un dispositivo cuántico específico. También optimiza sus instrucciones para su ejecución en computadoras cuánticas con presencia de ruido.(ver figura \ref{fig:transpiling}). 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.15]{imagenes/transpiling_core_steps.png}
@@ -823,40 +821,42 @@ Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llam
     \label{fig:transpiling}
 \end{figure}
 
-En este trabajo, nos referiremos a las topologías como las distintas formas que pueden estar conectados los qubits en una computadora cuántica. En la plataforma de IBM las topologías que trabajaremos son la T, línea y H (ver figura \ref{fig:topos}). El uso cada topología afectará en la forma de acomodar las distintas transformaciones de un circuito.  
-
+%=======================
+La topología del sistema influye directamente en como se implementan las interacciones entre qubits dentro del circuito cuántico, especialmente cuando se hacen operaciones entre qubits que no estan conectados de forma uniforme (ver figura \ref{fig:topos}). 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.16]{imagenes/topologias.png}
-    \caption{Visualización de las topologías T,línea y H para la conexión de qubits en la plataforma de IBM}
+    \includegraphics[scale=0.5]{imagenes/topo_ibm_kyiv.png}
+    \caption{Topología correspondiente a la computadora cuántica IBM\_Kyiv de IBM, con capacidad de 127 qubits. Fuente: IBM Quantum Resources \cite{ibm_quantum_resources}}
     \label{fig:topos}
 \end{figure}
- \begin{ex} \label{ex:med_dif} \end{ex} El circuito cuántico de la figura \ref{fig:circuito7}, muestra al qubit $q_3$ pasando por una compuerta $Z$  y luego interaccionando con el qubit $q_0$ por medio de una compuerta $CNOT$. Caso similar  entre el qubit $q_2$ y $q_0$ con una $CNOT$; mientras que $q_2$ solo pasa por una compuerta $Y$. 
-    \noindent Supongamos que se busca ejecutar este circuito en una computadora cuántica de topología T como en la figura \ref{fig:circuito7}. Ya que los qubits $q_0,q_3$ y $q_0,q_2$ no interaccionan directamente, debemos reescribir nuestro circuito para esta topología. La solución bastaría con cambiar las operaciones realizadas de $q_0$ a $q_1$, ya que $q_1$ interacciona directamente con $q_3,q_2$ (ver figura \ref{fig:circuito8}).  
-        
-    \begin{figure}[h]
-        \centering
-        \begin{quantikz}
-        \lstick{$q_0$} & \qw  & \targ{} & \targ{}& \qw \\
-        \lstick{$q_1$} & \gate{Y} & \qw & \qw  & \qw \\
-        \lstick{$q_2$} & \qw & \qw & \ctrl{-2} & \qw \\
-        \lstick{$q_3$} & \gate{Z} & \ctrl{-3} & \qw  & \qw\\
-        \end{quantikz}
-        \caption{Circuito inicial correspondiente al ejemplo \ref{ex:med_dif}. \textbf{Fuente:} elaboración propia.}
-        \label{fig:circuito7}
-    \end{figure}
-    
-    \begin{figure}[h]
-        \centering
-        \begin{quantikz}
-        \lstick{$q_0$} & \gate{Y} & \qw & \qw  & \qw \\
-        \lstick{$q_1$} & \qw  & \targ{} & \targ{}& \qw \\
-        \lstick{$q_2$} & \qw & \qw & \ctrl{-1} & \qw \\
-        \lstick{$q_3$} & \gate{Z} & \ctrl{-2} & \qw  & \qw\\
-        \end{quantikz}
-        \caption{Circuito final correspondiente al ejemplo \ref{ex:med_dif}, ajustado a la topología T. \textbf{Fuente:} elaboración propia.}
-        \label{fig:circuito8}
-    \end{figure}
+\begin{ex} \label{ex:transpilation} \end{ex}
+El circuito cuántico mostrado en la figura \ref{fig:circuito7} aplica una compuerta $Z$ al qubit $q_3$ y luego una compuerta $CNOT$ entre los qubits $q_3$ y $q_0$. De manera similar, los qubits $q_2$ y $q_0$ interactúan a través de otra compuerta $CNOT$. Supongamos que buscamos ejecutar este circuito en la computadora cuántica con la topología de la figura \ref{fig:circuito7}. Ya que los qubits $q_0,q_3$ y $q_0,q_2$ no interaccionan directamente, debemos reescribir nuestro circuito para esta topología. La transpilación resultante se puede ver en la figura \ref{fig:circuito8}).  
+
+\begin{figure}[h]
+\centering
+\begin{quantikz}
+\lstick{$q_0$} & \qw      & \ctrl{3} & \ctrl{2} & \qw \\
+\lstick{$q_1$} & \qw      & \qw      & \qw      & \qw \\
+\lstick{$q_2$} & \qw      & \qw      & \targ{}  & \qw \\
+\lstick{$q_3$} & \gate{Z} & \targ{}  & \qw      & \qw
+\end{quantikz}
+\caption{Circuito inicial correspondiente al ejemplo \ref{ex:transpilation}. \textbf{Fuente:} elaboración propia.}
+\label{fig:circuito7}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\begin{quantikz}
+\lstick{$q_0$} & \qw      & \qw & \qw & \qw & \qw & \qw \\
+\lstick{$q_1$} & \gate{H} & \qw      & \qw      & \ctrl{1}  & \gate{H} & \qw\\
+\lstick{$q_2$} & \qw      & \ctrl{1}     & \gate{H}  & \targ{} & \gate{H} & \qw\\
+\lstick{$q_3$} & \gate{Z} & \targ{}  & \qw      & \qw & \qw & \qw
+\end{quantikz}
+\caption{Circuito final correspondiente al ejemplo \ref{ex:transpilation}, luego de ser transpilado. \textbf{Fuente:} elaboración propia.}
+\label{fig:circuito8}
+\end{figure}
+%=================================================
 
 
 
