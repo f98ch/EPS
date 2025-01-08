@@ -757,10 +757,7 @@ A continuación, usaremos el principio \cpnote{Es una definicion, o un principio
  de Nielsen y Chuang
 \cite{nielsen_chuang_2011}:
 %
-\begin{prin}\textbf{(Principio de medición diferida)}:  Las mediciones siempre pueden
-ser medidas de un punto intermedio de un circuito cuántico al final
-del circuito. Si resultados de la medición son usados en algún punto del
-circuito, entonces los operadores de control clásicos son reemplazados por
+\begin{prin}\textbf{(Principio de medición diferida)}:  Las mediciones intermedias pueden posponerse hasta el final del circuito cuántico. Si resultados de la medición son usados en algún punto del circuito, entonces los operadores de control clásicos son reemplazados por
 operadores condicionales cuánticos.   
 \end{prin}
 \cpnote{No recuerod donde usas eso en tu trabajo. Me lo puedes señalar?}\felnote{idem con lo anterior. Lo uso de forma implícita cuando trazamos parcialmente un circuito , consideras mejor quitarlo?    }
@@ -818,7 +815,7 @@ plataforma.
 Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico para que se adapte a la topología de un dispositivo cuántico específico. También optimiza sus instrucciones para su ejecución en computadoras cuánticas con presencia de ruido.(ver figura \ref{fig:transpiling}). 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.15]{imagenes/transpiling_core_steps.png}
+    \includegraphics[scale=0.20]{imagenes/transpiling_core_steps.png}
     \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM} \textbf{Fuente}: IBM Quantum API \cite{ibm_quantum_api}
     \label{fig:transpiling}
 \end{figure}
@@ -856,6 +853,9 @@ El circuito cuántico mostrado en la figura \ref{fig:circuito7}  se aplica una c
 \caption{Circuito final correspondiente al ejemplo \ref{ex:transpilation}, luego de ser transpilado. \textbf{Fuente:} elaboración propia.}
 \label{fig:circuito8}
 \end{figure}
+La transpilación de circuitos viene incorporada en la librería de Qiskit, es necesaria para ejecutar circuitos en computadoras cuánticas reales y será un componente clave del proyecto. Invitamos al lector a indagar más a detalle en la documentación de la librería \cite{qiskit_transpiler}.
+
+
 %=================================================
 
 
