@@ -712,7 +712,7 @@ Al medirlo en la base $\{\ket{+}, \ket{-}\}$, obtendremos probabilidades $|\alph
 Las mediciones en otras bases serán de utilidad para la tomografía de estado ya que hace uso de distintas mediciones en distintas bases para recuperar la información de un estado cuántico.
 % }}}
 \subsection{Composición de circuitos cuánticos} % {{{
-
+\felnote{Sección corregida}
 Un circuito cuántico es una rutina computacional con operadores que actúan
 sobre qubits. Los circuitos se conforman por cables, compuertas y mediciones.
 Un cable se usa como representación de un qubit en estado inicial $\ket{0}$.  
@@ -748,51 +748,7 @@ clásicos resultantes de la medición.
         \label{fig:circuito2}
     \end{figure}
 
-Al conocer la composición de circuitos cuánticos, es importante un principio
-que nos permitirá implementar circuitos en computadoras cuánticas
-reales\cpnote{porque necesitamos este principio para implemtnar circuitos?} \felnote{Lo uso de forma implícita cuando trazamos parcialmente el entorno. Lo quito?   }.
-A continuación, usaremos el principio \cpnote{Es una definicion, o un principio?} \felnote{Corregido: es un principio}
- de Nielsen y Chuang
-\cite{nielsen_chuang_2011}:
-%
-\begin{prin}\textbf{(Principio de medición diferida)}:  Las mediciones intermedias pueden posponerse hasta el final del circuito cuántico. Si resultados de la medición son usados en algún punto del circuito, entonces los operadores de control clásicos son reemplazados por
-operadores condicionales cuánticos.   
-\end{prin}
-\cpnote{No recuerod donde usas eso en tu trabajo. Me lo puedes señalar?}\felnote{idem con lo anterior. Lo uso de forma implícita cuando trazamos parcialmente un circuito , consideras mejor quitarlo?    }
 
-A menudo, las mediciones cuánticas se realizan como un paso intermedio en un
-circuito cuántico, y sus resultados se utilizan para controlar de manera
-condicional las compuertas cuánticas que siguen.  Este es el caso, por ejemplo,
-en un circuito de teleportación cuántica (ver figura \ref{fig:telep_cuant}).
-Sin embargo, estas mediciones pueden moverse al final del circuito,
-reemplazando las operaciones clásicas condicionales por operaciones cuánticas
-equivalentes (ver figura \ref{fig:telep_cuant_dif}).
-
-\begin{figure}[h]
-    \centering
-    \begin{quantikz}
-    \lstick{$\ket{\psi}$} \qw & \ctrl{1} & \gate{H} & \meter{$M_1$} & \cw & \cw & \cwbend{2} & \\
-    \lstick[wires=2]{$\ket{\beta_{00}}$} \qw & \targ{} & \qw & \meter{$M_2$} & \cw & \cwbend{1} \\
-    \qw & \qw & \qw & \qw & \qw & \gate{X^{M_2}} & \gate{Z^{M_1}} & \qw \rstick{$\ket{\psi}$}\\
-    \end{quantikz}
-    \caption{Circuito de teleportación cuántica. Las líneas dobles representan
-el traslado de información en bits clásicos. El estado $\ket{\beta_{00}}$ representa un estado de Bell. \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}.}
-    \label{fig:telep_cuant}
-\end{figure}	
-
-\begin{figure}[h]
-    \centering
-    \begin{quantikz}
-    \lstick{$\ket{\psi}$} \qw & \ctrl{1} & \gate{H} & \qw  & \ctrl{2} & \qw  & \meter{}\\
-    \lstick[wires=2]{$\ket{\beta_{00}}$} \qw & \targ{} & \qw &  \ctrl{1} & \qw & \qw & \meter{} \\
-    \qw & \qw & \qw & \gate{X} & \gate{Z} & \qw & \qw       \rstick{$\ket{\psi}$}\\
-    \end{quantikz}
-    \caption{Circuito equivalente de teleportación, usando el principio de medición diferida. \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}.}
-    \label{fig:telep_cuant_dif}
-\end{figure}
-
-
-% Desarrollaremos un principio importante para las mediciones en circuitos cuánticos: principio de medición diferida. El principio nos indica que las mediciones pueden ser llevadas siempre al final del circuito.  
 
 % }}}
 \subsection{Plataforma \textit{IBM Quantum Experience}} % {{{
@@ -803,21 +759,27 @@ ejecutar circuitos cuánticos válidos. La conexión a las computadoras se hace
 por medio de la librería de qiskit de \textit{Python}.  
 
 Podemos correr circuitos cuánticos en la plataforma por medio de simuladores,
-que emulan de forma cercana el comportamiento de una computadora cuántica, con
-capacidad de hasta 5000 qubits \cpnote{dudo este numero. tienes alguna referencia?} \felnote{Quisiera que hablemos sobre esto, desde la versión 1.0 ya no aparecen los simuladores en el dashboard (https://quantum.ibm.com/services/resources), hice pruebas con las funciones actuales y no pasa de 16 qubits. Encontré cuando sí decía 5000 en el internet archive (ver quantum\_resources\_archive.png) .}. También podemos correr los circuitos en
+que emulan de forma cercana el comportamiento de una computadora cuántica. Al mismo tiempo podemos correr los circuitos en
 computadoras cuánticas reales,  con capacidad de hasta 127 qubits de forma
-gratuita \cite{ibm_quantum_resources}\cpnote{Checa, no se si siga siendo gratuito y no se si ese numero de 7 está 
-actualizado} \felnote{Corregido: lo actualicé a 127 (https://quantum.ibm.com/services/resources) , pero también quisiera que lo hablaramos.}. En este trabajo haremos uso de los servicios gratuitos en la
+gratuita \cite{ibm_quantum_resources} \felnote{Corregido: Agregué el número de qubiits con cita}. En este trabajo haremos uso de los servicios gratuitos en la
 plataforma.  
 
 Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico para que se adapte a la topología de un dispositivo cuántico específico. También optimiza sus instrucciones para su ejecución en computadoras cuánticas con presencia de ruido.(ver figura \ref{fig:transpiling}). 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.20]{imagenes/transpiling_core_steps.png}
-    \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM} \textbf{Fuente}: IBM Quantum API \cite{ibm_quantum_api}
+    \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM} \textbf{Fuente}: IBM Quantum API \cite{qiskit_transpiler}
     \label{fig:transpiling}
 \end{figure}
-La topología del sistema influye directamente en como se implementan las interacciones entre qubits dentro del circuito cuántico, especialmente cuando se hacen operaciones entre qubits que no estan conectados de forma uniforme (ver figura \ref{fig:topos}). 
+La topología del sistema influye directamente en como se implementan las interacciones entre qubits dentro del circuito cuántico, especialmente cuando se hacen operaciones entre qubits que no estan conectados de forma uniforme (ver figuras \ref{fig:topos_kyiv} y  \ref{fig:topos}). 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{imagenes/ibm_kyiv_front.png}
+    \caption{Capacidades de la computadora Cuántica IBM\_Kyiv de IBM, con capacidad de 127 qubits. Fuente: IBM Quantum Resources. \cite{ibm_quantum_resources}}
+    \label{fig:topos_kyiv}
+\end{figure}
+
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{imagenes/topo_ibm_kyiv.png}
@@ -854,8 +816,10 @@ El circuito cuántico mostrado en la figura \ref{fig:circuito7}  se aplica una c
 La transpilación de circuitos viene incorporada en la librería de Qiskit, es necesaria para ejecutar circuitos en computadoras cuánticas reales y será un componente clave del proyecto. Invitamos al lector a indagar más a detalle en la documentación de la librería \cite{qiskit_transpiler}.
 
 
-%=================================================
 
+%=================================================
+\felnote{Agregué un newpage para que no se crucen imágenes de 1.3 con 1.4.}
+\newpage
 
 
 
@@ -870,7 +834,9 @@ Supondremos que la interacción entre ambos sistemas se da por una transformaci�
 \begin{equation}
     \mathcal{E}(\rho_{\text{sp}}) = \text{Tr}_{\text{ent}}[ U( \rho_{\text{sp}} \otimes \rho_{\text{ent}} ) U^\dagger ].
 \end{equation}
-Notemos que si $U$ no involucra ninguna interacción entre el sistema y el entorno entonces  $\mathcal{E}(\rho_{sp}) =  \widetilde{U} \rho \widetilde{U}^\dagger \footnotemark$\footnotetext{A partir de los siguientes enunciados se utilizará $\rho = \rho_{\text{sp}}$ ya que se entiende de forma implícita que nos referimos a $\rho$ como el sistema principal.} , donde $\widetilde{U}$ es la parte de $U$ que interactúa solo con el sistema principal. Este proceso describe cómo los operadores de evolución de sistemas cuánticos cerrados pueden ser generalizados a operadores cuánticos $\mathcal{E}$ (también conocidos como superoperadores), que mapean matrices de densidad del sistema a nuevos estados cuánticos, teniendo en cuenta las influencias del entorno.
+
+Notemos que si $U$ no involucra ninguna interacción entre el sistema y el entorno entonces  $\mathcal{E}(\rho_{sp}) =  \widetilde{U} \rho \widetilde{U}^\dagger \footnotemark$\footnotetext{A partir de los siguientes enunciados se utilizará $\rho = \rho_{\text{sp}}$ ya que se entiende de forma implícita que nos referimos a $\rho$ como el sistema principal.} , donde $\widetilde{U}$ es la parte de $U$ que interactúa solo con el sistema principal. 
+Este proceso describe cómo los operadores de evolución de sistemas cuánticos cerrados pueden ser generalizados a operadores cuánticos $\mathcal{E}$ (también conocidos como superoperadores), que mapean matrices de densidad del sistema a nuevos estados cuánticos, teniendo en cuenta las influencias del entorno.
 
 Los operadores cuánticos pueden ser representados de forma explícita en términos del espacio de Hilbert de los operadores del sistema principal. Donde $\ket{e_k}$ es una base ortonormal del espacio del entorno, y $\rho_{ent} = \ketbra{e_0}$ su estado inicial, asumimos que:
 \begin{align}
@@ -906,6 +872,40 @@ que nos deja la segunda representación de la matriz de Choi
 \Lambda_{\mathcal{E}} = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}).
 \end{equation}
 Esta expresión representa la superposición de todas las posibles transformaciones que $\mathcal{E}$ puede aplicar sobre la base computacional del sistema principal luego de su interacción con el entorno. Esto permite ver el efecto del canal sobre cualquier estado del sistema principal.
+
+\begin{ex} \label{Ejemplo 1.0.1} 
+\end{ex}
+El canal despolarizante  (DP, por sus siglas en inglés de Depolarizing Channel)  es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
+\begin{equation} \label{ec:superop_depolarizing}
+\mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho ,
+\end{equation}
+donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}\\
+Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
+\begin{equation}
+\mathcal{E}(\ketbra{i}{j}) = \text{Tr}(\ketbra{i}{j})  p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
+\end{equation}
+Por lo que podemos ver su acción en los estados de la base:
+\begin{alignat*}{2}
+     \mathcal{E}( \ketbra{0}) = & (1 - \frac{p}{2} ) \ketbra{0} + \frac{p}{2} \ketbra{1}, \\
+     \mathcal{E}( \ketbra{0}{1}) = & (1 - p ) \ketbra{0}{1},\\
+      \mathcal{E}( \ketbra{1}{0}) = & (1 - p ) \ketbra{1}{0},\\
+           \mathcal{E}( \ketbra{1}) = & (1 - \frac{p}{2} ) \ketbra{1} + \frac{p}{2} \ketbra{0}.
+\end{alignat*}
+Recordando la ecuación \ref{ec:Choi_ketbra}, escribimos su matriz de Choi:
+% \begin{equation}
+% \Lambda_{\mathcal{E}} = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left(  \text{Tr}(\ketbra{i}{j} ) p  \frac{I}{2} +  (1-p) \ketbra{i}{j}  \right).
+% \end{equation}
+% que consiguientemente nos da la matriz 
+\begin{equation}\label{ec:choi_depolarizing}
+    \Lambda_\mathcal{E} = 
+\begin{pmatrix}
+1 - \frac{p}{2} & 0 & 0 & 1 - p \\
+0 & \frac{p}{2} & 0 & 0 \\
+0 & 0 & \frac{p}{2} & 0 \\
+1 - p & 0 & 0 & 1 - \frac{p}{2}
+\end{pmatrix}.
+\end{equation}
+Notemos cómo $\Lambda_{\mathcal{E}}$ refleja el funcionamiento del canal despolarizante: las entradas diagonales muestran cómo el canal mezcla el estado original con la matriz identidad, dependiendo de $p$, reduciendo la pureza del estado. Las entradas no diagonales indican las coherencias introducidas por el canal.
 
 
 La matriz de Choi tiene  varias propiedades descritas en el paper de  G. Homa  y otros \cite{Choi2024},  que permiten describir completamente un canal cuántico y hacer una correlación con la representación de Kraus:
@@ -1018,8 +1018,7 @@ La matriz de Choi tiene  varias propiedades descritas en el paper de  G. Homa  y
     Esto implica que para cada par $i, j$, se debe cumplir que $\mathcal{F}(\ketbra{i}{j}) = \mathcal{G}(\ketbra{i}{j})$. Dado que los elementos $\ketbra{i}{j}$ abarcan toda la base del espacio de operadores, implica que $\mathcal{F} = \mathcal{G}$ para todos los posibles estados en el espacio $\blacksquare$.
 \end{enumerate}
 
-Tras demostrar estas propiedades, notemos  que podemos analizar si un operador $\mathcal{E}$ es CPTP al igual que con los operadores de Kraus. Sin embargo hay una diferencia fundamental entre ambas representaciones: la representación de Kraus \textit{no es única} para un canal cuántico $\mathcal{E}$.
-Esta demostración se da por el Teorema 8.1 en Nielsen y Chuang \cite{nielsen_chuang_2011}:
+Tras demostrar estas propiedades, es importante establecer una diferencia fundamental entre la representación de Choi y la de Kraus: la representación de Choi es única para un canal cuántico $\mathcal{E}$. Esta demostración se da por el Teorema 8.1 en Nielsen y Chuang \cite{nielsen_chuang_2011}: 
 
 \begin{thm}\textbf{(Teorema de libertad unitaria en la representación de Kraus):}  Supongamos dos conjuntos de operadores de Kraus $\{E_i, \ldots, E_m\}$ y $\{F_1, \ldots, F_r\}$ que representan el mismo canal cuántico. Podemos asegurar que $m = n$ añadiendo ceros a la lista más corta de operadores. Entonces, $\{E_i\}$ y $\{F_j\}$ describen el mismo canal cuántico si y solo si existe una matriz unitaria $U$ tal que $E_i = \sum_j u_{ij} F_j$, donde $u_{ij}$ es un elemento de la matriz unitaria $U$.
 \end{thm}
@@ -1037,56 +1036,20 @@ Por otro lado, cualquier estado $\ket{\psi}$ puede expresarse en términos de $\
 \begin{equation}
 E_i \ket{\psi} = \sum_j u_{ij} F_j \ket{\psi}.
 \end{equation}
-Esto demuestra que $E_i$ puede ser expresado como una combinación lineal de $\{F_j\}$ con coeficientes unitarios, mostrando que la representación de Kraus no es única y depende de la elección de la matriz unitaria $U$.\\
+Esto demuestra que $E_i$ puede ser expresado como una combinación lineal de $\{F_j\}$ con coeficientes unitarios, mostrando que la representación de Kraus no es única y depende de la elección de la matriz unitaria $U$. $\blacksquare$
+
 Por lo tanto, en adelante utilizaremos la notación de la matriz de Choi, ya que nos será de utilidad para la reconstrucción de canales cuánticos en la tomografía de proceso y la fidelidad de proceso al ejecutarlo en computadoras cuánticas.
 
-\begin{ex} \label{Ejemplo 1.0.1} 
-\end{ex}
-El canal despolarizante  (DP, por sus siglas en inglés de Depolarizing Channel)  es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
-\begin{equation} \label{ec:superop_depolarizing}
-\mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho ,
-\end{equation}
-donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}\\
-Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
-\begin{equation}
-\mathcal{E}(\ketbra{i}{j}) = \text{Tr}(\ketbra{i}{j})  p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
-\end{equation}
-Por lo que podemos ver su acción en los estados de la base:
-\begin{alignat*}{2}
-     \mathcal{E}( \ketbra{0}) = & (1 - \frac{p}{2} ) \ketbra{0} + \frac{p}{2} \ketbra{1}, \\
-     \mathcal{E}( \ketbra{0}{1}) = & (1 - p ) \ketbra{0}{1},\\
-      \mathcal{E}( \ketbra{1}{0}) = & (1 - p ) \ketbra{1}{0},\\
-           \mathcal{E}( \ketbra{1}) = & (1 - \frac{p}{2} ) \ketbra{1} + \frac{p}{2} \ketbra{0}.
-\end{alignat*}
-Recordando la ecuación \ref{ec:Choi_ketbra}, escribimos su matriz de Choi:
-% \begin{equation}
-% \Lambda_{\mathcal{E}} = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left(  \text{Tr}(\ketbra{i}{j} ) p  \frac{I}{2} +  (1-p) \ketbra{i}{j}  \right).
-% \end{equation}
-% que consiguientemente nos da la matriz 
-\begin{equation}\label{ec:choi_depolarizing}
-    \Lambda_\mathcal{E} = 
-\begin{pmatrix}
-1 - \frac{p}{2} & 0 & 0 & 1 - p \\
-0 & \frac{p}{2} & 0 & 0 \\
-0 & 0 & \frac{p}{2} & 0 \\
-1 - p & 0 & 0 & 1 - \frac{p}{2}
-\end{pmatrix}.
-\end{equation}
-Notemos cómo $\Lambda_{\mathcal{E}}$ refleja el funcionamiento del canal despolarizante: las entradas diagonales muestran cómo el canal mezcla el estado original con la matriz identidad, dependiendo de $p$, reduciendo la pureza del estado. Las entradas no diagonales indican las coherencias introducidas por el canal. Así, $\Lambda_{\mathcal{E}}$  nos proporciona una representación completa del efecto del canal despolarizante sobre la base computacional.  
 
-Los canales cuánticos representarán un papel al implementarse en computadoras cuánticas. En los siguientes capítulos se detallará el proceso para implementar su matriz de Choi y reconstruirla en sistemas cuánticos.
 
-\subsection{Tomografía y Fidelidad de Proceso Cuántico} % {{{
+\subsection{Tomografía de Proceso Cuántico} % {{{
 La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes de hablar de la tomografía es necesario conocer la tomografía de estado cuántico.  
+
 
 La tomografía de estado cuántico es un proceso para reconstruir
 experimentalmente un estado desconocido a partir de un conjunto de mediciones
-\cite{nielsen_chuang_2011}. El problema básico es que no existe medición
-cuántica que pueda distinguir entre estados como $\ket{0}$ y
-$(\ket{0}+\ket{1})/\sqrt{2}$ con certeza. No obstante, es posible estimar
-$\rho$ si tenemos un gran número de copias de $\rho$. Mencionaremos el proceso
-indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011}. 
-
+\cite{nielsen_chuang_2011}. Es posible estimar $\rho$ si tenemos un gran número de copias del mismo. Mencionaremos el proceso
+indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011}:
 
 Consideremos un estado $\rho$ y los operadores $\{\frac{\mathcal{I}}{\sqrt{2}}
 \frac{X}{\sqrt{2}},  \frac{Y}{\sqrt{2}},  \frac{Z}{\sqrt{2}} \} $ que forman un
@@ -1138,7 +1101,8 @@ Por ende, el circuito cuántico debe ser medido en cada una de las bases (ver fi
         \label{eq:circuitos_tomoestado}
     \end{figure}
 
-Ya que conocemos como realizar la tomografía de estado, podemos usarla para realizar tomografía de proceso. La tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011}. 
+
+Por otra parte,  la tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011}: 
 
 Sea $\rho_j$ , $1\leq j \leq d^2$ una base linealmente independiente del espacio de matrices $d\times d$, es decir, que cualquier matriz $d \times d$ puede ser escrita como una combinación linear única de $\rho_j$.  Una elección conveniente de operadores es $\ketbra{n}{m}$. Por lo tanto, los estados de salida $\mathcal{E}(\ketbra{n}{m})$ pueden ser considerados preparando los estados de entrada:
 \begin{itemize}
@@ -1147,7 +1111,7 @@ Sea $\rho_j$ , $1\leq j \leq d^2$ una base linealmente independiente del espacio
     \item$\ket{+} = \frac{\ket{n} + \ket{m}}{\sqrt{2}}$,
     \item$\ket{-} = \frac{\ket{n} + i\ket{m}}{\sqrt{2}}$.
 \end{itemize}
-luego, se forman combinaciones lineales de $\mathcal{E} (\ketbra{n}), \ketbra{m},\mathcal{E}(\ketbra{+})$ y $\mathcal{E}(\ketbra{-})$ de la forma:
+Luego se forman combinaciones lineales de $\mathcal{E} (\ketbra{n}), \ketbra{m},\mathcal{E}(\ketbra{+})$ y $\mathcal{E}(\ketbra{-})$ de la forma:
 \begin{equation}
     \mathcal{E}(\ket{n}\bra{m}) = \mathcal{E}(\ket{+}\bra{+}) + i \mathcal{E}(\ket{-}\bra{-}) - \frac{1 + i}{2} \mathcal{E}(\ket{n}\bra{n}) - \frac{1 + i}{2} \mathcal{E}(\ket{m}\bra{m}).
 \end{equation}
