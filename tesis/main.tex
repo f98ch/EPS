@@ -12,7 +12,7 @@
 
 % Descomentar para anular recuadros en los hiperenlaces dentro del pdf
 \hypersetup{pdfborder={0 0 0}}
-
+\usepackage{bm} 
 % Teoremas ---------------------------------------------------------
 % estos ambientes son para teoremas, lemas, corolarios, otros
 % si no los utiliza los puede obviar en su trabajo de graduación
@@ -712,6 +712,7 @@ Al medirlo en la base $\{\ket{+}, \ket{-}\}$, obtendremos probabilidades $|\alph
 Las mediciones en otras bases serán de utilidad para la tomografía de estado ya que hace uso de distintas mediciones en distintas bases para recuperar la información de un estado cuántico.
 % }}}
 \subsection{Composición de circuitos cuánticos} % {{{
+\felnote{Sección corregida}
 Un circuito cuántico es una rutina computacional con operadores que actúan
 sobre qubits. Los circuitos se conforman por cables, compuertas y mediciones.
 Un cable se usa como representación de un qubit en estado inicial $\ket{0}$.  
@@ -760,8 +761,7 @@ por medio de la librería de qiskit de \textit{Python}.
 Podemos correr circuitos cuánticos en la plataforma por medio de simuladores,
 que emulan de forma cercana el comportamiento de una computadora cuántica. Al mismo tiempo podemos correr los circuitos en
 computadoras cuánticas reales,  con capacidad de hasta 127 qubits de forma
-gratuita \cite{ibm_quantum_resources}. En este trabajo haremos uso de los
-servicios gratuitos en la
+gratuita \cite{ibm_quantum_resources} \felnote{Corregido: Agregué el número de qubiits con cita}. En este trabajo haremos uso de los servicios gratuitos en la
 plataforma.  
 
 Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llamado transpilación. Este se encarga de reescribir un circuito cuántico para que se adapte a la topología de un dispositivo cuántico específico. También optimiza sus instrucciones para su ejecución en computadoras cuánticas con presencia de ruido.(ver figura \ref{fig:transpiling}). 
@@ -818,8 +818,8 @@ La transpilación de circuitos viene incorporada en la librería de Qiskit, es n
 
 
 %=================================================
-% \felnote{Agregué un newpage para que no se crucen imágenes de 1.3 con 1.4.}
-% \newpage
+\felnote{Agregué un newpage para que no se crucen imágenes de 1.3 con 1.4.}
+\newpage
 
 
 
@@ -832,6 +832,7 @@ Una forma natural de describir la dinámica de un sistema cuántico abierto es c
 \end{equation}
 Supondremos que la interacción entre ambos sistemas se da por una transformación unitaria $U$, luego de esto, el sistema ya no interactúa con el entorno resultando en el estado final del sistema pincipal $\mathcal{E}$:
 \begin{equation}
+    \label{ec:sistema_principal}
     \mathcal{E}(\rho_{\text{sp}}) = \text{Tr}_{\text{ent}}[ U( \rho_{\text{sp}} \otimes \rho_{\text{ent}} ) U^\dagger ].
 \end{equation}
 
@@ -1043,7 +1044,7 @@ Por lo tanto, en adelante utilizaremos la notación de la matriz de Choi, ya que
 
 
 \subsection{Tomografía de Proceso Cuántico} % {{{
-La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes de hablar de la tomografía es necesario conocer la tomografía de estado cuántico.  
+La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes es necesario conocer la tomografía de estado cuántico.  
 
 
 La tomografía de estado cuántico es un proceso para reconstruir
@@ -1101,8 +1102,7 @@ Por ende, el circuito cuántico debe ser medido en cada una de las bases (ver fi
         \label{eq:circuitos_tomoestado}
     \end{figure}
 
-
-Por otra parte,  la tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011}: 
+La tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011}: 
 
 Sea $\rho_j$ , $1\leq j \leq d^2$ una base linealmente independiente del espacio de matrices $d\times d$, es decir, que cualquier matriz $d \times d$ puede ser escrita como una combinación linear única de $\rho_j$.  Una elección conveniente de operadores es $\ketbra{n}{m}$. Por lo tanto, los estados de salida $\mathcal{E}(\ketbra{n}{m})$ pueden ser considerados preparando los estados de entrada:
 \begin{itemize}
@@ -1199,7 +1199,7 @@ y Chuang  \cite{nielsen_chuang_2011}, que da sentido a la ecuación
     \end{enumerate}
 
     
-Ya que conocemos la fidelidad de estado cuántico, podemos la similitud entre dos canales cuánticos por medio de la  fidelidad de proceso, $F_{\text{proc}}$, entre dos canales cuánticos $\mathcal{E}$ y $\mathcal{F}$, definida como:
+Ya que conocemos la fidelidad de estado cuántico, podemos calcular la similitud entre dos canales cuánticos por medio de la  fidelidad de proceso $F_{\text{proc}}$ entre dos canales cuánticos $\mathcal{E}$ y $\mathcal{F}$. Esta se define como:
 \begin{equation} \label{ec:fidel_proc}
 F_{\text{proc}}(\mathcal{E}, \mathcal{F}) = F(\rho_{\mathcal{E}}, \rho_{\mathcal{F}}), 
 \end{equation}
@@ -1213,21 +1213,119 @@ Esta métrica proporciona una medida cuantitativa de cuán similar es un canal c
 \chapter{ALGORITMOS VARIACIONALES CUÁNTICOS (VQA)} % {{{
 \section{Introducción}
 \section{Descripción de los VQA}
-Los Algoritmos Variacionales Cuánticos son una clase de algoritmos que combinan computación cuántica y clásica para resolver problemas de optimización.  
+%==================================
+Los VQA son algoritmos que entrenan a un circuito cuántico parametrizado $U(\bm{\theta})$ que luego es optimizado de forma clásica para resolver una tarea dada. Es importante establecer una definición formal, por ello usaremos la definición mencionada en el paper de Lorenzo Leone y otros \cite{HEA}:
 
-El \textit{ansatz} es una suposición inicial o una forma parametrizada del estado cuántico que se va a optimizar. La calidad del \textit{ansatz} afecta directamente la eficiencia del VQA .  
+Sea $O$ un operador Hermítico, cuyo estado fundamental codifique la solución de un problema de interés. En una tarea VQA, el objetivo es minimizar una función de costo $C(\bm{\theta})$, parametrizada a través de un circuito cuántico $U(\bm{\theta})$, para preparar el estado fundamental de $O$ a partir de un estado fiduciario $\ket{\psi_0}$.\felnote{Aquí me gustaría iniciar la siguiente frase sin sangría pero con espacio porque iniciaria en un nuevo parrafo, pero pertenece al mismo hilo.}
+En una tarea VQA usualmente se define una función de costo de la forma:
+\begin{equation}
+    C(\bm{\theta}) =  \text{Tr} \left[U(\bm{\theta}) \ketbra{\psi_0}{\psi_0} U^{\dagger}(\bm{\theta}) O \right],
+\end{equation}
+donde $\bm{\theta}$ es un conjunto de parámetros $ \bm{\theta}= (\theta_0,\theta_1,...,\theta_n)$. 
+El valor de $C(\bm{\theta})$ se obtiene a través de mediciones en la computadora cuántica, posteriormente se usa un algoritmo de optimización clásica para encontrar los parámetros óptimos $\theta^*$ de la forma:
+\begin{equation}
+\theta^* = \text{arg }\underset{\bm{\theta}} {\text{min}} C (\bm{\theta}).
+\end{equation}
 
-La función de costo $C(\theta)$ mide la calidad de la solución propuesta por el algoritmo cuántico. Esta función es evaluada en un circuito cuántico y luego optimizada clásicamente.  
+El aspecto más importante de los VQA es la elección del ansatz, que se refiere a las especificaciones para el arreglo y tipo de compuertas cuánticas en $U(\bm{\theta})$ (ver figura \ref{fig:ansatz_general}). El ansatz más comunmente usado es el \textit{Hardware Efficient-Ansatz} (HEA) cuyo objetivo principal es mitigar el efecto del ruido del hardware usando compuertas nativas del dispositivo específico que se esté usando.\felnote{ídem con la anotación pasada.}\\
 
-La optimización de la función de costo se realiza mediante métodos clásicos, como el descenso de gradientes, que ajustan los parámetros del \textit{ansatz} para minimizar la función de costo.  
- 
-El método de gradientes calcula la derivada de la función de costo respecto a los parámetros del \textit{ansatz} y ajusta estos parámetros para encontrar el mínimo de la función de costo.  
+La ventaja principal de los HEA es que están diseñados para minimizar la profundidad del circuito, que reduce los efectos adversos del ruido del hardware cuántico \cite{HEA}. Además, su diseño es independiente de la tarea a resolver, por lo que son más versátiles y aplicables a una variedad de problemas sin ajustes específicos.
+Generalmente asumimos que el circuito cuántico parametrizado se expresa cómo: 
+\begin{equation}
+    U(\bm{\theta}) = \prod\limits_{l} e^{-i\theta_lH_l} V_l.
+\end{equation}
+donde $\{V_l\}$ son operadores unitarios no parametrizados y $\{H_l\}$ son operadores de Pauli sin traza.
+En este trabajo consideraremos la instancia más profunda y eficiente que es el HEA alternador de capas unidimensional. Aquí se asume que los qubits físicos en el hardware están organizados en una cadena como lo vimos en la topología de las computadoras cuánticas de IBM en la figura \ref{fig:topos}. 
+Posteriormente, cada capa $L$ del circuito conecta cada qubit con su vecino cercano de forma alterna, similar a un ladrillo (ver figura \ref{fig:HEA_ansatz}).  
+\begin{figure}[h!]  
+    \begin{subfigure}[b]{0.47\linewidth}
+        \includegraphics[width=\linewidth]{imagenes/ansatz_esquema.jpg}
+        \caption{}
+        \label{fig:ansatz_general}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.55\linewidth}
+        \includegraphics[width=\linewidth]{imagenes/HEA_ansatz.jpg}
+        \caption{}
+        \label{fig:HEA_ansatz}
+    \end{subfigure}
+    \caption{(a) Diagrama esquemático de un ansatz, donde el operador unitario $U(\bm{\theta})$ puede ser expresado como el producto de $L$ unitarias $U_l(\theta_l)$ de forma secuencial actuando sobre un estado inicial. \textbf{Fuente}: M. Cerezo y otros \cite{VQA}. (b) Diagrama esquemático de un HEA donde se nota cómo este usa compuertas de dos qubits organizadas en forma de ladrillo. \textbf{Fuente}: Lorenzo Leone y otros \cite{HEA}.}
+    \label{fig:ansatz_comparacion}
+\end{figure}
 
 \section{Implementación de canales de un qubit usando VQA}
-Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$.  
-
-Hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit, para esto , nuestra función de costo a optimizar será la fidelidad de proceso entre la matriz de Choi teórica contra la reconstruida en una computadora cuántica.  
+Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$. Por ello hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit. Para esto nuestra función de costo a optimizar será la fidelidad de proceso como lo vimos en la ecuación \ref{ec:fidel_proc}:
+\begin{equation}
+    \label{ec:cost_func}
+    C(\bm{\theta}) = \frac{1}{d^2} F_{proc}\bigl( \Lambda_r(\bm{\theta}), \Lambda_{obj} \bigr),
+\end{equation}
+ donde $\Lambda_r$ es la matriz de Choi reconstruida tras realizar la tomografía de proceso sobre el circuito cuántico parametrizado, mientras que $\Lambda_{obj}$ es la matriz de Choi objetivo del canal cuántico a implementar.
  
+ Por otro lado, el HEA utilizado para este proyecto es el mismo utilizado en el paper de Huan-Yu Liu y otros
+\cite{Liu_2021} \cite{Sim_2019}, que combina compuertas sencillas de implementar entre operaciones de uno o dos qubits. Luego las capas son repetidas para incrementar la profundidad expresiva, por lo que la estructura del ansatz es:
+ \begin{equation}
+ \label{ec:ansatz}
+     U(\bm{\theta}) =\prod_{i=1}^{M} \prod_{j=1}^N U_{ent} (\theta_i)R_z(\theta_{ij})R_x(\theta_{ij2})R_z(\theta_{ij3}),
+ \end{equation}
+donde $N$ y $M$ son el número de qubits y capas en el circuito respectivamente. Para la parte de entrelazamiento $U_{ent}$ tomamos compuertas de control $cR_y$, por lo que en este caso los parámetros $\bm{\theta}$ son rotaciones de las compuertas del ansatz. 
+Podemos ver a este circuito cuántico como un sistema cerrado en la ecuación \ref{ec:rep_sist_abierto}, donde el sistema principal se obtiene luego de interactuar con el entorno como en la ecuación \ref{ec:sistema_principal}. 
+Notemos que este ansatz construye un estado puro de  $2n$ qubits de la forma:
+\begin{equation}
+    \ket{\psi(\bm{\theta})} = U(\bm{\theta})\ket{0}^{\otimes 2n},
+\end{equation}
+posteriormente se trazan parcialmente los $n$ qubits auxiliares  para obtener el ansatz :
+\begin{equation}
+    \text{Tr}_{anc}\left[\ketbra{\psi(\bm{\theta})}{\psi(\bm{\theta})}\right] = \mathcal{}\rho(\bm{\theta}),
+\end{equation} donde $\rho(\bm{\theta})$ representa al sistema luego de su interacción con el canal cuántico. 
+Ya que hemos definido la función de costo en la ecuación \ref{ec:cost_func}, se ejecuta la tomografía de proceso  sobre $\rho(\bm{\theta})$ para encontrar $\Lambda_{r}$ y comparar su fidelidad de proceso con la matriz de Choi del canal cuántico objetivo $\Lambda_{obj}$. Este proceso  se repite iterativamente como lo vimos en la sección anterior hasta que se alcancen los parámetros óptimos de la forma:
+\begin{equation}
+    \label{ec:argmin_cost}
+    \theta^* =  \text{arg }\underset{\bm{\theta}}{\text{min}} [ - C(\bm{\theta})].
+\end{equation}
+\begin{ex}\label{ex:depolarizing}   \end{ex}
+Supongamos que buscamos implementar el VQA para un canal despolarizante (DP), en este caso la matriz de Choi para un qubit $\Lambda_{obj}$ está definida por la ecuación \ref{ec:choi_depolarizing}. Por lo que podemos construir un ansatz de una capa y dos qubits resultando en (ver figura \ref{fig:ansatz_dp}) : 
+\begin{equation}
+    U(\bm{\theta}) = \prod_{j=1}^2 cR_y(\theta_i) R_z(\theta_{ij})R_x(\theta_{ij2})R_z(\theta_{ij3}).
+\end{equation}
+Iniciamos los parámetros iniciales $(\bm{\theta_0})$ de forma aleatoria y ejecutamos el VQA hasta alcanzar la minimización de la función de costo (\ref{ec:argmin_cost})(ver esquema en la figura \ref{fig:esquema_dp}). Notemos que esta matriz de Choi, se debe específicar para un valor específico de $p$. Por lo que se obtiene la matriz de $\Lambda_r(p)$. 
+\begin{figure}[h!] 
+    \centering 
+    \includegraphics[width=0.65\linewidth]{imagenes/ansatz tesis.png}
+    \caption{Ansatz perteneciente al ejemplo \ref{ex:depolarizing}, en donde se usa el HEA de la ecuación \ref{ec:ansatz} con restricción de una capa y dos qubits. \textbf{Fuente}: elaboración propia. }
+    \label{fig:ansatz_dp}
+    \end{figure}
+\begin{figure}[h!] 
+    \centering 
+    \includegraphics[width=0.70\linewidth]{imagenes/esquema_dp_v1.png}
+    \caption{Esquema de VQA para la implementación de canales cuánticos de un qubit. \textbf{Fuente}: elaboración propia, basado en esquema general de M. Cerezo y otros \cite{VQA}. }
+    \label{fig:esquema_dp}
+    \end{figure}
+
+Si ejecutamos este algoritmo en un simulador cuántico para una matriz objetivo del DP con $p=0.25$ tenemos que:
+\begin{equation}
+    \Lambda_{obj} = \begin{pmatrix}
+0.875 & 0 & 0 & 0.75 \\
+0 & 0.125 & 0 & 0 \\
+0 & 0 & 0.125 & 0 \\
+0.75 & 0 & 0 & 0.875
+\end{pmatrix},
+\end{equation}
+mientras que la matriz de Choi optimizada tras utilizar el VQA nos da como resultado :
+\begin{equation}
+  \Lambda_r =  \begin{pmatrix}
+(0.895+0.000i) & (-0.142+0.092i) & (0.123+0.056i) & (0.822-0.052i) \\
+(-0.142-0.092i) & (0.105+0.000i) & (-0.074+0.001i) & (-0.123-0.056i) \\
+(0.123-0.056i) & (-0.074-0.001i) & (0.125+0.000i) & (0.138-0.085i) \\
+(0.822+0.052i) & (-0.123+0.056i) & (0.138+0.085i) & (0.875+0.000i)
+\end{pmatrix},
+\end{equation}
+que corresponde a una fidelidad de proceso $F_{proc}= 0.9431$. Por lo que el circuito resultante de este ansatz optimizado para este valor de $p$ (ver figura \ref{fig:ansatz_p025}) tiene la capacidad de aplicar la acción de un DP en un simulador cuántico.
+\begin{figure}[h!] 
+    \centering 
+    \includegraphics[width=0.70\linewidth]{imagenes/ansatz_p025.png}
+    \caption{Ansatz optimizado para un DP con valor de despolarización $p=0.25$, esto fue optimizado en el simulador \texttt{AerSimulator} de Qiskit, IBM. \textbf{Fuente}: elaboración propia. }
+    \label{fig:ansatz_p025}
+    \end{figure}
 
 % }}}
 \chapter{RESULTADOS PARA EL CANAL DESPOLARIZANTE DE UN QUBIT } % {{{
@@ -1243,12 +1341,8 @@ de la librería Qiskit. A continuación, se enumeran las funciones utilizadas:
     \item \texttt{Choi\_matrix\_depolarizing(p)}: genera la matriz de Choi que
 corresponde al DP con probabilidad de depolarización $p$.
 
-    \item \texttt{Cirq\_ansq(qubits, parameters, layers)}: genera un \textit{ansatz} en
-un circuito cuántico de Qiskit. Toma como entradas el número de
- qubit, el listado de ángulos de rotación $\{\theta_i\}$ (indicados en
-\texttt{parameters}) y el número de capas del \textit{ansatz} (indicado en
-\texttt{layers}).
-
+    \item \texttt{Cirq\_ansq(qubits, parameters, layers)}: genera un HEA en un circuito cuántico de Qiskit. Toma como entradas el número de qubits, el listado de ángulos de rotación $\bm{\theta}$ (indicados en \texttt{parameters}) y el número de capas del ansatz (indicado en \texttt{layers}).
+    
     \item \texttt{ProcessTomography(circuit, measurement\_indices,
 preparation\_indices)}: función de Qiskit que genera los circuitos
 correspondientes a la tomografía de proceso para reconstruir la matriz de Choi
@@ -1275,14 +1369,14 @@ objetivo) \cite{Qiskit_documentation}, acorde a la ecuación
 sobre el sistema de una matriz de choi definida en \texttt{choi\_matrix()}.
 Este cálculo se realiza dependiendo de la dimensión del sistema cuántico (por
 defecto es para dos qubits).
-    \item \texttt{Cost\_func(params)}: genera el circuito \textit{ansatz} usando
+    \item \texttt{Cost\_func(params)}: genera el circuito ansatz usando
 \texttt{Cirq\_ansq()}. Posteriormente utiliza \texttt{ProcessTomography()} para
 ejecutar la tomografía de proceso sobre el primer qubit del circuito generado.
 Finalmente calcula la función de costo usando \texttt{Process\_fidelity()}
-entre la matriz de Choi reconstruida del circuito \textit{ansatz} y una matriz de Choi
+entre la matriz de Choi reconstruida del circuito ansatz y una matriz de Choi
 objetivo. Esta función usa como entrada global la matriz de Choi objetivo
 (\texttt{target} de la función \texttt{Process\_fidelity()}) y como entrada
-local la lista de rotaciones $\{\theta_i\}$ (definidas en  \texttt{params}).
+local la lista de rotaciones $\bm{\theta}$ (definidas en  \texttt{params}).
     \item \texttt{Minimize(fun, x0, method=None, tol)}: función de la librería
 \texttt{scipy} encargada de minimización una función escalar \texttt{fun}, de
 una o más variables. Esta función requiere un conjunto de parámetros iniciales
@@ -1303,23 +1397,23 @@ iteración. A continuación la describimos en detalle:
 \texttt{Optimizar\_depolarizacion(p\_values)}: función para optimizar la
 fidelidad del proceso cuántico para una lista de valores de $p$. \newline
 
-\noindent\textbf{Entrada:} lista de valores $p$ para optimizar el \textit{ansatz}.
+\noindent\textbf{Entrada:} lista de valores $p$ para optimizar el ansatz.
 
 \noindent\textbf{Salida:} DataFrame con los valores de $p$, la fidelidad
 optimizada, matriz de Choi objetivo, matriz de Choi reconstruida y los
-parámetros $\{\theta_i\}$ optimizados.
+parámetros $\bm{\theta}$ optimizados.
 
 \noindent\textbf{Utiliza:} \texttt{choi\_matrix\_depolarizing},
-\texttt{cirq\_\textit{ansatz}}, \texttt{ProcessTomography}, \texttt{process\_fidelity},
+\texttt{cirq\_ansatz}, \texttt{ProcessTomography}, \texttt{process\_fidelity},
 \texttt{cost\_func}, \texttt{minimize}. \newline
 
 Para cada valor de $p$ en \texttt{p\_values}: 
 \begin{enumerate}
     \item Generar una matriz de Choi dependiente de $p$ con \texttt{Choi\_matrix\_depolarizing()}.
     \item Iniciar a  \texttt{Cost\_func()} valuado en un conjunto inicial
-aleatorio de parámetros $\{\theta_i\}$. 
+aleatorio de parámetros $\bm{\theta}$. 
    \item Utilizar \texttt{Minimize()} para iterar recursivamente sobre
-\texttt{Cost\_func()}, ajustando los parámetros $\{\theta_i\}$ hasta alcanzar
+\texttt{Cost\_func()}, ajustando los parámetros $\bm{\theta}$ hasta alcanzar
 una convergencia definida por \texttt{tol}.
    \item Guardar los parámetros $\{ \theta_i\}$ que minimizan la función de
 costo. 
@@ -1327,7 +1421,7 @@ costo.
 veces en el simulador \texttt{AerSimualtor()} y una vez en una computadora
 cuántica. 
     \item Almacenar los parámetros optimizados $\{ \theta_i\}$, el circuito
-\textit{ansatz} generado, las matrices de Choi objetvo y reconstruidas en ambos
+ansatz generado, las matrices de Choi objetvo y reconstruidas en ambos
 sistemas, y sus fidelidades de proceso. 
 \end{enumerate}
 \vspace{-.5cm}
@@ -1339,9 +1433,9 @@ Para la función general, se fijaron dos hiper parámetros de
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
 de optimización, ni en la minimización de la función de costo al aumentar este
 parámetro, esto lo podemos ver en la figura \ref{fig:comparacion_capas}. Por
-otro lado, se utilizaron 4 qubits en el \textit{ansatz}, donde una mitad
+otro lado, se utilizaron 4 qubits en el ansatz, donde una mitad
 funcionó como \textit{ancilla} y la otra para el sistema, siguiendo el diseño
-presentado en el \textit{ansatz} \ref{fig:ansatz_dp} \felnote{Esta referencia se arreglará al finalizar el cap 2.}. Esto se decidió porque al
+presentado en el ansatz \ref{ec:ansatz} \felnote{Esta referencia se arreglará al finalizar el cap 2.}. Esto se decidió porque al
 utilizar únicamente dos  qubits no se alcanzó la convergencia en la función de
 costo. 
 
@@ -1368,10 +1462,10 @@ IBM, donde el tiempo de uso está limitado a 10 minutos mensuales\footnote{Este
 es el tiempo de uso disponible en el plan gratuito de IBM.}. Vimos que el
 tiempo de ejecución de una tomografía de proceso para un canal de un  qubit
 requiere 12 circuitos, que lleva un tiempo de ejecución promedio de $16$s. Por
-esta razón decidimos optimizar el \textit{ansatz} en el simulador cuántico y
+esta razón decidimos optimizar el ansatz en el simulador cuántico y
 posteriormente, ejecutar el circuito optimizado en una computadora cuántica.
 Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
-\textit{ansatz} optimizado 4 veces para cada valor de $p$ en el simulador de
+ansatz optimizado 4 veces para cada valor de $p$ en el simulador de
 \texttt{AerSimualtor()}.
 
 La función general se ejecutó para un listado de 38 valores distintos de $p$ en 
@@ -1398,7 +1492,7 @@ tabla \ref{tab:comparacion_fidelidades}.
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.7\linewidth]{imagenes/comparacion fidelidad.png}
-    \caption{Comparación de fidelidades de proceso luego de ejecutar el \textit{ansatz}
+    \caption{Comparación de fidelidades de proceso luego de ejecutar el ansatz
 optimizado. En azul se encuentra la fidelidad de la matriz de Choi reconstruida
 en el simulador cuántico \texttt{AerSimualtor()}. Por otro lado en azul,
 corresponde a la ejecución en la computadora cuántica \texttt{ibm-kyoto}.
@@ -1418,7 +1512,7 @@ ibm-kyoto     & 0.8916 & 0.5533 & 0.9738 & 0.825 & 0.125 & 0.0899  \\ \hline
 \end{tabular}
 }
 \caption{Comparación de fidelidad de proceso entre las matrices de Choi
-reconstruidas del \textit{ansatz} optimizado. Los resultados de la computadora cuántica
+reconstruidas del ansatz optimizado. Los resultados de la computadora cuántica
 fueron tomados en \texttt{ibm-kyoto}, mientras que en el simulador fueron en
 \texttt{AerSimualtor()} de Qiskit. \textbf{Fuente:} elaboración propia.}
 \label{tab:comparacion_fidelidades}
@@ -1650,12 +1744,12 @@ reconstruidas]{
 % % Pendiente de redactar
 % Los Algoritmos Variacionales Cuánticos (VQA) representan una estrategia innovadora en el campo de la computación cuántica para resolver problemas complejos. A través de un esquema híbrido que aprovecha tanto recursos cuánticos como clásicos, los VQA buscan optimizar un conjunto de parámetros en un circuito cuántico parametrizado. Estos algoritmos son fundamentales en tareas donde la solución se codifica dentro de una función de costo o pérdida, la cual es minimizada a través del ajuste variacional de parámetros dentro del circuito. \cite{VQA}
 
-% El circuito cuántico parametrizado, o \textit{\textit}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los \textit{ansatz} más efectivos, como el Hardware Efficient \textit{ansatz} (HEA), son aquellos que equilibran la expresividad del circuito y la eficiencia en términos de recursos y operaciones cuánticas requeridas. \cite{VQA}
+% El circuito cuántico parametrizado, o \textit{\textit}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los ansatz más efectivos, como el Hardware Efficient ansatz (HEA), son aquellos que equilibran la expresividad del circuito y la eficiencia en términos de recursos y operaciones cuánticas requeridas. \cite{VQA}
 
 % El proceso de optimización en VQAs se articula en tres fases principales:
 % \begin{enumerate}
-%     \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{\textit{ansatz}}.
-%     \item \textbf{Aplicación del \textit{ansatz}:} Se utiliza el \textit{\textit{ansatz}} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
+%     \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{ansatz}.
+%     \item \textbf{Aplicación del ansatz:} Se utiliza el \textit{ansatz} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
 %     \item \textbf{Evaluación y Optimización:} Se evalúa la función de costo mediante mediciones cuánticas y se emplea un optimizador clásico para ajustar los parámetros en busca de un mínimo, completando así el bucle cuántico-clásico.
 % \end{enumerate}
 % \subsubsection{Ejemplo: Inicialización de estados mixtos en computadoras cuánticas}
