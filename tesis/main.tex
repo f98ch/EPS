@@ -145,6 +145,7 @@
 \usepackage{bbold}
 \usepackage{fancybox}	
 \usepackage{colortbl}
+\usepackage{csquotes}
 
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
@@ -203,6 +204,20 @@ bien conectados} \felnote{No lo es. Pensaba dejarla al final de la redacción pa
 % }}}
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}% {{{
 \section{Introducción} % Intro {{{
+% % Intro {{{
+% Esta sección estudiará las propiedades y definiciones esenciales de la
+% computación cuántica para entender los circuitos cuánticos. Comenzaremos
+% describiendo las compuertas cuánticas y su acción sobre estados de qubits,
+% incluyendo cómo se transforman en la esfera de Bloch. También exploraremos las
+% mediciones cuánticas y las transformaciones necesarias para medir en distintas
+% bases. Finalmente, describiremos la plataforma de \textit{IBM Quantum
+% Experience} donde se implementarán nuestros circuitos cuánticos, mencionando
+% sus capacidades y limitaciones para entender cómo inicializar estados en
+% circuitos cuánticos. Los conocimientos y técnicas adquiridas a lo largo de esta
+% sección nos darán las bases necesarias para
+% trabajar con estados y canales cuánticos en las próximas secciones.
+
+
 \felnote{Pendiente: la redactaré al finalizar el capítulo}
 % }}}
 \section{Matriz Densidad} % {{{
@@ -273,7 +288,6 @@ mientras que para los estados mixtos es:
 \end{equation}
 con $n$ el número de estados del ensamble y $p_i$ el 'peso' mencionado
 anteriormente, cumpliendo con la condición $\sum p_i =1$.
-
 Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,...,d$, veremos que los elementos de la
 matriz densidad serán \cite{princip_quantum}:
 \begin{equation}
@@ -339,10 +353,7 @@ Para medir que tanta información o que tan mixto es un estado cuántico se hace
     \gamma = \text{Tr}(\rho ^2),
 \end{equation}
 con $\gamma=1$ para un estado puro, mientras que $\gamma < 1$ para un estado
-mixto. Además, la pureza está limitada por las cotas $ \frac{1}{d}\leq\gamma\leq 1$. 
-  
-
-Para probar este criterio iniciamos con la descomposición espectral
+mixto. Además, la pureza está limitada por las cotas $ \frac{1}{d}\leq\gamma\leq 1$.  Para probar este criterio iniciamos con la descomposición espectral
 \cite{princip_quantum} para la matriz densidad $\rho$ :
     \begin{equation} 
         \label{ec:dens_espectral}
@@ -381,12 +392,12 @@ Por consiguiente:
         \therefore \gamma & < 1 \square
      \end{align}
 La demostración anterior prueba la cota superior de la pureza, para la cota
-inferior es necesario agregar un teorema:
+inferior es necesario agregar un teorema \cite{jensen_wolfram}:
   %Estos  solo están para el \felnote
 \begin{thm}
 \textbf{(Desigualdad de Jensen):} \label{thm:jensen}  Sean $w_1,...,w_n$
 números positivos que sumen $1$ y $f$ una función real continua convexa,
-entonces \cite{jensen_wolfram}:
+entonces:
 \begin{equation}
     f \left( \sum_j w_j x_j  \right) \leq \sum_j w_j f(x_j).
 \end{equation}
@@ -430,15 +441,15 @@ la ecuación \ref{eq:rho_ij}.}:
 Este no es el caso general para los sistemas compuestos, sin embargo, será con
 el que trabajemos en los siguientes capítulos \cpnote{No creo qe trabajemos con
 este estado. lo discutimos} \felnote{Sí claro, me parece bien. Yo lo uso luego
-para introducir los canales (ec: \ref{ec:rep_sist_abierto} ).}.
+para introducir los canales (ec: \ref{ec:rep_sist_abierto} )}.
 
 Al trabajar con sistemas compuestos puede darse el caso donde no conozcamos
 uno, o varios de los estados que describan a sus subsistemas. Entonces, para
 dar una descripción a los subsistemas se usa la matriz densidad reducida.
 Utilizaremos la definición dada por Nielsen y Chuang
-\cite{nielsen_chuang_2011}.
-
-Si tenemos a los sistemas físicos $A$,$B$ cuyo sistema compuesto se describe
+\cite{nielsen_chuang_2011} \felnote{Aquí agregué un quote}:
+\begin{quote}
+    Si tenemos a los sistemas físicos $A$,$B$ cuyo sistema compuesto se describe
 por el estado $\rho_{AB}$. Entonces el subsistema $A$ puede ser descrito por
 medio de la matriz densidad reducida $\rho_A$:
 \begin{equation}
@@ -461,8 +472,7 @@ trazando parcialmente $A$ como:
 \begin{equation}
     \text{Tr}_A(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B}  ) \equiv  \text{Tr}(\ket{i_A} \bra{j_A}) \ket{i_B}\bra{j_B}.
 \end{equation}
- 
-
+\end{quote}
 \begin{ex}\label{ex:traza parcial} \end{ex}  Consideremos un estado compuesto puro, conformado por dos estados puros $\rho_{AB} = \Omega  \otimes \sigma$. Si buscamos describir al subsistema $\rho_{B}$ tenemos:
 \begin{equation}
     \rho_{B} = \text{Tr}_{A} (\Omega  \otimes \sigma) = \Omega \text{Tr}(\sigma) = \Omega, 
@@ -498,21 +508,7 @@ Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto.
 
 % }}}
 % }}}
-\section{Circuitos Cuánticos} % {{{
-\label{introduccion} 
-% Intro {{{
-Este capítulo estudiará las propiedades y definiciones esenciales de la
-computación cuántica para entender los circuitos cuánticos. Comenzaremos
-describiendo las compuertas cuánticas y su acción sobre estados de qubits,
-incluyendo cómo se transforman en la esfera de Bloch. También exploraremos las
-mediciones cuánticas y las transformaciones necesarias para medir en distintas
-bases. Finalmente, describiremos la plataforma de \textit{IBM Quantum
-Experience} donde se implementarán nuestros circuitos cuánticos, mencionando
-sus capacidades y limitaciones para entender cómo inicializar estados en
-circuitos cuánticos. Los conocimientos y técnicas adquiridas a lo largo de esta
-sección nos darán las bases necesarias para
-trabajar con estados y canales cuánticos en las próximas secciones.
-% }}}
+\section{Circuitos Cuánticos} 
 \subsection{Compuertas y mediciones cuánticas} % {{{
 
 Previo a hablar sobre compuertas cuánticas, es necesario introducir una forma
@@ -674,9 +670,7 @@ $y$ (ver figura \ref{fig:hadamard}).
 Las compuertas anteriores son importantes al trabajar con un qubit, sin
 embargo, para trabajar con varios qubits usamos compuertas de control.
 Estas compuertas hacen uso de un qubit con el rol de  control, el cual
-regula la acción de otros qubits que tienen el rol de objetivo.
-
-Las compuertas de control unitario de dos qubits $CU$, son representadas por la matriz:
+regula la acción de otros qubits que tienen el rol de objetivo. Las compuertas de control unitario de dos qubits $CU$, son representadas por la matriz:
 \begin{equation}
     CU = 
     \begin{pmatrix}
@@ -691,9 +685,10 @@ donde $u_{ij}$ son los elementos de la compuerta unitaria $U$ que actúa sobre e
 
 En esta matriz, el primer cuadrante es una identidad que garantiza que, si el qubit de control está en el estado $\ket{0}$, el qubit objetivo permanece sin cambios. Si el qubit de control está en $\ket{1}$, el bloque inferior derecho aplica la transformación unitaria $U$ al qubit objetivo. Esto permite implementar distintas compuertas de control, como $CR_x$ \footnote{La compuerta $CX$ es comúnmente conocida como compuerta $CNOT$. En adelante, cuando hablemos de la compuerta $CNOT$, nos referimos a $CR_x(\pi/2)$.}  o $CR_z$, ajustando los parámetros $u_{ij}$.
 
-Al realizar una medición cuántica hace que nuestro qubit colapse a uno de los estados de la base $ \sigma_z$. Sin embargo, es posible realizar un cambio de base y poder medir en otro tipo de bases. A continuación daremos la definición de Nielsen y Chuang \cite{nielsen_chuang_2011}:
-
+Al realizar una medición cuántica hace que nuestro qubit colapse a uno de los estados de la base $ \sigma_z$. Sin embargo, es posible realizar un cambio de base y poder medir en otro tipo de bases. A continuación daremos la definición de Nielsen y Chuang \cite{nielsen_chuang_2011} \felnote{Aquí también agregué un quote}:
+\begin{quote}
 Dada cualquier base de estados $\ket{a},\ket{b}$ para un qubit, es posible expresar un estado arbitrario como una combinación lineal $\alpha\ket{a}+\beta\ket{b}$ de esos estados. Además, siempre que los estados sean ortonormales,  \textbf{es posible realizar una medición respecto a la base de $\ket{a},\ket{b}$}, dando un resultado $a$, con probabilidad $|\alpha|^2$ y $b$, con probabilidad $|\beta|^2$. 
+\end{quote}
 
 \begin{ex}\label{Ejemplo 2.1.1} \end{ex}
  Supongamos un estado arbitrario $\ket{\psi}=\alpha \ket{0} + \beta\ket{1}$, del cual buscamos medir en una nueva base:
@@ -881,8 +876,7 @@ El canal despolarizante  (DP, por sus siglas en inglés de Depolarizing Channel)
 \begin{equation} \label{ec:superop_depolarizing}
 \mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho ,
 \end{equation}
-donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}\\
-Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
+donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}. Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
 \begin{equation}
 \mathcal{E}(\ketbra{i}{j}) = \text{Tr}(\ketbra{i}{j})  p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
 \end{equation}
@@ -1051,8 +1045,8 @@ La tomografía de proceso cuántico (QPT) es una técnica fundamental para recon
 La tomografía de estado cuántico es un proceso para reconstruir
 experimentalmente un estado desconocido a partir de un conjunto de mediciones
 \cite{nielsen_chuang_2011}. Es posible estimar $\rho$ si tenemos un gran número de copias del mismo. Mencionaremos el proceso
-indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011}:
-
+indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011} \felnote{Aquí hago otro quote}:
+\begin{quote}
 Consideremos un estado $\rho$ y los operadores $\{\frac{\mathcal{I}}{\sqrt{2}}
 \frac{X}{\sqrt{2}},  \frac{Y}{\sqrt{2}},  \frac{Z}{\sqrt{2}} \} $ que forman un
 conjunto ortonormal de matrices con su respectivo producto interno. Entonces,
@@ -1071,8 +1065,8 @@ Generalizando este procedimiento, para el caso de una matriz densidad arbitraria
 \begin{equation}
 \rho = \sum_{\vec{v}} \frac{ \text{Tr}(\sigma_{v_1} \otimes \sigma_{v_2} \otimes ... \otimes \sigma_{v_n} \rho  ) \sigma_{v_1} \otimes \sigma_{v_2 } \otimes ... \otimes \sigma_{v_n}     }{2}.
 \end{equation}
+\end{quote}
 La suma de la ecuación es sobre vectores $\vec{v} = (v_1,...,v_n)$ con entradas $v_i$ escogidas del conjunto 0,1,2,3. Al realizar mediciones de observables que son productos de las matrices de Pauli, podemos estimar cada término en esta suma, y entonces estimar $\rho$. 
-
 
 Para implementar la tomografía de estado en una computadora cuántica es
 necesario realizar mediciones en las bases de los operadores de Pauli
@@ -1103,8 +1097,8 @@ Por ende, el circuito cuántico debe ser medido en cada una de las bases (ver fi
         \label{eq:circuitos_tomoestado}
     \end{figure}
 
-La tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011}: 
-
+La tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011} \felnote{Aquí también hago otro quote}: 
+\begin{quote}
 Sea $\rho_j$ , $1\leq j \leq d^2$ una base linealmente independiente del espacio de matrices $d\times d$, es decir, que cualquier matriz $d \times d$ puede ser escrita como una combinación linear única de $\rho_j$.  Una elección conveniente de operadores es $\ketbra{n}{m}$. Por lo tanto, los estados de salida $\mathcal{E}(\ketbra{n}{m})$ pueden ser considerados preparando los estados de entrada:
 \begin{itemize}
     \item$\ket{n}$,
@@ -1117,6 +1111,7 @@ Luego se forman combinaciones lineales de $\mathcal{E} (\ketbra{n}), \ketbra{m},
     \mathcal{E}(\ket{n}\bra{m}) = \mathcal{E}(\ket{+}\bra{+}) + i \mathcal{E}(\ket{-}\bra{-}) - \frac{1 + i}{2} \mathcal{E}(\ket{n}\bra{n}) - \frac{1 + i}{2} \mathcal{E}(\ket{m}\bra{m}).
 \end{equation}
 Entonces, es posible determinar $\mathcal{E}(\rho_j)$ por medio de tomografía de estado para cada $\rho_j$.
+\end{quote}
 
 Qiskit , para un qubit , utiliza los estados de entrada para la QPT:
 \begin{alignat}{2}
@@ -1213,11 +1208,18 @@ Esta métrica proporciona una medida cuantitativa de cuán similar es un canal c
 % }}}
 \chapter{ALGORITMOS VARIACIONALES CUÁNTICOS (VQA)} % {{{
 \section{Introducción}
-\section{Descripción de los VQA}
-%==================================
-Los VQA son algoritmos que entrenan a un circuito cuántico parametrizado $U(\bm{\theta})$ que luego es optimizado de forma clásica para resolver una tarea dada. Es importante establecer una definición formal, por ello usaremos la definición mencionada en el paper de Lorenzo Leone y otros \cite{HEA}:
+La llegada de la tecnología ruidosa de escala intermedia (NISQ) ha generado gran interés, ya que permite trabajar con una mayor cantidad de qubits, aunque también con mayores niveles de error. Por ello, es fundamental implementar algoritmos que aprovechen las capacidades del hardware actual. Uno de ellos son los algoritmos variacionales cuánticos (VQA), los cuales serán desarrollados en la sección~\ref{sec:desc_vqa}, ya que funcionan de forma híbrida cuántico-clásica optimizando circuitos parametrizados para resolver una tarea específica.
 
-Sea $O$ un operador Hermítico, cuyo estado fundamental codifique la solución de un problema de interés. En una tarea VQA, el objetivo es minimizar una función de costo $C(\bm{\theta})$, parametrizada a través de un circuito cuántico $U(\bm{\theta})$, para preparar el estado fundamental de $O$ a partir de un estado fiduciario $\ket{\psi_0}$.\felnote{Aquí me gustaría iniciar la siguiente frase sin sangría pero con espacio porque iniciaria en un nuevo parrafo, pero pertenece al mismo hilo.}
+Con este desarrollo general, en la sección~\ref{sec:impl_vqa} se propone una aplicación del VQA utilizando un \textit{Hardware Efficient Ansatz} (HEA) para la implementación de canales cuánticos de un qubit en una computadora cuántica. Finalmente, en esa misma sección, se presenta un ejemplo concreto en el que se emplea un HEA para implementar un canal despolarizante haciendo uso del VQA. Al finalizar este capítulo, se habrán establecido las bases necesarias para implementar un canal cuántico de un qubit en la plataforma IBM Quantum Experience mediante este tipo de algoritmos.
+
+
+\section{Descripción de los VQA} \label{sec:desc_vqa}
+%==================================
+Los VQA son algoritmos que entrenan a un circuito cuántico parametrizado $U(\bm{\theta})$ que luego es optimizado de forma clásica para resolver una tarea dada. Es importante establecer una definición formal, por ello usaremos la definición mencionada en el paper de Lorenzo Leone y otros 
+\felnote{Aquí agregue un quote}\cite{HEA}:
+\begin{quote}
+\enquote{ Sea $O$ un operador Hermítico, cuyo estado fundamental codifique la solución de un problema de interés. En una tarea VQA, el objetivo es minimizar una función de costo $C(\bm{\theta})$, parametrizada a través de un circuito cuántico $U(\bm{\theta})$, para preparar el estado fundamental de $O$ a partir de un estado fiduciario $\ket{\psi_0}$.}
+\end{quote}
 En una tarea VQA usualmente se define una función de costo de la forma:
 \begin{equation}
     C(\bm{\theta}) =  \text{Tr} \left[U(\bm{\theta}) \ketbra{\psi_0}{\psi_0} U^{\dagger}(\bm{\theta}) O \right],
@@ -1228,7 +1230,7 @@ El valor de $C(\bm{\theta})$ se obtiene a través de mediciones en la computador
 \theta^* = \text{arg }\underset{\bm{\theta}} {\text{min}} C (\bm{\theta}).
 \end{equation}
 
-El aspecto más importante de los VQA es la elección del ansatz, que se refiere a las especificaciones para el arreglo y tipo de compuertas cuánticas en $U(\bm{\theta})$ (ver figura \ref{fig:ansatz_general}). El ansatz más comunmente usado es el \textit{Hardware Efficient-Ansatz} (HEA) cuyo objetivo principal es mitigar el efecto del ruido del hardware usando compuertas nativas del dispositivo específico que se esté usando.\felnote{ídem con la anotación pasada.}\\
+El aspecto más importante de los VQA es la elección del ansatz, que se refiere a las especificaciones para el arreglo y tipo de compuertas cuánticas en $U(\bm{\theta})$ (ver figura \ref{fig:ansatz_general}). El ansatz más comunmente usado es el \textit{Hardware Efficient-Ansatz} (HEA) cuyo objetivo principal es mitigar el efecto del ruido del hardware usando compuertas nativas del dispositivo específico que se esté usando.
 
 La ventaja principal de los HEA es que están diseñados para minimizar la profundidad del circuito, que reduce los efectos adversos del ruido del hardware cuántico \cite{HEA}. Además, su diseño es independiente de la tarea a resolver, por lo que son más versátiles y aplicables a una variedad de problemas sin ajustes específicos.
 Generalmente asumimos que el circuito cuántico parametrizado se expresa cómo: 
@@ -1254,15 +1256,15 @@ Posteriormente, cada capa $L$ del circuito conecta cada qubit con su vecino cerc
     \label{fig:ansatz_comparacion}
 \end{figure}
 
-\section{Implementación de canales de un qubit usando VQA}
-Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas necesarias que repliquen la acción del canal sobre el sistema principal $\rho$. Por ello hemos propuesto utilizar los VQA para inicializar canales cuánticos de 1 qubit. Para esto nuestra función de costo a optimizar será la fidelidad de proceso como lo vimos en la ecuación \ref{ec:fidel_proc}:
+\section{Implementación de canales de un qubit usando VQA}\label{sec:impl_vqa} 
+Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas específicas que repliquen la acción del canal sobre el sistema principal $\rho$. Por ello hemos propuesto utilizar los VQA para inicializar canales cuánticos de un qubit. Para esto nuestra función de costo a optimizar será la fidelidad de proceso como lo vimos en la ecuación \ref{ec:fidel_proc}:
 \begin{equation}
     \label{ec:cost_func}
     C(\bm{\theta}) = \frac{1}{d^2} F_{proc}\bigl( \Lambda_r(\bm{\theta}), \Lambda_{obj} \bigr),
 \end{equation}
  donde $\Lambda_r$ es la matriz de Choi reconstruida tras realizar la tomografía de proceso sobre el circuito cuántico parametrizado, mientras que $\Lambda_{obj}$ es la matriz de Choi objetivo del canal cuántico a implementar.
  
- Por otro lado, el HEA utilizado para este proyecto es el mismo utilizado en el paper de Huan-Yu Liu y otros
+ Por otro lado, el HEA utilizado para este proyecto es el mismo usado en el paper de Huan-Yu Liu y otros
 \cite{Liu_2021} \cite{Sim_2019}, que combina compuertas sencillas de implementar entre operaciones de uno o dos qubits. Luego las capas son repetidas para incrementar la profundidad expresiva, por lo que la estructura del ansatz es:
  \begin{equation}
  \label{ec:ansatz}
@@ -1274,11 +1276,11 @@ Notemos que este ansatz construye un estado puro de  $2n$ qubits de la forma:
 \begin{equation}
     \ket{\psi(\bm{\theta})} = U(\bm{\theta})\ket{0}^{\otimes 2n},
 \end{equation}
-posteriormente se trazan parcialmente los $n$ qubits auxiliares  para obtener el ansatz :
+posteriormente se trazan parcialmente los $n$ qubits auxiliares para obtener:
 \begin{equation}
     \text{Tr}_{anc}\left[\ketbra{\psi(\bm{\theta})}{\psi(\bm{\theta})}\right] = \mathcal{}\rho(\bm{\theta}),
 \end{equation} donde $\rho(\bm{\theta})$ representa al sistema luego de su interacción con el canal cuántico. 
-Ya que hemos definido la función de costo en la ecuación \ref{ec:cost_func}, se ejecuta la tomografía de proceso  sobre $\rho(\bm{\theta})$ para encontrar $\Lambda_{r}$ y comparar su fidelidad de proceso con la matriz de Choi del canal cuántico objetivo $\Lambda_{obj}$. Este proceso  se repite iterativamente como lo vimos en la sección anterior hasta que se alcancen los parámetros óptimos de la forma:
+Ya que hemos definido la función de costo en la ecuación \ref{ec:cost_func}, se ejecuta la tomografía de proceso  sobre $\rho(\bm{\theta})$ para encontrar $\Lambda_{r}$ y comparar su fidelidad de proceso con la matriz de Choi del canal objetivo $\Lambda_{obj}$. Este proceso  se repite iterativamente como lo vimos en la sección anterior hasta que se alcancen los parámetros óptimos de la forma:
 \begin{equation}
     \label{ec:argmin_cost}
     \theta^* =  \text{arg }\underset{\bm{\theta}}{\text{min}} [ - C(\bm{\theta})].
@@ -1288,7 +1290,7 @@ Supongamos que buscamos implementar el VQA para un canal despolarizante (DP), en
 \begin{equation}
     U(\bm{\theta}) = \prod_{j=1}^2 cR_y(\theta_i) R_z(\theta_{ij})R_x(\theta_{ij2})R_z(\theta_{ij3}).
 \end{equation}
-Iniciamos los parámetros iniciales $(\bm{\theta_0})$ de forma aleatoria y ejecutamos el VQA hasta alcanzar la minimización de la función de costo (\ref{ec:argmin_cost})(ver esquema en la figura \ref{fig:esquema_dp}). Notemos que esta matriz de Choi, se debe específicar para un valor específico de $p$. Por lo que se obtiene la matriz de $\Lambda_r(p)$. 
+Iniciamos los parámetros iniciales $(\bm{\theta_0})$ de forma aleatoria y ejecutamos el VQA hasta alcanzar la minimización de la función de costo (\ref{ec:argmin_cost})(ver esquema en la figura \ref{fig:esquema_dp}). Notemos que esta matriz de Choi, se debe específicar para un valor de $p$. Por lo que se obtiene la matriz de $\Lambda_r(p)$. 
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.65\linewidth]{imagenes/ansatz tesis.png}
