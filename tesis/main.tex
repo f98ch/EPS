@@ -1203,7 +1203,6 @@ Esta métrica proporciona una medida cuantitativa de cuán similar es un canal c
 % }}}
 \chapter{ALGORITMOS VARIACIONALES CUÁNTICOS (VQA)} % {{{
 % \section{Introducción} % {{{
-\cpnote{Le quite el nombre de introduccion. Creo que está mejor. Quita igual esto para los otros }\felnote{Listo, corregido}
 La llegada de la tecnología ruidosa de escala intermedia (NISQ) ha generado
 gran interés, ya que permite trabajar con una mayor cantidad de qubits, aunque
 también con mayores niveles de error. Por ello, es fundamental implementar
@@ -1289,14 +1288,19 @@ lo que la estructura del ansatz es:
  \end{equation}
 donde $N$ y $M$ son el número de qubits y capas en el circuito respectivamente.
 Para la parte de entrelazamiento $U_{ent}$ tomamos compuertas de control
-$cR_y$.  En este esquema, los parámetros $\bm{\theta}$ corresponden a los ángulos de rotación de las compuertas del ansatz. Este circuito puede interpretarse como un modelo de sistema abierto, donde el sistema principal interactúa con un entorno, como se muestra en la ecuación ~\ref{ec:rep_sist_abierto}.
+$cR_y$.  En este esquema, los parámetros $\bm{\theta}$ corresponden a los
+ángulos de rotación de las compuertas del ansatz. Este circuito puede
+interpretarse como un modelo de sistema abierto, donde el sistema principal
+interactúa con un entorno, como se muestra en la
+ecuación~\ref{ec:rep_sist_abierto}.
 % Podemos ver a este circuito cuántico como un
 % sistema cerrado en la ecuación \ref{ec:rep_sist_abierto}, donde el sistema
 % principal se obtiene luego de interactuar con el entorno como en la ecuación
 % \ref{ec:sistema_principal}
-\cpnote{La redaccion de esta frase esta muy rara. Que 
-quieres decir aca?} \felnote{Sí esta rara, modifiqué esa frase (591-595). Aquí quiero decir que este ansatz representa el sistema como $\rho_{sp} \otimes \rho_{ent}$ ( $\rho_{sp}$ es el sistema principal) . Lo menciono para darle sentido a la ecuación  (\ref{ec:tr_anc}) }.  Notemos que este ansatz construye un estado puro
-de  $2n$ qubits de la forma:
+Aquí quiero decir que este ansatz representa el sistema como $\rho_{sp} \otimes
+\rho_{ent}$ ( $\rho_{sp}$ es el sistema principal) . Lo menciono para darle
+sentido a la ecuación  (\ref{ec:tr_anc}).  Notemos que este ansatz construye un
+estado puro de  $2n$ qubits de la forma:
 \begin{equation} 
     \ket{\psi(\bm{\theta})} = U(\bm{\theta})\ket{0}^{\otimes 2n}.
 \end{equation}
@@ -1304,21 +1308,31 @@ de  $2n$ qubits de la forma:
 Posteriormente, se realiza la traza parcial sobre los $n$ qubits auxiliares con el fin de obtener el estado del sistema principal:
 \begin{equation} \label{ec:tr_anc}    \text{Tr}_{\text{anc}}\left[\ketbra{\psi(\bm{\theta})}{\psi(\bm{\theta})}\right] = \rho(\bm{\theta}),
 \end{equation}
-donde $\rho(\bm{\theta})$ representa el estado del sistema luego de su interacción con el canal cuántico. Una vez definida la función de costo en la ecuación~\ref{ec:cost_func}, se procede a ejecutar la tomografía de proceso sobre $\rho(\bm{\theta})$ con el propósito de reconstruir la matriz de Choi $\Lambda_{r}$, que será comparada con la matriz de Choi del canal objetivo $\Lambda_{obj}$ mediante la fidelidad de proceso \cpnote{mejorar la redaccion} \felnote{Corregida}.  Este procedimiento se repite iterativamente, actualizando los parámetros $\bm{\theta}$, hasta encontrar el conjunto óptimo:
+donde $\rho(\bm{\theta})$ representa el estado del sistema luego de su
+interacción con el canal cuántico. Una vez definida la función de costo en la
+ecuación~\ref{ec:cost_func}, se procede a ejecutar la tomografía de proceso
+con el propósito de reconstruir la matriz de Choi
+$\Lambda_{r}$, que será comparada con la matriz de Choi del canal objetivo
+$\Lambda_{obj}$ mediante la fidelidad de proceso.
+Este procedimiento se repite iterativamente, actualizando
+los parámetros $\bm{\theta}$, hasta encontrar el conjunto óptimo:
 \begin{equation}
     \label{ec:argmin_cost}
     \theta^* =  \text{arg }\underset{\bm{\theta}}{\text{min}} [ - C(\bm{\theta})].
 \end{equation}
 %==========================================
 \begin{ex}\label{ex:depolarizing}\end{ex}
-\cpnote{mejora la redaccion de este parrafo. Por cierto, para que usas el begin ex?} \felnote{Para iniciar ejemplos, usé el mismo formato que JA.} \felnote{Corregido, arreglé la redacción.}
 Como caso de estudio, se considera la implementación de un canal despolarizante (DP) mediante un VQA. En este caso, la matriz de Choi correspondiente al canal objetivo $\Lambda_{obj}$ para un qubit está definida en la ecuación~\ref{ec:choi_depolarizing}. Para aproximar este canal, se construye un ansatz con una sola capa y dos qubits, de la forma (ver figura \ref{fig:ansatz_dp}):
 \begin{equation}
     U(\bm{\theta}) = \prod_{j=1}^2 cR_y(\theta_i)\, R_z(\theta_{ij})\, R_x(\theta_{ij2})\, R_z(\theta_{ij3}).
 \end{equation}
 Los parámetros iniciales $\bm{\theta}_0$ se eligen de manera aleatoria, y el VQA se ejecuta iterativamente hasta alcanzar la minimización de la función de costo definida en la ecuación~\ref{ec:argmin_cost} (véase figura~\ref{fig:esquema_dp}). Cabe resaltar que la matriz de Choi del canal despolarizante depende del parámetro de ruido $p$, por esta razón $\Lambda_r(p)$ debe obtenerse para un valor específico de dicho parámetro.
 
-Iniciamos los parámetros iniciales $(\bm{\theta_0})$ de forma aleatoria y ejecutamos el VQA hasta alcanzar la minimización de la función de costo (\ref{ec:argmin_cost})(ver esquema en la figura \ref{fig:esquema_dp}). Notemos que esta matriz de Choi, se debe específicar para un valor de $p$. En consecuencia, se obtiene la matriz $\Lambda_r(p)$.
+Iniciamos los parámetros iniciales $(\bm{\theta_0})$ de forma aleatoria y
+ejecutamos el VQA hasta alcanzar la minimización de la función de costo
+(\ref{ec:argmin_cost})(ver esquema en la figura \ref{fig:esquema_dp}). Notemos
+que esta matriz de Choi, se debe especificar para un valor de $p$. En
+consecuencia, se obtiene la matriz $\Lambda_r(p)$.
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.65\linewidth]{imagenes/ansatz tesis.png}
@@ -1341,8 +1355,9 @@ Si ejecutamos este algoritmo en un simulador cuántico para una matriz objetivo 
 0.75 & 0 & 0 & 0.875
 \end{pmatrix},
 \end{equation}
-mientras que la matriz de Choi optimizada tras utilizar el VQA nos da como resultado :
-\cpnote{Porque no se logra optimizar al maximo??? Osea a fidelidad uno?}\felnote{Porque el optimizador clásico no garantiza encontrar un máximo global. En ningún caso que ejecuté alcancé un máximo global, pero si uno local (por ejemplo, mira los resultados de la figura \ref{fig:comparacion_capas}) . Por eso en redacción lo dejé más abierto con 'optimizada'.}
+mientras que la matriz de Choi optimizada tras utilizar el VQA nos da como
+resultado : \cpnote{Porque no se logra optimizar al maximo??? Me gustaria platicar al respecto. 
+Creo qeu si se debe comentar en la tesis.}
 \begin{equation}
   \Lambda_r =  \begin{pmatrix}
 (0.895+0.000i) & (-0.142+0.092i) & (0.123+0.056i) & (0.822-0.052i) \\
@@ -1351,8 +1366,7 @@ mientras que la matriz de Choi optimizada tras utilizar el VQA nos da como resul
 (0.822+0.052i) & (-0.123+0.056i) & (0.138+0.085i) & (0.875+0.000i)
 \end{pmatrix},
 \end{equation}
-que corresponde a una fidelidad de proceso $F_{proc}= 0.9431$. \cpnote{Redaccion. 
-Esta usando el ``por lo que'' de manera recurrente y no está bien.} \felnote{Gracias. En esta frase ví que incluso se puede omitir, revisé y arregle todas la instancias donde lo veía raro.} El
+que corresponde a una fidelidad de proceso $F_{proc}= 0.9431$. El
 circuito resultante de este ansatz optimizado para este valor de $p$ (ver
 figura \ref{fig:ansatz_p025}) tiene la capacidad de aplicar la acción de un DP
 en un simulador cuántico.  \begin{figure}[h!] 
