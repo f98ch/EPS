@@ -1356,7 +1356,7 @@ Si ejecutamos este algoritmo en un simulador cuántico para una matriz objetivo 
 \end{equation}
 mientras que la matriz de Choi optimizada tras utilizar el VQA nos da como
 resultado : \cpnote{Porque no se logra optimizar al maximo??? Me gustaria platicar al respecto. 
-Creo qeu si se debe comentar en la tesis.}
+Creo qeu si se debe comentar en la tesis.} \felnote{Corregido en base a lo que platicamos por llamada, (ver el siguiente felnote) }
 \begin{equation}
   \Lambda_r =  \begin{pmatrix}
 (0.895+0.000i) & (-0.142+0.092i) & (0.123+0.056i) & (0.822-0.052i) \\
@@ -1365,10 +1365,7 @@ Creo qeu si se debe comentar en la tesis.}
 (0.822+0.052i) & (-0.123+0.056i) & (0.138+0.085i) & (0.875+0.000i)
 \end{pmatrix},
 \end{equation}
-que corresponde a una fidelidad de proceso $F_{proc}= 0.9431$. El
-circuito resultante de este ansatz optimizado para este valor de $p$ (ver
-figura \ref{fig:ansatz_p025}) tiene la capacidad de aplicar la acción de un DP
-en un simulador cuántico.  \begin{figure}[h!] 
+que corresponde a una fidelidad de proceso $F_{proc}= 0.9431$. Notemos que el circuito resultante del ansatz optimizado para este valor de $p$ (ver figura \ref{fig:ansatz_p025}) no alcanza una fidelidad de proceso igual a uno. \felnote{aquí empieza esa mención }Esta diferencia se debe a que la obtención de la matriz de Choi se realiza mediante tomografía de procesos, la cual implica mediciones repetidas en el simulador, introduciendo errores asociados al muestreo, a diferencia de un cálculo analítico exacto. \felnote{aquí finaliza} \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.70\linewidth]{imagenes/ansatz_p025.png}
     \caption{Ansatz optimizado para un DP con valor de despolarización $p=0.25$, esto fue optimizado en el simulador \texttt{AerSimulator} de Qiskit, IBM. \textbf{Fuente}: elaboración propia. }
@@ -1780,37 +1777,22 @@ reconstruidas]{
 % }}}
 % }}}
 \chapter{CONCLUSIONES} % {{{
-\section{Conclusiones}
-\section{Trabajo a Futuro}
-\subsection{Implementación de VQA para 2 qubits}
+En este trabajo propusimos el uso de algoritmos variacionales cuánticos (VQA, por sus siglas en inglés) para implementar canales cuánticos de un qubit en computadoras cuánticas. Se utilizó un \textit{hardware-efficient ansatz}, optimizado mediante un simulador cuántico (\texttt{AerSimulator}) y validado en una computadora cuántica de IBM (\texttt{ibm\_kyoto}) \cite{VQA} \cite{ibm_quantum_resources}. La optimización se llevó a cabo maximizando la fidelidad de proceso entre las matrices de Choi correspondientes al canal objetivo y al canal implementado, obtenidas a partir de tomografía de procesos. Como caso de estudio, se consideró la simulación de un canal despolarizante (DP) para distintos valores de la probabilidad de despolarización $p$. Los resultados obtenidos muestran que el simulador cuántico es capaz de implementar la acción del DP con fidelidades cercanas a 1. Además, se observó una baja variabilidad como correlación con el valor $p$, que refleja una notable estabilidad con el entrenamiento. Por otro lado, los resultados obtenidos en la computadora cuántica presentaron un comportamiento distinto. En este caso, la fidelidad tendió a aumentar conforme incrementaba la interacción con el ruido del dispositivo (ver figura  \ref{fig:comparacion_fidelidad} ). Esta tendencia fue medida mediante una regresión lineal , cuya pendiente resulto ser $m= 0.2707$, que indica un crecimiento moderado de la fidelidad con $p$. Asímismo, observamos una disminución en la variabilidad de la fidelidad con el aumento de $p$. Este fenómeno puede atribuirse a que, al aumentar la probabilidad de despolarización, los estados cuánticos se vuelven más mixtos y, por lo tanto, más susceptibles a errores introducidos por el hardware. Sin embargo, el coeficiente de terminación $R^2=0.7055$ , sugiere que existen otros factores, además de la probabilidad de despolarización, que influyen en el comportamiento de la fidelidad en el dispositivo cuántico. Estos factores se evidenciaron en la inspección de las matrices de Choi (ver figura \ref{fig:comparacion_choi}) , donde la computadora cuántica presentaba una mayor coherencia en las entradas no diagonales en las primeras etapas del proceso. Finalmente, los resultados obtenidos muestran que en entornos ideales, los VQA pueden ser efectivos para implementar canales cuánticos. No obstante, en computadoras cuánticas reales, la precisión se ve afectada por la naturaleza del hardware, ya que este introduce una fuente adicional de ruido que debe ser considerado al momento de la implementación. 
+
+
+\chapter{TRABAJO FUTURO}
+Los resultados obtenidos en la computadora cuántica abren diversas líneas de investigación para trabajos futuros. A continuación, se proponen algunas de ellas: 
+\begin{itemize}
+    \item Explorar diferentes tipos de \textit{ansatz} para el entrenamiento y la optimización de la fidelidad de proceso, como se describió en la sección \ref{sec:desc_vqa}. En este trabajo se enfocó el estudio en \textit{hardware-efficient ansatz} (HEA) debido a su amplio uso actual. Sin embargo, la evaluación de otros tipos de \textit{ansatz} podría conducir a un mejor desempeño en computadoras cuánticas reales.
+    
+    \item Implementar los VQA para canales cuánticos de dos o más qubits. Dado que el \textit{ansatz} presentado en la ecuación \ref{ec:ansatz} es generalizable para $n$ qubits, es posible extender este esquema a la implementación de canales cuánticos de mayor dimensión. El principal desafío en este caso radica en las limitaciones del hardware cuántico actual, así como en el aumento de los recursos necesarios para la optimización en simuladores cuánticos.
+    
+    \item Realizar la optimización directamente sobre hardware cuántico. En este trabajo se utilizó exclusivamente la plataforma IBM Quantum Experience, la cual presenta ciertas restricciones en el tiempo de ejecución. Sin embargo, explorar otras plataformas podría permitir realizar optimizaciones directamente en el dispositivo, lo que abriría la posibilidad de obtener mejores resultados y de realizar un análisis más detallado del desempeño del hardware.
+\end{itemize}
+
+
 % }}}
 \appendix
-% Notas sueltas {{{
-
-% En la teoría cuántica, un sistema cuántico abierto es aquel que no está aislado, sino que interactúa continuamente con su entorno. Este tipo de sistemas son fundamentales para entender muchos fenómenos cuánticos en la práctica, ya que cualquier sistema cuántico real interactúa con su entorno. A diferencia de los sistemas cuánticos cerrados, que se consideran completamente aislados y evolucionan de manera unitaria según la ecuación de Schrödinger, los sistemas cuánticos abiertos pueden sufrir pérdidas de coherencia cuántica debido a estas interacciones. En la sección 3.1 exploraremos este tipo de sistemas por medio de canales cuánticos, con énfasis en su representación con la matriz de Choi. En la sección 3.2 mencionaremos la tomografía y fidelidad de proceso cuántico, ya que son importantes para la reconstrucción de canales cuánticos en computadoras cuánticas
-
-
-% % Pendiente de redactar
-% Los Algoritmos Variacionales Cuánticos (VQA) representan una estrategia innovadora en el campo de la computación cuántica para resolver problemas complejos. A través de un esquema híbrido que aprovecha tanto recursos cuánticos como clásicos, los VQA buscan optimizar un conjunto de parámetros en un circuito cuántico parametrizado. Estos algoritmos son fundamentales en tareas donde la solución se codifica dentro de una función de costo o pérdida, la cual es minimizada a través del ajuste variacional de parámetros dentro del circuito. \cite{VQA}
-
-% El circuito cuántico parametrizado, o \textit{\textit}, es diseñado para ser versátil y adaptarse a la naturaleza del problema y las características del hardware cuántico disponible. Los ansatz más efectivos, como el Hardware Efficient ansatz (HEA), son aquellos que equilibran la expresividad del circuito y la eficiencia en términos de recursos y operaciones cuánticas requeridas. \cite{VQA}
-
-% El proceso de optimización en VQAs se articula en tres fases principales:
-% \begin{enumerate}
-%     \item \textbf{Inicialización:} Se comienza con la preparación de un estado cuántico de referencia, sobre el cual se aplicarán las operaciones del \textit{ansatz}.
-%     \item \textbf{Aplicación del ansatz:} Se utiliza el \textit{ansatz} para transformar el estado inicial en un estado final que depende de los parámetros variacionales. Este paso es crítico y requiere una cuidadosa selección y configuración de las puertas cuánticas para navegar el espacio de Hilbert eficazmente.
-%     \item \textbf{Evaluación y Optimización:} Se evalúa la función de costo mediante mediciones cuánticas y se emplea un optimizador clásico para ajustar los parámetros en busca de un mínimo, completando así el bucle cuántico-clásico.
-% \end{enumerate}
-% \subsubsection{Ejemplo: Inicialización de estados mixtos en computadoras cuánticas}
-% Faltante de redactar
-
-
-
-
-% \section{Aplicación de VQA para la simulación de Canales Cuánticos}
-% Faltante de Redactar
-
-
 
 
 
