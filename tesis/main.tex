@@ -859,7 +859,7 @@ Desarrollando el el término $|\Omega\rangle\langle\Omega|$ obtenemos:
 |\Omega\rangle\langle\Omega| = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \ketbra{i}{j},
 \end{equation} 
 que nos deja la segunda representación de la matriz de Choi
-\cite{Qiskit_documentation} \cite{QProcess}:
+\cite{Qiskit_documentation,QProcess}:
 \begin{equation}\label{ec:Choi_ketbra}
 \Lambda_{\mathcal{E}} = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}).
 \end{equation}
@@ -1124,7 +1124,10 @@ Con cada estado reconstruido $\mathcal{E}(\ketbra{\psi_i})$,  obtenemos la matri
 
 % }}}
 \subsection{Fidelidad de Proceso Cuántico} % {{{
-Previo a hablar de la fidelidad de proceso cuántico es necesario conocer la fidelidad de estado cuántico, que es una una forma de conocer la similitud entre dos estados cuánticos. Si poseemos dos estados $\rho,\sigma$, conoceremos su fidelidad por la ecuación \cite{nielsen_chuang_2011} \cite{bengtsson_zyczkowski_2017}:
+Previo a hablar de la fidelidad de proceso cuántico es necesario conocer la
+fidelidad de estado cuántico, que es una una forma de conocer la similitud
+entre dos estados cuánticos. Si poseemos dos estados $\rho,\sigma$, conoceremos
+su fidelidad por la ecuación \cite{nielsen_chuang_2011,bengtsson_zyczkowski_2017}:
 \begin{equation}
        \label{eq:fidelidad_estado}
        F(\rho,\sigma) \equiv tr \sqrt{\rho^{1/2} \sigma \rho^{1/2} } = tr |\sqrt{\rho}\sqrt{\sigma}|.     \footnote{La ecuación usada aquí para describir la fidelidad es la descrita en Nielsen y Chuang. En otros textos,  como del autor original Richard Jozsa\cite{Jozsa} y Bengston \cite{bengtsson_zyczkowski_2017},  suelen llamarla  'raíz fidelidad'.}
@@ -1777,11 +1780,45 @@ reconstruidas]{
 % }}}
 % }}}
 \chapter{CONCLUSIONES} % {{{
-En este trabajo propusimos el uso de algoritmos variacionales cuánticos (VQA, por sus siglas en inglés) para implementar canales cuánticos de un qubit en computadoras cuánticas. Se utilizó un \textit{hardware-efficient ansatz}, optimizado mediante un simulador cuántico (\texttt{AerSimulator}) y validado en una computadora cuántica de IBM (\texttt{ibm\_kyoto}) \cite{VQA} \cite{ibm_quantum_resources}. La optimización se llevó a cabo maximizando la fidelidad de proceso entre las matrices de Choi correspondientes al canal objetivo y al canal implementado, obtenidas a partir de tomografía de procesos. Como caso de estudio, se consideró la simulación de un canal despolarizante (DP) para distintos valores de la probabilidad de despolarización $p$. Los resultados obtenidos muestran que el simulador cuántico es capaz de implementar la acción del DP con fidelidades cercanas a 1. Además, se observó una baja variabilidad como correlación con el valor $p$, que refleja una notable estabilidad con el entrenamiento. Por otro lado, los resultados obtenidos en la computadora cuántica presentaron un comportamiento distinto. En este caso, la fidelidad tendió a aumentar conforme incrementaba la interacción con el ruido del dispositivo (ver figura  \ref{fig:comparacion_fidelidad} ). Esta tendencia fue medida mediante una regresión lineal , cuya pendiente resulto ser $m= 0.2707$, que indica un crecimiento moderado de la fidelidad con $p$. Asímismo, observamos una disminución en la variabilidad de la fidelidad con el aumento de $p$. Este fenómeno puede atribuirse a que, al aumentar la probabilidad de despolarización, los estados cuánticos se vuelven más mixtos y, por lo tanto, más susceptibles a errores introducidos por el hardware. Sin embargo, el coeficiente de terminación $R^2=0.7055$ , sugiere que existen otros factores, además de la probabilidad de despolarización, que influyen en el comportamiento de la fidelidad en el dispositivo cuántico. Estos factores se evidenciaron en la inspección de las matrices de Choi (ver figura \ref{fig:comparacion_choi}) , donde la computadora cuántica presentaba una mayor coherencia en las entradas no diagonales en las primeras etapas del proceso. Finalmente, los resultados obtenidos muestran que en entornos ideales, los VQA pueden ser efectivos para implementar canales cuánticos. No obstante, en computadoras cuánticas reales, la precisión se ve afectada por la naturaleza del hardware, ya que este introduce una fuente adicional de ruido que debe ser considerado al momento de la implementación. 
-
-
-\chapter{TRABAJO FUTURO}
-Los resultados obtenidos en la computadora cuántica abren diversas líneas de investigación para trabajos futuros. A continuación, se proponen algunas de ellas: 
+En este trabajo propusimos el uso de algoritmos variacionales cuánticos (VQA,
+por sus siglas en inglés) para implementar canales cuánticos de un qubit en
+computadoras cuánticas. Se utilizó un \textit{hardware-efficient ansatz},
+optimizado mediante un simulador cuántico (\texttt{AerSimulator}) y validado en
+una computadora cuántica de IBM (\texttt{ibm\_kyoto})
+\cite{VQA,ibm_quantum_resources}. La optimización se llevó a cabo maximizando
+la fidelidad de proceso entre las matrices de Choi correspondientes al canal
+objetivo y al canal implementado, obtenidas a partir de tomografía de procesos.
+Como caso de estudio, se consideró la simulación de un canal despolarizante
+(DP) para distintos valores de la probabilidad de despolarización $p$. Los
+resultados obtenidos muestran que el simulador cuántico es capaz de implementar
+la acción del DP con fidelidades cercanas a 1. Además, se observó una baja
+variabilidad como correlación con el valor $p$, que refleja una notable
+estabilidad con el entrenamiento\cpnote{Simplifica y corrige la redaccion}. Por otro lado, los resultados obtenidos en la
+computadora cuántica presentaron un comportamiento distinto. En este caso, la
+fidelidad tendió a aumentar conforme incrementaba la interacción con el ruido
+del dispositivo (ver figura  \ref{fig:comparacion_fidelidad}). Esta tendencia
+fue medida mediante una regresión lineal , cuya pendiente resulto ser $m=
+0.2707$, que indica un crecimiento moderado de la fidelidad con $p$. Así mismo,
+observamos una disminución en la variabilidad de la fidelidad con el aumento de
+$p$. Este fenómeno puede atribuirse a que, al aumentar la probabilidad de
+despolarización, los estados cuánticos se vuelven más mixtos y, por lo tanto,
+más susceptibles a errores introducidos por el hardware. Sin embargo, el
+coeficiente de terminación $R^2=0.7055$ , sugiere que existen otros factores,
+además de la probabilidad de despolarización, que influyen en el comportamiento
+de la fidelidad en el dispositivo cuántico. Estos factores se evidenciaron en
+la inspección de las matrices de Choi (ver figura \ref{fig:comparacion_choi}) ,
+donde la computadora cuántica presentaba una mayor coherencia en las entradas
+no diagonales en las primeras etapas del proceso. Finalmente, los resultados
+obtenidos muestran que en entornos ideales, los VQA pueden ser efectivos para
+implementar canales cuánticos. No obstante, en computadoras cuánticas reales,
+la precisión se ve afectada por la naturaleza del hardware, ya que este
+introduce una fuente adicional de ruido que debe ser considerado al momento de
+la implementación. 
+% }}}
+\chapter{TRABAJO FUTURO} % {{{
+Los resultados obtenidos en la computadora cuántica abren diversas líneas de
+investigación para trabajos futuros. A continuación, se proponen algunas de
+ellas: 
 \begin{itemize}
     \item Explorar diferentes tipos de \textit{ansatz} para el entrenamiento y la optimización de la fidelidad de proceso, como se describió en la sección \ref{sec:desc_vqa}. En este trabajo se enfocó el estudio en \textit{hardware-efficient ansatz} (HEA) debido a su amplio uso actual. Sin embargo, la evaluación de otros tipos de \textit{ansatz} podría conducir a un mejor desempeño en computadoras cuánticas reales.
     
@@ -1789,11 +1826,6 @@ Los resultados obtenidos en la computadora cuántica abren diversas líneas de i
     
     \item Realizar la optimización directamente sobre hardware cuántico. En este trabajo se utilizó exclusivamente la plataforma IBM Quantum Experience, la cual presenta ciertas restricciones en el tiempo de ejecución. Sin embargo, explorar otras plataformas podría permitir realizar optimizaciones directamente en el dispositivo, lo que abriría la posibilidad de obtener mejores resultados y de realizar un análisis más detallado del desempeño del hardware.
 \end{itemize}
-
-
-% }}}
-\appendix
-
 
 
 % }}}
