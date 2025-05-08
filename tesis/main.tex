@@ -1359,18 +1359,27 @@ Si ejecutamos este algoritmo en un simulador cuántico para una matriz objetivo 
 \end{equation}
 mientras que la matriz de Choi optimizada tras utilizar el VQA nos da como
 resultado : \cpnote{Porque no se logra optimizar al maximo??? Me gustaria platicar al respecto. 
-Creo qeu si se debe comentar en la tesis.} \felnote{Corregido en base a lo que platicamos por llamada, (ver el siguiente felnote) }
+Creo qeu si se debe comentar en la tesis.} \felnote{Corregido en base a lo que platicamos por llamada, (agregué la mención del cálculo analítico).  }
 \begin{equation}
   \Lambda_r =  \begin{pmatrix}
-(0.895+0.000i) & (-0.142+0.092i) & (0.123+0.056i) & (0.822-0.052i) \\
-(-0.142-0.092i) & (0.105+0.000i) & (-0.074+0.001i) & (-0.123-0.056i) \\
-(0.123-0.056i) & (-0.074-0.001i) & (0.125+0.000i) & (0.138-0.085i) \\
-(0.822+0.052i) & (-0.123+0.056i) & (0.138+0.085i) & (0.875+0.000i)
+(0.918 + 0.000i) & (-0.080 - 0.073i) & (0.092 - 0.098i) & (0.752 + 0.038i) \\
+(-0.080 + 0.073i) & (0.082 + 0.000i) & (-0.055 + 0.019i) & (-0.092 + 0.098i) \\
+(0.092 + 0.098i) & (-0.055 - 0.019i) & (0.078 + 0.000i) & (0.076 + 0.079i) \\
+(0.752 - 0.038i) & (-0.092 - 0.098i) & (0.076 - 0.079i) & (0.922 + 0.000i)
 \end{pmatrix},
 \end{equation}
-que corresponde a una fidelidad de proceso $F_{proc}= 0.9431$. Notemos que el circuito resultante del ansatz optimizado para este valor de $p$ (ver figura \ref{fig:ansatz_p025}) no alcanza una fidelidad de proceso igual a uno. \felnote{aquí empieza esa mención }Esta diferencia se debe a que la obtención de la matriz de Choi se realiza mediante tomografía de procesos, la cual implica mediciones repetidas en el simulador, introduciendo errores asociados al muestreo, a diferencia de un cálculo analítico exacto. \felnote{aquí finaliza} \begin{figure}[h!] 
+que corresponde a una fidelidad de proceso $F_{proc}= 0.9440$. Notemos que el circuito resultante del ansatz optimizado para este valor de $p$ (ver figura \ref{fig:ansatz_p025}) no alcanza una fidelidad de proceso igual a uno. \felnote{aquí empieza esa mención } Esta diferencia se debe a que en primer lugar, el optimizador finalizar al alcanzar un mínimo local. Por otro lado la obtención de la matriz de Choi se realiza mediante tomografía de procesos, la cual implica mediciones repetidas en el simulador, introduciendo errores asociados al muestreo. Si realizamos un cálculo analítico del circuito optimizado de la figura \ref{fig:ansatz_p025}, la matriz de Choi resultante sería:
+\begin{equation}
+    \Lambda_{ar} =  \begin{pmatrix}
+(0.909 + 0.000i) & (-0.083 - 0.081i) & (0.083 - 0.080i) & (0.748 + 0.038i) \\
+(-0.083 + 0.081i) & (0.091 + 0.000i) & (-0.061 + 0.014i) & (-0.083 + 0.080i) \\
+(0.083 + 0.080i) & (-0.061 - 0.014i) & (0.087 + 0.000i) & (0.084 + 0.081i) \\
+(0.748 - 0.038i) & (-0.083 - 0.080i) & (0.084 - 0.081i) & (0.913 + 0.000i)
+\end{pmatrix},
+\end{equation}
+que tiene una fidelidad de proceso $F_{proc} = 0.9547$. Esta es superior al obtenido con la tomografía de proceso. \felnote{aquí finaliza} \begin{figure}[h!] 
     \centering 
-    \includegraphics[width=0.70\linewidth]{imagenes/ansatz_p025.png}
+    \includegraphics[width=0.70\linewidth]{imagenes/ansatz_p025_v2.png}
     \caption{Ansatz optimizado para un DP con valor de despolarización $p=0.25$, esto fue optimizado en el simulador \texttt{AerSimulator} de Qiskit, IBM. \textbf{Fuente}: elaboración propia. }
     \label{fig:ansatz_p025}
     \end{figure}
@@ -1780,33 +1789,12 @@ reconstruidas]{
 % }}}
 % }}}
 \chapter{CONCLUSIONES} % {{{
-En este trabajo propusimos el uso de algoritmos variacionales cuánticos (VQA,
-por sus siglas en inglés) para implementar canales cuánticos de un qubit en
-computadoras cuánticas. Se utilizó un \textit{hardware-efficient ansatz},
-optimizado mediante un simulador cuántico (\texttt{AerSimulator}) y validado en
-una computadora cuántica de IBM (\texttt{ibm\_kyoto})
-\cite{VQA,ibm_quantum_resources}. La optimización se llevó a cabo maximizando
-la fidelidad de proceso entre las matrices de Choi correspondientes al canal
-objetivo y al canal implementado, obtenidas a partir de tomografía de procesos.
-Como caso de estudio, se consideró la simulación de un canal despolarizante
-(DP) para distintos valores de la probabilidad de despolarización $p$. Los
-resultados obtenidos muestran que el simulador cuántico es capaz de implementar
-la acción del DP con fidelidades cercanas a 1. Además, se observó una baja
-variabilidad como correlación con el valor $p$, que refleja una notable
-estabilidad con el entrenamiento\cpnote{Simplifica y corrige la redaccion}. Por otro lado, los resultados obtenidos en la
-computadora cuántica presentaron un comportamiento distinto. En este caso, la
-fidelidad tendió a aumentar conforme incrementaba la interacción con el ruido
-del dispositivo (ver figura  \ref{fig:comparacion_fidelidad}). Esta tendencia
-fue medida mediante una regresión lineal , cuya pendiente resulto ser $m=
-0.2707$, que indica un crecimiento moderado de la fidelidad con $p$. Así mismo,
-observamos una disminución en la variabilidad de la fidelidad con el aumento de
-$p$. Este fenómeno puede atribuirse a que, al aumentar la probabilidad de
+En este trabajo propusimos el uso de algoritmos variacionales cuánticos (VQA por sus siglas en inglés) para implementar canales cuánticos de un qubit en computadoras cuánticas. Se usó un \textit{hardware-efficient ansatz}, optimizado con un simulador cuántico (\texttt{AerSimulator}) y validado la computadora cuántica \texttt{ibm\_kyoto} \cite{VQA,ibm_quantum_resources}. La optimización buscó maximizar la fidelidad entre las matrices de Choi del canal objetivo y del canal implementado, calculadas mediante tomografía de procesos. Como caso de estudio, se simuló un canal despolarizante (DP) para distintos valores de la probabilidad de despolarización $p$. Los resultados muestran que el simulador alcanzó fidelidades cercanas a 1. Además, la variabilidad, como la correlación de la fidelidad con $p$ fue baja, lo que refleja un comportamiento estable del entrenamiento. \cpnote{Simplifica y corrige la redaccion} \felnote{Corregido}. Por otro lado, los resultados obtenidos en la computadora cuántica presentaron un comportamiento distinto. La fidelidad tendió a aumentar conforme crecía la interacción con el ruido del dispositivo (ver figura  \ref{fig:comparacion_fidelidad}). Analizamos esta tendencia con una regresión lineal , cuya pendiente fue $m = 0.2707$, que indica un crecimiento moderado de la fidelidad con $p$. También observamos una disminución en la variabilidad de la fidelidad al aumentar $p$. Este fenómeno puede atribuirse a que, al aumentar la probabilidad de
 despolarización, los estados cuánticos se vuelven más mixtos y, por lo tanto,
 más susceptibles a errores introducidos por el hardware. Sin embargo, el
-coeficiente de terminación $R^2=0.7055$ , sugiere que existen otros factores,
-además de la probabilidad de despolarización, que influyen en el comportamiento
-de la fidelidad en el dispositivo cuántico. Estos factores se evidenciaron en
-la inspección de las matrices de Choi (ver figura \ref{fig:comparacion_choi}) ,
+coeficiente de determinación $R^2=0.7055$  sugiere que existen otros factores,
+además de $p$, que influyen en el comportamiento
+de la fidelidad en el dispositivo cuántico. Estos factores se evidenciaron al inspeccionar las matrices de Choi (ver figura \ref{fig:comparacion_choi}) ,
 donde la computadora cuántica presentaba una mayor coherencia en las entradas
 no diagonales en las primeras etapas del proceso. Finalmente, los resultados
 obtenidos muestran que en entornos ideales, los VQA pueden ser efectivos para
