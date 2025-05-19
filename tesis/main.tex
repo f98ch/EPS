@@ -169,8 +169,7 @@
 % Preámbulo
 % }}}
 \begin{document}
-
-% Datos generales del trabajo de graduación, tabla de contenidos etc {{{
+% Datos generales del trabajo de graduación, tabla de contenidos etc por ahi mas cosas {{{
 \datosThesis%
 {1}%						% física 1; matemática 2
 {Implementación de canales cuánticos \\ de un qubit usando VQA}%		% Título del trabajo de graduación
@@ -182,7 +181,8 @@
 \frontmatter
 \tableofcontents    % Índice general vinculado
 \figurasYtablas{1}{1}
-\chapter*{LISTA DE SÍMBOLOS}
+% }}}
+\chapter*{LISTA DE SÍMBOLOS} % {{{
 % \phantomsection
 \addcontentsline{toc}{chapter}{LISTA DE SÍMBOLOS}
 
@@ -213,8 +213,7 @@
   \item[$\bm{\theta}$] Vector de parámetros del ansatz.
   \item[$\text{argmin}(-C(\bm{\theta}))$] Optimización clásica sobre los parámetros del VQA.
 \end{description}
-
-
+% }}}
 \chapter*{OBJETIVOS} % {{{
 % \phantomsection
 \addcontentsline{toc}{chapter}{OBJETIVOS}
@@ -229,7 +228,6 @@ Estudiar y desarrollar Algoritmos Variacionales Cuánticos para la implementaci�
     \item Implementar canales cuánticos de un qubit en computadoras cuánticas y analizar su comportamiento.
 \end{itemize}
 % }}}
-
 \chapter*{INTRODUCCIÓN} % {{{
 \addcontentsline{toc}{chapter}{INTRODUCCIÓN}
 % El estudio de la dinámica de sistemas cuánticos abiertos es esencial para el desarrollo de la computación e información cuántica. A diferencia de los sistemas cerrados, donde la evolución está completamente determinada por operadores unitarios, los sistemas abiertos requieren una descripción más general que considere la interacción del sistema con su entorno. En este contexto, los canales cuánticos permiten modelar dicha evolución mediante mapas completamente positivos y que preservan la traza (CPTP), convirtiéndose en una herramienta central para caracterizar procesos ruidosos y operaciones no ideales en plataformas cuánticas reales.
@@ -244,29 +242,34 @@ En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cu�
 \cpnote{Esta es la intro total? Me parece que el primer parrafo y el segundo no están 
 bien conectados} \felnote{No lo es. Último bloque pendiente por redactar.}
 % }}}
-% \felnote{Corregido: Introducción redactada}
-% {{{
-% % Intro {{{
-% Esta sección estudiará las propiedades y definiciones esenciales de la
-% computación cuántica para entender los circuitos cuánticos. Comenzaremos
-% describiendo las compuertas cuánticas y su acción sobre estados de qubits,
-% incluyendo cómo se transforman en la esfera de Bloch. También exploraremos las
-% mediciones cuánticas y las transformaciones necesarias para medir en distintas
-% bases. Finalmente, describiremos la plataforma de \textit{IBM Quantum
-% Experience} donde se implementarán nuestros circuitos cuánticos, mencionando
-% sus capacidades y limitaciones para entender cómo inicializar estados en
-% circuitos cuánticos. Los conocimientos y técnicas adquiridas a lo largo de esta
-% sección nos darán las bases necesarias para
-% trabajar con estados y canales cuánticos en las próximas secciones.
+\mainmatter % Inicio del contenido principal
+\chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos} % {{{
+% Intro de los fundamento {{{
+Para implementar canales cuánticos en plataformas actuales, es necesario
+establecer un marco teórico que permita describir y manipular estados
+cuánticos. En la sección~\ref{sec:matriz_densidad}, se introduce el formalismo
+de la matriz densidad, junto con los conceptos de pureza y traza parcial,
+fundamentales para caracterizar estados puros y mixtos. Posteriormente, en la
+sección \ref{sec:circuitos_cuanticos}, se presentan los circuitos cuánticos
+como herramienta para ejecutar operaciones sobre qubits. Se describen las
+compuertas cuánticas, las mediciones, y su representación en la esfera de
+Bloch. También se explica el proceso de transpilación y la influencia de la
+topología física de las computadoras cuánticas, en particular aquellas
+disponibles en la  plataforma \textit{IBM Quantum Experience}, que será
+utilizada en este trabajo.
 
-% }}}
-
-% Inicio del contenido principal
-\mainmatter
-\chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos}
-Para implementar canales cuánticos en plataformas actuales, es necesario establecer un marco teórico que permita describir y manipular estados cuánticos. En la sección~\ref{sec:matriz_densidad}, se introduce el formalismo de la matriz densidad, junto con los conceptos de pureza y traza parcial, fundamentales para caracterizar estados puros y mixtos. Posteriormente, en la sección \ref{sec:circuitos_cuanticos}, se presentan los circuitos cuánticos como herramienta para ejecutar operaciones sobre qubits. Se describen las compuertas cuánticas, las mediciones, y su representación en la esfera de Bloch. También se explica el proceso de transpilación y la influencia de la topología física de las computadoras cuánticas, en particular aquellas disponibles en la  plataforma \textit{IBM Quantum Experience}, que será utilizada en este trabajo.
-
-Con estos elementos, la sección \ref{sec:canales_cuanticos} introduce formalmente los canales cuánticos como operadores completamente positivos y que preservan la traza (CPTP). Se analizan sus representaciones, destacando la matriz de Choi por su utilidad para caracterizarlos y compararlos. Como caso de estudio, se examina el canal despolarizante, cuya implementación se aborda en los capítulos \ref{cap:algoritmos_variacionales} y \ref{cap:resultados}. Finalmente, en la misma sección, se presentan las herramientas necesarias para caracterizar experimentalmente un canal cuántico: la tomografía y la fidelidad de proceso. Estas permitirán validar y evaluar los canales implementados. Al finalizar este capítulo, el lector contará con una base sólida para comprender cómo se definen, manipulan y validan canales cuánticos en computadoras cuánticas. \felnote{Introducción agregada}
+Con estos elementos, la sección \ref{sec:canales_cuanticos} introduce
+formalmente los canales cuánticos como operadores completamente positivos y que
+preservan la traza (CPTP). Se analizan sus representaciones, destacando la
+matriz de Choi por su utilidad para caracterizarlos y compararlos. Como caso de
+estudio, se examina el canal despolarizante, cuya implementación se aborda en
+los capítulos \ref{cap:algoritmos_variacionales} y \ref{cap:resultados}.
+Finalmente, en la misma sección, se presentan las herramientas necesarias para
+caracterizar experimentalmente un canal cuántico: la tomografía y la fidelidad
+de proceso. Estas permitirán validar y evaluar los canales implementados. Al
+finalizar este capítulo, el lector contará con una base sólida para comprender
+cómo se definen, manipulan y validan canales cuánticos en computadoras
+cuánticas. 
 % }}}
 \section{Matriz Densidad} % {{{
 \label{sec:matriz_densidad}
@@ -1424,9 +1427,7 @@ resultado:
 \end{equation}
 que corresponde a una fidelidad de proceso $F_{proc}= 0.9440$. Notemos que el
 circuito resultante del ansatz optimizado para este valor de $p$ (ver figura
-\ref{fig:ansatz_p025}) no alcanza una fidelidad de proceso igual a uno. Esta diferencia puede atribuirse a dos factores principales. Primero, el optimizador puede converger en un mínimo local, sin alcanzar el valor óptimo global. Segundo, la matriz de Choi $\Lambda_r$ fue obtenida mediante tomografía de proceso, lo que implica realizar estimaciones basadas en un número finito de mediciones, introduciendo así errores de muestreo. Para explicar el segundo punto, calculamos la matriz de Choi $\Lambda_{ar}$ asociada al circuito final optimizado (ver figura \ref{fig:ansatz_p025}) al conjunto de estados vistos en la sección \ref{sec:Tomo_proc} , seguido de la traza parcial sobre los qubits auxiliares, evitando así incertidumbres inherentes a la tomografía. El resultado obtenido es: \cpnote{no está claro de esta frase si es de mediciones o analitico. 
-pense que el anterior era el analitico... creo qeu tienes que ser mas 
-claro} \felnote{Corregido: ahora menciono explícitamente cual es el resultado experimental y cual es el analítico.}
+\ref{fig:ansatz_p025}) no alcanza una fidelidad de proceso igual a uno. Esta diferencia puede atribuirse a dos factores principales. Primero, el optimizador puede converger en un mínimo local, sin alcanzar el valor óptimo global. Segundo, la matriz de Choi $\Lambda_r$ fue obtenida mediante tomografía de proceso, lo que implica realizar estimaciones basadas en un número finito de mediciones, introduciendo así errores de muestreo. Para explicar el segundo punto, calculamos la matriz de Choi $\Lambda_{ar}$ asociada al circuito final optimizado (ver figura \ref{fig:ansatz_p025}) al conjunto de estados vistos en la sección \ref{sec:Tomo_proc} , seguido de la traza parcial sobre los qubits auxiliares, evitando así incertidumbres inherentes a la tomografía. El resultado obtenido es:
 \begin{equation}
     \Lambda_{ar} =  \begin{pmatrix}
 (0.909 + 0.000i) & (-0.083 - 0.081i) & (0.083 - 0.080i) & (0.748 + 0.038i) \\
@@ -1448,13 +1449,19 @@ que tiene una fidelidad de proceso $F_{proc} = 0.9547$. La diferencia evidencia 
 
 % }}}
 % }}}
-
 \chapter{RESULTADOS PARA EL CANAL DESPOLARIZANTE DE UN QUBIT } \label{cap:resultados} % {{{
-% \section{Introducción} % {{{
+% Introducción % {{{
 Este capítulo presenta los resultados de la implementación del canal despolarizante (DP) de un qubit mediante algoritmos variacionales cuánticos (VQA), como fue planteado en el Capítulo \ref{cap:algoritmos_variacionales}. En la sección \ref{sec:algoritmos_vqa}, se describe la programación del VQA en Python usando la librería Qiskit, detallando las funciones utilizadas para construir el circuito, ejecutar la tomografía de proceso y optimizar la fidelidad de proceso con respecto a una matriz de Choi objetivo. En la sección \ref{sec:resultados_dp}, se presentan los resultados obtenidos para distintos valores de la probabilidad de despolarización $p$, tanto en el simulador cuántico \texttt{AerSimulator()} como en la computadora cuántica \texttt{ibm\_kyoto}. Se analizan las fidelidades alcanzadas, la completa positividad, la preservación de la traza y se comparan las matrices de Choi reconstruidas con las teóricas. 
 
-Por último, en la sección \ref{sec:discusion_dp} se discuten las diferencias entre los entornos ideal y real, el impacto de la despolarización sobre la fidelidad y los autovalores de las matrices de Choi, así como las limitaciones inherentes al hardware utilizado. Esta discusión permite evaluar el desempeño de los algoritmos variacionales en la implementación de canales cuánticos en computadoras cuánticas y llegar a una conclusión respecto a los objetivos planteados en el proyecto. 
-\cpnote{Falta introduccion. Escribirla al final quizá de la tesis}\felnote{Corregido: Se agregó introducción a este capítulo}
+Por último, en la sección \ref{sec:discusion_dp} se discuten las diferencias
+entre los entornos ideal y real, el impacto de la despolarización sobre la
+fidelidad y los autovalores de las matrices de Choi, así como las limitaciones
+inherentes al hardware utilizado. Esta discusión permite evaluar el desempeño
+de los algoritmos variacionales en la implementación de canales cuánticos en
+computadoras cuánticas y llegar a una conclusión respecto a los objetivos
+planteados en el proyecto. 
+
+\cpnote{Es importante aca mencionar los resultados también. Como un pequeño trailer. }
 % }}}
 \section{Algoritmos de implementación} % {{{
 \label{sec:algoritmos_vqa}
@@ -1857,9 +1864,40 @@ reconstruidas]{
 % }}}
 \backmatter
 \chapter{CONCLUSIONES} % {{{
-En este trabajo abordamos la implementación de canales cuánticos de un qubit utilizando Algoritmos Variacionales Cuánticos (VQA). Diseñamos e implementamos un canal despolarizante (DP) mediante un \textit{hardware-efficient} ansatz, el cual fue optimizado en un simulador cuántico y validado en un dispositivo cuántico real a través de la plataforma IBM Quantum Experience \cite{VQA,ibm_quantum_resources}. A partir de este enfoque, se empleó una función de costo basada en la fidelidad de proceso, que comparó el canal implementado con el canal objetivo. La evaluación se realizó tanto en un simulador (\texttt{AerSimulator}) como en una computadora cuántica (\texttt{ibm\_kyoto}) para distintos valores del parámetro de despolarización $p$. Se observó que, en el caso del simulador cuántico, la fidelidad de proceso mantuvo sus valores con baja variación, además de tener valores de fidelidad superiores a 0.900 en la mayoría de casos.  \cpnote{Simplifica y corrige la redaccion} \felnote{Corregido}\cpnote{sigo sin entender}.\felnote{Volví a corregir} 
+En este trabajo abordamos la implementación de canales cuánticos de un qubit
+utilizando Algoritmos Variacionales Cuánticos (VQA). Diseñamos e implementamos
+un canal despolarizante (DP) mediante un \textit{hardware-efficient} ansatz, el
+cual fue optimizado en un simulador cuántico y validado en un dispositivo
+cuántico real a través de la plataforma IBM Quantum Experience
+\cite{VQA,ibm_quantum_resources}. A partir de este enfoque, se empleó una
+función de costo basada en la fidelidad de proceso, que comparó el canal
+implementado con el canal objetivo. La evaluación se realizó tanto en un
+simulador (\texttt{AerSimulator}) como en una computadora cuántica
+(\texttt{ibm\_kyoto}) para distintos valores del parámetro de despolarización
+$p$. Se observó que, en el caso del simulador cuántico, la fidelidad de proceso
+mantuvo sus valores con baja variación, además de tener valores de fidelidad
+superiores a 0.900 en la mayoría de casos. 
 
-Por otro lado, los resultados obtenidos en la computadora cuántica mostraron un comportamiento distinto. La fidelidad de proceso tendió a aumentar conforme crecía la probabilidad de despolarización $p$ (ver figura \ref{fig:comparacion_fidelidad}). Para analizar esta tendencia, se aplicó una regresión lineal con pendiente $m = 0.2707$, que indica un crecimiento moderado de la fidelidad con respecto a $p$. También observamos una disminución en la variabilidad de la fidelidad al aumentar $p$, lo cual podría atribuirse a que, al incrementar la despolarización, los estados cuánticos se vuelven más mixtos y, por ende, más tolerantes a los errores introducidos por el hardware. Sin embargo, el coeficiente de determinación $R^2 = 0.7055$ sugiere que existen otros factores, además de $p$, que influyen en el comportamiento observado. Esta influencia adicional se evidenció al inspeccionar las matrices de Choi reconstruidas (ver figura~\ref{fig:comparacion_choi}), donde notamos que, en las primeras etapas del proceso, el dispositivo cuántico conservaba coherencias mayores en las entradas no diagonales. En conjunto, estos resultados indican que, en entornos ideales, los VQA pueden ser efectivos para la implementación de canales cuánticos. No obstante, en dispositivos cuánticos reales, la fidelidad y estabilidad del canal implementado se ven afectadas por el ruido propio del hardware, el cual debe ser considerado cuidadosamente durante el diseño y la ejecución del algoritmo.
+Por otro lado, los resultados obtenidos en la computadora cuántica mostraron un
+comportamiento distinto. La fidelidad de proceso tendió a aumentar conforme
+crecía la probabilidad de despolarización $p$ (ver figura
+\ref{fig:comparacion_fidelidad}). Para analizar esta tendencia, se aplicó una
+regresión lineal con pendiente $m = 0.2707$, que indica un crecimiento moderado
+de la fidelidad con respecto a $p$. También observamos una disminución en la
+variabilidad de la fidelidad al aumentar $p$, lo cual podría atribuirse a que,
+al incrementar la despolarización, los estados cuánticos se vuelven más mixtos
+y, por ende, más tolerantes a los errores introducidos por el hardware. Sin
+embargo, el coeficiente de determinación $R^2 = 0.7055$ sugiere que existen
+otros factores, además de $p$, que influyen en el comportamiento observado.
+Esta influencia adicional se evidenció al inspeccionar las matrices de Choi
+reconstruidas (ver figura~\ref{fig:comparacion_choi}), donde notamos que, en
+las primeras etapas del proceso, el dispositivo cuántico conservaba coherencias
+mayores en las entradas no diagonales. En conjunto, estos resultados indican
+que, en entornos ideales, los VQA pueden ser efectivos para la implementación
+de canales cuánticos. No obstante, en dispositivos cuánticos reales, la
+fidelidad y estabilidad del canal implementado se ven afectadas por el ruido
+propio del hardware, el cual debe ser considerado cuidadosamente durante el
+diseño y la ejecución del algoritmo.
 
 
 
