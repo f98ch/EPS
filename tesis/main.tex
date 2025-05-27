@@ -230,11 +230,44 @@ Estudiar y desarrollar algoritmos variacionales cuánticos para la implementaci�
 % }}}
 \chapter*{INTRODUCCIÓN} % {{{
 \addcontentsline{toc}{chapter}{INTRODUCCIÓN}
-El estudio de sistemas cuánticos abiertos es fundamental para el desarrollo de tecnologías cuánticas, especialmente en el contexto de la computación y la información cuántica \cite{nielsen_chuang_2011, schlosshauer2007decoherence}. Para describir la dinámica de estos sistemas se utilizan los canales cuánticos, definidos como operadores completamente positivos y que preservan la traza (CPTP) \cite{Choi2024}.Es importante comprender e implementar estos canales para caracterizar el ruido en computadoras cuánticas reales, especialmente en dispositivos de propósito cuántico limitados como los de la era de tecnología ruidosa de escala media (NISQ). Entre las técnicas más prometedoras para enfrentar estos desafíos se encuentran los algoritmos variacionales cuánticos (VQA), que combinan circuitos cuánticos parametrizados con estrategias de optimización clásica. Este enfoque híbrido ha demostrado ser eficaz para distintas aplicaciones como el \textit{variational quantum eigensolver} (VQE), encontrar estados fundamentales, estados excitados, entre otros \cite{VQA}.
+El estudio de sistemas cuánticos abiertos es fundamental para el desarrollo de
+tecnologías cuánticas, especialmente en el contexto de la computación y la
+información cuántica \cite{nielsen_chuang_2011, schlosshauer2007decoherence}.
+Para describir la dinámica de estos sistemas se utilizan los canales cuánticos,
+definidos como operadores completamente positivos y que preservan la traza~\cite{Choi2024}. Es importante comprender e implementar estos canales
+para caracterizar el ruido en computadoras cuánticas reales, especialmente en
+dispositivos de propósito cuántico limitados como los de la era de tecnología
+ruidosa de escala media\cpnote{porque lo dices? Me gustaría que me defendieras
+este punto. Siento que es copiado y pegado de otra parte.}. Entre las técnicas
+más prometedoras para
+enfrentar estos desafíos \cpnote{Cuales desafíos? Debe cuadrar bien 
+con la frase que sigue} se encuentran los algoritmos
+variacionales cuánticos
+(VQA), que combinan circuitos cuánticos parametrizados con estrategias de
+optimización clásica. Este enfoque híbrido ha demostrado ser eficaz para
+distintas aplicaciones como el \textit{variational quantum eigensolver},
+encontrar estados fundamentales, estados excitados, entre otros \cite{VQA}\cpnote{
+Ver que hay ahi. Creo que se puede poner en otro siito pero no se}.
 
-En este trabajo se propone la implementación de canales cuánticos de un qubit, con énfasis en el canal despolarizante, utilizando los VQA. Con este objetivo, se estudiarán, en la primera parte del trabajo, los fundamentos teóricos de los canales cuánticos y su representación matemática, haciendo énfasis en el formalismo de Choi y la tomografía de procesos. Posteriormente, se construirá un VQA con el uso de un \textit{hardware efficient ansatz} (HEA)  que implementará la acción del canal sobre un sistema cuántico, el cual es optimizado en función  de la fidelidad de proceso. Este proceso se llevará a cabo tanto en un simualdor, como en una computadora cuántica real, lo que permitirá contrastar el rendimiento ideal frente al hardware disponible. Finalmente, se discutirán las implicaciones de estos resultados y se propondrán líneas de trabajo futuro en el contexto de la computación cuántica.
+En este trabajo se propone la implementación de canales cuánticos de un qubit,
+con énfasis en el canal despolarizante, utilizando los VQA. Con este objetivo,
+se estudiarán, en la primera parte del trabajo, los fundamentos teóricos de los
+canales cuánticos y su representación matemática, haciendo énfasis en el
+formalismo de Choi y la tomografía de procesos. Posteriormente, se construirá
+un VQA con el uso de un \textit{hardware efficient ansatz} (HEA)  que
+implementará la acción del canal sobre un sistema cuántico, el cual es
+optimizado en función  de la fidelidad de proceso. Este proceso se llevará a
+cabo tanto en un simulador, como en una computadora cuántica real, lo que
+permitirá contrastar el rendimiento ideal frente al hardware disponible.
+Finalmente, se discutirán las implicaciones \cpnote{Cuales son las implicaciones de que?}
+de estos resultados \cpnote{De cuales
+resultados? No has mencionado nada}y se propondrán
+líneas de trabajo futuro en el contexto de la computación cuántica.
 
-El desarrollo y análisis de esta propuesta permiten no solo validar la factibilidad de los VQA para la simulación de canales cuánticos, sino también ofrecer una herramienta versátil para el diseño de algoritmos tolerantes a errores y estrategias de corrección cuántica. 
+El desarrollo y análisis de esta propuesta permiten no solo validar la
+factibilidad de los VQA para la simulación de canales cuánticos, sino también
+ofrecer una herramienta versátil para el diseño de algoritmos tolerantes a
+errores y estrategias de corrección cuántica. 
 \cpnote{Esta es la intro total? Me parece que el primer parrafo y el segundo no están 
 bien conectados} \felnote{Corregido: Redacté la introducción final en esta iteración.}
 
@@ -244,7 +277,7 @@ bien conectados} \felnote{Corregido: Redacté la introducción final en esta ite
 
 % En este trabajo, nos enfocamos en la aplicación de algoritmos variacionales cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
 
-
+% }}}
 \mainmatter % Inicio del contenido principal
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos} % {{{
 % Intro de los fundamento {{{
@@ -1265,7 +1298,7 @@ Esta métrica proporciona una medida cuantitativa de cuán similar es un canal c
 \chapter{ALGORITMOS VARIACIONALES CUÁNTICOS (VQA)} % {{{
 \label{cap:algoritmos_variacionales}
 % \section{Introducción} % {{{
-La llegada de la tecnología ruidosa de escala intermedia (NISQ) ha generado
+La llegada de la tecnología ruidosa de escala intermedia ha generado
 gran interés, ya que permite trabajar con una mayor cantidad de qubits, aunque
 también con mayores niveles de error. Por ello, es fundamental implementar
 algoritmos que aprovechen las capacidades del hardware actual. Uno de ellos
@@ -1450,13 +1483,35 @@ que tiene una fidelidad de proceso $F_{proc} = 0.9547$. La diferencia evidencia 
 % }}}
 \chapter{RESULTADOS PARA EL CANAL DESPOLARIZANTE DE UN QUBIT } \label{cap:resultados} % {{{
 % Introducción % {{{
-Este capítulo presenta los resultados de la implementación del canal despolarizante (DP) de un qubit mediante algoritmos variacionales cuánticos (VQA), como fue planteado en el Capítulo~\ref{cap:algoritmos_variacionales}. En la sección~\ref{sec:algoritmos_vqa}, se describe la programación del VQA en Python utilizando la librería Qiskit, detallando las funciones empleadas para construir el circuito, ejecutar la tomografía de proceso y optimizar la fidelidad del canal respecto a una matriz de Choi objetivo.  En la sección \ref{sec:resultados_dp}, se presentan los resultados obtenidos para distintos valores de la probabilidad de despolarización $p$, utilizando tanto el simulador cuántico \texttt{AerSimulator()} como la computadora cuántica \texttt{ibm\_kyoto}.  \felnote{aquí se mencionan resultados }Se analizaron las fidelidades alcanzadas, verificando que en el simulador estas se mantuvieron consistentemente por encima de 0.900, mientras que en la computadora cuántica se registró una mayor variabilidad, con fidelidades entre 0.5533 y 0.9738 \felnote{Aquí termina la pequeña mención}. Además, se evaluó el cumplimiento de las propiedades fundamentales del canal, tales como la completa positividad (CP) y la preservación de la traza (TP), y se compararon las matrices de Choi reconstruidas con las teóricas.
+Este capítulo presenta los resultados de la implementación del canal
+despolarizante (DP) de un qubit mediante algoritmos variacionales cuánticos
+(VQA), como fue planteado en el Capítulo~\ref{cap:algoritmos_variacionales}. En
+la sección~\ref{sec:algoritmos_vqa}, se describe la programación del VQA en
+Python utilizando la librería Qiskit, detallando las funciones empleadas para
+construir el circuito, ejecutar la tomografía de proceso y optimizar la
+fidelidad del canal respecto a una matriz de Choi objetivo.  En la sección
+\ref{sec:resultados_dp}, se presentan los resultados obtenidos para distintos
+valores de la probabilidad de despolarización $p$, utilizando tanto el
+simulador cuántico \texttt{AerSimulator()} como la computadora cuántica
+\texttt{ibm\_kyoto}. Se analizaron las
+fidelidades alcanzadas, verificando que en el simulador estas se mantuvieron
+consistentemente por encima de 0.900, mientras que en la computadora cuántica
+se registró una mayor variabilidad, con fidelidades entre 0.5533 y 0.9738.
+Además, se evaluó el cumplimiento de
+las propiedades fundamentales del canal, tales como la completa positividad
+(CP) y la preservación de la traza (TP), y se compararon las matrices de Choi
+reconstruidas con las teóricas.
 
-Por último, en la sección~\ref{sec:discusion_dp}, se discuten las diferencias observadas entre los entornos ideal y real, el impacto del valor de $p$ sobre la fidelidad y los autovalores de las matrices de Choi, así como las limitaciones propias del hardware cuántico. Esta discusión permite valorar la viabilidad y desempeño de los algoritmos variacionales en la implementación de canales cuánticos en plataformas cuánticas actuales, y establecer conclusiones respecto a los objetivos planteados en este proyecto.
+Por último, en la sección~\ref{sec:discusion_dp}, se discuten las diferencias
+observadas entre los entornos ideal y real, el impacto del valor de $p$ sobre
+la fidelidad y los autovalores de las matrices de Choi, así como las
+limitaciones propias del hardware cuántico. Esta discusión permite valorar la
+viabilidad y desempeño de los algoritmos variacionales en la implementación de
+canales cuánticos en plataformas cuánticas actuales, y establecer conclusiones
+respecto a los objetivos planteados en este proyecto.
 
 
 
-\cpnote{Es importante aca mencionar los resultados también. Como un pequeño trailer. } \felnote{Corregido: Lo verás en la nota de correccion arriba }
 % }}}
 \section{Algoritmos de implementación} % {{{
 \label{sec:algoritmos_vqa}
