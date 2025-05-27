@@ -218,30 +218,33 @@
 % \phantomsection
 \addcontentsline{toc}{chapter}{OBJETIVOS}
 \section*{General} 
-Estudiar y desarrollar Algoritmos Variacionales Cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
+Estudiar y desarrollar algoritmos variacionales cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
 
 \section*{Específicos}
 \begin{itemize}
     \item Estudiar la teoría y uso de computadoras cuánticas.
     \item Comprender las definiciones fundamentales de la teoría de sistemas cuánticos abiertos y canales cuánticos.
-    \item Investigar el uso de los Algoritmos Variacionales Cuánticos en la resolución de problemas de información cuántica.
+    \item Investigar el uso de los algoritmos variacionales cuánticos en la resolución de problemas de información cuántica.
     \item Implementar canales cuánticos de un qubit en computadoras cuánticas y analizar su comportamiento.
 \end{itemize}
 % }}}
 \chapter*{INTRODUCCIÓN} % {{{
 \addcontentsline{toc}{chapter}{INTRODUCCIÓN}
-% El estudio de la dinámica de sistemas cuánticos abiertos es esencial para el desarrollo de la computación e información cuántica. A diferencia de los sistemas cerrados, donde la evolución está completamente determinada por operadores unitarios, los sistemas abiertos requieren una descripción más general que considere la interacción del sistema con su entorno. En este contexto, los canales cuánticos permiten modelar dicha evolución mediante mapas completamente positivos y que preservan la traza (CPTP), convirtiéndose en una herramienta central para caracterizar procesos ruidosos y operaciones no ideales en plataformas cuánticas reales.
+El estudio de sistemas cuánticos abiertos es fundamental para el desarrollo de tecnologías cuánticas, especialmente en el contexto de la computación y la información cuántica \cite{nielsen_chuang_2011, schlosshauer2007decoherence}. Para describir la dinámica de estos sistemas se utilizan los canales cuánticos, definidos como operadores completamente positivos y que preservan la traza (CPTP) \cite{Choi2024}.Es importante comprender e implementar estos canales para caracterizar el ruido en computadoras cuánticas reales, especialmente en dispositivos de propósito cuántico limitados como los de la era de tecnología ruidosa de escala media (NISQ). Entre las técnicas más prometedoras para enfrentar estos desafíos se encuentran los algoritmos variacionales cuánticos (VQA), que combinan circuitos cuánticos parametrizados con estrategias de optimización clásica. Este enfoque híbrido ha demostrado ser eficaz para distintas aplicaciones como el \textit{variational quantum eigensolver} (VQE), encontrar estados fundamentales, estados excitados, entre otros \cite{VQA}.
 
-% Con el avance de tecnologías de propósito cuántico, especialmente en la era NISQ (Noisy Intermediate-Scale Quantum), se vuelve crucial encontrar métodos que permitan implementar y validar estos canales en dispositivos con recursos limitados y expuestos a ruido. Entre las técnicas más prometedoras para enfrentar estos desafíos se encuentran los Algoritmos Variacionales Cuánticos (VQA), que combinan circuitos cuánticos parametrizados con estrategias de optimización clásica. Este enfoque híbrido ha demostrado ser eficaz para tareas como la estimación de estados, simulaciones y, en particular, para la caracterización y síntesis de canales cuánticos.
+En este trabajo se propone la implementación de canales cuánticos de un qubit, con énfasis en el canal despolarizante, utilizando los VQA. Con este objetivo, se estudiarán, en la primera parte del trabajo, los fundamentos teóricos de los canales cuánticos y su representación matemática, haciendo énfasis en el formalismo de Choi y la tomografía de procesos. Posteriormente, se construirá un VQA con el uso de un \textit{hardware efficient ansatz} (HEA)  que implementará la acción del canal sobre un sistema cuántico, el cual es optimizado en función  de la fidelidad de proceso. Este proceso se llevará a cabo tanto en un simualdor, como en una computadora cuántica real, lo que permitirá contrastar el rendimiento ideal frente al hardware disponible. Finalmente, se discutirán las implicaciones de estos resultados y se propondrán líneas de trabajo futuro en el contexto de la computación cuántica.
 
-% En este trabajo, se aborda la implementación del canal despolarizante de un qubit utilizando VQAs, enfocándose en la inicialización del canal mediante circuitos cuánticos y su posterior optimización a través de métricas como la fidelidad de proceso. El procedimiento se basa en la reconstrucción experimental del canal usando tomografía de proceso cuántico, contrastando los resultados con simulaciones ideales y evaluaciones realizadas en una computadora cuántica real. Este enfoque busca explorar la viabilidad de los VQAs como herramientas para diseñar y controlar canales cuánticos de forma adaptable y eficiente, abriendo camino hacia aplicaciones más robustas en computación cuántica bajo condiciones reales.
-El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para el avance de la computación e información cuántica. Los canales cuánticos describen la evolución de estados cuánticos en  interacción con su entorno, y son clave para el entendimiento de este tipo de sistemas.
-
-En este trabajo, nos enfocamos en la aplicación de Algoritmos Variacionales Cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
-
+El desarrollo y análisis de esta propuesta permiten no solo validar la factibilidad de los VQA para la simulación de canales cuánticos, sino también ofrecer una herramienta versátil para el diseño de algoritmos tolerantes a errores y estrategias de corrección cuántica. 
 \cpnote{Esta es la intro total? Me parece que el primer parrafo y el segundo no están 
-bien conectados} \felnote{No lo es. Último bloque pendiente por redactar.}
-% }}}
+bien conectados} \felnote{Corregido: Redacté la introducción final en esta iteración.}
+
+
+
+% El estudio de la dinámica de sistemas cuánticos abiertos es fundamental para el avance de la computación e información cuántica. Los canales cuánticos describen la evolución de estados cuánticos en  interacción con su entorno, y son clave para el entendimiento de este tipo de sistemas.
+
+% En este trabajo, nos enfocamos en la aplicación de algoritmos variacionales cuánticos (VQA) para la inicialización y optimización de canales cuánticos en plataformas de computación cuántica. Los VQA, a través de su enfoque híbrido que combina computación cuántica y optimización clásica, nos ofrecen una técnica óptima para ajustar los parámetros que gobiernan los canales cuánticos, permitiendo una mayor precisión y control en el procesamiento cuántico.
+
+
 \mainmatter % Inicio del contenido principal
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos} % {{{
 % Intro de los fundamento {{{
@@ -814,7 +817,7 @@ Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llam
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.20]{imagenes/transpiling_core_steps.png}
-    \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM} \textbf{Fuente}: IBM Quantum API \cite{qiskit_transpiler}
+    \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM \textbf{Fuente}: IBM Quantum API \cite{qiskit_transpiler}.}
     \label{fig:transpiling}
 \end{figure}
 La topología del sistema influye directamente en como se implementan las interacciones entre qubits dentro del circuito cuántico, especialmente cuando se hacen operaciones entre qubits que no estan conectados de forma uniforme (ver figuras \ref{fig:topos_kyiv} y  \ref{fig:topos}). 
@@ -864,7 +867,6 @@ La transpilación de circuitos viene incorporada en la librería de Qiskit, es n
 
 
 %=================================================
-\felnote{Agregué un newpage para que no se crucen imágenes de 1.3 con 1.4.}
 \newpage
 
 
@@ -1145,7 +1147,7 @@ Por ende, el circuito cuántico debe ser medido en cada una de las bases (ver fi
         \begin{quantikz}
         \lstick{$\ket{\psi}$}  & \meter{} & \cw{M}
         \end{quantikz}  
-        \caption{Mediciones cuánticas necesarias para realizar la tomografía de estado.}
+        \caption{Mediciones cuánticas necesarias para realizar la tomografía de estado. \textbf{Fuente:} elaboración propia.}
         \label{eq:circuitos_tomoestado}
     \end{figure}
 
@@ -1338,7 +1340,7 @@ tomografía de proceso sobre el circuito cuántico parametrizado, mientras que
 $\Lambda_{obj}$ es la matriz de Choi objetivo del canal cuántico a implementar.
  
 Por otro lado, el HEA utilizado para este proyecto es el mismo usado en el
-paper de Huan-Yu Liu y otros \cite{Liu_2021} \cite{Sim_2019}, que combina
+paper de Huan-Yu Liu y otros \cite{Liu_2021,Sim_2019}, que combina
 compuertas sencillas de implementar entre operaciones de uno o dos qubits.
 Luego las capas son repetidas para incrementar la profundidad expresiva, por
 lo que la estructura del ansatz es:
@@ -1437,9 +1439,6 @@ circuito resultante del ansatz optimizado para este valor de $p$ (ver figura
 \end{pmatrix},
 \end{equation}
 que tiene una fidelidad de proceso $F_{proc} = 0.9547$. La diferencia evidencia el impacto de los errores de medición y validación estadística en la fidelidad estimada experimentalmente.
-
-
-
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.70\linewidth]{imagenes/ansatz_p025_v2.png}
@@ -1451,17 +1450,13 @@ que tiene una fidelidad de proceso $F_{proc} = 0.9547$. La diferencia evidencia 
 % }}}
 \chapter{RESULTADOS PARA EL CANAL DESPOLARIZANTE DE UN QUBIT } \label{cap:resultados} % {{{
 % Introducción % {{{
-Este capítulo presenta los resultados de la implementación del canal despolarizante (DP) de un qubit mediante algoritmos variacionales cuánticos (VQA), como fue planteado en el Capítulo \ref{cap:algoritmos_variacionales}. En la sección \ref{sec:algoritmos_vqa}, se describe la programación del VQA en Python usando la librería Qiskit, detallando las funciones utilizadas para construir el circuito, ejecutar la tomografía de proceso y optimizar la fidelidad de proceso con respecto a una matriz de Choi objetivo. En la sección \ref{sec:resultados_dp}, se presentan los resultados obtenidos para distintos valores de la probabilidad de despolarización $p$, tanto en el simulador cuántico \texttt{AerSimulator()} como en la computadora cuántica \texttt{ibm\_kyoto}. Se analizan las fidelidades alcanzadas, la completa positividad, la preservación de la traza y se comparan las matrices de Choi reconstruidas con las teóricas. 
+Este capítulo presenta los resultados de la implementación del canal despolarizante (DP) de un qubit mediante algoritmos variacionales cuánticos (VQA), como fue planteado en el Capítulo~\ref{cap:algoritmos_variacionales}. En la sección~\ref{sec:algoritmos_vqa}, se describe la programación del VQA en Python utilizando la librería Qiskit, detallando las funciones empleadas para construir el circuito, ejecutar la tomografía de proceso y optimizar la fidelidad del canal respecto a una matriz de Choi objetivo.  En la sección \ref{sec:resultados_dp}, se presentan los resultados obtenidos para distintos valores de la probabilidad de despolarización $p$, utilizando tanto el simulador cuántico \texttt{AerSimulator()} como la computadora cuántica \texttt{ibm\_kyoto}.  \felnote{aquí se mencionan resultados }Se analizaron las fidelidades alcanzadas, verificando que en el simulador estas se mantuvieron consistentemente por encima de 0.900, mientras que en la computadora cuántica se registró una mayor variabilidad, con fidelidades entre 0.5533 y 0.9738 \felnote{Aquí termina la pequeña mención}. Además, se evaluó el cumplimiento de las propiedades fundamentales del canal, tales como la completa positividad (CP) y la preservación de la traza (TP), y se compararon las matrices de Choi reconstruidas con las teóricas.
 
-Por último, en la sección \ref{sec:discusion_dp} se discuten las diferencias
-entre los entornos ideal y real, el impacto de la despolarización sobre la
-fidelidad y los autovalores de las matrices de Choi, así como las limitaciones
-inherentes al hardware utilizado. Esta discusión permite evaluar el desempeño
-de los algoritmos variacionales en la implementación de canales cuánticos en
-computadoras cuánticas y llegar a una conclusión respecto a los objetivos
-planteados en el proyecto. 
+Por último, en la sección~\ref{sec:discusion_dp}, se discuten las diferencias observadas entre los entornos ideal y real, el impacto del valor de $p$ sobre la fidelidad y los autovalores de las matrices de Choi, así como las limitaciones propias del hardware cuántico. Esta discusión permite valorar la viabilidad y desempeño de los algoritmos variacionales en la implementación de canales cuánticos en plataformas cuánticas actuales, y establecer conclusiones respecto a los objetivos planteados en este proyecto.
 
-\cpnote{Es importante aca mencionar los resultados también. Como un pequeño trailer. }
+
+
+\cpnote{Es importante aca mencionar los resultados también. Como un pequeño trailer. } \felnote{Corregido: Lo verás en la nota de correccion arriba }
 % }}}
 \section{Algoritmos de implementación} % {{{
 \label{sec:algoritmos_vqa}
@@ -1865,7 +1860,7 @@ reconstruidas]{
 \backmatter
 \chapter{CONCLUSIONES} % {{{
 En este trabajo abordamos la implementación de canales cuánticos de un qubit
-utilizando Algoritmos Variacionales Cuánticos (VQA). Diseñamos e implementamos
+utilizando algoritmos variacionales cuánticos (VQA). Diseñamos e implementamos
 un canal despolarizante (DP) mediante un \textit{hardware-efficient} ansatz, el
 cual fue optimizado en un simulador cuántico y validado en un dispositivo
 cuántico real a través de la plataforma IBM Quantum Experience
@@ -1919,9 +1914,13 @@ ellas:
     
     \item Realizar la optimización directamente sobre hardware cuántico. En este trabajo se utilizó exclusivamente la plataforma IBM Quantum Experience, la cual presenta ciertas restricciones en el tiempo de ejecución. Sin embargo, explorar otras plataformas podría permitir realizar optimizaciones directamente en el dispositivo, lo que abriría la posibilidad de obtener mejores resultados y de realizar un análisis más detallado del desempeño del hardware.
 \end{itemize}
-
-
 % }}}
 \bibliographystyle{abbrv}
 \bibliography{references} % Bibliografía
+
+
+% \appendix
+% \chapter*{A.1}
+
+% \addcontentsline{toc}{chapter}{A.1}
 \end{document}
