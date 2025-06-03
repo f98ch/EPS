@@ -238,15 +238,34 @@ Para describir la dinámica de estos sistemas se utilizan los canales cuánticos
 % para caracterizar el ruido en computadoras cuánticas reales, especialmente en
 % dispositivos de propósito cuántico limitados como los de la era de tecnología
 % ruidosa de escala media (NISQ)
-\cpnote{porque lo dices? Me gustaría que me defendieras
-este punto. Siento que es copiado y pegado de otra parte.} \felnote{No es copiada, la última frase la usé para conectar la teoría de canales cuánticos con computadoras cuánticas (ver introducción del cap \ref{cap:algoritmos_variacionales}). Pero lo escribí mal, yo quiero dar a entender la importancia de usar el vqa para implementar canales cuánticos en computadoras cuánticas actuales, por lo mismo que actualmente son proponesas a errores.... Volví a redactar esta frase, dime que opinas.}. En respuesta a estos desafíos, una de las estategias más promoetedoras es el uso de de los algoritmos variacionales cuánticos (VQA), \cpnote{Cuales desafíos? Debe cuadrar bien  con la frase que sigue} \felnote{Corregido: Ahora esta explícito en la frase anterior y conecta con esta frase.} , que combinan circuitos cuánticos parametrizados con estrategias de optimización clásica. Este enfoque híbrido ha mostrado ser eficaz para distintas aplicaciones como el \textit{variational quantum eigensolver} (VQE) para la estimación de estados fundamentales y estados excitados. \cite{VQA}\cpnote{ Ver que hay ahi. Creo que se puede poner en otro siito pero no se} \felnote{Lo corregí, era más un tema de redacción para mencionar una de sus aplicaciones.}.  En este trabajo se propone la implementación de canales cuánticos de un qubit, con énfasis en el canal despolarizante, utilizando los VQA. Con este objetivo, se estudiarán, en la primera parte del trabajo, los fundamentos teóricos de los canales cuánticos y su representación matemática, haciendo énfasis en el formalismo de Choi y la tomografía de procesos.  Posteriormente, se construirá un VQA usando un \textit{hardware efficient ansats} (HEA), diseñado para replicar la acción del canal sobre un sistema cuántico, optimizando los parámetros en función de la fidelidad de proceso. Este proceso se llevará a cabo tanto en un simulador como en una computadora cuántica real, lo que permitirá comparar el rendimiento ideal con el comportamiento en dispositivos actuales. Finalmente, se analizarán los resultados obtenidos,  \cpnote{Cuales son las implicaciones de que?} de estos resultados \cpnote{De cuales resultados? No has mencionado nada} \felnote{Corregido: reescribí toda esta primera frase. Ahora menciono que vamos a hacer en la parte de resultados.} destacando la fidelidad de proceso alcanzada en cada plataforma, así como la variabilidad observada entre distintas ejecuciones. Estos resultados permitirán evaluar el impacto del ruido y las limitaciones del hardware cuántico. Con base en ello, se propondrán posibles líneas de trabajo futuro en el contexto de la computación cuántica.
+\cpnote{Hablar de esta frase anterior}. En respuesta a estos desafíos, una de
+las estrategias más
+prometedoras es el uso de de los algoritmos variacionales cuánticos (VQA),
+que combinan circuitos cuánticos parametrizados con estrategias
+de optimización clásica. Este enfoque híbrido ha mostrado ser eficaz para
+distintas aplicaciones como el \textit{variational quantum eigensolver} (VQE)
+para la estimación de estados fundamentales y estados excitados.
+\cite{VQA}. En este trabajo se propone la implementación de canales
+cuánticos de un qubit, con énfasis en el canal despolarizante, utilizando los
+VQA. Con este objetivo, se estudiarán, en la primera parte del trabajo, los
+fundamentos teóricos de los canales cuánticos y su representación matemática,
+haciendo énfasis en el formalismo de Choi y la tomografía de procesos.
+Posteriormente, se construirá un VQA usando un \textit{hardware efficient
+ansats} (HEA), diseñado para replicar la acción del canal sobre un sistema
+cuántico, optimizando los parámetros en función de la fidelidad de proceso.
+Este proceso se llevará a cabo tanto en un simulador como en una computadora
+cuántica real, lo que permitirá comparar el rendimiento ideal con el
+comportamiento en dispositivos actuales. Finalmente, se analizarán los
+resultados obtenidos, destacando la fidelidad de proceso
+alcanzada en cada plataforma, así como la variabilidad observada entre
+distintas ejecuciones. Estos resultados permitirán evaluar el impacto del ruido
+y las limitaciones del hardware cuántico. Con base en ello, se propondrán
+posibles líneas de trabajo futuro en el contexto de la computación cuántica.
 
 El desarrollo y análisis de esta propuesta permiten no solo validar la
 factibilidad de los VQA para la simulación de canales cuánticos, sino también
 ofrecer una herramienta versátil para el diseño de algoritmos tolerantes a
 errores y estrategias de corrección cuántica. 
-\cpnote{Esta es la intro total? Me parece que el primer parrafo y el segundo no están 
-bien conectados} \felnote{Corregido: Redacté la introducción final en esta iteración.}
 
 
 
