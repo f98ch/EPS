@@ -174,46 +174,46 @@
 {1}%						% física 1; matemática 2
 {Implementación de canales cuánticos \\ de un qubit usando VQA}%		% Título del trabajo de graduación
 {Felipe Antonio Ixcamparic Choy}%			% autor
-{Dr. Ángel Giovanni Ramírez García\\y Dr. Carlos Francisco Pineda Zorrilla}%			% asesor
-{agosto de 2024}		% mes y año de la orden de impresión
+{Dr. Carlos Francisco Pineda Zorrilla\\y Dr. Ángel Giovanni Ramírez García}%			% asesor
+{junio de 2025}		% mes y año de la orden de impresión
 {2}							% femenino 1; masculino 2
 
 \frontmatter
 \tableofcontents    % Índice general vinculado
 \figurasYtablas{1}{1}
 % }}}
-\chapter*{LISTA DE SÍMBOLOS} % {{{
-% \phantomsection
-\addcontentsline{toc}{chapter}{LISTA DE SÍMBOLOS}
+% \chapter*{LISTA DE SÍMBOLOS} % {{{
+% % \phantomsection
+% \addcontentsline{toc}{chapter}{LISTA DE SÍMBOLOS}
 
-\begin{description}[leftmargin=3cm, style=nextline]
-  \item[$\mathcal{H}$] Espacio de Hilbert o espacio de estado.
-  \item[$\ket{\psi}$] Representación del vector de estado en la notación de Dirac (\textit{ket}).
-  \item[$\bra{\psi}$] Vector dual al estado $\ket{\psi}$ (\textit{bra}).
-  \item[$\braket{\psi|\phi}$] Producto interno entre dos vectores en la notación de Dirac (\textit{braket}).
-  \item[$\ketbra{\psi}{\phi}$] Producto externo, también llamado \textit{ketbra}.
-  \item[$\overline{\braket{\psi|\phi}}$] Conjugado complejo del producto interno.
-  \item[$\rho$] Matriz densidad de un sistema cuántico.
-  \item[$\rho_{AB}$] Matriz densidad de un sistema compuesto A y B.
-  \item[$\rho_A = \text{Tr}_B(\rho_{AB})$] Matriz densidad reducida del subsistema A (traza parcial sobre B).
-  \item[$\text{Tr}(\cdot)$] Operación de traza sobre un operador.
-  \item[$\gamma$] Pureza de un estado cuántico ($\gamma = \text{Tr}(\rho^2)$).
-  \item[$\sigma_x, \sigma_y, \sigma_z$] Matrices de Pauli.
-  \item[$R_x(\theta), R_y(\theta), R_z(\theta)$] Compuertas de rotación alrededor de los ejes X, Y y Z.
-  \item[$H$] Compuerta de Hadamard.
-  \item[$\text{CNOT}$] Compuerta de control-X (controlada).
-  \item[$\Lambda_E$] Matriz de Choi del canal cuántico $E$.
-  \item[$\{E_k\}$] Conjunto de operadores de Kraus para un canal cuántico.
-  \item[$E(\rho)$] Acción del canal cuántico $E$ sobre el estado $\rho$.
-  \item[$p$] Parámetro de despolarización (probabilidad de ruido).
-  \item[$F(\rho, \sigma)$] Fidelidad entre dos estados cuánticos.
-  \item[$F_{\text{proc}}$] Fidelidad de proceso cuántico.
-  \item[$U(\bm{\theta})$] Circuito parametrizado o ansatz en un VQA.
-  \item[$C(\bm{\theta})$] Función de costo en un algoritmo variacional cuántico.
-  \item[$\bm{\theta}$] Vector de parámetros del ansatz.
-  \item[$\text{argmin}(-C(\bm{\theta}))$] Optimización clásica sobre los parámetros del VQA.
-\end{description}
-% }}}
+% \begin{description}[leftmargin=3cm, style=nextline]
+%   \item[$\mathcal{H}$] Espacio de Hilbert o espacio de estado.
+%   \item[$\ket{\psi}$] Representación del vector de estado en la notación de Dirac (\textit{ket}).
+%   \item[$\bra{\psi}$] Vector dual al estado $\ket{\psi}$ (\textit{bra}).
+%   \item[$\braket{\psi|\phi}$] Producto interno entre dos vectores en la notación de Dirac (\textit{braket}).
+%   \item[$\ketbra{\psi}{\phi}$] Producto externo, también llamado \textit{ketbra}.
+%   \item[$\overline{\braket{\psi|\phi}}$] Conjugado complejo del producto interno.
+%   \item[$\rho$] Matriz densidad de un sistema cuántico.
+%   \item[$\rho_{AB}$] Matriz densidad de un sistema compuesto A y B.
+%   \item[$\rho_A = \text{Tr}_B(\rho_{AB})$] Matriz densidad reducida del subsistema A (traza parcial sobre B).
+%   \item[$\text{Tr}(\cdot)$] Operación de traza sobre un operador.
+%   \item[$\gamma$] Pureza de un estado cuántico ($\gamma = \text{Tr}(\rho^2)$).
+%   \item[$\sigma_x, \sigma_y, \sigma_z$] Matrices de Pauli.
+%   \item[$R_x(\theta), R_y(\theta), R_z(\theta)$] Compuertas de rotación alrededor de los ejes X, Y y Z.
+%   \item[$H$] Compuerta de Hadamard.
+%   \item[$\text{CNOT}$] Compuerta de control-X (controlada).
+%   \item[$\Lambda_E$] Matriz de Choi del canal cuántico $E$.
+%   \item[$\{E_k\}$] Conjunto de operadores de Kraus para un canal cuántico.
+%   \item[$E(\rho)$] Acción del canal cuántico $E$ sobre el estado $\rho$.
+%   \item[$p$] Parámetro de despolarización (probabilidad de ruido).
+%   \item[$F(\rho, \sigma)$] Fidelidad entre dos estados cuánticos.
+%   \item[$F_{\text{proc}}$] Fidelidad de proceso cuántico.
+%   \item[$U(\bm{\theta})$] Circuito parametrizado o ansatz en un VQA.
+%   \item[$C(\bm{\theta})$] Función de costo en un algoritmo variacional cuántico.
+%   \item[$\bm{\theta}$] Vector de parámetros del ansatz.
+%   \item[$\text{argmin}(-C(\bm{\theta}))$] Optimización clásica sobre los parámetros del VQA.
+% \end{description}
+% % }}}
 \chapter*{OBJETIVOS} % {{{
 % \phantomsection
 \addcontentsline{toc}{chapter}{OBJETIVOS}
@@ -238,8 +238,7 @@ Para describir la dinámica de estos sistemas se utilizan los canales cuánticos
 % para caracterizar el ruido en computadoras cuánticas reales, especialmente en
 % dispositivos de propósito cuántico limitados como los de la era de tecnología
 % ruidosa de escala media (NISQ)
-\cpnote{Hablar de esta frase anterior}. En respuesta a estos desafíos, una de
-las estrategias más
+. En respuesta a estos desafíos, una de las estrategias más
 prometedoras es el uso de de los algoritmos variacionales cuánticos (VQA),
 que combinan circuitos cuánticos parametrizados con estrategias
 de optimización clásica. Este enfoque híbrido ha mostrado ser eficaz para
