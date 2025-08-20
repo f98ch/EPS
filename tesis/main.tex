@@ -29,8 +29,9 @@
 \newtheorem{exa}{Ejemplo}[chapter]
 \newtheorem{defn}{Definición}[chapter]
 \newtheorem{axm}{Axioma}[chapter]
-\usepackage[draft,inline,nomargin]{fixme} \fxsetup{theme=color}
+\usepackage[draft, inline, nomargin]{fixme} \fxsetup{theme=color}
 \FXRegisterAuthor{cp}{acp}{\color{blue}CP}
+\FXRegisterAuthor{gr}{agr}{\color{green}GR}
 \FXRegisterAuthor{fel}{afel}{\color{purple}F}
 
 \theoremstyle{remark}
@@ -129,7 +130,7 @@
 \newcommand{\ot}{\otimes}
 \newtheorem{ex}{Ejemplo}[section]
 \newcommand{\m}{\textcolor{JAsColor}{|}}
-\newcommand{\taus}{\tau_{j_1,\ldots ,j_n}}
+\newcommand{\taus}{\tau_{j_1,\ldots, j_n}}
 \newcommand{\tauijk}[3]{\boldmath{$\tau_{#1#2#3}$}}
 \newcommand{\tauij}[2]{\boldmath{$\tau_{#1#2}$}}
 \newcommand{\ep}{\textbf{Fuente:} elaboración propia.}
@@ -153,7 +154,10 @@
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 \renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
 
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
 
 
 % <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -177,6 +181,41 @@
 {Dr. Carlos Francisco Pineda Zorrilla\\y Dr. Ángel Giovanni Ramírez García}%			% asesor
 {junio de 2025}		% mes y año de la orden de impresión
 {2}							% femenino 1; masculino 2
+\chapter*{AGRADECIMIENTOS}
+% \pdfbookmark[1]{AGRADECIMIENTOS}{agr}          % marca en el panel de marcadores del PDF (opcional)
+% \vspace{1em}
+A Dios por darme la bendición de haber podido estudiar esta carrera y haberme mantenido resiliente a los cambios. 
+    
+A mi señora madre, Siria,  por siempre acompañarme en los peores y mejores momentos que tuve, siempre te voy a querer. Los chocolates de medianoche eran más dulces cuando me los regalabas, más aún cuando te quedabas acompañándome hasta las 3am. 
+
+A mi padre, Erick, por haberme dado el empujón que necesitaba para entrar a esta carrera, así como nunca habernos dejado atrás a mi hermano y a mí. 
+
+A mi hermano Josué, por ser mi guía desde antes de entrar a la universidad , ayudarme y cuidarme siempre. Creo que no hay persona que no me conozca sin conocerte por lo buena persona que sos. 
+
+A mi hermana, Kristel, por ser alegría y mi motivación para seguir adelante desde el momento que nació. 
+
+A Carlos Pineda, por el tiempo y dedicación que tuvo conmigo en todo momento desde el inicio de mis prácticas supervisadas, así como este proyecto. Agradezco enteramente los proyectos CBF-2025-I-1548 (SECIHTI) y UNAM-PAPIIT IG101324. Haber convivido con el grupo de mecánica cuántica de la UNAM, ha sido una experienciai maravillosa. Los conocimientos, mejora de redacción y calidad de informe no habría sido sin el apoyo del grupo. 
+
+A Juan Diego Chang y Giovanni Ramirez, por haber sido no solo mis guías, sino mis pilares de conocimiento, sobre los que adquirí el gusto por la mecánica cuántica , materia condensada y la computación cuántica. Además de ser grandes personas que me tuvieron paciencia dentro y fuera de clases, son personas bastante admirables.
+
+A Marco Cerezo, así como el curso de Física sin Fronteras del año 2021, por haber sido una gran fuente de inspiración en este proyecto y mi gusto por la computación cuántica. 
+
+A todos los profesores de la ECFM que me impartieron cursos a lo largo de la carrera. No creo haber conocido profesionales que hayan dedicado una atención al detalle y cariño por la ciencia como ellos. Gracias por siempre haber sido pacientes conmigo. 
+
+A José Alfredo de León, por haber sido un auxiliar y profesor extraordinario, además de haber sido quien me presentó con Carlos. También por haberme ayudado cuando tenía dudas referentes a cuántica, no había necesidad de responderme y apoyarme tanto, agradezco enteramente la dedicación con la que trabajaste. 
+
+A Subadra, por ser más que una tutora, una gran amiga con quien pude mejorar como persona, hablar de mis problemas y mejorar mi redacción. No tengo palabras para agradecer el tiempo que dedicaste en resolver mis dudas y ayudarme cada vez que te lo pedía. 
+
+A mis mejores amigos de la carrera: Bryant, Hugo, Jeff , Pablo, Mario, José (Flint), Josué (Yoshi), Andy, Nacho y Laura. Por ser las personas más fieles, confiables y divertidas con quien he convivido. No olvido ni olvidaré ningún momento que pasamos en cursos, jugando smash, noches en discord ni parqueazos que tuvimos en la universidad. Me dieron el soporte más grande que necesitaba a lo largo de la carrera. El cariño que les tengo es enorme, sepan que no podría haber conocido mejores personas. 
+
+A todos los amigos que hice dentro y fuera de la U, gracias por siempre decirme que era pilas aún sin sentirlo, o hacerme sentir mejor con frases como 'Mi Lic' o 'Fisiquin', las pequeñas acciones tuvieron un gran impacto en mi persona. 
+
+A mi mascota Rex, que ha estado siempre cuidándome mañana y noche que he trabajado, siempre te llevo en el corazón.
+\chapter*{DEDICATORIA}
+\begin{flushright}
+\textit{Para mamá y papá,} \\
+\textit{su hijo al fin terminó.}  \\
+\end{flushright}
 
 \frontmatter
 \tableofcontents    % Índice general vinculado
@@ -218,14 +257,14 @@
 % \phantomsection
 \addcontentsline{toc}{chapter}{OBJETIVOS}
 \section*{General} 
-Estudiar y desarrollar algoritmos variacionales cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
+Estudiar y desarrollan algoritmos variacionales cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
 
 \section*{Específicos}
 \begin{itemize}
     \item Estudiar la teoría y uso de computadoras cuánticas.
-    \item Comprender las definiciones fundamentales de la teoría de sistemas cuánticos abiertos y canales cuánticos.
+    \item Estudiar las definiciones fundamentales de la teoría de sistemas cuánticos abiertos y canales cuánticos.
     \item Investigar el uso de los algoritmos variacionales cuánticos en la resolución de problemas de información cuántica.
-    \item Implementar canales cuánticos de un qubit en computadoras cuánticas y analizar su comportamiento.
+    \item Implementar canales cuánticos de un qubit en computadoras cuánticas y analizan su comportamiento.
 \end{itemize}
 % }}}
 \chapter*{INTRODUCCIÓN} % {{{
@@ -233,38 +272,38 @@ Estudiar y desarrollar algoritmos variacionales cuánticos para la implementaci�
 El estudio de sistemas cuánticos abiertos es fundamental para el desarrollo de
 tecnologías cuánticas, especialmente en el contexto de la computación e
 información cuántica \cite{nielsen_chuang_2011, schlosshauer2007decoherence}.
-Para describir la dinámica de estos sistemas se utilizan los canales cuánticos, definidos como operadores completamente positivos y que preservan la traza.  ~\cite{Choi2024}. La implementación de estos canales en computadoras cuánticas reales representa un desafío en la era de la tecnología ruidosa de escala intermedia (NISQ), debido a la susceptibilidad de estos dispositivos a ruido y errores. 
+Para describir la dinámica de estos sistemas se utilizan los canales cuánticos, definidos como operadores completamente positivos y que preservan la traza  ~\cite{Choi2024}. La implementación de estos canales en computadoras cuánticas reales representa un desafío en la era de la tecnología cuántica de estala intermedia ruidosa (NISQ), debido a la susceptibilidad de estos dispositivos a ruido y errores. 
 % Es importante comprender e implementar estos canales
 % para caracterizar el ruido en computadoras cuánticas reales, especialmente en
 % dispositivos de propósito cuántico limitados como los de la era de tecnología
 % ruidosa de escala media (NISQ)
-. En respuesta a estos desafíos, una de las estrategias más
+En respuesta a estos desafíos, una de las estrategias más
 prometedoras es el uso de de los algoritmos variacionales cuánticos (VQA),
 que combinan circuitos cuánticos parametrizados con estrategias
-de optimización clásica. Este enfoque híbrido ha mostrado ser eficaz para
+de optimización clásica. Este enfoque híbrido muestra ser eficaz para
 distintas aplicaciones como el \textit{variational quantum eigensolver} (VQE)
-para la estimación de estados fundamentales y estados excitados.
+para la estimación de estados fundamentales y estados excitados
 \cite{VQA}. En este trabajo se propone la implementación de canales
 cuánticos de un qubit, con énfasis en el canal despolarizante, utilizando los
-VQA. Con este objetivo, se estudiarán, en la primera parte del trabajo, los
+VQA. Con este objetivo, se estudian, en la primera parte del trabajo, los
 fundamentos teóricos de los canales cuánticos y su representación matemática,
 haciendo énfasis en el formalismo de Choi y la tomografía de procesos.
-Posteriormente, se construirá un VQA usando un \textit{hardware efficient
+Posteriormente, se construye un VQA usando un \textit{hardware efficient
 ansats} (HEA), diseñado para replicar la acción del canal sobre un sistema
 cuántico, optimizando los parámetros en función de la fidelidad de proceso.
-Este proceso se llevará a cabo tanto en un simulador como en una computadora
-cuántica real, lo que permitirá comparar el rendimiento ideal con el
-comportamiento en dispositivos actuales. Finalmente, se analizarán los
+Este proceso se lleva a cabo tanto en un simulador como en una computadora
+cuántica real, lo que permite comparar el rendimiento ideal con el
+comportamiento en dispositivos actuales. Finalmente, se analizan los
 resultados obtenidos, destacando la fidelidad de proceso
 alcanzada en cada plataforma, así como la variabilidad observada entre
-distintas ejecuciones. Estos resultados permitirán evaluar el impacto del ruido
-y las limitaciones del hardware cuántico. Con base en ello, se propondrán
+distintas ejecuciones. Estos resultados permiten evaluar el impacto del ruido
+y las limitaciones del hardware cuántico. Con base en ello, se proponen
 posibles líneas de trabajo futuro en el contexto de la computación cuántica.
 
 El desarrollo y análisis de esta propuesta permiten no solo validar la
 factibilidad de los VQA para la simulación de canales cuánticos, sino también
 ofrecer una herramienta versátil para el diseño de algoritmos tolerantes a
-errores y estrategias de corrección cuántica. 
+errores y estrategias de corrección cuántica.  
 
 
 
@@ -276,31 +315,31 @@ errores y estrategias de corrección cuántica.
 \mainmatter % Inicio del contenido principal
 \chapter{FUNDAMENTOS TEÓRICOS} \label{cap:fundamentos:teoricos} % {{{
 % Intro de los fundamento {{{
-Para implementar canales cuánticos en plataformas actuales, es necesario
-establecer un marco teórico que permita describir y manipular estados
-cuánticos. En la sección~\ref{sec:matriz_densidad}, se introduce el formalismo
+Para implementar canales cuánticos en plataformas actuales, necesitamos establecer un marco teórico que nos permita describir y manipular estados
+cuánticos. En la sección~\ref{sec:matriz_densidad}, introducimos el formalismo
 de la matriz densidad, junto con los conceptos de pureza y traza parcial,
 fundamentales para caracterizar estados puros y mixtos. Posteriormente, en la
-sección \ref{sec:circuitos_cuanticos}, se presentan los circuitos cuánticos
-como herramienta para ejecutar operaciones sobre qubits. Se describen las
+sección \ref{sec:circuitos_cuanticos}, presentamos los circuitos cuánticos
+como herramienta para ejecutar operaciones sobre qubits. Describimos las
 compuertas cuánticas, las mediciones, y su representación en la esfera de
-Bloch. También se explica el proceso de transpilación y la influencia de la
+Bloch. También explicamos el proceso de transpilación y la influencia de la
 topología física de las computadoras cuánticas, en particular aquellas
-disponibles en la  plataforma \textit{IBM Quantum Experience}, que será
-utilizada en este trabajo.
+disponibles en la  plataforma \textit{IBM Quantum}, que utilizamos
+en este trabajo. 
 
-Con estos elementos, la sección \ref{sec:canales_cuanticos} introduce
+Con estos elementos, en la sección \ref{sec:canales_cuanticos} introducimos
 formalmente los canales cuánticos como operadores completamente positivos y que
-preservan la traza (CPTP). Se analizan sus representaciones, destacando la
+preservan la traza (CPTP). Analizamos sus representaciones, destacando la
 matriz de Choi por su utilidad para caracterizarlos y compararlos. Como caso de
-estudio, se examina el canal despolarizante, cuya implementación se aborda en
+estudio, examinamos el canal despolarizante, cuya implementación abordamos en
 los capítulos \ref{cap:algoritmos_variacionales} y \ref{cap:resultados}.
-Finalmente, en la misma sección, se presentan las herramientas necesarias para
+Finalmente, en la misma sección, presentamos las herramientas necesarias para
 caracterizar experimentalmente un canal cuántico: la tomografía y la fidelidad
-de proceso. Estas permitirán validar y evaluar los canales implementados. Al
-finalizar este capítulo, el lector contará con una base sólida para comprender
-cómo se definen, manipulan y validan canales cuánticos en computadoras
-cuánticas. 
+de proceso. Estas nos permiten validar y evaluar los canales implementados.
+% Al
+% finalizar este capítulo, el lector contará con una base sólida para comprender
+% cómo se definen, manipulan y validan canales cuánticos en computadoras
+% cuánticas. 
 % }}}
 \section{Matriz Densidad} % {{{
 \label{sec:matriz_densidad}
@@ -324,13 +363,8 @@ normalización \cite{nielsen_chuang_2011}:
 donde $|c_i|^2$ es la probabilidad de encontrar al sistema en el estado
 $\ket{i}$ al medir el observable asociado con la base $\{\ket{i} \}$.
 
-\begin{ex} \label{ex: dens1}\end{ex} Si tenemos un sistema de un
-qubit~\footnote{Qubit es un sistema cuántico de dos estados (o dos niveles). Es
-la
-unidad básica de información de una computadora cuántica siendo su base los
-autovectores de el operador de Pauli 
-$\sigma_z$.}, su base estaría conformada
-por los estados $\{{\ket{0},\ket{1}}\}$, con vectores:
+\begin{ex} \label{ex: dens1}\end{ex}  
+Un sistema cuántico de dos estados, también llamado qubit, constituye la unidad básica de información de una computadora cuántica. Su base está dada por los autovectores del operador de Pauli $\sigma_z$ y se conforma por los estados $\{\ket{0}, \ket{1}\}$, con vectores:
 \begin{equation}
 \ket{0} = \begin{bmatrix} 
     1 \\
@@ -344,7 +378,7 @@ por los estados $\{{\ket{0},\ket{1}}\}$, con vectores:
     \begin{equation}
       \ket{\psi} = c_0 \ket{0} + c_1 \ket{1},   
     \end{equation}
-    y al medirlo tendría probabilidades de que colapse en su respectivo estado:
+    y al medirlo en esta base tendría probabilidades de que colapse en su respectivo estado:
     \begin{equation}
      p_0=|c_0|^2, \quad p_1=|c_1|^2.
     \end{equation}
@@ -355,10 +389,10 @@ Notemos que en el ejemplo hay un único estado asociado al sistema $\ket{\psi}$.
 En estos casos, decimos que el sistema es descrito por un estado puro.
 Un sistema cuántico puede estar sometido a factores que eviten describirlo con
 un estado puro.  Entonces nuestro sistema es descrito por un ensamble
-estadístico de estados $\{\ket{\psi_i} \}$  con probabilidades o ``pesos''
+estadístico de estados $\{\ket{\psi_i} \}$  con probabilidades o \textit{pesos}
 $\{p_i\}$. El ensamble que describe al sistema  es llamado un estado mixto.
 
-Los estados puros como mixtos pueden ser descritos por un operador,
+Los estados puros como los mixtos pueden ser descritos por un operador,
 conocido como matriz densidad $\rho$. Para estados puros tenemos:
     \begin{equation}
         \label{ec:dens_puros}
@@ -371,7 +405,7 @@ mientras que para los estados mixtos es:
 \end{equation}
 con $n$ el número de estados del ensamble y $p_i$ el 'peso' mencionado
 anteriormente, cumpliendo con la condición $\sum p_i =1$.
-Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,...,d$, veremos que los elementos de la
+Si damos una base ortonormal $\{\ket{i}\}$, con $i=1,2,..., d$, veremos que los elementos de la
 matriz densidad serán \cite{princip_quantum}:
 \begin{equation}
     \label{eq:rho_ij}
@@ -380,13 +414,13 @@ matriz densidad serán \cite{princip_quantum}:
    
 La matriz densidad cuenta con propiedades que deben ser satisfechas, por ello
 enunciaremos las propiedades mostradas en el libro de  Benneti y Casati
-\cite{princip_quantum}, así como su demostración :
+\cite{princip_quantum}, así como su demostración:
 \begin{enumerate}
 \item $\rho$ es Hermítico, es decir $\rho = \rho^{\dagger}.$\\ 
 La transpuesta conjugada del operador $\rho$ es:
 \begin{align}
     \label{ec:dagger}
-    \rho^{\dagger}  & = \left( \sum p_i \ketbra{\psi_i}  \right)^{\dagger}.
+    \rho^{\dagger}  & = \left(\sum p_i \ketbra{\psi_i}  \right)^{\dagger}.
 \end{align}
 Esta cumple con la siguiente propiedad:
 \begin{align}
@@ -409,9 +443,9 @@ La traza se define para una matriz densidad como:
 siendo $\{\ket{e_k}\}$ una base ortonormal del espacio de Hilbert del sistema y $d$ su
 dimensión. Por ello tenemos
 \begin{align}
-    \text{Tr}(\rho) & = \sum_{i,k} \bra{e_k}p_i\ket{\psi_i} \braket{\psi_i}{e_k} \\
-    & = \sum_i p_i \bra{\psi_i} \left( \sum_k \ketbra{e_k} \right) \ket{\psi_i}
-= \sum{p_i} \braket{\psi_i} = 1.
+    \text{Tr}(\rho) & = \sum_{i, k} \bra{e_k}p_i\ket{\psi_i} \braket{\psi_i}{e_k} \\
+    & = \sum_i p_i \bra{\psi_i} \left(\sum_k \ketbra{e_k} \right) \ket{\psi_i}
+= \sum{p_i} \braket{\psi_i} = 1.\blacksquare
 \end{align}
 % \begin{align}
 %     \text{Tr}(\rho) & = \sum_{i=1}^{l} p_k c_i^{(k)}c_i^{(k)\ast} \\
@@ -430,22 +464,22 @@ Esta condición también es conocida como condición de positividad \cite{nielse
 
 % }}}
 \subsection{Pureza y traza parcial} % {{{
-Para medir que tanta información o que tan mixto es un estado cuántico se hace uso de la pureza, criterio descrito por la ecuación:
+Para medir qué tanta información o qué tan mixto es un estado cuántico hacemos uso de la pureza, criterio descrito por la ecuación:
 \begin{equation}
     \label{ec::1.25}
     \gamma = \text{Tr}(\rho ^2),
 \end{equation}
 con $\gamma=1$ para un estado puro, mientras que $\gamma < 1$ para un estado
 mixto. Además, la pureza está limitada por las cotas $ \frac{1}{d}\leq\gamma\leq 1$.  Para probar este criterio iniciamos con la descomposición espectral
-\cite{princip_quantum} para la matriz densidad $\rho$ :
+\cite{princip_quantum} para la matriz densidad $\rho$:
     \begin{equation} 
         \label{ec:dens_espectral}
         \rho = \sum_{j} \lambda_j \ketbra{j},
     \end{equation}
-siendo $\ket{j}$ vectores  qubit normalizados y ortogonales y $d$ la dimensión del sistema, con  $\lambda_j \geq0$ ya que $\rho$ es positivo. 
+siendo $\ket{j}$ vectores qubit ortonormales, y $d$ la dimensión del sistema, con  $\lambda_j \geq0$ ya que $\rho$ es positivo. 
  Usando la descomposición espectral nuevamente para $\rho^2$ tenemos:
     \begin{align}
-        \rho^2 & = \left( \sum_{j} \lambda_j \ketbra{j} \right) \left( \sum_{j} \lambda_j \ketbra{j} \right) \\
+        \rho^2 & = \left(\sum_{j} \lambda_j \ketbra{j} \right) \left(\sum_{j} \lambda_j \ketbra{j} \right) \\
         &= \sum_{j} \lambda^2_j \ket{j}\braket{j}\bra{j} \\
         & = \sum_{j} \lambda_j^2\ketbra{j}.
     \end{align}
@@ -478,37 +512,37 @@ La demostración anterior prueba la cota superior de la pureza, para la cota
 inferior es necesario agregar un teorema \cite{jensen_wolfram}:
   %Estos  solo están para el \felnote
 \begin{thm}
-\textbf{(Desigualdad de Jensen):} \label{thm:jensen}  Sean $w_1,...,w_n$
+\textbf{(Desigualdad de Jensen):} \label{thm:jensen}  Sean $w_1,..., w_n$
 números positivos que sumen $1$ y $f$ una función real continua convexa,
 entonces:
 \begin{equation}
-    f \left( \sum_j w_j x_j  \right) \leq \sum_j w_j f(x_j).
+    f \left(\sum_j w_j x_j  \right) \leq \sum_j w_j f(x_j).
 \end{equation}
 \end{thm}
 
 Si aplicamos esta desigualdad con la función convexa $x \xrightarrow{}x^2$,  a
-la suma $\sum_j \lambda_j /d$ (siendo $1/d$ el peso de $j$) tendremos:
+la suma $\sum_j \lambda_j /d$ (siendo $1/d$ el peso de $j$) tenemos:
     \begin{align}
     \label{eq:desig_jens}
-        \left( \frac{\sum_j  \lambda_j}{d}\right)^2  & \leq \frac{1}{d} \sum_j \lambda_j^2.
+        \left(\frac{\sum_j  \lambda_j}{d}\right)^2  & \leq \frac{1}{d} \sum_j \lambda_j^2.
     \end{align}
 Por lo visto en $(\ref{ec:dens_eigvals}),(\ref{eq:pureza_lambdas})$ aplicado a $(\ref{eq:desig_jens})$ concluimos con:
 \begin{equation}
     \frac{1}{d} \leq \gamma, 
 \end{equation}
 demostrando que las cotas de la pureza son $\frac{1}{d} \leq \gamma \leq
-1$.$\blacksquare$ 
+1$.$\blacksquare$
 
 Cuando trabajamos con un sistema conformado por dos o más sistemas físicos
 distintos se le conoce como un sistema compuesto.  El espacio de Hilbert
 correspondiente al estado que describe a este sistema, es el producto
 tensorial de cada uno de los espacios $H_i$ asociados a los subsistemas: 
 \begin{equation}
-H_T=H_1 \otimes H_2\otimes ...\otimes H_n.
+H_T=H_1 \otimes H_2\otimes...\otimes H_n.
 \end{equation}
  Existen estados puros que podemos describir como el producto tensorial: 
 \begin{equation}
-    \ket{\psi}_T = \ket{\psi}_1 \otimes ... \otimes \ket{\psi_n},
+    \ket{\psi}_T = \ket{\psi}_1 \otimes... \otimes \ket{\psi_n},
 \end{equation}
 a los que su matriz densidad correspondiente sería \cite{nielsen_chuang_2011}
 \footnote{Para este caso se utilizan números para indicar el estado $\rho$ que
@@ -518,8 +552,8 @@ adelante se utilizarán letras mayúsculas como subíndices para mantener
 consistencia, y no confundirse con componentes de una matriz densidad como en
 la ecuación \ref{eq:rho_ij}.}: 
 \begin{align}
-    \rho_T  & = \rho_1 \otimes \rho_2 \otimes  ... \otimes \rho_n \\
-            & = \ketbra{\psi_1} \otimes \ketbra{\psi_2} ... \otimes \ketbra{\psi_n}. 
+    \rho_T  & = \rho_1 \otimes \rho_2 \otimes ... \otimes \rho_n \\
+            & = \ketbra{\psi_1} \otimes \ketbra{\psi_2}... \otimes \ketbra{\psi_n}. 
 \end{align}
 Este no es el caso general para los sistemas compuestos, sin embargo, será con
 el que trabajemos en los siguientes capítulos.
@@ -540,7 +574,7 @@ con $\text{Tr}_B$ un mapeo de operadores, conocido como traza parcial, que
 actúa sobre el sistema compuesto. Si buscamos trazar parcialmente el subsistema
 $B$ obtenemos:
 \begin{equation}
-    \text{Tr}_B(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B}  ) \equiv \ket{i_A} \bra{j_A} \text{Tr}(\ket{i_B}\bra{j_B}),
+    \text{Tr}_B(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B} ) \equiv \ket{i_A} \bra{j_A} \text{Tr}(\ket{i_B}\bra{j_B}),
 \end{equation}
 siendo $\ket{i_A}$ y $\ket{j_A}$ un par de vectores cualquiera en el espacio de
 $A$, análogamente $\ket{i_B}$, $\ket{j_B}$ para el espacio de $B$. Por lo que
@@ -551,7 +585,7 @@ la traza $\text{Tr}$ en $B$ es:
 Similarmente podemos calcular la matriz densidad para el sistema reducido $B$
 trazando parcialmente $A$ como:
 \begin{equation}
-    \text{Tr}_A(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B}  ) \equiv  \text{Tr}(\ket{i_A} \bra{j_A}) \ket{i_B}\bra{j_B}.
+    \text{Tr}_A(\ket{i_A}\bra{j_A} \otimes \ket{i_B}\bra{j_B} ) \equiv  \text{Tr}(\ket{i_A} \bra{j_A}) \ket{i_B}\bra{j_B}.
 \end{equation}
 \end{quote}
 \begin{ex}\label{ex:traza parcial} \end{ex}  Consideremos un estado compuesto puro, conformado por dos estados puros $\rho_{AB} = \Omega  \otimes \sigma$. Si buscamos describir al subsistema $\rho_{B}$ tenemos:
@@ -566,16 +600,16 @@ análogamente si buscáramos $\rho_A$:
 El estado que describe a este sistema es llamado un estado separable. Ya que al hallar sus subsistemas, veremos que puede escribirse como un producto tensorial $\rho_A \otimes \rho_B$, indicando que ambos subsistemas no estan correlacionados.   
 
 \begin{ex} \label{ex: traza parcial2} \end{ex} 
-Consideremos un estado puro de dos qubits conocido como el estado de \textit{Bell} 
+Consideremos un estado puro de dos qubits conocido como el estado de \textit{Bell}:
 \begin{equation}
 \label{ec:1.45}
-    \ket{\psi_{AB}}=\frac{1}{\sqrt{2}} (\ket{0_A0_B} + \ket{1_A1_B}  ).
+    \ket{\psi_{AB}}=\frac{1}{\sqrt{2}} (\ket{0_A0_B} + \ket{1_A1_B} ).
 \end{equation}
-Este estado se dice que está \textit{entrelazado}, dado que no es separable, es decir, $ \ket{\psi_{AB}} \neq \ket{\psi_A} \otimes \ket{\psi_B}$, siendo $\ket{\psi_A},\ket{\psi_B}$ estados puros que describen a los sistemas $A,B$ respectivamente. Esto es signo existe una correlación entre ambos subsistemas.
+Este estado se dice que está \textit{entrelazado}, dado que no es separable, es decir, $ \ket{\psi_{AB}} \neq \ket{\psi_A} \otimes \ket{\psi_B}$, siendo $\ket{\psi_A},\ket{\psi_B}$ estados puros que describen a los sistemas $A, B$ respectivamente. Esto es signo de correlación correlación entre ambos subsistemas.
 
  Si hallamos la matriz densidad del sistema tendríamos:
 \begin{align}
-    \rho & =  \frac{1}{2}\left[ \ket{0_A0_B} + \ket{1_A1_B}        \right)\left( \ket{0_A0_B} + \ket{1_A1_B}        \right]\\
+    \rho & =  \frac{1}{2}\left[ \ket{0_A0_B} + \ket{1_A1_B}        \right)\left(\ket{0_A0_B} + \ket{1_A1_B}        \right]\\
         & = \frac{1}{2} \left[ \ketbra{0_A0_B} + \ketbra{1_A1_B}{0_A0_B} + \ketbra{0_A0_B}{1_A1_B} + \ketbra{1_A1_B} \right].
 \end{align}
 Si buscamos la matriz reducida del subsistema $B$ tenemos:
@@ -585,7 +619,7 @@ Si buscamos la matriz reducida del subsistema $B$ tenemos:
         & \qquad +\text{Tr}_A(\ketbra{0_A0_B}{1_A1_B}) + \text{Tr}_A(\ketbra{1_A1_B}{1_A1_B})  \large] \\
       & = \frac{1}{2} \left[ \ketbra{0_B} + \ketbra{1_B}  \right]  = \frac{1}{2} \mathbb{1}.
 \end{align}
-Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto. También veamos que nuestro sistema compuesto no se puede describir de alguna forma con el producto $\rho_A \otimes \rho_B$ para las matrices densidad reducidas. Esto indica que las correlaciones entre $A,B$ no se incluyen en el producto tensorial de ambos subsistemas. 
+Notemos que $\gamma({\rho_B}) = \frac{1}{2} < 1$ le corresponde un estado mixto. También veamos que nuestro sistema compuesto no se puede describir de alguna forma con el producto $\rho_A \otimes \rho_B$ para las matrices densidad reducidas. Esto indica que las correlaciones entre $A, B$ no se incluyen en el producto tensorial de ambos subsistemas. 
 
 % }}}
 % }}}
@@ -601,7 +635,7 @@ cambios del estado de un qubit bajo diversas transformaciones unitarias $U$.
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.70]{imagenes/Bloch.png}
-    \caption{Representación de un estado cuántico en la esfera de Bloch.
+    \caption[Representación de un estado cuántico en la esfera de Bloch]{Representación de un estado cuántico en la esfera de Bloch.
 \textbf{Fuente:} Nielsen y Chuang \cite{nielsen_chuang_2011}.}
     \label{fig:Bloch}
 \end{figure}
@@ -614,9 +648,9 @@ con $\theta,\phi$,  ángulos que recorren la esfera (ver figura \ref{fig:Bloch})
 \begin{equation}
  0 \leq \theta \leq \pi ;  \quad   0 \leq \phi \leq 2\pi.
 \end{equation} 
-La ecuación \ref{ec:Bloch_rep} nos permite representar estados puros en la esfera de Bloch. Sin embargo, para cualquier estado $\rho$ de un qubit, usamos el vector de Bloch, cuyas componentes señalan un punto en la esfera \cite{princip_quantum}.
+La ecuación (\ref{ec:Bloch_rep}) nos permite representar estados puros en la esfera de Bloch. Sin embargo, para cualquier estado $\rho$ de un qubit, usamos el vector de Bloch, cuyas componentes señalan un punto en la esfera \cite{princip_quantum}.
 
-Para definir el vector de Bloch transformamos los parámetros $\theta,\phi$ a coordenadas cartesianas como $\textbf{r} = (x,y,z)$ de la forma:
+Para definir el vector de Bloch transformamos los parámetros $\theta,\phi$ a coordenadas cartesianas como $\textbf{r} = (x, y, z)$ de la forma:
 \begin{equation}
 \left\{\begin{matrix}
 x = |\textbf{r}| \sin{(\theta)} \cos{(\phi)} \\
@@ -627,11 +661,10 @@ z = |\textbf{r}| \cos{(\theta)}.
 El valor absoluto $|\textbf{r}|=1$ para estados puros, mientras que
 $|\textbf{r}|<1$ para estados mixtos. Notemos que los estados puros se
 encuentran en la superficie de la esfera de Bloch, mientras que los estados
-mixtos en el interior. Por lo tanto, obtenemos otra representación útil de la
-ecuación \ref{ec:Bloch_rep} mediante el operador $\rho$ para estados puros como
+mixtos en el interior. Por lo tanto, obtenemos otra representación útil de la ecuación (\ref{ec:Bloch_rep}) mediante el operador $\rho$ para estados puros como
 :
 \begin{equation}    \label{ec:vec_bloch}
-    \rho  = \frac{1}{2} ( \mathbb{1} + \textbf{r} \cdot \sigma),
+    \rho  = \frac{1}{2} (\mathbb{1} + \textbf{r} \cdot \sigma),
 \end{equation}
 donde $\sigma $ es llamado el vector de Pauli, con las matrices:
 \begin{equation}
@@ -652,7 +685,7 @@ donde $\sigma $ es llamado el vector de Pauli, con las matrices:
 
 Las compuertas cuánticas son operadores unitarios reversibles $U$ de dimensión
 $n\times n $. Estas actúan linealmente sobre qubits que pueden estar en
-superposición. Además, se visualizan por cajas que contienen las iniciales del
+superposición. Además, tienen una representación gráfica por cajas que contienen las iniciales del
 operador aplicado (ver figura \ref{fig:compuerta}). 
 
   \begin{figure}[h]
@@ -660,7 +693,7 @@ operador aplicado (ver figura \ref{fig:compuerta}).
         \begin{quantikz}
         \qw & \gate{U} & \qw
         \end{quantikz}
-        \caption{Representación de compuerta cuántica $U$. \textbf{Fuente:} elaboración propia.     }
+        \caption[Representación de compuerta cuántica $U$]{Representación de compuerta cuántica $U$ \textbf{Fuente:} elaboración propia.     }
         \label{fig:compuerta}
     \end{figure}
     
@@ -675,8 +708,7 @@ Nos enfocaremos en un conjunto específico de compuertas de uno y varios qubits
 necesarias para este trabajo, comenzando con las compuertas de rotación en los
 ejes de la esfera de Bloch: $R_x$, $R_y$ y $R_z$. Estas compuertas rotan el
 estado del qubit alrededor de cada eje de la esfera de Bloch y pueden
-interpretarse como versiones parametrizadas de los operadores de Pauli (ver
-ecuación \ref{ec:pauli_matrix}). La representación de cada rotación es:
+interpretarse como versiones parametrizadas de los operadores de Pauli (\ref{ec:pauli_matrix}). La representación de cada rotación es:
 \begin{align}
     R_x(\theta) &=  \begin{bmatrix}
     \cos{(\theta)} & -i\sin{(\theta)}\\
@@ -692,7 +724,7 @@ ecuación \ref{ec:pauli_matrix}). La representación de cada rotación es:
     \end{bmatrix}.
 \end{align}
 Si aplicamos una rotación con un ángulo $\pi/2$ es equivalente a aplicar los
-operadores de Pauli $X,Y,Z$. Esto cambia la dirección del estado en su
+operadores de Pauli $X, Y, Z$. Esto cambia la dirección del estado en su
 respectivo eje (ver figura \ref{fig:rep_pauli}). 
 
 \begin{figure}[h!] % {{{
@@ -721,7 +753,7 @@ respectivo eje (ver figura \ref{fig:rep_pauli}).
         \label{fig:Pauliz}
     \end{subfigure}
     
-    \caption{Representación visual de las compuertas de rotación en la esfera de Bloch. \textbf{Fuente:} elaboración propia}
+    \caption[Representación visual de las compuertas de rotación en la esfera de Bloch]{Representación visual de las compuertas de rotación en la esfera de Bloch. \textbf{Fuente:} elaboración propia}
     \label{fig:rep_pauli}
 \end{figure} % }}}
 
@@ -729,7 +761,7 @@ Además de las compuertas de Pauli, necesitamos de una compuerta que haga otro
 tipo de cambio en la base de un qubit, como lo es la compuerta de
 Hadamard. Esta compuerta tiene la característica de poner en
 superposición de igual amplitud a los estados de la base de un qubit.
-La matriz que la describe es
+La matriz que la describe es:
 \begin{equation}
     H= \frac{1}{\sqrt{2}}
     \begin{pmatrix}
@@ -745,7 +777,7 @@ $y$ (ver figura \ref{fig:hadamard}).
 \begin{figure}
     \centering
     \includegraphics[scale=0.15]{imagenes/Haddamard.png}
-    \caption{Representación visual de la acción de la compuerta de Hadamard sobre un estado inicial $\ket{0}$ en la esfera de Bloch. \textbf{Fuente}: elaboración propia.}
+    \caption[Compuerta de Hadamard sobre $\ket{0}$ en esfera de Bloch]{Representación visual de la acción de la compuerta de Hadamard sobre un estado inicial $\ket{0}$ en la esfera de Bloch. \textbf{Fuente}: elaboración propia.}
     \label{fig:hadamard}
 \end{figure}
 
@@ -765,7 +797,7 @@ regula la acción de otros qubits que tienen el rol de objetivo. Las compuertas 
 \end{equation}
 donde $u_{ij}$ son los elementos de la compuerta unitaria $U$ que actúa sobre el qubit objetivo.
 
-En esta matriz, el primer cuadrante es una identidad que garantiza que, si el qubit de control está en el estado $\ket{0}$, el qubit objetivo permanece sin cambios. Si el qubit de control está en $\ket{1}$, el bloque inferior derecho aplica la transformación unitaria $U$ al qubit objetivo. Esto permite implementar distintas compuertas de control, como $CR_x$ \footnote{La compuerta $CX$ es comúnmente conocida como compuerta $CNOT$. En adelante, cuando hablemos de la compuerta $CNOT$, nos referimos a $CR_x(\pi/2)$.}  o $CR_z$, ajustando los parámetros $u_{ij}$.
+En esta matriz, el primer cuadrante es una identidad que garantiza que, si el qubit de control está en el estado $\ket{0}$, el qubit objetivo permanece sin cambios. Si el qubit de control está en $\ket{1}$, el bloque inferior derecho aplica la transformación unitaria $U$ al qubit objetivo. Esto nos permite implementar distintas compuertas de control, como $CR_x$ o $CR_z$, ajustando los parámetros $u_{ij}$. La compuerta $CX$, comúnmente conocida como compuerta $CNOT$, corresponde específicamente a $CR_x(\pi/2)$. 
 
 Al realizar una medición cuántica hace que nuestro qubit colapse a uno de los estados de la base $ \sigma_z$. Sin embargo, es posible realizar un cambio de base y poder medir en otro tipo de bases. A continuación daremos la definición de Nielsen y Chuang \cite{nielsen_chuang_2011}:
 \begin{quote}
@@ -779,15 +811,15 @@ Dada cualquier base de estados $\ket{a},\ket{b}$ para un qubit, es posible expre
      \ket{+} & \equiv \frac{1}{\sqrt{2}} (\ket{0} + \ket{1}) \\
     \ket{-} & \equiv \frac{1}{\sqrt{2}} (\ket{0}-\ket{1}).
  \end{align}
-Si re expresamos $\ket{\psi}$ en la nueva base veremos que:
+Si re-expresamos $\ket{\psi}$ en la nueva base veremos que:
  \begin{align}
      \ket{\psi}  &= \alpha\ket{0} + \beta\ket{1} \\
-                 &= \frac{\alpha}{\sqrt{2}} ( \ket{+ } + \ket{-}) + \frac{\beta}{\sqrt{2}} (\ket{+} + \ket{-})\\
-                 & = \frac{\alpha+\beta}{\sqrt{2}} \ket{+} + \frac{\alpha-\beta}{\sqrt{2}} \ket{-} . 
+                 &= \frac{\alpha}{\sqrt{2}} (\ket{+ } + \ket{-}) + \frac{\beta}{\sqrt{2}} (\ket{+} + \ket{-})\\
+                 & = \frac{\alpha+\beta}{\sqrt{2}} \ket{+} + \frac{\alpha-\beta}{\sqrt{2}} \ket{-}. 
  \end{align}
 Al medirlo en la base $\{\ket{+}, \ket{-}\}$, obtendremos probabilidades $|\alpha+\beta|^2$ y $|\alpha-\beta|^2$ respectivamente.
 
-Las mediciones en otras bases serán de utilidad para la tomografía de estado ya que hace uso de distintas mediciones en distintas bases para recuperar la información de un estado cuántico.
+Las mediciones en otras bases nos serán de utilidad para la tomografía de estado ya que hace uso de distintas mediciones en distintas bases para recuperar la información de un estado cuántico.
 % }}}
 \subsection{Composición de circuitos cuánticos} % {{{
 Un circuito cuántico es una rutina computacional con operadores que actúan
@@ -796,7 +828,7 @@ Un cable se usa como representación de un qubit en estado inicial $\ket{0}$.
 Como vimos en la sección anterior, las compuertas cuánticas se representan con
 cajas que contienen el nombre del operador, además se posicionan en el cable del qubit que actúan. Por otro lado, las compuertas de
 control se identifican con un punto para el qubit de control unido a una caja
-del qubit target (ver figura \ref{fig:circuito0}).
+del qubit \textit{target} (ver figura \ref{fig:circuito0}).
 
 \begin{figure}[h]
     \centering
@@ -804,14 +836,13 @@ del qubit target (ver figura \ref{fig:circuito0}).
     \lstick{$\ket{0}$} & \gate{X} & \ctrl{1} & \qw  \\
     \lstick{$\ket{0}$} & \qw & \gate{R_y} & \qw 
     \end{quantikz}
-    \caption{Circuito de ejemplo para crear interacción entre dos qubits. \textbf{Fuente:} elaboración propia.}
+    \caption[Circuito de ejemplo para crear interacción entre dos qubits]{Circuito de ejemplo para crear interacción entre dos qubits. \textbf{Fuente:} elaboración propia.}
     \label{fig:circuito0}
 \end{figure}
 
 
 Por el lado de  la medición cuántica, se representa mediante un símbolo de
-``medidor''
-que colapsa el estado cuántico del qubit y almacena el resultado en
+\textit{medidor} que colapsa el estado cuántico del qubit y almacena el resultado en
 bits clásicos (ver figura \ref{fig:circuito2}). En los diagramas, una línea
 simple representa a los qubits, mientras que una línea doble indica los bits
 clásicos resultantes de la medición.
@@ -821,19 +852,18 @@ clásicos resultantes de la medición.
         \begin{quantikz}
         \lstick{$\ket{\psi}$} &  \meter{} & \cw{M}
         \end{quantikz}
-        \caption{Circuito cuántico representativo para una medición. \textbf{Fuente}: elaboración propia.}
+        \caption[Circuito cuántico representativo para una medición]{Circuito cuántico representativo para una medición. \textbf{Fuente}: elaboración propia.}
         \label{fig:circuito2}
     \end{figure}
 
 
 
 % }}}
-\subsection{Plataforma \textit{IBM Quantum Experience}} % {{{
+\subsection{Plataforma \textit{IBM Quantum}} % {{{
 
-Para este trabajo utilizaremos la plataforma de \textit{IBM Quantum
-Experience}. Esta plataforma nos da acceso a computadoras cuánticas para
+Para este trabajo utilizaremos la plataforma de \textit{IBM Quantum}. Esta plataforma nos da acceso a computadoras cuánticas para
 ejecutar circuitos cuánticos válidos. La conexión a las computadoras se hace
-por medio de la librería de qiskit de \textit{Python}.  
+por medio de la biblioteca de qiskit de \textit{Python}.  
 
 Podemos correr circuitos cuánticos en la plataforma por medio de simuladores,
 que emulan de forma cercana el comportamiento de una computadora cuántica. Al mismo tiempo podemos correr los circuitos en
@@ -845,7 +875,7 @@ Al ejecutar un circuito en una computadora cuántica se pasa por un proceso llam
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.20]{imagenes/transpiling_core_steps.png}
-    \caption{Proceso de transpilación para un circuito cuántico en la plataforma de IBM \textbf{Fuente}: IBM Quantum API \cite{qiskit_transpiler}.}
+    \caption[Transpilación de circuito cuántico en IBM]{Proceso de transpilación para un circuito cuántico en la plataforma de IBM. \textbf{Fuente}: IBM Quantum API \cite{qiskit_transpiler}.}
     \label{fig:transpiling}
 \end{figure}
 La topología del sistema influye directamente en como se implementan las interacciones entre qubits dentro del circuito cuántico, especialmente cuando se hacen operaciones entre qubits que no estan conectados de forma uniforme (ver figuras \ref{fig:topos_kyiv} y  \ref{fig:topos}). 
@@ -853,18 +883,20 @@ La topología del sistema influye directamente en como se implementan las intera
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.7]{imagenes/ibm_kyiv_front.png}
-    \caption{Capacidades de la computadora Cuántica IBM\_Kyiv de IBM, con capacidad de 127 qubits. \textbf{Fuente:} IBM Quantum Resources. \cite{ibm_quantum_resources}}
+    \caption[Capacidades de la c.c. IBM\_Kyiv (127 qubits)]{Capacidades de la computadora cuántica IBM\_Kyiv de IBM, con capacidad de 127 qubits. \textbf{Fuente:} IBM Quantum Resources \cite{ibm_quantum_resources}.}
+
     \label{fig:topos_kyiv}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{imagenes/topo_ibm_kyiv.png}
-    \caption{Topología correspondiente a la computadora cuántica IBM\_Kyiv de IBM, con capacidad de 127 qubits. \textbf{Fuente:} IBM Quantum Resources \cite{ibm_quantum_resources}}
+    \caption[Topología de la c.c IBM\_Kyiv (127 qubits)]{Topología correspondiente a la computadora cuántica IBM\_Kyiv de IBM, con capacidad de 127 qubits. \textbf{Fuente:} IBM Quantum Resources \cite{ibm_quantum_resources}.}
+
     \label{fig:topos}
 \end{figure}
 \begin{ex} \label{ex:transpilation} \end{ex}
-El circuito cuántico mostrado en la figura \ref{fig:circuito7}  se aplica una compuerta $Z$ al qubit $q_3$ , segudo una compuerta $CNOT$ entre los qubits $q_3$ y $q_0$. De forma similar, los qubits $q_2$ y $q_0$ interactúan a través de otra compuerta $CNOT$. Supongamos que buscamos ejecutar este circuito en la computadora cuántica con la topología de la figura \ref{fig:topos}. Ya que los qubits $q_0,q_3$ y $q_0,q_2$ no interaccionan directamente, debemos reescribir nuestro circuito para esta topología. La transpilación resultante se puede ver en la figura \ref{fig:circuito8}).  
+El circuito cuántico mostrado en la figura \ref{fig:circuito7}  se aplica una compuerta $Z$ al qubit $q_3$, seguido de una compuerta $CNOT$ entre los qubits $q_3$ y $q_0$. De forma similar, los qubits $q_2$ y $q_0$ interactúan a través de otra compuerta $CNOT$. Supongamos que buscamos ejecutar este circuito en la computadora cuántica con la topología de la figura \ref{fig:topos}. Ya que los qubits $q_0, q_3$ y $q_0, q_2$ no interaccionan directamente, debemos reescribir nuestro circuito para esta topología. La transpilación resultante se puede ver en la figura \ref{fig:circuito8}).  
 
 \begin{figure}[h]
 \centering
@@ -874,7 +906,7 @@ El circuito cuántico mostrado en la figura \ref{fig:circuito7}  se aplica una c
 \lstick{$q_2$} & \qw      & \qw      & \targ{}  & \qw \\
 \lstick{$q_3$} & \gate{Z} & \targ{}  & \qw      & \qw
 \end{quantikz}
-\caption{Circuito inicial correspondiente al ejemplo \ref{ex:transpilation}. \textbf{Fuente:} elaboración propia.}
+\caption[Circuito inicial correspondiente al ejemplo \ref{ex:transpilation}]{Circuito inicial correspondiente al ejemplo \ref{ex:transpilation}. \textbf{Fuente:} elaboración propia.}
 \label{fig:circuito7}
 \end{figure}
 
@@ -887,10 +919,10 @@ El circuito cuántico mostrado en la figura \ref{fig:circuito7}  se aplica una c
 \lstick{$q_2$} & \qw      & \ctrl{1}     & \gate{H}  & \targ{} & \gate{H} & \qw\\
 \lstick{$q_3$} & \gate{Z} & \targ{}  & \qw      & \qw & \qw & \qw
 \end{quantikz}
-\caption{Circuito final correspondiente al ejemplo \ref{ex:transpilation}, luego de ser transpilado. \textbf{Fuente:} elaboración propia.}
+\caption[Circuito final transpilado correspondiente al ejemplo \ref{ex:transpilation}]{Circuito final correspondiente al ejemplo \ref{ex:transpilation}, luego de ser transpilado. \textbf{Fuente:} elaboración propia.}
 \label{fig:circuito8}
 \end{figure}
-La transpilación de circuitos viene incorporada en la librería de Qiskit, es necesaria para ejecutar circuitos en computadoras cuánticas reales y será un componente clave del proyecto. Invitamos al lector a indagar más a detalle en la documentación de la librería \cite{qiskit_transpiler}.
+La transpilación de circuitos viene incorporada en la biblioteca de Qiskit, es necesaria para ejecutar circuitos en computadoras cuánticas reales y será un componente clave del proyecto. Para más detalles se puede consultar la biblioteca diisponible en \cite{qiskit_transpiler}.
 
 
 
@@ -903,25 +935,25 @@ La transpilación de circuitos viene incorporada en la librería de Qiskit, es n
 % }}}
 \section{Canales Cuánticos y su representación} % {{{
 \label{sec:canales_cuanticos}
-Una forma natural de describir la dinámica de un sistema cuántico abierto es considerar que este surge de la interacción de un sistema de interés , al que llamaremos sitema principal , y un \textit{entorno}, que juntos forman un sistema cuántico cerrado \cite{nielsen_chuang_2011}:
+Una forma natural de describir la dinámica de un sistema cuántico abierto es considerar que este surge de la interacción de un sistema de interés, al que llamaremos sistema principal, y un \textit{entorno}, que juntos forman un sistema cuántico cerrado \cite{nielsen_chuang_2011}:
 \begin{equation}\label{ec:rep_sist_abierto}
     \rho = \rho_{\text{sp}} \otimes \rho_{\text{ent}}.
 \end{equation}
 Supondremos que la interacción entre ambos sistemas se da por una transformación unitaria $U$, luego de esto, el sistema ya no interactúa con el entorno resultando en el estado final del sistema pincipal $\mathcal{E}$:
 \begin{equation}
     \label{ec:sistema_principal}
-    \mathcal{E}(\rho_{\text{sp}}) = \text{Tr}_{\text{ent}}[ U( \rho_{\text{sp}} \otimes \rho_{\text{ent}} ) U^\dagger ].
+    \mathcal{E}(\rho_{\text{sp}}) = \text{Tr}_{\text{ent}}[ U(\rho_{\text{sp}} \otimes \rho_{\text{ent}}) U^\dagger ].
 \end{equation}
 
-Notemos que si $U$ no involucra ninguna interacción entre el sistema y el entorno entonces  $\mathcal{E}(\rho_{sp}) =  \widetilde{U} \rho \widetilde{U}^\dagger \footnotemark$\footnotetext{A partir de los siguientes enunciados se utilizará $\rho = \rho_{\text{sp}}$ ya que se entiende de forma implícita que nos referimos a $\rho$ como el sistema principal.} , donde $\widetilde{U}$ es la parte de $U$ que interactúa solo con el sistema principal. 
-Este proceso describe cómo los operadores de evolución de sistemas cuánticos cerrados pueden ser generalizados a operadores cuánticos $\mathcal{E}$ (también conocidos como superoperadores), que mapean matrices de densidad del sistema a nuevos estados cuánticos, teniendo en cuenta las influencias del entorno.
+Notemos que si $U$ no involucra ninguna interacción entre el sistema y el entorno entonces  $\mathcal{E}(\rho_{sp}) =  \widetilde{U} \rho \widetilde{U}^\dagger$,\footnote{A partir de los siguientes enunciados se utilizará $\rho = \rho_{\text{sp}}$ ya que se entiende de forma implícita que nos referimos a $\rho$ como el sistema principal.}, donde $\widetilde{U}$ es la parte de $U$ que interactúa solo con el sistema principal. 
+Este proceso describe cómo los operadores de evolución de sistemas cuánticos cerrados pueden ser generalizados a operadores cuánticos $\mathcal{E}$ (también conocidos como superoperadores) que mapean matrices de densidad del sistema a nuevos estados cuánticos, teniendo en cuenta las influencias del entorno.
 
 Los operadores cuánticos pueden ser representados de forma explícita en términos del espacio de Hilbert de los operadores del sistema principal. Donde $\ket{e_k}$ es una base ortonormal del espacio del entorno, y $\rho_{ent} = \ketbra{e_0}$ su estado inicial, asumimos que:
 \begin{align}
-\mathcal{E}(\rho) &= \text{Tr}_{\text{ent}}[ U( \rho \otimes \ketbra{e_0} ) U^\dagger ] \\
+\mathcal{E}(\rho) &= \text{Tr}_{\text{ent}}[ U(\rho \otimes \ketbra{e_0}) U^\dagger ] \\
 &= \sum_k E_k \rho E_k^\dagger.  \label{ec:Canal_Kraus}
 \end{align}
-En esta expresión, cada operador $E_k \equiv \bra{e_k} U \ket{e_0}$ actúa sobre el espacio del sistema principal. Esta formulación es conocida como la representación de Kraus de $\mathcal{E}$. Los operadores $\{E_k\}$ son denominados peradores de Kraus. Además, esta representación caracteriza a $\mathcal{E}$ como un operador completamente positivo (CP).
+En esta expresión, cada operador $E_k \equiv \bra{e_k} U \ket{e_0}$ actúa sobre el espacio del sistema principal. Esta formulación es conocida como la representación de Kraus de $\mathcal{E}$. Los operadores $\{E_k\}$ son denominados operadores de Kraus. Además, esta representación caracteriza a $\mathcal{E}$ como un operador completamente positivo (CP).
 
 Los operadores $\{E_k\}$  satisfacen la relación de completitud, que requiere que la traza de $\mathcal{E}(\rho) = 1$:
 \begin{align}
@@ -932,45 +964,45 @@ Notemos que para que esto se cumpla entonces:
 \begin{equation}
     \sum_k E_k^\dagger E_k = I. \label{ec:trace_preserving}
 \end{equation}
-Esta propiedad caracteriza a los operadores $\mathcal{E}$ que preservan la traza (TP). Por lo tanto, decimos que un canal cuántico $\mathcal{E}$ es un operador completamente positivo y  que preserva la traza (CPTP), cumpliendo con las ecuaciones \ref{ec:Canal_Kraus}  y\ref{ec:trace_preserving}. 
+Esta propiedad caracteriza a los operadores $\mathcal{E}$ que preservan la traza (TP). Por lo tanto, decimos que un canal cuántico $\mathcal{E}$ es un operador completamente positivo y  que preserva la traza (CPTP), cumpliendo con las ecuaciones (\ref{ec:Canal_Kraus})  y (\ref{ec:trace_preserving}). 
 
 Mientras que la representación de Kraus ofrece una forma de describir los canales cuánticos, la matriz de Choi proporciona una representación alternativa útil para su caracterización. 
 La matriz de Choi de un canal cuántico $\mathcal{E}$ se define como \cite{QProcess}:
 \begin{equation} 
 \Lambda_{\mathcal{E}} = (I \otimes \mathcal{E})(|\Omega\rangle\langle\Omega|),
 \end{equation} 
-donde $\ket{\Omega}$ es un estado máximamente entrelazado no normalizado $\ket{\Omega} = \sum_i \ket{ii}$ .
+donde $\ket{\Omega}$ es un estado máximamente entrelazado no normalizado $\ket{\Omega} = \sum_i \ket{ii}$.
 Desarrollando el el término $|\Omega\rangle\langle\Omega|$ obtenemos:
 \begin{equation}
-|\Omega\rangle\langle\Omega| = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \ketbra{i}{j},
+|\Omega\rangle\langle\Omega| = \sum_{i, j=1}^{d} \ketbra{i}{j} \otimes \ketbra{i}{j},
 \end{equation} 
 que nos deja la segunda representación de la matriz de Choi
 \cite{Qiskit_documentation,QProcess}:
 \begin{equation}\label{ec:Choi_ketbra}
-\Lambda_{\mathcal{E}} = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}).
+\Lambda_{\mathcal{E}} = \sum_{i, j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}).
 \end{equation}
-Esta expresión representa la superposición de todas las posibles transformaciones que $\mathcal{E}$ puede aplicar sobre la base computacional del sistema principal luego de su interacción con el entorno. Esto permite ver el efecto del canal sobre cualquier estado del sistema principal.
+Esta expresión representa la superposición de todas las posibles transformaciones que $\mathcal{E}$ puede aplicar sobre la base computacional del sistema principal luego de su interacción con el entorno. Esto nos permite ver el efecto del canal sobre cualquier estado del sistema principal.
 
 \begin{ex} \label{Ejemplo 1.0.1} 
 \end{ex}
-El canal despolarizante  (DP, por sus siglas en inglés de Depolarizing Channel)  es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
+El canal despolarizante  (DP, por sus siglas en inglés de \textit{Depolarizing Channel})  es un canal cuántico que introduce ruido aleatorio en un sistema, transformando cualquier estado cuántico de entrada en un estado mixto \cite{nielsen_chuang_2011}. La acción del canal actúa por una probabilidad $p$ de despolarizar un estado cuántico $\rho$ se describe de la forma:
 \begin{equation} \label{ec:superop_depolarizing}
-\mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho ,
+\mathcal{E}(\rho) = \text{Tr}(\rho) p  \frac{I}{2}   + (1 - p)\rho,
 \end{equation}
 donde $I$ es la matriz identidad y $p$ la probabilidad mencionada. Este canal, por tanto, transforma el estado $\rho$ en una mezcla de $\rho$ y la matriz identidad, reduciendo la pureza del estado inicial. \footnote{La traza de $\rho$ convencionalmente no se muestra en textos como Nielsen y Chuang, sin embargo,  se incluye para asegurar que el canal sea CPTP.}. Dado que el canal  convierte cualquier estado $\rho$ en una mezcla, la acción de $\mathcal{E}$ sobre $\ketbra{i}{j}$ puede escribirse como:
 \begin{equation}
 \mathcal{E}(\ketbra{i}{j}) = \text{Tr}(\ketbra{i}{j})  p \frac{I}{2}+ (1 - p) \ketbra{i}{j}.
 \end{equation}
-Por lo lo tanto, podemos ver su acción en los estados de la base:
+Por lo lo tanto, vemos su acción en los estados de la base:
 \begin{alignat*}{2}
-     \mathcal{E}( \ketbra{0}) = & (1 - \frac{p}{2} ) \ketbra{0} + \frac{p}{2} \ketbra{1}, \\
-     \mathcal{E}( \ketbra{0}{1}) = & (1 - p ) \ketbra{0}{1},\\
-      \mathcal{E}( \ketbra{1}{0}) = & (1 - p ) \ketbra{1}{0},\\
-           \mathcal{E}( \ketbra{1}) = & (1 - \frac{p}{2} ) \ketbra{1} + \frac{p}{2} \ketbra{0}.
+     \mathcal{E}(\ketbra{0}) = & (1 - \frac{p}{2}) \ketbra{0} + \frac{p}{2} \ketbra{1}, \\
+     \mathcal{E}(\ketbra{0}{1}) = & (1 - p) \ketbra{0}{1},\\
+      \mathcal{E}(\ketbra{1}{0}) = & (1 - p) \ketbra{1}{0},\\
+           \mathcal{E}(\ketbra{1}) = & (1 - \frac{p}{2}) \ketbra{1} + \frac{p}{2} \ketbra{0}.
 \end{alignat*}
-Recordando la ecuación \ref{ec:Choi_ketbra}, escribimos su matriz de Choi:
+Recordando la ecuación (\ref{ec:Choi_ketbra}), escribimos su matriz de Choi:
 % \begin{equation}
-% \Lambda_{\mathcal{E}} = \frac{1}{2} \sum_{i,j=0}^{1} \ketbra{i}{j} \otimes \left(  \text{Tr}(\ketbra{i}{j} ) p  \frac{I}{2} +  (1-p) \ketbra{i}{j}  \right).
+% \Lambda_{\mathcal{E}} = \frac{1}{2} \sum_{i, j=0}^{1} \ketbra{i}{j} \otimes \left( \text{Tr}(\ketbra{i}{j}) p  \frac{I}{2} +  (1-p) \ketbra{i}{j}  \right).
 % \end{equation}
 % que consiguientemente nos da la matriz 
 \begin{equation}\label{ec:choi_depolarizing}
@@ -985,59 +1017,59 @@ Recordando la ecuación \ref{ec:Choi_ketbra}, escribimos su matriz de Choi:
 Notemos cómo $\Lambda_{\mathcal{E}}$ refleja el funcionamiento del canal despolarizante: las entradas diagonales muestran cómo el canal mezcla el estado original con la matriz identidad, dependiendo de $p$, reduciendo la pureza del estado. Las entradas no diagonales indican las coherencias introducidas por el canal.
 
 
-La matriz de Choi tiene  varias propiedades descritas en el paper de  G. Homa  y otros \cite{Choi2024},  que permiten describir completamente un canal cuántico y hacer una correlación con la representación de Kraus:
+La matriz de Choi tiene  varias propiedades descritas en el artículo de  G. Homa  y otros \cite{Choi2024},  que permiten describir completamente un canal cuántico y hacer una correlación con la representación de Kraus:
 \begin{enumerate}
-     \item Para un operador $\mathcal{E}$ completamente positivo, dado en una representación de Kraus, su matriz de Choi es \textit{Hermítica}, es decir $\Lambda_{\mathcal{E}} = \Lambda_{\mathcal{E}}^{\dagger}$.\\ 
-        La transpuesta conjuntada de la matriz de Choi es: 
+     \item Para un operador $\mathcal{E}$ completamente positivo, dado en una representación de Kraus, su matriz de Choi es hermítica, es decir $\Lambda_{\mathcal{E}} = \Lambda_{\mathcal{E}}^{\dagger}$.\\ 
+        La transpuesta conjugada de la matriz de Choi es: 
         \begin{equation*}
-            \Lambda_{\mathcal{E}}^\dagger = \left( \sum_{i,j} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) \right)^\dagger.
+            \Lambda_{\mathcal{E}}^\dagger = \left(\sum_{i, j} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) \right)^\dagger.
         \end{equation*}
-        Utilizando la propiedad de la transpuesta conjuntada $(A \otimes B)^\dagger = A^\dagger \otimes B^\dagger$, obtenemos:
+        Utilizando la propiedad de la transpuesta conjugada $(A \otimes B)^\dagger = A^\dagger \otimes B^\dagger$, obtenemos:
         \begin{equation}
-          \Lambda_{\mathcal{E}}^\dagger = \sum_{i,j} (\ketbra{i}{j})^\dagger \otimes \mathcal{E}(\ketbra{i}{j})^\dagger.  
+          \Lambda_{\mathcal{E}}^\dagger = \sum_{i, j} (\ketbra{i}{j})^\dagger \otimes \mathcal{E}(\ketbra{i}{j})^\dagger.  
         \end{equation}
         Sabemos que $(\ketbra{i}{j})^\dagger = \ketbra{j}{i}$ y que $\mathcal{E}(\ketbra{i}{j})^\dagger = \mathcal{E}(\ketbra{j}{i})$ porque $\mathcal{E}$ es un operador CP. Así, tenemos:
         \begin{equation}
-         \Lambda_{\mathcal{E}}^\dagger = \sum_{i,j} \ketbra{j}{i} \otimes \mathcal{E}(\ketbra{j}{i}).   
+         \Lambda_{\mathcal{E}}^\dagger = \sum_{i, j} \ketbra{j}{i} \otimes \mathcal{E}(\ketbra{j}{i}).   
         \end{equation}
         Cambiando los índices de suma, podemos renombrar $i$ como $j$ y $j$ como $i$:
         \begin{equation}
-           \Lambda_{\mathcal{E}}^\dagger = \sum_{j,i} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) = \Lambda_{\mathcal{E}}. \blacksquare
+           \Lambda_{\mathcal{E}}^\dagger = \sum_{j, i} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) = \Lambda_{\mathcal{E}}. \blacksquare
         \end{equation}
     \item Para un operador $\mathcal{E}$ completamente positivo, podemos escribirlo en términos de la matriz de Choi como:
             \begin{equation}\label{ec:canal_choi_form}
-            \mathcal{E} (\rho) = \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)] .
+            \mathcal{E} (\rho) = \text{Tr}_1 [ \Lambda (\rho^{T} \otimes I)].
             \end{equation}
             Para demostrar esta expresión partimos de escribir a  $\rho$ en la base computacional:
         \begin{equation} \label{ec:densidad_computacional}
-            \rho = \sum_{k,l} \rho_{k,l} \ketbra{k}{l},
+            \rho = \sum_{k, l} \rho_{k, l} \ketbra{k}{l},
         \end{equation}
         entonces:
         \begin{equation}
-            \rho^{T} \otimes I = \sum_{k,l} \rho_{k,l} \ketbra{l}{k} \otimes I.
+            \rho^{T} \otimes I = \sum_{k, l} \rho_{k, l} \ketbra{l}{k} \otimes I.
         \end{equation}
         Multiplicamos $\Lambda$ con $\rho^{T} \otimes I$:
         \begin{align}
-            \Lambda(\rho^{T} \otimes I) & = \left( \sum_{i,j} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) \right) \left( \sum_{k,l} \rho_{k,l} \ketbra{l}{k} \otimes I \right) \\
-            & = \sum_{i,j,k,l} \rho_{k,l} (  \ketbra{i}{j} ) (\ketbra{l}{k}) \otimes \mathcal{E} (\ketbra{i}{j})\\
-            & =  \sum_{i,j,k,l} \rho_{k,l} \delta_{j,l} \ketbra{i}{k} \otimes \mathcal{E}( \ketbra{i}{j})\\
-            & = \sum_{i,k,l} \rho_{k,l} \ketbra{i}{k} \otimes \mathcal{E}( \ketbra{i}{l}).
+            \Lambda(\rho^{T} \otimes I) & = \left(\sum_{i, j} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j}) \right) \left(\sum_{k, l} \rho_{k, l} \ketbra{l}{k} \otimes I \right) \\
+            & = \sum_{i, j, k, l} \rho_{k, l} ( \ketbra{i}{j}) (\ketbra{l}{k}) \otimes \mathcal{E} (\ketbra{i}{j})\\
+            & =  \sum_{i, j, k, l} \rho_{k, l} \delta_{j, l} \ketbra{i}{k} \otimes \mathcal{E}(\ketbra{i}{j})\\
+            & = \sum_{i, k, l} \rho_{k, l} \ketbra{i}{k} \otimes \mathcal{E}(\ketbra{i}{l}).
         \end{align}
         Si trazamos parcialmente el primer subsistema tenemos la expresión: 
         \begin{equation}
-            \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)]  = \text{Tr}_1 \left[  \sum_{i,k,l} \rho_{k,l}\ketbra{i}{k} \otimes \mathcal{E}(\ketbra{i}{l})\right],
+            \text{Tr}_1 [ \Lambda (\rho^{T} \otimes I)]  = \text{Tr}_1 \left[  \sum_{i, k, l} \rho_{k, l}\ketbra{i}{k} \otimes \mathcal{E}(\ketbra{i}{l})\right],
         \end{equation}
         consideramos solo los términos donde $i=k$:
         \begin{equation}
-            \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)]  = \sum_{i,l}\rho_{i,l} \mathcal{E}(\ketbra{i}{l}) = \mathcal{E}(\rho) .\blacksquare
+            \text{Tr}_1 [ \Lambda (\rho^{T} \otimes I)]  = \sum_{i, l}\rho_{i, l} \mathcal{E}(\ketbra{i}{l}) = \mathcal{E}(\rho).\blacksquare
         \end{equation}
         Notemos también  que podemos reescribir esta expresión en términos de los operadores de Kraus:
         \begin{equation}
-            \mathcal{E}(\rho) = \sum_{i,l} \rho_{i,l} \sum_k E_k \ketbra{i}{l}E_k^{\dagger},
+            \mathcal{E}(\rho) = \sum_{i, l} \rho_{i, l} \sum_k E_k \ketbra{i}{l}E_k^{\dagger},
         \end{equation}
-        ya que $\rho_{i,l}$ es un escalar, y recordando la ecuación \ref{ec:densidad_computacional}, reordenamos la expresión: 
+        ya que $\rho_{i, l}$ es un escalar, y recordando la ecuación (\ref{ec:densidad_computacional}), reordenamos la expresión: 
         \begin{align}
-            \mathcal{E}(\rho)& = \sum_k E_k \left( \sum_{i,l}\rho_{i,l}\ketbra{i}{l}\right) E_k^{\dagger}\\
+            \mathcal{E}(\rho)& = \sum_k E_k \left(\sum_{i, l}\rho_{i, l}\ketbra{i}{l}\right) E_k^{\dagger}\\
             & = \sum_k E_k \rho E_k^{\dagger}.
         \end{align}
 
@@ -1051,7 +1083,7 @@ La matriz de Choi tiene  varias propiedades descritas en el paper de  G. Homa  y
     
     Si escribimos a $\ket{\psi} = \sum_i c_i \ket{i} \otimes \ket{\psi_i}$, tenemos:
     \begin{equation}
-    \bra{\psi} \Lambda_{\mathcal{E}} \ket{\psi} = \sum_{i,j} \overline{c_i} c_j \bra{\psi_i} \mathcal{E}\ketbra{i}{j}) \ket{\psi_j}.
+    \bra{\psi} \Lambda_{\mathcal{E}} \ket{\psi} = \sum_{i, j} \overline{c_i} c_j \bra{\psi_i} \mathcal{E}\ketbra{i}{j}) \ket{\psi_j}.
     \end{equation}
     Debido a que $\mathcal{E}$ es completamente positivo, entonces $\mathcal{E}(\ketbra{i}{j})$ es un operador positivo semidefinido. Por lo tanto: 
     \begin{equation}
@@ -1067,16 +1099,16 @@ La matriz de Choi tiene  varias propiedades descritas en el paper de  G. Homa  y
     \end{equation}
     \textbf{Ida:} suponemos que $\mathcal{F}$ es un mapeo que preserva la traza. Por lo que si trazamos parcialmente el segundo subsistema tenemos:
     \begin{equation}
-        \text{Tr}_2(\Lambda) = \sum_{i,j}\ketbra{i}{j}\text{Tr}( \mathcal{F}(\ketbra{i}{j})),
+        \text{Tr}_2(\Lambda) = \sum_{i, j}\ketbra{i}{j}\text{Tr}(\mathcal{F}(\ketbra{i}{j})),
     \end{equation}
-    ya que $\mathcal{F}$ preserva la traza, entonces $\text{Tr}( \mathcal{F}(\ketbra{i}{j})) = Tr(\ketbra{i}{j})$, por lo tanto:
+    ya que $\mathcal{F}$ preserva la traza, entonces $\text{Tr}(\mathcal{F}(\ketbra{i}{j})) = Tr(\ketbra{i}{j})$, por lo tanto:
     \begin{equation}
-         \text{Tr}_2(\Lambda) = \sum_{i,j}\ketbra{i}{j} \delta_{ij}= \sum_i \ketbra{i}= I. 
+         \text{Tr}_2(\Lambda) = \sum_{i, j}\ketbra{i}{j} \delta_{ij}= \sum_i \ketbra{i}= I. 
     \end{equation}
     
-    \textbf{Vuelta:} suponemos que $\text{Tr}_2(\Lambda) = I$ para $\Lambda$. Por lo que si usamos la representación del mapeo $\mathcal{F}$ según la ecuación \ref{ec:canal_choi_form} tenemos:
+    \textbf{Vuelta:} suponemos que $\text{Tr}_2(\Lambda) = I$ para $\Lambda$. Por lo que si usamos la representación del mapeo $\mathcal{F}$ según la ecuación (\ref{ec:canal_choi_form}) tenemos:
     \begin{align}
-        \text{Tr} (\mathcal{F}(\rho)) &= \text{Tr}( \text{Tr}_1 [ \Lambda ( \rho^{T} \otimes I)]).
+        \text{Tr} (\mathcal{F}(\rho)) &= \text{Tr}(\text{Tr}_1 [ \Lambda (\rho^{T} \otimes I)]).
     \end{align}
     Usando la propiedad cíclica de la traza $\text{Tr}(AB) = \text{Tr}(BA)$:
     \begin{align}
@@ -1090,7 +1122,7 @@ La matriz de Choi tiene  varias propiedades descritas en el paper de  G. Homa  y
     \item La matriz de Choi $\Lambda_{\mathcal{E}}$ de un operador cuántico completamente positivo y que preserva la traza (CPTP)  es única. \\
     Supongamos dos operadores distintos $\mathcal{F}$ y $\mathcal{G}$ con la misma matriz de Choi:
     \begin{equation}
-       \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{F}(\ketbra{i}{j}) =  \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{G}(\ketbra{i}{j}).
+       \sum_{i, j=1}^{d} \ketbra{i}{j} \otimes \mathcal{F}(\ketbra{i}{j}) =  \sum_{i, j=1}^{d} \ketbra{i}{j} \otimes \mathcal{G}(\ketbra{i}{j}).
     \end{equation}
     Esto implica que para cada par $i, j$, se debe cumplir que $\mathcal{F}(\ketbra{i}{j}) = \mathcal{G}(\ketbra{i}{j})$. Dado que los elementos $\ketbra{i}{j}$ abarcan toda la base del espacio de operadores, implica que $\mathcal{F} = \mathcal{G}$ para todos los posibles estados en el espacio $\blacksquare$.
 \end{enumerate}
@@ -1104,7 +1136,7 @@ Para probar este teorema partimos sabiendo que  $\{E_i\}$ y $\{F_j\}$ son conjun
 \begin{equation}
    \sum_i E_i^\dagger E_i = \sum_j F_j^\dagger F_j. 
 \end{equation}
-Definimos los estados $\ket{e_i} = E_i \ket{k}$ , $\ket{f_j} = F_j \ket{k}$. Por la definición de un operador de Kraus, podemos escribir:
+Definimos los estados $\ket{e_i} = E_i \ket{k}$, $\ket{f_j} = F_j \ket{k}$. Por la definición de un operador de Kraus, podemos escribir:
 \begin{equation}
   \ket{e_i} = \sum_j u_{ij} \ket{f_j},  
 \end{equation} 
@@ -1121,7 +1153,7 @@ Por lo tanto, en adelante utilizaremos la notación de la matriz de Choi, ya que
 
 \subsection{Tomografía de Proceso Cuántico} % {{{
 \label{sec:Tomo_proc}
-La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes es necesario conocer la tomografía de estado cuántico.  
+La tomografía de proceso cuántico (QPT) es una técnica fundamental para reconstruir experimentalmente un canal cuántico por medio de mediciones. Sin embargo, antes es necesario que conozcamos la tomografía de estado cuántico.  
 
 
 La tomografía de estado cuántico es un proceso para reconstruir
@@ -1129,7 +1161,7 @@ experimentalmente un estado desconocido a partir de un conjunto de mediciones
 \cite{nielsen_chuang_2011}. Es posible estimar $\rho$ si tenemos un gran número de copias del mismo. Mencionaremos el proceso
 indicado en el libro de Nielsen y Chuang \cite{nielsen_chuang_2011}:
 \begin{quote}
-Consideremos un estado $\rho$ y los operadores $\{\frac{\mathcal{I}}{\sqrt{2}}
+Consideremos un estado $\rho$ y los operadores $\{\frac{\mathcal{I}}{\sqrt{2}},
 \frac{X}{\sqrt{2}},  \frac{Y}{\sqrt{2}},  \frac{Z}{\sqrt{2}} \} $ que forman un
 conjunto ortonormal de matrices con su respectivo producto interno. Entonces,
 $\rho$ se expande como:
@@ -1141,18 +1173,18 @@ La expresión $\text{Tr}(A\rho)$ se interpreta como el valor medio de los observ
 \begin{equation}
     \text{Tr}(A \rho) \approx \sum_i \frac{z_i}{m}.
 \end{equation}
-De esta forma podemos reconstruir la matriz $\rho$ como en la ecuación \ref{eq:tomo_estado}.  
+De esta forma podemos reconstruir la matriz $\rho$ como en la ecuación (\ref{eq:tomo_estado}).  
 
 Generalizando este procedimiento, para el caso de una matriz densidad arbitraria de $n$ qubits, puede ser expandida cómo:
 \begin{equation}
-\rho = \sum_{\vec{v}} \frac{ \text{Tr}(\sigma_{v_1} \otimes \sigma_{v_2} \otimes ... \otimes \sigma_{v_n} \rho  ) \sigma_{v_1} \otimes \sigma_{v_2 } \otimes ... \otimes \sigma_{v_n}     }{2}.
+\rho = \sum_{\vec{v}} \frac{ \text{Tr}(\sigma_{v_1} \otimes \sigma_{v_2} \otimes... \otimes \sigma_{v_n} \rho ) \sigma_{v_1} \otimes \sigma_{v_2 } \otimes... \otimes \sigma_{v_n}     }{2}.
 \end{equation}
 \end{quote}
-La suma de la ecuación es sobre vectores $\vec{v} = (v_1,...,v_n)$ con entradas $v_i$ escogidas del conjunto 0,1,2,3. Al realizar mediciones de observables que son productos de las matrices de Pauli, podemos estimar cada término en esta suma, y entonces estimar $\rho$. 
+La suma de la ecuación es sobre vectores $\vec{v} = (v_1,..., v_n)$ con entradas $v_i$ escogidas del conjunto 0,1,2,3. Al realizar mediciones de observables que son productos de las matrices de Pauli, podemos estimar cada término en esta suma, y entonces estimar $\rho$. 
 
 Para implementar la tomografía de estado en una computadora cuántica es
 necesario realizar mediciones en las bases de los operadores de Pauli
-$(X,Y,Z)$. Por ello, podemos hacer un cambio de base para nuestras mediciones. Por lo tanto, para $X$ transformamos a los estados de la base $\{ 
+$(X, Y, Z)$. Por ello, podemos hacer un cambio de base para nuestras mediciones. Por lo tanto, para $X$ transformamos a los estados de la base $\{ 
  {\ket{0},\ket{1}} \}$, a la base de Pauli $X$:
 \begin{equation}
     \ket{\pm} = \frac{1}{\sqrt{2}} (\ket{0} \pm \ket{1}),
@@ -1171,17 +1203,17 @@ Por ende, el circuito cuántico debe ser medido en cada una de las bases (ver fi
         \end{quantikz},
         \begin{quantikz}
         \lstick{$\ket{\psi}$} &  \gate{H} & \gate{S^{\dagger}} & \meter{} & \cw{M}
-        \end{quantikz} , 
+        \end{quantikz}, 
         \begin{quantikz}
         \lstick{$\ket{\psi}$}  & \meter{} & \cw{M}
         \end{quantikz}  
-        \caption{Mediciones cuánticas necesarias para realizar la tomografía de estado. \textbf{Fuente:} elaboración propia.}
+        \caption[Mediciones cuánticas necesarias para realizar la tomografía de estado]{Mediciones cuánticas necesarias para realizar la tomografía de estado. \textbf{Fuente:} elaboración propia.}
         \label{eq:circuitos_tomoestado}
     \end{figure}
 
 La tomografía de proceso implica preparar un conjunto de estados puros de entrada que forman una base del espacio de matrices $\ket{\psi_j}$. Estos estados interactúan con el canal cuántico $\mathcal{E}$, y luego se realiza la tomografía de estado cuántico para reconstruir $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$. Nuevamente, mencionamos esta elección de estados usado en Nielsen y Chuang \cite{nielsen_chuang_2011}: 
 \begin{quote}
-Sea $\rho_j$ , $1\leq j \leq d^2$ una base linealmente independiente del espacio de matrices $d\times d$, es decir, que cualquier matriz $d \times d$ puede ser escrita como una combinación linear única de $\rho_j$.  Una elección conveniente de operadores es $\ketbra{n}{m}$. Por lo tanto, los estados de salida $\mathcal{E}(\ketbra{n}{m})$ pueden ser considerados preparando los estados de entrada:
+Sea $\rho_j$, $1\leq j \leq d^2$ una base linealmente independiente del espacio de matrices $d\times d$, es decir, que cualquier matriz $d \times d$ puede ser escrita como una combinación lineal única de $\rho_j$.  Una elección conveniente de operadores es $\ketbra{n}{m}$. Por lo tanto, los estados de salida $\mathcal{E}(\ketbra{n}{m})$ pueden ser considerados preparando los estados de entrada:
 \begin{itemize}
     \item$\ket{n}$,
     \item$\ket{m}$,
@@ -1195,7 +1227,7 @@ Luego se forman combinaciones lineales de $\mathcal{E} (\ketbra{n}), \ketbra{m},
 Entonces, es posible determinar $\mathcal{E}(\rho_j)$ por medio de tomografía de estado para cada $\rho_j$.
 \end{quote}
 
-Qiskit , para un qubit , utiliza los estados de entrada para la QPT:
+Qiskit, para un qubit, utiliza los estados de entrada para la QPT:
 \begin{alignat}{2}
     \ket{\psi_1} &= \ket{0}, \\
     \ket{\psi_2} &= \ket{1}, \\
@@ -1204,10 +1236,10 @@ Qiskit , para un qubit , utiliza los estados de entrada para la QPT:
 \end{alignat}
 Notemos que para la matriz de Choi necesitamos los estados $\ketbra{0}{1}$ y $\ketbra{1}{0}$, que obtenemos respectivamente:
 \begin{alignat}{1}
-    \ketbra{0}{1} &= \frac{1}{2} \left( \ketbra{+}{+} - \ketbra{-}{-} + i \big( \ketbra{i}{i} - \ketbra{-i}{-i} \big) \right), \\
-    \ketbra{1}{0} &= \frac{1}{2} \left( \ketbra{+}{+} - \ketbra{-}{-} - i \big( \ketbra{i}{i} - \ketbra{-i}{-i} \big) \right).
+    \ketbra{0}{1} &= \frac{1}{2} \left(\ketbra{+}{+} - \ketbra{-}{-} + i \big(\ketbra{i}{i} - \ketbra{-i}{-i} \big) \right), \\
+    \ketbra{1}{0} &= \frac{1}{2} \left(\ketbra{+}{+} - \ketbra{-}{-} - i \big(\ketbra{i}{i} - \ketbra{-i}{-i} \big) \right).
 \end{alignat}
-Con cada estado reconstruido $\mathcal{E}(\ketbra{\psi_i})$,  obtenemos la matriz de Choi $\Lambda_{\mathcal{E}}$ ( \ref{ec:Choi_ketbra} ). De esta forma, la tomografía de proceso cuántico proporciona una descripción completa y detallada del canal cuántico por medio de mediciones. 
+Con cada estado reconstruido $\mathcal{E}(\ketbra{\psi_i})$,  obtenemos la matriz de Choi $\Lambda_{\mathcal{E}}$ como se muestra en la ecuación (\ref{ec:Choi_ketbra}). De esta forma, la tomografía de proceso cuántico proporciona una descripción completa y detallada del canal cuántico por medio de mediciones. 
 
 % }}}
 \subsection{Fidelidad de Proceso Cuántico} % {{{
@@ -1228,7 +1260,7 @@ y Chuang  \cite{nielsen_chuang_2011}, que da sentido a la ecuación
 (\ref{eq:fidelidad_estado}):
     
     \begin{thm}
-    \textbf{(Teorema de Uhlmann)}: $F(\rho,\sigma) = max |\braket{\psi_\rho}{\psi_\sigma}|$ . El máximo se toma sobre las purificaciones de $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ de $\rho,\sigma$ respectivamente. 
+    \textbf{(Teorema de Uhlmann)}: $F(\rho,\sigma) = max |\braket{\psi_\rho}{\psi_\sigma}|$. El máximo se toma sobre las purificaciones de $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ de $\rho,\sigma$ respectivamente. 
     \end{thm}
      Para probar este teorema supondremos dos estados $\ket{\psi_\rho},\ket{\psi_\sigma}$ que son las purificaciones de las matrices $\rho,\sigma$ respectivamente. Si los escribimos de forma general tendremos:
     \begin{align}
@@ -1242,34 +1274,34 @@ y Chuang  \cite{nielsen_chuang_2011}, que da sentido a la ecuación
     con $\text{Tr}(A) = \sum_{i=1}^{d} \lambda_i$, siendo $\lambda_i$ sus autovalores llegamos a la expresión:
     \begin{equation}
     \label{eq:rho_ij0}
-        \braket{\psi_\rho}{\psi_\sigma} = \text{Tr}( \sqrt{\rho}\sqrt{\sigma} U ),
+        \braket{\psi_\rho}{\psi_\sigma} = \text{Tr}(\sqrt{\rho}\sqrt{\sigma} U),
     \end{equation}
     con la matriz unitaria $U$ definida como:
     \begin{equation}
-        U = \left(\sum_k \ketbra{\mu_k}{u_k}    \right)  \left(\sum_j \ketbra{v_j} {\lambda_j}   \right) .
+        U = \left(\sum_k \ketbra{\mu_k}{u_k}    \right)  \left(\sum_j \ketbra{v_j} {\lambda_j}   \right).
     \end{equation} 
     En este momento es bueno introducir el siguiente lema de Nielsen y Chuang \cite{nielsen_chuang_2011} que dice lo siguiente:
     \begin{lem}  Sea A cualquier operador, y $U$ unitario. Entonces
     \begin{equation}
-        | \text{Tr}(AU)| \leq tr|A|,
+        | \text{Tr}(AU)| \leq \text{Tr}|A|,
     \end{equation}
     con la igualdad obtenida escogiendo $U= V^\dagger$. Aquí $A= |A|V$ es la descomposición polar de $A$.
     \end{lem}
     Para probar este lema podemos ver que:
     \begin{equation}
-        |\text{Tr}(AU)| = |\text{Tr}(|A|VU)| = \left| \text{Tr}(|A|VU  ) \right| = \left|\text{Tr}(|A|^{1/2}|A|^{1/2} VU )   \right|.
+        |\text{Tr}(AU)| = |\text{Tr}(|A|VU)| = \left| \text{Tr}(|A|VU ) \right| = \left|\text{Tr}(|A|^{1/2}|A|^{1/2} VU)   \right|.
     \end{equation}
     Usando la desigualdad de Cauchy-Schwarz \cite{nielsen_chuang_2011} para el espacio de Hilbert-Schmidt obtenemos:
     \begin{equation}
-        |\text{Tr}(AU)| \leq \sqrt{ tr|A| \text{Tr}(U^\dagger V^ \dagger  |A|VU) } = tr|A| \blacksquare  
+        |\text{Tr}(AU)| \leq \sqrt{ \text{Tr}|A| \text{Tr}(U^\dagger V^ \dagger  |A|VU) } = \text{Tr}|A| \blacksquare  
     \end{equation} 
-    Retomando la prueba de Uhlman, al usar el (Lema 9.5 ) comparado con la ecuación ( \ref{eq:rho_ij0})  llegamos a la conclusión
+    Retomando la prueba de Uhlman, al usar el (Lema 9.5) comparado con la ecuación (\ref{eq:rho_ij0})  llegamos a la conclusión
     \begin{equation}
-        |\braket{\psi_\rho}{\psi_\sigma}| = |\text{Tr}(\sqrt{\rho} \sqrt{\sigma} U )| \leq tr|\sqrt{\rho} \sqrt{\sigma} |.
+        |\braket{\psi_\rho}{\psi_\sigma}| = |\text{Tr}(\sqrt{\rho} \sqrt{\sigma} U)| \leq \text{Tr}|\sqrt{\rho} \sqrt{\sigma} |.
     \end{equation}
-    Esto nos quiere decir que $|\braket{\psi_\rho}{\psi_\sigma}| = tr| \sqrt{\rho}\sqrt{\sigma}|$ cuando las purificaciones $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ son tales que $\sqrt{\rho}\sqrt{\sigma} U = |\sqrt{\rho}\sqrt{\sigma}|$. Como esta selección no depende de los estados que escojamos podemos concluir que
+    Esto nos quiere decir que $|\braket{\psi_\rho}{\psi_\sigma}| = \text{Tr}| \sqrt{\rho}\sqrt{\sigma}|$ cuando las purificaciones $\ket{\psi_\rho}$ y $\ket{\psi_\sigma}$ son tales que $\sqrt{\rho}\sqrt{\sigma} U = |\sqrt{\rho}\sqrt{\sigma}|$. Como esta selección no depende de los estados que escojamos podemos concluir que
     \begin{equation}
-        tr|\sqrt{\rho}\sqrt{\sigma}| = max | \braket{\psi_\rho}{\psi_\sigma}|. \blacksquare
+        \text{Tr}|\sqrt{\rho}\sqrt{\sigma}| = max | \braket{\psi_\rho}{\psi_\sigma}|. \blacksquare
     \end{equation}
     Consecuencia del teorema anterior se tienen las siguientes propiedades de la fidelidad mostradas en el paper de Josza \cite{Jozsa}:
     \begin{enumerate}
@@ -1285,7 +1317,7 @@ F_{\text{proc}}(\mathcal{E}, \mathcal{F}) = F(\rho_{\mathcal{E}}, \rho_{\mathcal
 \end{equation}
 donde $F$ es la fidelidad de estado,  $\rho_{\mathcal{E}} =  \Lambda_{\mathcal{E}}/d $ es la matriz de Choi normalizada del canal cuántico $\mathcal{E}$, y $d$ es la dimensión de entrada del canal $\mathcal{E}$. 
 
-Esta métrica proporciona una medida cuantitativa de cuán similar es un canal cuántico experimental al canal cuántico teórico. Ya que utiliza la fidelidad de estado, mantiene las mismas propiedades para describir a los canales cuánticos. 
+Esta métrica nos proporciona una medida cuantitativa de cuán similar es un canal cuántico experimental al canal cuántico teórico. Ya que utiliza la fidelidad de estado, mantiene las mismas propiedades para describir a los canales cuánticos. 
 
 % }}}
 % }}}
@@ -1293,23 +1325,23 @@ Esta métrica proporciona una medida cuantitativa de cuán similar es un canal c
 \chapter{ALGORITMOS VARIACIONALES CUÁNTICOS (VQA)} % {{{
 \label{cap:algoritmos_variacionales}
 % \section{Introducción} % {{{
-La llegada de la tecnología ruidosa de escala intermedia (NISQ) ha generado
-gran interés, ya que permite trabajar con una mayor cantidad de qubits, aunque
+La llegada de la tecnología cuántica de escala intermedia ruidosa (NISQ) ha generado
+gran interés, ya que nos permite trabajar con una mayor cantidad de qubits, aunque
 también con mayores niveles de error. Por ello, es fundamental implementar
-algoritmos que aprovechen las capacidades del hardware actual. Uno de ellos
-son los algoritmos variacionales cuánticos (VQA), los cuales serán
-desarrollados en la sección~\ref{sec:desc_vqa}, ya que funcionan de forma
+algoritmos que aprovechen las capacidades del hardware actual. Unos de ellos
+son los algoritmos variacionales cuánticos (VQA), los cuales desarrollamos
+en la sección~\ref{sec:desc_vqa}, ya que funcionan de forma
 híbrida cuántico-clásica optimizando circuitos parametrizados para resolver
 una tarea específica.
 
-Con este desarrollo general, en la sección~\ref{sec:impl_vqa} se propone una
+Con este desarrollo general, en la sección~\ref{sec:impl_vqa} proponemos una
 aplicación del VQA utilizando un \textit{Hardware Efficient Ansatz} (HEA) para
 la implementación de canales cuánticos de un qubit en una computadora cuántica.
-Finalmente, en esa misma sección, se presenta un ejemplo concreto en el que se
-emplea un HEA para implementar un canal despolarizante haciendo uso del VQA. Al
-finalizar este capítulo, se habrán establecido las bases necesarias para
-implementar un canal cuántico de un qubit en la plataforma IBM Quantum
-Experience mediante este tipo de algoritmos.
+Finalmente, en esa misma sección, presentamos un ejemplo concreto en el que
+empleamos un HEA para implementar un canal despolarizante haciendo uso del VQA. 
+Al finalizar este capítulo, establecemos las bases necesarias para
+implementar un canal cuántico de un qubit en la plataforma IBM Quantum mediante este tipo de algoritmos.
+
 
 % }}}
 \section{Descripción de los VQA} \label{sec:desc_vqa} % {{{
@@ -1317,7 +1349,7 @@ Experience mediante este tipo de algoritmos.
 Los VQA son algoritmos que entrenan a un circuito cuántico parametrizado
 $U(\bm{\theta})$ que luego es optimizado de forma clásica para resolver una
 tarea dada. Es importante establecer una definición formal, por ello usaremos
-la definición mencionada en el paper de Lorenzo Leone y otros~\cite{HEA}:
+la definición mencionada en el artículo de Lorenzo Leone y otros~\cite{HEA}:
 \begin{quote}
 \enquote{Sea $O$ un operador Hermítico, cuyo estado fundamental codifique la solución de un problema de interés. En una tarea VQA, el objetivo es minimizar una función de costo $C(\bm{\theta})$, parametrizada a través de un circuito cuántico $U(\bm{\theta})$, para preparar el estado fundamental de $O$ a partir de un estado fiduciario $\ket{\psi_0}$.}
 \end{quote}
@@ -1331,7 +1363,7 @@ El valor de $C(\bm{\theta})$ se obtiene a través de mediciones en la computador
 \theta^* = \text{arg }\underset{\bm{\theta}} {\text{min}} C (\bm{\theta}).
 \end{equation}
 
-El aspecto más importante de los VQA es la elección del ansatz, que se refiere a las especificaciones para el arreglo y tipo de compuertas cuánticas en $U(\bm{\theta})$ (ver figura \ref{fig:ansatz_general}). El ansatz más comunmente usado es el \textit{Hardware Efficient-Ansatz} (HEA) cuyo objetivo principal es mitigar el efecto del ruido del hardware usando compuertas nativas del dispositivo específico que se esté usando.
+El aspecto más importante de los VQA es la elección del \textit{ansatz}, que se refiere a las especificaciones para el arreglo y tipo de compuertas cuánticas en $U(\bm{\theta})$ (ver figura \ref{fig:ansatz_general}). El \textit{ansatz} más comunmente usado es el \textit{Hardware Efficient Ansatz} (HEA) cuyo objetivo principal es mitigar el efecto del ruido del hardware usando compuertas nativas del dispositivo específico que se esté usando.
 
 La ventaja principal de los HEA es que están diseñados para minimizar la profundidad del circuito, que reduce los efectos adversos del ruido del hardware cuántico \cite{HEA}. Además, su diseño es independiente de la tarea a resolver, lo cual los hace más versátiles y aplicables a una variedad de problemas sin ajustes específicos.
 Generalmente asumimos que el circuito cuántico parametrizado se expresa cómo: 
@@ -1353,25 +1385,25 @@ Posteriormente, cada capa $L$ del circuito conecta cada qubit con su vecino cerc
         \caption{}
         \label{fig:HEA_ansatz}
     \end{subfigure}
-    \caption{(a) Diagrama esquemático de un ansatz, donde el operador unitario $U(\bm{\theta})$ puede ser expresado como el producto de $L$ unitarias $U_l(\theta_l)$ de forma secuencial actuando sobre un estado inicial. \textbf{Fuente}: M. Cerezo y otros \cite{VQA}. (b) Diagrama esquemático de un HEA donde se nota cómo este usa compuertas de dos qubits organizadas en forma de ladrillo. \textbf{Fuente}: Lorenzo Leone y otros \cite{HEA}.}
+    \caption[Diagramas esquemáticos de un \textit{ansatz} y un HEA]{(a) Diagrama esquemático de un \textit{ansatz}, donde el operador unitario $U(\bm{\theta})$ puede ser expresado como el producto de $L$ unitarias $U_l(\theta_l)$ de forma secuencial actuando sobre un estado inicial. \textbf{Fuente}: M. Cerezo y otros \cite{VQA}. (b) Diagrama esquemático de un HEA donde se nota cómo este usa compuertas de dos qubits organizadas en forma de ladrillo. \textbf{Fuente}: Lorenzo Leone y otros \cite{HEA}.}   
     \label{fig:ansatz_comparacion}
 \end{figure}
 % }}}
 \section{Implementación de canales de un qubit usando VQA}\label{sec:impl_vqa}  % {{{
-Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas específicas que repliquen la acción del canal sobre el sistema principal $\rho$. Por ello hemos propuesto utilizar los VQA para inicializar canales cuánticos de un qubit. Para esto nuestra función de costo a optimizar será la fidelidad de proceso, ver ecuación \ref{ec:fidel_proc}:
+Podemos iniciar un canal cuántico en una computadora cuántica si conocemos el conjunto de compuertas específicas que repliquen la acción del canal sobre el sistema principal $\rho$. Por ello hemos propuesto utilizar los VQA para inicializar canales cuánticos de un qubit. Para esto nuestra función de costo a optimizar será la fidelidad de proceso, ver ecuación (\ref{ec:fidel_proc}):
 \begin{equation}
     \label{ec:cost_func}
-    C(\bm{\theta}) = \frac{1}{d^2} F_{proc}\bigl( \Lambda_r(\bm{\theta}), \Lambda_{obj} \bigr),
+    C(\bm{\theta}) = \frac{1}{d^2} F_{proc}\bigl(\Lambda_r(\bm{\theta}), \Lambda_{obj} \bigr),
 \end{equation}
  donde $\Lambda_r$ es la matriz de Choi reconstruida tras realizar la
 tomografía de proceso sobre el circuito cuántico parametrizado, mientras que
 $\Lambda_{obj}$ es la matriz de Choi objetivo del canal cuántico a implementar.
  
 Por otro lado, el HEA utilizado para este proyecto es el mismo usado en el
-paper de Huan-Yu Liu y otros \cite{Liu_2021,Sim_2019}, que combina
+artículo de Huan-Yu Liu y otros \cite{Liu_2021,Sim_2019}, que combina
 compuertas sencillas de implementar entre operaciones de uno o dos qubits.
 Luego las capas son repetidas para incrementar la profundidad expresiva, por
-lo que la estructura del ansatz es:
+lo que la estructura del \textit{ansatz} es:
  \begin{equation}
  \label{ec:ansatz}
      U(\bm{\theta}) =\prod_{i=1}^{M} \prod_{j=1}^N U_{ent} (\theta_i)R_z(\theta_{ij})R_x(\theta_{ij2})R_z(\theta_{ij3}),
@@ -1379,28 +1411,29 @@ lo que la estructura del ansatz es:
 donde $N$ y $M$ son el número de qubits y capas en el circuito respectivamente.
 Para la parte de entrelazamiento $U_{ent}$ tomamos compuertas de control
 $cR_y$.  En este esquema, los parámetros $\bm{\theta}$ corresponden a los
-ángulos de rotación de las compuertas del ansatz. Este circuito puede
+ángulos de rotación de las compuertas del \textit{ansatz}. Este circuito puede
 interpretarse como un modelo de sistema abierto, donde el sistema principal
 interactúa con un entorno, como se muestra en la
-ecuación~\ref{ec:rep_sist_abierto}.
+ecuación (\ref{ec:rep_sist_abierto}).
 % Podemos ver a este circuito cuántico como un
 % sistema cerrado en la ecuación \ref{ec:rep_sist_abierto}, donde el sistema
 % principal se obtiene luego de interactuar con el entorno como en la ecuación
 % \ref{ec:sistema_principal}
-Aquí quiero decir que este ansatz representa el sistema como $\rho_{sp} \otimes
-\rho_{ent}$ ( $\rho_{sp}$ es el sistema principal) . Lo menciono para darle
-sentido a la ecuación  (\ref{ec:tr_anc}).  Notemos que este ansatz construye un
-estado puro de  $2n$ qubits de la forma:
+% Aquí quiero decir que este \textit{ansatz} representa el sistema como $\rho_{sp} \otimes
+% \rho_{ent}$ (donde $\rho_{sp}$ es el sistema principal).
+% Lo menciono para darle
+% sentido a la ecuación  (\ref{ec:tr_anc}).
+Notemos que este \textit{ansatz} construye un estado puro de  $2n$ qubits de la forma:
 \begin{equation} 
     \ket{\psi(\bm{\theta})} = U(\bm{\theta})\ket{0}^{\otimes 2n}.
 \end{equation}
 %======================
-Posteriormente, se realiza la traza parcial sobre los $n$ qubits auxiliares con el fin de obtener el estado del sistema principal:
+Posteriormente, realizamos la traza parcial sobre los $n$ qubits auxiliares con el fin de obtener el estado del sistema principal:
 \begin{equation} \label{ec:tr_anc}    \text{Tr}_{\text{anc}}\left[\ketbra{\psi(\bm{\theta})}{\psi(\bm{\theta})}\right] = \rho(\bm{\theta}),
 \end{equation}
 donde $\rho(\bm{\theta})$ representa el estado del sistema luego de su
 interacción con el canal cuántico. Una vez definida la función de costo en la
-ecuación~\ref{ec:cost_func}, se procede a ejecutar la tomografía de proceso
+ecuación (\ref{ec:cost_func}), ejecutamos la tomografía de proceso
 con el propósito de reconstruir la matriz de Choi
 $\Lambda_{r}$, que será comparada con la matriz de Choi del canal objetivo
 $\Lambda_{obj}$ mediante la fidelidad de proceso.
@@ -1412,11 +1445,11 @@ los parámetros $\bm{\theta}$, hasta encontrar el conjunto óptimo:
 \end{equation}
 %==========================================
 \begin{ex}\label{ex:depolarizing}\end{ex}
-Como caso de estudio, se considera la implementación de un canal despolarizante (DP) mediante un VQA. En este caso, la matriz de Choi correspondiente al canal objetivo $\Lambda_{obj}$ para un qubit está definida en la ecuación~\ref{ec:choi_depolarizing}. Para aproximar este canal, se construye un ansatz con una sola capa y dos qubits, de la forma (ver figura \ref{fig:ansatz_dp}):
+Como caso de estudio, consideramos la implementación de un canal despolarizante (DP) mediante un VQA. En este caso, la matriz de Choi correspondiente al canal objetivo $\Lambda_{obj}$ para un qubit está definida en la ecuación (\ref{ec:choi_depolarizing}). Para aproximar este canal, construimos un \textit{ansatz} con una sola capa y dos qubits, de la forma (ver figura \ref{fig:ansatz_dp}):
 \begin{equation}
     U(\bm{\theta}) = \prod_{j=1}^2 cR_y(\theta_i)\, R_z(\theta_{ij})\, R_x(\theta_{ij2})\, R_z(\theta_{ij3}).
 \end{equation}
-Los parámetros iniciales $\bm{\theta}_0$ se eligen de manera aleatoria, y el VQA se ejecuta iterativamente hasta alcanzar la minimización de la función de costo definida en la ecuación~\ref{ec:argmin_cost} (véase figura~\ref{fig:esquema_dp}). Cabe resaltar que la matriz de Choi del canal despolarizante depende del parámetro de ruido $p$, por esta razón $\Lambda_r(p)$ debe obtenerse para un valor específico de dicho parámetro.
+Los parámetros iniciales $\bm{\theta}_0$ se eligen de manera aleatoria, y el VQA se ejecuta iterativamente hasta alcanzar la minimización de la función de costo definida en la ecuación (\ref{ec:argmin_cost}) (véase figura~\ref{fig:esquema_dp}). Cabe resaltar que la matriz de Choi del canal despolarizante depende del parámetro de ruido $p$, por esta razón $\Lambda_r(p)$ debe obtenerse para un valor específico de dicho parámetro.
 
 Iniciamos los parámetros iniciales $(\bm{\theta_0})$ de forma aleatoria y
 ejecutamos el VQA hasta alcanzar la minimización de la función de costo
@@ -1426,13 +1459,14 @@ consecuencia, se obtiene la matriz $\Lambda_r(p)$.
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.65\linewidth]{imagenes/ansatz tesis.png}
-    \caption{Ansatz perteneciente al ejemplo \ref{ex:depolarizing}, en donde se usa el HEA de la ecuación \ref{ec:ansatz} con restricción de una capa y dos qubits. \textbf{Fuente}: elaboración propia. }
+    \caption[\textit{Ansatz} del ejemplo \ref{ex:depolarizing}]{\textit{Ansatz} perteneciente al ejemplo \ref{ex:depolarizing}, en donde se usa el HEA de la ecuación \ref{ec:ansatz} con restricción de una capa y dos qubits. \textbf{Fuente}: elaboración propia.}
     \label{fig:ansatz_dp}
     \end{figure}
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.70\linewidth]{imagenes/esquema_dp_v1.png}
-    \caption{Esquema de VQA para la implementación de canales cuánticos de un qubit. \textbf{Fuente}: elaboración propia, basado en esquema general de M. Cerezo y otros \cite{VQA}. }
+    \caption[Esquema del VQA para canales cuánticos de un qubit]{Esquema de VQA para la implementación de canales cuánticos de un qubit. \textbf{Fuente}: elaboración propia, basado en esquema general de M. Cerezo y otros \cite{VQA}.}
+    
     \label{fig:esquema_dp}
     \end{figure}
 
@@ -1456,8 +1490,8 @@ resultado:
 \end{pmatrix},
 \end{equation}
 que corresponde a una fidelidad de proceso $F_{proc}= 0.9440$. Notemos que el
-circuito resultante del ansatz optimizado para este valor de $p$ (ver figura
-\ref{fig:ansatz_p025}) no alcanza una fidelidad de proceso igual a uno. Esta diferencia puede atribuirse a dos factores principales. Primero, el optimizador puede converger en un mínimo local, sin alcanzar el valor óptimo global. Segundo, la matriz de Choi $\Lambda_r$ fue obtenida mediante tomografía de proceso, lo que implica realizar estimaciones basadas en un número finito de mediciones, introduciendo así errores de muestreo. Para explicar el segundo punto, calculamos la matriz de Choi $\Lambda_{ar}$ asociada al circuito final optimizado (ver figura \ref{fig:ansatz_p025}) al conjunto de estados vistos en la sección \ref{sec:Tomo_proc} , seguido de la traza parcial sobre los qubits auxiliares, evitando así incertidumbres inherentes a la tomografía. El resultado obtenido es:
+circuito resultante del \textit{ansatz} optimizado para este valor de $p$ (ver figura
+\ref{fig:ansatz_p025}) no alcanza una fidelidad de proceso igual a uno. Esta diferencia puede atribuirse a dos factores principales. Primero, el optimizador puede converger en un mínimo local, sin alcanzar el valor óptimo global. Segundo, obtuvimos la matriz de Choi $\Lambda_r$ mediante tomografía de proceso, lo que implica realizar estimaciones basadas en un número finito de mediciones, introduciendo así errores de muestreo. Para explicar el segundo punto, calculamos la matriz de Choi $\Lambda_{ar}$ asociada al circuito final optimizado (ver figura \ref{fig:ansatz_p025}) al conjunto de estados vistos en la sección \ref{sec:Tomo_proc}, seguido de la traza parcial sobre los qubits auxiliares, evitando así incertidumbres inherentes a la tomografía. El resultado obtenido es:
 \begin{equation}
     \Lambda_{ar} =  \begin{pmatrix}
 (0.909 + 0.000i) & (-0.083 - 0.081i) & (0.083 - 0.080i) & (0.748 + 0.038i) \\
@@ -1470,7 +1504,7 @@ que tiene una fidelidad de proceso $F_{proc} = 0.9547$. La diferencia evidencia 
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.70\linewidth]{imagenes/ansatz_p025_v2.png}
-    \caption{Ansatz optimizado para un DP con valor de despolarización $p=0.25$, esto fue optimizado en el simulador \texttt{AerSimulator} de Qiskit, IBM. \textbf{Fuente}: elaboración propia. }
+    \caption[\textit{Ansatz} optimizado para DP con $p=0.25$]{\textit{Ansatz} optimizado para un DP con valor de despolarización $p=0.25$, optimizado en el simulador \texttt{AerSimulator} de Qiskit, IBM. \textbf{Fuente}: elaboración propia.}
     \label{fig:ansatz_p025}
     \end{figure}
 
@@ -1478,47 +1512,48 @@ que tiene una fidelidad de proceso $F_{proc} = 0.9547$. La diferencia evidencia 
 % }}}
 \chapter{RESULTADOS PARA EL CANAL DESPOLARIZANTE DE UN QUBIT } \label{cap:resultados} % {{{
 % Introducción % {{{
-Este capítulo presenta los resultados de la implementación del canal
+En este capítulo presentamos los resultados de la implementación del canal
 despolarizante (DP) de un qubit mediante algoritmos variacionales cuánticos
-(VQA), como fue planteado en el Capítulo~\ref{cap:algoritmos_variacionales}. En
-la sección~\ref{sec:algoritmos_vqa}, se describe la programación del VQA en
-Python utilizando la librería Qiskit, detallando las funciones empleadas para
+(VQA), como lo planteamos en el Capítulo~\ref{cap:algoritmos_variacionales}. En
+la sección~\ref{sec:algoritmos_vqa}, describimos la programación del VQA en
+Python utilizando la biblioteca Qiskit, detallando las funciones que empleamos para
 construir el circuito, ejecutar la tomografía de proceso y optimizar la
-fidelidad del canal respecto a una matriz de Choi objetivo.  En la sección
-\ref{sec:resultados_dp}, se presentan los resultados obtenidos para distintos
+fidelidad del canal respecto a una matriz de Choi objetivo. En la sección
+\ref{sec:resultados_dp}, presentamos los resultados obtenidos para distintos
 valores de la probabilidad de despolarización $p$, utilizando tanto el
 simulador cuántico \texttt{AerSimulator()} como la computadora cuántica
-\texttt{ibm\_kyoto}. Se analizaron las
-fidelidades alcanzadas, verificando que en el simulador estas se mantuvieron
+\texttt{ibm\_kyoto}. Analizamos las
+fidelidades alcanzadas, verificando que en el simulador estas se mantienen
 consistentemente por encima de 0.900, mientras que en la computadora cuántica
-se registró una mayor variabilidad, con fidelidades entre 0.5533 y 0.9738.
-Además, se evaluó el cumplimiento de
+registramos una mayor variabilidad, con fidelidades entre 0.5533 y 0.9738.
+Además, evaluamos el cumplimiento de
 las propiedades fundamentales del canal, tales como la completa positividad
-(CP) y la preservación de la traza (TP), y se compararon las matrices de Choi
+(CP) y la preservación de la traza (TP), y comparamos las matrices de Choi
 reconstruidas con las teóricas.
 
-Por último, en la sección~\ref{sec:discusion_dp}, se discuten las diferencias
+Por último, en la sección~\ref{sec:discusion_dp}, discutimos las diferencias
 observadas entre los entornos ideal y real, el impacto del valor de $p$ sobre
 la fidelidad y los autovalores de las matrices de Choi, así como las
-limitaciones propias del hardware cuántico. Esta discusión permite valorar la
+limitaciones propias del hardware cuántico. Esta discusión nos permite valorar la
 viabilidad y desempeño de los algoritmos variacionales en la implementación de
 canales cuánticos en plataformas cuánticas actuales, y establecer conclusiones
 respecto a los objetivos planteados en este proyecto.
 
 
 
+
 % }}}
 \section{Algoritmos de implementación} % {{{
 \label{sec:algoritmos_vqa}
-Se han programado las funciones necesarias para implementar un DP mediante VQA
+Programamos las funciones necesarias para implementar un DP mediante VQA
 en una computadora cuántica. Estas funciones siguen el algoritmo presentado en
 el capítulo anterior, desarrollado en el lenguaje Python con el apoyo esencial
-de la librería Qiskit. A continuación, se enumeran las funciones utilizadas: 
+de la biblioteca Qiskit. A continuación, enumeramos las funciones utilizadas: 
 \begin{enumerate}
     \item \texttt{Choi\_matrix\_depolarizing(p)}: genera la matriz de Choi que
 corresponde al DP con probabilidad de depolarización $p$.
 
-    \item \texttt{Cirq\_ansq(qubits, parameters, layers)}: genera un HEA en un circuito cuántico de Qiskit. Toma como entradas el número de qubits, el listado de ángulos de rotación $\bm{\theta}$ (indicados en \texttt{parameters}) y el número de capas del ansatz (indicado en \texttt{layers}).
+    \item \texttt{Cirq\_ansq(qubits, parameters, layers)}: genera un HEA en un circuito cuántico de Qiskit. Toma como entradas el número de qubits, el listado de ángulos de rotación $\bm{\theta}$ (indicados en \texttt{parameters}) y el número de capas del \textit{ansatz} (indicado en \texttt{layers}).
     
     \item \texttt{ProcessTomography(circuit, measurement\_indices,
 preparation\_indices)}: función de Qiskit que genera los circuitos
@@ -1526,40 +1561,38 @@ correspondientes a la tomografía de proceso para reconstruir la matriz de Choi
 en un circuito cuántico. Esta función genera $4^N3^N$ circuitos de medición
 acorde a la teoría explicada en el \autoref{cap:fundamentos:teoricos}. Toma como entrada el circuito
 cuántico (en  \texttt{circuit})  y el indicador correspondiente al(los)
-qubit(s) donde se realizará la tomografía de proceso ( indicado en
-\texttt{measurement\_indices} y \texttt{preparation\_indices}) . Tiene el
+qubit(s) donde se realizará la tomografía de proceso (indicado en
+\texttt{measurement\_indices} y \texttt{preparation\_indices}). Tiene el
 método: 
     \begin{enumerate}
 	\item \texttt{Run(backend)}: método encargado de ejecutar el(los)
-circuito(s) cuántico(s) en un servidor de IBM Quantum Experience. El
+circuito(s) cuántico(s) en un servidor de IBM Quantum. El
 \texttt{backend} puede ser el simulador de Qiskit  \texttt{AerSimulator()} o
-bien, una computadora cuántica en servicio. Invitamos nuevamente al lector a
-ver los backends en la documentación de Qiskit \cite{Qiskit_documentation}. 
+bien, una computadora cuántica en servicio. Para más información sobre los backends se puede consultar la documentación de Qiskit \cite{Qiskit_documentation}. 
     \end{enumerate}
 
     \item \texttt{Process\_fidelity(channel, target)}: función de Qiskit que
-mide la fidelidad de proceso entre dos matrices de Choi , (\texttt{channel}
+mide la fidelidad de proceso entre dos matrices de Choi, (\texttt{channel}
 para la matriz de Choi del canal, \texttt{target} para una matriz de Choi
 objetivo) \cite{Qiskit_documentation}, acorde a la ecuación
 \ref{ec:choi_depolarizing}.
-    \item \texttt{Partial\_trace(choi\_matrix,dim)}: calcula la traza parcial
-sobre el sistema de una matriz de choi definida en \texttt{choi\_matrix()}.
+    \item \texttt{Partial\_trace(choi\_matrix, dim)}: calcula la traza parcial
+sobre el sistema de una matriz de Choi definida en \texttt{choi\_matrix()}.
 Este cálculo se realiza dependiendo de la dimensión del sistema cuántico (por
 defecto es para dos qubits).
-    \item \texttt{Cost\_func(params)}: genera el circuito ansatz usando
+    \item \texttt{Cost\_func(params)}: genera el circuito \textit{ansatz} usando
 \texttt{Cirq\_ansq()}. Posteriormente utiliza \texttt{ProcessTomography()} para
 ejecutar la tomografía de proceso sobre el primer qubit del circuito generado.
 Finalmente calcula la función de costo usando \texttt{Process\_fidelity()}
-entre la matriz de Choi reconstruida del circuito ansatz y una matriz de Choi
+entre la matriz de Choi reconstruida del circuito \textit{ansatz} y una matriz de Choi
 objetivo. Esta función usa como entrada global la matriz de Choi objetivo
 (\texttt{target} de la función \texttt{Process\_fidelity()}) y como entrada
 local la lista de rotaciones $\bm{\theta}$ (definidas en  \texttt{params}).
-    \item \texttt{Minimize(fun, x0, method=None, tol)}: función de la librería
+    \item \texttt{Minimize(fun, x0, method=None, tol)}: función de la biblioteca
 \texttt{scipy} encargada de minimización una función escalar \texttt{fun}, de
 una o más variables. Esta función requiere un conjunto de parámetros iniciales
 de la función \texttt{x0}. Como parte opcional se puede escoger el método de
-optimización, invitamos al lector a verlos más a detalle en su respectiva
-documentación \cite{scipy}. Finalmente, se puede escoger un valor de tolerancia
+optimización, para ver más detalles se puede consultar la documentación \cite{scipy}. Finalmente, se puede escoger un valor de tolerancia
 (indicado en \texttt{tol})  como criterio de convergencia para el método
 utilizado (en \texttt{method}) y que éste se detenga.
 \end{enumerate}
@@ -1574,7 +1607,7 @@ iteración. A continuación la describimos en detalle:
 \texttt{Optimizar\_depolarizacion(p\_values)}: función para optimizar la
 fidelidad del proceso cuántico para una lista de valores de $p$. \newline
 
-\noindent\textbf{Entrada:} lista de valores $p$ para optimizar el ansatz.
+\noindent\textbf{Entrada:} lista de valores $p$ para optimizar el \textit{ansatz}.
 
 \noindent\textbf{Salida:} DataFrame con los valores de $p$, la fidelidad
 optimizada, matriz de Choi objetivo, matriz de Choi reconstruida y los
@@ -1606,29 +1639,26 @@ sistemas, y sus fidelidades de proceso.
 % }}}
 \section{Resultados} % {{{
 \label{sec:resultados_dp}
-Para la función general, se fijaron dos hiper parámetros de
+Para la función general, se fijaron dos hiperparámetros de
 \texttt{Cirq\_ansq()}: \texttt{layers} y  qubit. El número de capas se
 estableció en 1, ya que no se observó una mejora significativa en los tiempos
 de optimización, ni en la minimización de la función de costo al aumentar este
 parámetro, esto lo podemos ver en la figura \ref{fig:comparacion_capas}. Por
-otro lado, se utilizaron 4 qubits en el ansatz, donde una mitad
+otro lado, se utilizaron 4 qubits en el \textit{ansatz}, donde una mitad
 funcionó como \textit{ancilla} y la otra para el sistema, siguiendo el diseño
-presentado en el ansatz \ref{ec:ansatz}. Esto se decidió porque al
+presentado en el \textit{ansatz} (\ref{ec:ansatz}). Esto se decidió porque al
 utilizar únicamente dos  qubits no se alcanzó la convergencia en la función de
 costo. 
 
 \begin{figure}[h!]  % {{{
     \centering 
     \includegraphics[width=0.70 \linewidth]{imagenes/comparacion_capas.png}
-    \caption{Comparación de el proceso de optimización del ansatz utilizado
-para el DP a diferentes capas. En azul vemos el resultado para una capa,
-amarillo para dos y verde para tres. Estos resultados fueron ejecutados para un
-valor de $p=0.125$. \textbf{Fuente}: elaboración propia.}
+    \caption[Comparación de optimización del \textit{ansatz} para DP]{Comparación de el proceso de optimización del \textit{ansatz} utilizado para el DP a diferentes capas. En azul vemos el resultado para una capa, amarillo para dos y verde para tres. Estos resultados fueron ejecutados para un valor de $p=0.125$. \textbf{Fuente}: elaboración propia.}
     \label{fig:comparacion_capas}
 \end{figure} % }}}
 
 
-Para la función \texttt{Minimize}() se fijaron dos hiper parámetros :
+Para la función \texttt{Minimize}() fijamos dos hiperparámetros:
 \texttt{method} y \texttt{tol}. Se utilizó el método \texttt{COBYLLA}, que
 realiza la minimización mediante aproximaciones lineales, mientras que la
 tolerancia se ajustó a $1\times 10^{-15}$. Se tomaron estos hiperparámetros
@@ -1636,24 +1666,22 @@ porque con ellos alcanzamos consistentemente la minimización de la función de
 costo sin estresar de forma inecesaria el equipo de trabajo. 
 
 Es importante mencionar las limitaciones al usar las computadoras cuánticas de
-IBM, donde el tiempo de uso está limitado a 10 minutos mensuales\footnote{Este
-es el tiempo de uso disponible en el plan gratuito de IBM.}. Vimos que el
+IBM, donde el tiempo de uso está limitado a 10 minutos mensuales, que corresponden al tiempo de uso disponible en el plan gratuito de IBM. Vimos que el
 tiempo de ejecución de una tomografía de proceso para un canal de un  qubit
 requiere 12 circuitos, que lleva un tiempo de ejecución promedio de $16$s. Por
-esta razón decidimos optimizar el ansatz en el simulador cuántico y
+esta razón decidimos optimizar el \textit{ansatz} en el simulador cuántico y
 posteriormente, ejecutar el circuito optimizado en una computadora cuántica.
 Además, el simulador no tiene restricciones de tiempo, por ello ejecutamos el
 ansatz optimizado 4 veces para cada valor de $p$ en el simulador de
 \texttt{AerSimualtor()}.
 
-La función general se ejecutó para un listado de 38 valores distintos de $p$ en 
+Ejecutamos la función principal para un listado de 38 valores distintos de $p$ en 
 \texttt{p\_values}, ajustándose al tiempo mensual disponible en IBM, con un 
 margen de error de una tomografía mensual. Cada circuito se ejecutó con 4000 
 mediciones tanto en la computadora cuántica como en el simulador.  No incluimos 
 todos los resultados detallados en esta sección para evitar sobrecargar la 
-discusión\footnote{Se puede acceder al dataframe final, así como al código de 
-este proyecto en el github: 
-\href{https://github.com/felipechoy1/EPS/tree/main/Código\%20y\%20Resultados}{https://github.com/felipechoy1/EPS/tree/main/Código\%20y\%20Resultados}}.
+discusión \footnote{Se puede acceder al dataframe final, así como al código de 
+este proyecto en el github: \href{https://github.com/felipechoy1/EPS/tree/main/Código\%20y\%20Resultados}{https://github.com/felipechoy1/EPS/tree/main/Código\%20y\%20Resultados}}.
 
 Los resultados correspondientes a las fidelidades alcanzadas en la computadora
 cuántica como en el simulador son presentadas en la figura
@@ -1670,33 +1698,30 @@ tabla \ref{tab:comparacion_fidelidades}.
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.7\linewidth]{imagenes/comparacion fidelidad.png}
-    \caption{Comparación de fidelidades de proceso luego de ejecutar el ansatz
-optimizado. En azul se encuentra la fidelidad de la matriz de Choi reconstruida
-en el simulador cuántico \texttt{AerSimualtor()}. Por otro lado en azul,
-corresponde a la ejecución en la computadora cuántica \texttt{ibm-kyoto}.
-\textbf{Fuente}: elaboración propia. }
+    \caption[Comparación de fidelidades de proceso simulador vs. IBM-Kyoto]{Comparación de fidelidades de proceso luego de ejecutar el \textit{ansatz} optimizado, en simulador y en la computadora cuántica \texttt{ibm-kyoto}. \textbf{Fuente}: elaboración propia.}
+
     \label{fig:comparacion_fidelidad}
     \end{figure}
     
 
-\begin{table}[htbp]
-\centering 
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|l|c|c|c|c|c|c|c|}
-\hline
-\textbf{Backend} & \textbf{Mediana} & \textbf{Mínimo} & \textbf{Máximo} & \textbf{p(max)} & \textbf{p(min)} & \textbf{Desv. Estándar} \\ \hline
-Aer Simulator & 0.9618  & 0.7620  & 0.9925 & 0.975 & 0.725 & 0.0418 \\ \hline
-ibm-kyoto     & 0.8916 & 0.5533 & 0.9738 & 0.825 & 0.125 & 0.0899  \\ \hline
-\end{tabular}
-}
-\caption{Comparación de fidelidad de proceso entre las matrices de Choi
-reconstruidas del ansatz optimizado. Los resultados de la computadora cuántica
-fueron tomados en \texttt{ibm-kyoto}, mientras que en el simulador fueron en
-\texttt{AerSimualtor()} de Qiskit. \textbf{Fuente:} elaboración propia.}
-\label{tab:comparacion_fidelidades}
-\end{table}
+    \begin{table}[htbp]
+    \centering 
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{Backend} & \textbf{Mediana} & \textbf{Mínimo} & \textbf{Máximo} & \textbf{p(max)} & \textbf{p(min)} & \textbf{Desv. Estándar} \\ \hline
+    Aer Simulator & 0.9618  & 0.7620  & 0.9925 & 0.975 & 0.725 & 0.0418 \\ \hline
+    ibm-kyoto     & 0.8916 & 0.5533 & 0.9738 & 0.825 & 0.125 & 0.0899  \\ \hline
+    \end{tabular}
+    }
+    \caption[Comparación de fidelidad de proceso entre las matrices de Choi reconstruidas del \textit{ansatz} optimizado.]{Comparación de fidelidad de proceso entre las matrices de Choi
+    reconstruidas del \textit{ansatz} optimizado. Los resultados de la computadora cuántica
+    fueron tomados en \texttt{ibm-kyoto}, mientras que en el simulador fueron en
+    \texttt{AerSimualtor()} de Qiskit. \textbf{Fuente:} elaboración propia.}
+    \label{tab:comparacion_fidelidades}
+    \end{table}
 
-Al mismo tiempo, evaluamos la completa positividad (CP) de las matrices de Choi reconstruidas por medio de sus autovalores. Para ello, sabemos que la matriz de Choi del DP esta dado por la ecuación \ref{ec:choi_depolarizing}, por lo que sus autovalores se calculan resolviendo la ecuación característica:
+Al mismo tiempo, evaluamos la completa positividad (CP) de las matrices de Choi reconstruidas por medio de sus autovalores. Para ello, sabemos que la matriz de Choi del DP está dado por la ecuación (\ref{ec:choi_depolarizing}), por lo que sus autovalores se calculan resolviendo la ecuación característica:
 \begin{equation}
 \det(\Lambda_\mathcal{E} - \lambda I) = 0,
 \end{equation}
@@ -1713,16 +1738,16 @@ los elementos diagonales de $\Lambda_\mathcal{E}$:
 \end{equation}
 Al encontrar la determinante de la matriz:
 \begin{equation}
-\left( \frac{p}{2} - \lambda \right)^2  \left[ \left( 1 - \frac{p}{2} - \lambda \right)^2 - (1 - p)^2 \right] = 0.
+\left(\frac{p}{2} - \lambda \right)^2  \left[ \left(1 - \frac{p}{2} - \lambda \right)^2 - (1 - p)^2 \right] = 0.
 \end{equation}
 Esto se puede factorizar como:
 \begin{equation}
-\left( \frac{p}{2} - \lambda \right)^2 \left( \lambda - \frac{p}{2} \right) \left( \lambda - \left( 2 - \frac{3p}{2} \right) \right) = 0.
+\left(\frac{p}{2} - \lambda \right)^2 \left(\lambda - \frac{p}{2} \right) \left(\lambda - \left(2 - \frac{3p}{2} \right) \right) = 0.
 \end{equation}
 Por lo tanto, los autovalores de $\Lambda_{\mathcal{E}}$ son:
 \begin{align}
 \lambda_1 &=\lambda_2=\lambda_3 = \frac{p}{2} \quad \\
-\lambda_4 &= 2 - \frac{3p}{2} .
+\lambda_4 &= 2 - \frac{3p}{2}.
 \end{align}
 Comparamos los autovalores de nuestros resultados en la figura
 \ref{fig:comparacion_autovalores} para cada valor de $p$. Notamos que todos los
@@ -1730,11 +1755,11 @@ autovalores para todos los valores de $p$ cumplen con ser mayores o iguales a
 0. Por lo tanto, los canales reconstruidos cumplen con ser CP.  Por otro
 lado, al analizar la condición de preservación de la traza (TP) notamos que
 ninguna de las matrices de Choi reconstruidas en ninguno de los sistemas cumple
-con preservar la traza. Esto lo verificamos realizando la traza parcial de las matrices de Choi con \texttt{partial\_trace()}, obteniendo resultados que son cercanos a la matriz identidad $I$. Sin embargo, se observan valores no nulos en los elementos fuera de la diagonal, lo que impide que sean exactamente iguales a $I$ (ver figura \ref{fig:ident_comp}).
+con preservar la traza. Esto lo verificamos realizando la traza parcial de las matrices de Choi con \texttt{partial\_trace()}, obteniendo resultados que son cercanos a la matriz identidad $I$. Sin embargo, observamos valores no nulos en los elementos fuera de la diagonal, lo que impide que sean exactamente iguales a $I$ (ver figura \ref{fig:ident_comp}).
 \begin{figure}[h!] 
     \centering 
     \includegraphics[width=0.90 \linewidth]{imagenes/eigenvalores_comparacion.png}
-    \caption{Comparación de autovalores correspondientes a la matriz de Choi reconstruidas. En azul se puede ver el autovalor esperado a lo largo de $p$, en verde vemos el promedio de los valores de las matrices de Choi reconstruidas  en el simulador cuántico \texttt{AerSimualtor()}. Finalmente vemos en rojo los autovalores correspondientes a las matrices de Choi reconstruidas en la computadora cuántica \texttt{ibm-kyoto}. \textbf{Fuente}: elaboración propia. }
+    \caption[Comparación de autovalores de matrices de Choi]{Comparación de autovalores correspondientes a la matriz de Choi reconstruidas. En azul se puede ver el autovalor esperado a lo largo de $p$, en verde vemos el promedio de los valores de las matrices de Choi reconstruidas  en el simulador cuántico \texttt{AerSimualtor()}. Finalmente vemos en rojo los autovalores correspondientes a las matrices de Choi reconstruidas en la computadora cuántica \texttt{ibm-kyoto}. \textbf{Fuente}: elaboración propia. }
     \label{fig:comparacion_autovalores}
 \end{figure}
 
@@ -1745,7 +1770,7 @@ con preservar la traza. Esto lo verificamos realizando la traza parcial de las m
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=0.9\linewidth]{imagenes/ident_comp_0.1.png}
-        \caption{Comparación de matrices densidad reducidas para p = 0.1}
+        \caption[Comparación de matrices densidad reducidas para p = 0.1]{Comparación de matrices densidad reducidas para p = 0.1}
         \label{fig:ident_comp_p0.1}
     \end{subfigure}
     \vspace{1em} % Espacio vertical entre subfiguras
@@ -1755,10 +1780,10 @@ con preservar la traza. Esto lo verificamos realizando la traza parcial de las m
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=0.9\linewidth]{imagenes/ident_comp_0.9.png}
-        \caption{Comparación de matrices densidad reducidas para p = 0.9}
+        \caption[Comparación de matrices densidad reducidas para p = 0.9]{Comparación de matrices densidad reducidas para p = 0.9}
         \label{fig:ident_comp_p0.9}
     \end{subfigure}
- \caption{Comparación entre matrices de Choi reducidas objetivo  y  las matrices de Choi reducidas en el simulador cuántico \texttt{AerSimulator()}. Los valores se presentan para disntintas probabilidades de despolarización $p$ del DP. Cada valor representa una componente real de la matriz de Choi reducida. \textbf{Fuente:} elaboración propia.}
+ \caption[Comparación de matrices de Choi reducidas en simulador cuántico]{Comparación entre matrices de Choi reducidas objetivo  y  las matrices de Choi reducidas en el simulador cuántico \texttt{AerSimulator()}. Los valores se presentan para disntintas probabilidades de despolarización $p$ del DP. Cada valor representa una componente real de la matriz de Choi reducida. \textbf{Fuente:} elaboración propia.}
     \label{fig:ident_comp}
 \end{figure}
 
@@ -1789,7 +1814,7 @@ cuántica como para el simulador, como se muestra en la figura
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.95\linewidth]{imagenes/Comparacion_regresiones.png}
-    \caption{Comparación de regresiones lineales entre los resultados de la fidelidad de proceso entre la matriz de Choi esperada , la computadora cuántica \texttt{ibm\_kyoto} y el simualdor cuántico \texttt{AerSimualtor()} respectivamente. \textbf{Fuente:} elaboración propia.}
+    \caption[Comparación de regresiones lineales para resultados de fidelidad de proceso]{Comparación de regresiones lineales entre los resultados de la fidelidad de proceso entre la matriz de Choi esperada, la computadora cuántica \texttt{ibm\_kyoto} y el simualdor cuántico \texttt{AerSimualtor()} respectivamente. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_regresiones}
 \end{figure}
 
@@ -1822,7 +1847,7 @@ Aunque el bajo valor de $R^2$ indica que la relación entre la fidelidad y $p$
 en el simulador es débil, sí se observa un aumento lineal sistemático en la
 fidelidad con respecto a $p$. La pequeña pendiente de la recta sugiere que el
 cambio en la fidelidad es leve y se mantiene prácticamente constante a lo largo
-del rango de $p$, aunque no completamente insensible al aumento de $p$.
+del rango de $p$, aunque no completamente insensible al aumento de este.
 
 Analizamos la variabilidad de fidelidad en ambos casos, como se muestra en la
 figura \ref{fig:comparacion_desviaciones}. En el simulador cuántico, no se
@@ -1838,7 +1863,7 @@ disminuye significativamente.
 \begin{figure}[h!] % {{{
     \centering
     \includegraphics[width=0.95\linewidth]{imagenes/Comparacion_desviaciones.png}
-    \caption{Comparación de desviación estándar entre los resultados de la fidelidad de proceso entre la matriz de Choi esperada , la computadora cuántica \texttt{ibm\_kyoto} (color naranja) y el simualdor cuántico (color azul) \texttt{AerSimualtor()}. La desviación estándar se calcula sobre los valores de fidelidad en el intervalo de $p$. \textbf{Fuente:} elaboración propia.}
+    \caption[Comparación de desviación estándar para resultados de fidelidad de proceso]{Comparación de desviación estándar entre los resultados de la fidelidad de proceso entre la matriz de Choi esperada, la computadora cuántica \texttt{ibm\_kyoto} (color naranja) y el simualdor cuántico (color azul) \texttt{AerSimualtor()}. La desviación estándar se calcula sobre los valores de fidelidad en el intervalo de $p$. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_desviaciones}
 \end{figure} % }}}
 
@@ -1869,8 +1894,7 @@ computadora cuántica introduce ruido desde un inicio del proceso de
 despolarización debido a las imperfecciones inherentes al hardware y las
 compuertas cuánticas. Notemos que al incrementar $p$, aumentamos la probabilidad de
 despolarización, lo cual introduce más ruido a la interacción del sistema con
-el estado máximamente mixto (ver ecuación
-\ref{ec:superop_depolarizing}). Este proceso provoca una mejora en la
+el estado máximamente mixto visto en la ecuación (\ref{ec:superop_depolarizing}). Este proceso provoca una mejora en la
 fidelidad porque, al hacer que los estados sean menos puros, se vuelven menos
 sensibles a errores específicos del hardware cuántico. 
 
@@ -1885,7 +1909,7 @@ a lo largo de $p$.
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{imagenes/comp_choi_p0.1.png}
-        \caption{Comparación de matrices de Choi para p = 0.1}
+        \caption[Comparación de matrices de Choi para p = 0.1]{Comparación de matrices de Choi para p = 0.1}
         \label{fig:choi_p0.1}
     \end{subfigure}
     \vspace{1em} % Espacio vertical entre subfiguras
@@ -1894,12 +1918,11 @@ a lo largo de $p$.
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=1\linewidth]{imagenes/comp_choi_p0.9.png}
-        \caption{Comparación de matrices de Choi para p = 0.9}
+        \caption[Comparación de matrices de Choi para p = 0.1]{Comparación de matrices de Choi para p = 0.9}
         \label{fig:choi_p0.9}
     \end{subfigure}
     
-    \caption[Comparación de matrices de Choi objetivo y
-reconstruidas]{
+    \caption[Comparación de matrices de Choi objetivo y reconstruidas]{
     Comparación de matrices de Choi objetivo y matrices de Choi reconstruidas en el simulador cuántico \texttt{AerSimulator()}, como en la computadora cuántica \texttt{ibm\_kyoto}. Los valores se presentan para disntintas probabilidades de despolarización $p$ del DP. Cada valor representa una componente real de la matriz de Choi. \textbf{Fuente:} elaboración propia.}
     \label{fig:comparacion_choi}
 \end{figure} % }}
@@ -1909,60 +1932,23 @@ reconstruidas]{
 % }}}
 \backmatter
 \chapter{CONCLUSIONES} % {{{
-En este trabajo abordamos la implementación de canales cuánticos de un qubit
-utilizando algoritmos variacionales cuánticos (VQA). Diseñamos e implementamos
-un canal despolarizante (DP) mediante un \textit{hardware-efficient} ansatz, el
-cual fue optimizado en un simulador cuántico y validado en un dispositivo
-cuántico real a través de la plataforma IBM Quantum Experience
-\cite{VQA,ibm_quantum_resources}. A partir de este enfoque, se empleó una
-función de costo basada en la fidelidad de proceso, que comparó el canal
-implementado con el canal objetivo. La evaluación se realizó tanto en un
-simulador (\texttt{AerSimulator}) como en una computadora cuántica
-(\texttt{ibm\_kyoto}) para distintos valores del parámetro de despolarización
-$p$. Se observó que, en el caso del simulador cuántico, la fidelidad de proceso
-mantuvo sus valores con baja variación, además de tener valores de fidelidad
-superiores a 0.900 en la mayoría de casos. 
+En este trabajo abordamos la implementación de canales cuánticos de un qubit utilizando algoritmos variacionales cuánticos (VQA). Diseñamos e implementamos un canal despolarizante (DP) mediante un \textit{hardware-efficient} \textit{ansatz}, el cual optimizamos en un simulador cuántico y validamos en un dispositivo cuántico real a través de la plataforma IBM Quantum \cite{VQA, ibm_quantum_resources}. A partir de este enfoque, empleamos una función de costo basada en la fidelidad de proceso, que comparó el canal implementado con el canal objetivo. La evaluación la realizamos tanto en un simulador (\texttt{AerSimulator}) como en una computadora cuántica (\texttt{ibm\_kyoto}) para distintos valores del parámetro de despolarización $p$. Observamos que, en el caso del simulador cuántico, la fidelidad de proceso mantuvo sus valores con baja variación, además de presentar valores superiores a 0.900 en la mayoría de casos. 
 
-Por otro lado, los resultados obtenidos en la computadora cuántica mostraron un
-comportamiento distinto. La fidelidad de proceso tendió a aumentar conforme
-crecía la probabilidad de despolarización $p$ (ver figura
-\ref{fig:comparacion_fidelidad}). Para analizar esta tendencia, se aplicó una
-regresión lineal con pendiente $m = 0.2707$, que indica un crecimiento moderado
-de la fidelidad con respecto a $p$. También observamos una disminución en la
-variabilidad de la fidelidad al aumentar $p$, lo cual podría atribuirse a que,
-al incrementar la despolarización, los estados cuánticos se vuelven más mixtos
-y, por ende, más tolerantes a los errores introducidos por el hardware. Sin
-embargo, el coeficiente de determinación $R^2 = 0.7055$ sugiere que existen
-otros factores, además de $p$, que influyen en el comportamiento observado.
-Esta influencia adicional se evidenció al inspeccionar las matrices de Choi
-reconstruidas (ver figura~\ref{fig:comparacion_choi}), donde notamos que, en
-las primeras etapas del proceso, el dispositivo cuántico conservaba coherencias
-mayores en las entradas no diagonales. En conjunto, estos resultados indican
-que, en entornos ideales, los VQA pueden ser efectivos para la implementación
-de canales cuánticos. No obstante, en dispositivos cuánticos reales, la
-fidelidad y estabilidad del canal implementado se ven afectadas por el ruido
-propio del hardware, el cual debe ser considerado cuidadosamente durante el
-diseño y la ejecución del algoritmo.
+Por otro lado, los resultados obtenidos en la computadora cuántica mostraron un comportamiento distinto. La fidelidad de proceso tendió a aumentar conforme crecía la probabilidad de despolarización $p$ (ver figura \ref{fig:comparacion_fidelidad}). Para analizar esta tendencia, aplicamos una regresión lineal con pendiente $m = 0.2707$, que indica un crecimiento moderado de la fidelidad con respecto a $p$. También observamos una disminución en la variabilidad de la fidelidad al aumentar $p$, lo cual podría atribuirse a que, al incrementar la despolarización, los estados cuánticos se vuelven más mixtos y, por ende, más tolerantes a los errores introducidos por el hardware. Sin embargo, el coeficiente de determinación $R^2 = 0.7055$ sugiere que existen otros factores, además de $p$, que influyen en el comportamiento observado. Esta influencia adicional se evidenció al inspeccionar las matrices de Choi reconstruidas (ver figura~\ref{fig:comparacion_choi}), donde notamos que, en las primeras etapas del proceso, el dispositivo cuántico conservaba coherencias mayores en las entradas no diagonales. En conjunto, estos resultados indican que, en entornos ideales, los VQA pueden ser efectivos para la implementación de canales cuánticos. No obstante, en dispositivos cuánticos reales, la fidelidad y estabilidad del canal implementado se ven afectadas por el ruido propio del hardware, el cual debemos considerar cuidadosamente durante el diseño y la ejecución del algoritmo.
 
-
-
-
-
-
-
-% Por otro lado, los resultados obtenidos en la computadora cuántica presentaron un comportamiento distinto. La fidelidad tendió a aumentar conforme crecía la interacción con el ruido del dispositivo (ver figura  \ref{fig:comparacion_fidelidad}). Analizamos esta tendencia con una regresión lineal , cuya pendiente fue $m = 0.2707$, que indica un crecimiento moderado de la fidelidad con $p$. También observamos una disminución en la variabilidad de la fidelidad al aumentar $p$. Este fenómeno puede atribuirse a que, al aumentar la probabilidad de despolarización, los estados cuánticos se vuelven más mixtos y, por lo tanto, más susceptibles a errores introducidos por el hardware. Sin embargo, el coeficiente de determinación $R^2=0.7055$  sugiere que existen otros factores, además de $p$, que influyen en el comportamiento de la fidelidad en el dispositivo cuántico. Estos factores se evidenciaron al inspeccionar las matrices de Choi (ver figura \ref{fig:comparacion_choi}), donde la computadora cuántica presentaba una mayor coherencia en las entradas no diagonales en las primeras etapas del proceso. Finalmente, los resultados obtenidos muestran que en entornos ideales, los VQA pueden ser efectivos para implementar canales cuánticos. No obstante, en computadoras cuánticas reales,
+% Por otro lado, los resultados obtenidos en la computadora cuántica presentaron un comportamiento distinto. La fidelidad tendió a aumentar conforme crecía la interacción con el ruido del dispositivo (ver figura  \ref{fig:comparacion_fidelidad}). Analizamos esta tendencia con una regresión lineal, cuya pendiente fue $m = 0.2707$, que indica un crecimiento moderado de la fidelidad con $p$. También observamos una disminución en la variabilidad de la fidelidad al aumentar $p$. Este fenómeno puede atribuirse a que, al aumentar la probabilidad de despolarización, los estados cuánticos se vuelven más mixtos y, por lo tanto, más susceptibles a errores introducidos por el hardware. Sin embargo, el coeficiente de determinación $R^2=0.7055$  sugiere que existen otros factores, además de $p$, que influyen en el comportamiento de la fidelidad en el dispositivo cuántico. Estos factores se evidenciaron al inspeccionar las matrices de Choi (ver figura \ref{fig:comparacion_choi}), donde la computadora cuántica presentaba una mayor coherencia en las entradas no diagonales en las primeras etapas del proceso. Finalmente, los resultados obtenidos muestran que en entornos ideales, los VQA pueden ser efectivos para implementar canales cuánticos. No obstante, en computadoras cuánticas reales,
 % la precisión se ve afectada por la naturaleza del hardware, ya que este introduce una fuente adicional de ruido que debe ser considerado al momento de la implementación. 
 % }}}
 \chapter{TRABAJO FUTURO} % {{{
 Los resultados obtenidos en la computadora cuántica abren diversas líneas de
-investigación para trabajos futuros. A continuación, se proponen algunas de
+investigación para trabajos futuros. A continuación, proponemos algunas de
 ellas: 
 \begin{itemize}
-    \item Explorar diferentes tipos de \textit{ansatz} para el entrenamiento y la optimización de la fidelidad de proceso, como se describió en la sección \ref{sec:desc_vqa}. En este trabajo se enfocó el estudio en \textit{hardware-efficient ansatz} (HEA) debido a su amplio uso actual. Sin embargo, la evaluación de otros tipos de \textit{ansatz} podría conducir a un mejor desempeño en computadoras cuánticas reales.
+    \item Explorar diferentes tipos de \textit{ansatz} para el entrenamiento y la optimización de la fidelidad de proceso, como describimos en la sección \ref{sec:desc_vqa}. En este trabajo enfocamos el estudio en \textit{hardware-efficient ansatz} (HEA) debido a su amplio uso actual. Sin embargo, la evaluación de otros tipos de \textit{ansatz} podría conducir a un mejor desempeño en computadoras cuánticas reales.
     
-    \item Implementar los VQA para canales cuánticos de dos o más qubits. Dado que el \textit{ansatz} presentado en la ecuación \ref{ec:ansatz} es generalizable para $n$ qubits, es posible extender este esquema a la implementación de canales cuánticos de mayor dimensión. El principal desafío en este caso radica en las limitaciones del hardware cuántico actual, así como en el aumento de los recursos necesarios para la optimización en simuladores cuánticos.
+    \item Implementar los VQA para canales cuánticos de dos o más qubits. Dado que el \textit{ansatz} presentado en la ecuación \ref{ec:ansatz} es generalizable para $n$ qubits, podemos extender este esquema a la implementación de canales cuánticos de mayor dimensión. El principal desafío en este caso radica en las limitaciones del hardware cuántico actual, así como en el aumento de los recursos necesarios para la optimización en simuladores cuánticos.
     
-    \item Realizar la optimización directamente sobre hardware cuántico. En este trabajo se utilizó exclusivamente la plataforma IBM Quantum Experience, la cual presenta ciertas restricciones en el tiempo de ejecución. Sin embargo, explorar otras plataformas podría permitir realizar optimizaciones directamente en el dispositivo, lo que abriría la posibilidad de obtener mejores resultados y de realizar un análisis más detallado del desempeño del hardware.
+    \item Realizar la optimización directamente sobre hardware cuántico. En este trabajo utilizamos exclusivamente la plataforma IBM Quantum, la cual presenta ciertas restricciones en el tiempo de ejecución. Sin embargo, explorar otras plataformas podría permitirnos realizar optimizaciones directamente en el dispositivo, lo que abriría la posibilidad de obtener mejores resultados y de realizar un análisis más detallado del desempeño del hardware.
 \end{itemize}
 % }}}
 \bibliographystyle{abbrv}
